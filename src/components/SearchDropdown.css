@@ -1,0 +1,153 @@
+.ongyeol-search-dropdown {
+  position: fixed;
+  top: var(--shop-header-bottom, 110px);
+  bottom: 0;
+  right: 0;
+  z-index: 31;
+  box-sizing: border-box;
+  width: 581px;
+  height: auto;
+  overflow-y: auto;
+  padding: 61px 0 0 76px;
+  border: 0;
+  background: #fff;
+  color: #000;
+  font-family: 'Ongyeol Noto Sans', sans-serif;
+  text-align: left;
+  letter-spacing: normal;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 250ms ease, transform 250ms ease, visibility 0s linear 250ms;
+}
+
+.ongyeol-search-hover-bridge {
+  position: fixed;
+  left: var(--search-bridge-left);
+  top: var(--search-bridge-top);
+  width: var(--search-bridge-width);
+  height: var(--search-bridge-height);
+  z-index: 31;
+}
+
+.ongyeol-search-dropdown.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.ongyeol-search-content {
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+  width: 358px;
+}
+
+.ongyeol-search-title {
+  margin: 0;
+  font: 600 20px/24px 'Ongyeol Noto Sans', sans-serif;
+}
+
+.ongyeol-search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 27px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #000;
+}
+
+.ongyeol-search-input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: #000;
+  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+  letter-spacing: normal;
+  appearance: none;
+}
+
+.ongyeol-search-input::placeholder { color: #515151; opacity: 1; }
+.ongyeol-search-input::-webkit-search-cancel-button { appearance: none; }
+.ongyeol-search-form:has(.ongyeol-search-input:focus-visible) { border-bottom-width: 2px; }
+
+.ongyeol-search-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ongyeol-search-submit img { display: block; width: 20px; height: 20px; }
+.ongyeol-search-submit:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.ongyeol-search-popular { width: 290px; }
+
+.ongyeol-search-popular-title {
+  margin: 0 0 25px;
+  color: #515151;
+  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+}
+
+.ongyeol-search-keywords {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+}
+
+.ongyeol-search-keywords li {
+  display: grid;
+  grid-template-columns: 17px 242px;
+  gap: 31px;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-search-dropdown { transition: none; }
+}
+
+@media (min-width: 600px) and (max-width: 834px) {
+  .ongyeol-search-dropdown {
+    width: 448px;
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 599px) {
+  .ongyeol-search-dropdown {
+    width: 100%;
+    padding: 61px 24px 24px;
+  }
+  .ongyeol-search-content {
+    width: 100%;
+    max-width: 358px;
+    margin-inline: auto;
+  }
+  .ongyeol-search-popular { width: 100%; }
+  .ongyeol-search-keywords li {
+    grid-template-columns: 17px minmax(0, 1fr);
+    white-space: normal;
+  }
+}

@@ -1,0 +1,68 @@
+.ongyeol-header-member-trigger {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+.ongyeol-member-dropdown {
+  position: fixed;
+  top: var(--member-top, 110px);
+  left: var(--member-left, 0px);
+  z-index: 33;
+  box-sizing: border-box;
+  width: min(160px, calc(100vw - 16px));
+  height: 80px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 0;
+  box-shadow: none;
+  background: #fff;
+  color: #000;
+  font: 400 15px/18px 'Ongyeol Noto Sans', sans-serif;
+  letter-spacing: normal;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 250ms ease, transform 250ms ease, visibility 0s linear 250ms;
+}
+.ongyeol-member-dropdown.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+.ongyeol-member-account-row { display: flex; align-items: center; }
+.ongyeol-member-item {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ongyeol-member-item:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.ongyeol-member-account-row,
+.ongyeol-member-dropdown > .ongyeol-member-item {
+  transform: translateY(0);
+  transition: transform 0.2s ease-out, color 0.2s ease-out;
+}
+.ongyeol-member-account-row:hover,
+.ongyeol-member-dropdown > .ongyeol-member-item:hover {
+  color: #666;
+  transform: translateY(-3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-member-dropdown { transition: none; }
+  .ongyeol-member-account-row,
+  .ongyeol-member-dropdown > .ongyeol-member-item { transition: none; }
+}

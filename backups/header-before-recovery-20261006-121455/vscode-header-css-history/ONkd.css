@@ -1,0 +1,180 @@
+@font-face {
+  font-family: 'Ongyeol Noto Serif';
+  src: url('../assets/header/noto-serif-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ongyeol Noto Sans';
+  src: url('../assets/header/noto-sans-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.ongyeol-header {
+  width: 100%;
+  flex: none;
+  color: #000;
+  background: #fff;
+  color-scheme: light;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.ongyeol-header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background: #000;
+  color: #fff;
+}
+
+.ongyeol-header-tagline {
+  margin: 0;
+  font-family: 'Ongyeol  Noto Serif', Noto sans-serif;
+  font-size: 15px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.ongyeol-header-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 80px;
+  padding: 10px 70px;
+}
+
+.ongyeol-header-menu {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ongyeol-header-menu-label {
+  font-family: 'Ongyeol Noto Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.ongyeol-header-logo {
+  --ongyeol-header-tracking: 22.5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Ongyeol Noto Serif', serif;
+  font-size: 50px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.ongyeol-header-wordmark {
+  display: block;
+  letter-spacing: var(--ongyeol-header-tracking);
+  margin-right: calc(-1 * var(--ongyeol-header-tracking));
+}
+
+.ongyeol-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.ongyeol-header-action,
+.ongyeol-header-menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #000;
+  font: inherit;
+  appearance: none;
+}
+
+.ongyeol-header-action {
+  min-width: 25px;
+  height: 26.2212px;
+}
+
+.ongyeol-header-icon,
+.ongyeol-header-icon img,
+.ongyeol-header-static-icon {
+  display: block;
+  flex: none;
+}
+
+.ongyeol-header-menu-button {
+  display: none;
+  width: 35px;
+  height: 35px;
+}
+
+.ongyeol-header-action:focus-visible,
+.ongyeol-header-menu-button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 5px;
+}
+
+/* 1600px부터 좌측 메뉴와 중앙 로고에 충분한 공간이 확보됩니다. */
+@media (max-width: 1599px) {
+  .ongyeol-header-bar { padding-inline: 25px; }
+  .ongyeol-header-navigation,
+  .ongyeol-header-action-desktop { display: none; }
+  .ongyeol-header-menu-button { display: flex; }
+  .ongyeol-header-logo {
+    --ongyeol-header-tracking: 18px;
+    font-size: 40px;
+  }
+  .ongyeol-header-tagline { font-size: 14px; }
+  .ongyeol-header-actions { gap: 30px; }
+  .ongyeol-header-action { min-width: 20px; height: 20px; }
+  .ongyeol-header-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 35px;
+  }
+  .ongyeol-header-hamburger-line {
+    display: block;
+    width: 35px;
+    height: 6px;
+    border-radius: 30px;
+    background: #000;
+  }
+  .ongyeol-header-icon { position: relative; }
+  .ongyeol-header-icon:has(img[src*="member-"]) { top: -0.25px; }
+}
+
+@media (max-width: 599px) {
+  .ongyeol-header-logo {
+    --ongyeol-header-tracking: 9px;
+    font-size: 20px;
+  }
+  .ongyeol-header-tagline { font-size: 10px; }
+  .ongyeol-header-actions { gap: 20px; }
+  .ongyeol-header-hamburger-line { width: 28px; height: 3px; }
+  .ongyeol-header-icon:has(img[src*="member-"]) { top: -0.5px; }
+}
+
+@media (max-width: 359px) {
+  .ongyeol-header-bar { padding-inline: 16px; }
+  .ongyeol-header-actions { gap: 12px; }
+}

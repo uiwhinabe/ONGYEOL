@@ -1,0 +1,15 @@
+﻿ M src/App.jsx
+ M src/components/Footer.jsx
+ M src/components/Header.jsx
+ M src/index.css
+?? backups/
+?? src/assets/footer/
+?? src/assets/header/
+?? src/assets/images/
+?? "src/components/AI chat.css"
+?? src/components/Footer.css
+?? src/components/Header.css
+?? src/components/SearchDropdown.css
+?? src/components/SearchDropdown.jsx
+?? src/components/ShopDropdown.css
+?? src/components/ShopDropdown.jsx

@@ -1,0 +1,60 @@
+.ongyeol-consultation {
+  position: fixed;
+  right: max(89px, env(safe-area-inset-right, 0px));
+  bottom: calc(195px + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  width: 420px;
+  height: 760px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 40px;
+  background: white;
+  box-shadow: -7px -10px 40px #00000040, 7px 10px 40px #00000040;
+  color: black;
+  color-scheme: light;
+  font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+.ongyeol-consultation[hidden] { display: none; }
+.ongyeol-consultation.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.ongyeol-consultation p { margin: 0; }
+.ongyeol-consultation-background { position: absolute; inset: 0; width: 420px; height: 760px; max-width: none; object-fit: cover; }
+.ongyeol-consultation-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, #ffffff00 29.252%, #ffffffe6 36.217%); border-radius: 30px; }
+.ongyeol-consultation-wordmark { position: absolute; left: 42px; top: 94px; font-size: 20px; letter-spacing: 9px; }
+.ongyeol-consultation-card { position: absolute; left: 30px; top: 139px; width: 360px; height: 482px; border-radius: 30px; background: white; overflow: hidden; }
+.ongyeol-consultation-avatar { position: absolute; left: 20px; top: 25px; width: 39px; height: 39px; }
+.ongyeol-consultation-avatar > img { display: block; }
+.ongyeol-consultation-avatar span { position: absolute; left: 6.0515px; top: 6.0515px; width: 26.897px; height: 26.897px; overflow: hidden; }
+.ongyeol-consultation-avatar span img { position: absolute; width: 36.9296px; height: 39.2077px; left: -6.6758px; top: -2.4557px; max-width: none; }
+.ongyeol-consultation-name { position: absolute; left: 73px; top: 34px; font-size: 15px; }
+.ongyeol-consultation-content { position: absolute; left: 34px; top: 122px; width: 292px; display: flex; flex-direction: column; align-items: center; }
+.ongyeol-consultation-copy { display: flex; flex-direction: column; align-self: flex-start; gap: 32px; width: 226px; font-size: 14px; line-height: 19px; font-variation-settings: 'CTGR' 100, 'wdth' 100; }
+.ongyeol-consultation-lines { display: flex; flex-direction: column; gap: 2px; }
+.ongyeol-consultation-hours { width: 178px; font-size: 15px; font-weight: 500; line-height: 20px; font-variation-settings: 'CTGR' 0, 'wdth' 100; }
+.ongyeol-consultation-ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ongyeol-consultation button { border: 0; margin: 0; font-family: inherit; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0; cursor: pointer; color: black; }
+.ongyeol-consultation button:disabled { cursor: default; opacity: 1; }
+.ongyeol-consultation button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.ongyeol-consultation-inquiry { margin-top: 66px !important; padding: 10px; width: 292px; height: 44px; display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(to right, #ffe9e0, #efdbd3); color: #000c !important; }
+.ongyeol-consultation-schedule { margin-top: 25px; display: flex; align-items: center; gap: 13px; }
+.ongyeol-consultation-schedule p { font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 10px; line-height: 14px; color: #0008; white-space: nowrap; }
+.ongyeol-consultation-navigation { position: absolute; bottom: 27px; left: 0; width: 420px; box-sizing: border-box; padding: 20px 10px; display: flex; align-items: center; justify-content: center; gap: 100px; }
+.ongyeol-consultation-navigation button { padding: 0; background: transparent; width: 28px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ongyeol-consultation-navigation button:first-child { width: 24px; }
+.ongyeol-consultation-navigation span { white-space: nowrap; }
+@media (max-width: 834px) {
+  .ongyeol-consultation { right: max(24px, env(safe-area-inset-right, 0px)); bottom: calc(141px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-consultation { transition: none; transform: none; }
+}

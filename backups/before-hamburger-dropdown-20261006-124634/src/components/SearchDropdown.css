@@ -1,0 +1,118 @@
+.ongyeol-search-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 31;
+  box-sizing: border-box;
+  width: 581px;
+  height: 844px;
+  padding: 61px 0 0 76px;
+  border: 0;
+  background: #fff;
+  color: #000;
+  font-family: 'Ongyeol Noto Sans', sans-serif;
+  text-align: left;
+  letter-spacing: normal;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 0s linear 160ms;
+}
+
+.ongyeol-search-dropdown.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.ongyeol-search-content {
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+  width: 358px;
+}
+
+.ongyeol-search-title {
+  margin: 0;
+  font: 600 20px/24px 'Ongyeol Noto Sans', sans-serif;
+}
+
+.ongyeol-search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 27px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #000;
+}
+
+.ongyeol-search-input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: #000;
+  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+  letter-spacing: normal;
+  appearance: none;
+}
+
+.ongyeol-search-input::placeholder { color: #515151; opacity: 1; }
+.ongyeol-search-input::-webkit-search-cancel-button { appearance: none; }
+.ongyeol-search-form:has(.ongyeol-search-input:focus-visible) { border-bottom-width: 2px; }
+
+.ongyeol-search-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ongyeol-search-submit img { display: block; width: 20px; height: 20px; }
+.ongyeol-search-submit:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.ongyeol-search-popular { width: 290px; }
+
+.ongyeol-search-popular-title {
+  margin: 0 0 25px;
+  color: #515151;
+  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+}
+
+.ongyeol-search-keywords {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+}
+
+.ongyeol-search-keywords li {
+  display: grid;
+  grid-template-columns: 17px 242px;
+  gap: 31px;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-search-dropdown { transition: none; }
+}

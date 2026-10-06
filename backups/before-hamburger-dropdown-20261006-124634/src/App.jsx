@@ -5,15 +5,13 @@ import viteLogo from './assets/vite.svg'
 import './App.css'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-import AIChatWidget from './components/AIChatWidget.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [chatOpen, setChatOpen] = useState(false)
 
   return (
     <>
-      <Header chatOpen={chatOpen} />
+      <Header />
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
@@ -121,7 +119,6 @@ function App() {
       <div className="ticks"></div>
       <section id="spacer"></section>
       <Footer />
-      <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
     </>
   )
 }
