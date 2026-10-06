@@ -3,11 +3,11 @@ import searchIcon from '../assets/images/header/search-dropdown.svg'
 import './SearchDropdown.css'
 
 const popularKeywords = [
-  '어성초 진정 세럼',
-  '비타민 미백 앰플',
-  '히알루로산 수분 에센스',
-  '히알루로산 보습 크림',
-  '나이아신아마이드 모공 마스크팩',
+  '백목이 수분 잠금 크림',
+  '오디 보습 크림',
+  '닥열매 퍼퓸 바디 스크럽',
+  'PDRN 리페어 로즈 아이크림',
+  '백목이 커스텀 핏 패드',
 ]
 
 export default function SearchDropdown({ ref, open, autoFocusInput, onSearch, onPointerEnter, onPointerLeave, onBlur }) {
@@ -65,7 +65,11 @@ export default function SearchDropdown({ ref, open, autoFocusInput, onSearch, on
             {popularKeywords.map((keyword, index) => (
               <li key={keyword}>
                 <span aria-hidden="true">{index + 1}.</span>
-                <span>{keyword}</span>
+                <button className="ongyeol-search-keyword" type="button" onClick={() => {
+                  setQuery(keyword)
+                  inputRef.current?.focus()
+                  onSearch?.(keyword)
+                }}>{keyword}</button>
               </li>
             ))}
           </ol>

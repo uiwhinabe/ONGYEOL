@@ -124,6 +124,19 @@
   white-space: nowrap;
 }
 
+.ongyeol-search-keyword {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ongyeol-search-keyword:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+
 @media (prefers-reduced-motion: reduce) {
   .ongyeol-search-dropdown { transition: none; }
 }
