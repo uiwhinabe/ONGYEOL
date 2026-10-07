@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './Header.css'
 import ShopDropdown from './ShopDropdown.jsx'
 import SearchDropdown from './SearchDropdown.jsx'
@@ -35,6 +35,18 @@ function ResponsiveIcon({ desktop, tablet, mobile }) {
 
 export default function Header({ onSearch, accountLinks, chatOpen = false, isAuthenticated = false, onLogout, onLogin }) {
   const location = useLocation()
+  useLayoutEffect(() => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }, [location])
+  const handleLogoClick = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    if (location.pathname === '/') {
+      event.preventDefault()
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }
   const [memberOpen, setMemberOpen] = useState(false)
   const [memberOpenedAt, setMemberOpenedAt] = useState(null)
   const memberVisible = memberOpen && isAuthenticated && memberOpenedAt === location
@@ -256,7 +268,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
           </span>
         </button>
         <div className="ongyeol-header-logo" aria-label="온결">
-          <span className="ongyeol-header-wordmark">ONGYEOL</span>
+          <Link className="ongyeol-header-wordmark" to="/" onClick={handleLogoClick} aria-label="온결 홈으로 이동">ONGYEOL</Link>
         </div>
         <div className="ongyeol-header-actions">
           <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberVisible} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>
