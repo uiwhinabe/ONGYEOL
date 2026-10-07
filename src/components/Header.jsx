@@ -33,6 +33,14 @@ function ResponsiveIcon({ desktop, tablet, mobile }) {
 }
 
 export default function Header({ onSearch, accountLinks, chatOpen = false }) {
+  const handleLogoClick = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    const homeUrl = new URL(event.currentTarget.href)
+    if (window.location.pathname === homeUrl.pathname) {
+      event.preventDefault()
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }
   const [memberOpen, setMemberOpen] = useState(false)
   const memberTriggerRef = useRef(null)
   const memberCloseTimer = useRef(null)
@@ -242,7 +250,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
           </span>
         </button>
         <div className="ongyeol-header-logo" aria-label="온결">
-          <span className="ongyeol-header-wordmark">ONGYEOL</span>
+          <a className="ongyeol-header-wordmark" href={import.meta.env.BASE_URL} onClick={handleLogoClick} aria-label="온결 홈으로 이동">ONGYEOL</a>
         </div>
         <div className="ongyeol-header-actions">
           <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberOpen} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>
