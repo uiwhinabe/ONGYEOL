@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
+import { useLocation } from 'react-router-dom'
 import './Header.css'
 import ShopDropdown from './ShopDropdown.jsx'
 import SearchDropdown from './SearchDropdown.jsx'
@@ -32,10 +33,16 @@ function ResponsiveIcon({ desktop, tablet, mobile }) {
   )
 }
 
-export default function Header({ onSearch, accountLinks, chatOpen = false }) {
+export default function Header({ onSearch, accountLinks, chatOpen = false, isAuthenticated = false, onLogout, onLogin }) {
+  const location = useLocation()
   const [memberOpen, setMemberOpen] = useState(false)
+  const [memberOpenedAt, setMemberOpenedAt] = useState(null)
+  const memberVisible = memberOpen && isAuthenticated && memberOpenedAt === location
   const memberTriggerRef = useRef(null)
   const memberCloseTimer = useRef(null)
+  useEffect(() => {
+    window.clearTimeout(memberCloseTimer.current)
+  }, [isAuthenticated, location])
   const cancelMemberClose = () => window.clearTimeout(memberCloseTimer.current)
   const enterMember = (event) => {
     if (event.pointerType !== 'mouse') return
@@ -145,15 +152,22 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
     closeShop()
     setSearchOpen(false)
     hamburger.close()
-    setMemberOpen((previous) => !previous)
+    if (!isAuthenticated) {
+      setMemberOpen(false)
+      onLogin?.()
+      return
+    }
+    setMemberOpenedAt(location)
+    setMemberOpen(!memberVisible)
   }
   const hoverMember = (event) => {
-    if (event.pointerType !== 'mouse') return
+    if (event.pointerType !== 'mouse' || !isAuthenticated) return
     enterMember(event)
     cancelSearchClose()
     closeShop()
     setSearchOpen(false)
     hamburger.close()
+    setMemberOpenedAt(location)
     setMemberOpen(true)
   }
   useEffect(() => {
@@ -245,7 +259,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
           <span className="ongyeol-header-wordmark">ONGYEOL</span>
         </div>
         <div className="ongyeol-header-actions">
-          <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberOpen} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>
+          <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberVisible} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>
             <ResponsiveIcon desktop={memberDesktop} tablet={memberTablet} mobile={memberMobile} />
           </button>
           <button ref={searchTriggerRef} id="search-trigger" className="ongyeol-header-action" type="button" aria-label="검색" aria-expanded={searchOpen} aria-controls="search-dropdown" onClick={toggleSearch} onPointerEnter={hoverSearch} onPointerLeave={leaveSearch}>
@@ -262,7 +276,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
       <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={onSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
       <HamburgerDropdown ref={hamburgerPanelRef} open={hamburgerOpen} controller={hamburger} />
-      <MemberDropdown open={memberOpen} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={accountLinks} />
+      <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={accountLinks} isAuthenticated={isAuthenticated} onLogout={onLogout} />
     </header>
   )
 }

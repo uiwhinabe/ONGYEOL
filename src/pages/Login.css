@@ -1,0 +1,39 @@
+﻿.ongyeol-layout { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.ongyeol-layout--login { background: #fff; color-scheme: light; }
+.ongyeol-login { box-sizing: border-box; flex: 1; min-width: 0; min-height: 976px; padding: 120px 20px 320px; background: #fff; color: #000; font: 500 15px/20px 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
+.ongyeol-login-panel { width: 100%; max-width: 458px; margin: 0 auto; }
+.ongyeol-login-tabs { display: flex; justify-content: center; border-bottom: 2px solid #9b9b9b; }
+.ongyeol-login-tabs a { box-sizing: border-box; flex: 0 1 200px; padding: 10px; border-bottom: 2px solid transparent; }
+.ongyeol-login-tabs a[aria-current='page'] { border-bottom-color: #000; }
+.ongyeol-login a { color: inherit; text-decoration: none; }
+.ongyeol-login-form { width: 100%; max-width: 380px; margin: 50px auto 0; }
+.ongyeol-login input { display: block; box-sizing: border-box; width: 100%; height: 45px; padding: 0 12px; border: 1px solid #000; border-radius: 5px; background: #fff; color: #000; font: inherit; }
+.ongyeol-login input::placeholder { color: #000; opacity: .5; }
+.ongyeol-login-email { position: relative; }
+.ongyeol-login input[aria-invalid='true'] { border: 1.5px solid #b41818; }
+.ongyeol-login input[aria-invalid='true']:focus-visible { outline-color: #b41818; }
+.ongyeol-login-error { position: absolute; top: 50px; left: 0; right: 0; display: flex; align-items: center; gap: 7px; min-height: 15px; color: #b41818; font-size: 12px; font-weight: 400; line-height: 15px; text-align: left; }
+.ongyeol-login-error svg { flex: none; }
+.ongyeol-login-password .ongyeol-login-error { top: 53px; }
+.ongyeol-login-submit-area { position: relative; }
+.ongyeol-login-form-error { position: absolute; top: calc(100% + 8px); left: 0; right: 0; color: #b41818; font-size: 12px; line-height: 16px; text-align: left; }
+.ongyeol-login-password { position: relative; margin-top: 35px; }
+.ongyeol-login-password input { padding-right: 48px; }
+.ongyeol-login button { box-sizing: border-box; font: inherit; }
+.ongyeol-login-toggle { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: 45px; height: 45px; padding: 0; border: 0; background: transparent; color: #878787; cursor: pointer; }
+.ongyeol-login-submit { width: 100%; height: 45px; margin-top: 63px; border: 0; border-radius: 5px; background: #1d1d1d; color: #fff; cursor: pointer; }
+.ongyeol-login-links { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 70px; white-space: nowrap; }
+.ongyeol-login-links button { border: 0; padding: 0; background: transparent; color: #000; opacity: 1; }
+.ongyeol-login-social { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
+.ongyeol-login-social button { position: relative; width: 100%; height: 45px; border: 0; border-radius: 5px; opacity: 1; }
+.ongyeol-login-social .ongyeol-login-social-kakao { background: #ffeb00; color: #000; }
+.ongyeol-login-social .ongyeol-login-social-naver { background: #01c73c; color: #fff; }
+.ongyeol-login-social-icon { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); }
+.ongyeol-login-naver { font-size: 20px; font-weight: 900; }
+.ongyeol-login :is(a, button, input):focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.ongyeol-login-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 1080px) {
+  .ongyeol-layout--login > .ongyeol-header { display: none; }
+  .ongyeol-login { min-height: 850px; padding-top: 120px; padding-bottom: 240px; }
+}
+@media (max-width: 400px) { .ongyeol-login-links { gap: 12px; font-size: 13px; } }

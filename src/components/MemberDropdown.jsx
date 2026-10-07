@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
+import { flushSync } from 'react-dom'
 import './MemberDropdown.css'
 
-export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {} }) {
+export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {}, isAuthenticated = false, onLogout }) {
   const panelRef = useRef(null)
 
   useLayoutEffect(() => {
@@ -49,15 +50,30 @@ export default function MemberDropdown({ open, onClose, onPointerEnter, onPointe
     }
   }, [open, onClose, anchorRef])
 
-  const item = (name, label) => links[name]
-    ? <a className="ongyeol-member-item" href={links[name]} onClick={onClose}>{label}</a>
-    : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
+  const navigate = (event, href) => {
+    // Close the menu before starting a full document navigation.
+    event.preventDefault()
+    flushSync(onClose)
+    window.location.assign(href)
+  }
+  const item = (name, label) => {
+    const href = isAuthenticated ? links[name] : '/login'
+    return href
+      ? <a className="ongyeol-member-item" href={href} onClick={(event) => navigate(event, href)}>{label}</a>
+      : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
+  }
+  const logout = () => {
+    flushSync(onClose)
+    onLogout?.()
+  }
 
   return (
     <nav ref={panelRef} id="member-dropdown" className={`ongyeol-member-dropdown${open ? ' is-open' : ''}`}
       inert={!open} aria-hidden={!open} aria-label="회원 메뉴" onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
       <div className="ongyeol-member-account-row">
-        {item('login', '로그인')}<span aria-hidden="true">/</span>{item('signup', '회원가입')}
+        {isAuthenticated
+          ? <button className="ongyeol-member-item" type="button" disabled={!onLogout} onClick={logout}>로그아웃</button>
+          : <>{item('login', '로그인')}<span aria-hidden="true">/</span>{item('signup', '회원가입')}</>}
       </div>
       {item('mypage', '마이페이지')}
     </nav>
