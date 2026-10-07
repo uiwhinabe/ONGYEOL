@@ -33,7 +33,6 @@
 .ongyeol-login :is(a, button, input):focus-visible { outline: 2px solid #000; outline-offset: 4px; }
 .ongyeol-login-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 @media (max-width: 1080px) {
-  .ongyeol-layout--login > .ongyeol-header { display: none; }
   .ongyeol-login { min-height: 850px; padding-top: 120px; padding-bottom: 240px; }
 }
 @media (max-width: 400px) { .ongyeol-login-links { gap: 12px; font-size: 13px; } }

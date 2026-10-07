@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { flushSync } from 'react-dom'
+import { Link } from 'react-router-dom'
 import './MemberDropdown.css'
 
-export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {}, isAuthenticated = false, onLogout }) {
+export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {}, isAuthenticated = false, onLogout, onLogin }) {
   const panelRef = useRef(null)
 
   useLayoutEffect(() => {
@@ -50,16 +51,18 @@ export default function MemberDropdown({ open, onClose, onPointerEnter, onPointe
     }
   }, [open, onClose, anchorRef])
 
-  const navigate = (event, href) => {
-    // Close the menu before starting a full document navigation.
-    event.preventDefault()
+  const handleItemClick = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     flushSync(onClose)
-    window.location.assign(href)
+    if (!isAuthenticated && onLogin) {
+      event.preventDefault()
+      onLogin()
+    }
   }
   const item = (name, label) => {
     const href = isAuthenticated ? links[name] : '/login'
     return href
-      ? <a className="ongyeol-member-item" href={href} onClick={(event) => navigate(event, href)}>{label}</a>
+      ? <Link className="ongyeol-member-item" to={href} onClick={handleItemClick}>{label}</Link>
       : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
   }
   const logout = () => {

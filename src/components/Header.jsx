@@ -49,7 +49,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
   }
   const [memberOpen, setMemberOpen] = useState(false)
   const [memberOpenedAt, setMemberOpenedAt] = useState(null)
-  const memberVisible = memberOpen && isAuthenticated && memberOpenedAt === location
+  const memberVisible = memberOpen && memberOpenedAt === location
   const memberTriggerRef = useRef(null)
   const memberCloseTimer = useRef(null)
   useEffect(() => {
@@ -164,16 +164,11 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
     closeShop()
     setSearchOpen(false)
     hamburger.close()
-    if (!isAuthenticated) {
-      setMemberOpen(false)
-      onLogin?.()
-      return
-    }
     setMemberOpenedAt(location)
     setMemberOpen(!memberVisible)
   }
   const hoverMember = (event) => {
-    if (event.pointerType !== 'mouse' || !isAuthenticated) return
+    if (event.pointerType !== 'mouse') return
     enterMember(event)
     cancelSearchClose()
     closeShop()
@@ -288,7 +283,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
       <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={onSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
       <HamburgerDropdown ref={hamburgerPanelRef} open={hamburgerOpen} controller={hamburger} />
-      <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={accountLinks} isAuthenticated={isAuthenticated} onLogout={onLogout} />
+      <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={accountLinks} isAuthenticated={isAuthenticated} onLogout={onLogout} onLogin={onLogin} />
     </header>
   )
 }
