@@ -8,29 +8,66 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
 import IdentityVerification from './pages/IdentityVerification.jsx'
+import Event from './pages/Event.jsx'
+import EventDetail from './pages/EventDetail.jsx'
+import welcomeBenefitDetail from './assets/images/events/welcome-benefit-detail.png'
+import kakaoDetail from './assets/images/events/kakao-detail.png'
 import AuthProvider from './components/AuthProvider.jsx'
 import { useAuth } from './components/authContext.js'
+
 function Layout() {
   const { pathname } = useLocation()
   const [chatOpen, setChatOpen] = useState(false)
   const { isAuthenticated, enterLogin, logout } = useAuth()
+
   const isLogin = pathname === '/login' || pathname === '/login/'
+
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   }, [pathname])
+
   return (
     <div className={`ongyeol-layout${isLogin ? ' ongyeol-layout--login' : ''}`}>
-      <Header chatOpen={chatOpen} isAuthenticated={isAuthenticated} onLogin={enterLogin} onLogout={logout} accountLinks={{ login: '/login', signup: '/signup' }} />
+      <Header
+        chatOpen={chatOpen}
+        isAuthenticated={isAuthenticated}
+        onLogin={enterLogin}
+        onLogout={logout}
+        accountLinks={{
+          login: '/login',
+          signup: '/signup',
+        }}
+      />
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/complete" element={<SignupComplete />} />
         <Route path="/signup/verify" element={<IdentityVerification />} />
+
+        <Route path="/event" element={<Event />} />
+        <Route path="/event/signup-coupon" element={<EventDetail title="신규 가입 회원 쿠폰 이벤트" detailImage={welcomeBenefitDetail} imageAlt="신규 회원 10,000원 쿠폰 혜택, 쿠폰 사용 안내, 쿠폰 받는 방법 및 쿠폰 이용 안내" />} />
+        <Route path="/event/kakao-coupon" element={<EventDetail title="카카오톡 플러스 친구 쿠폰 이벤트" detailImage={kakaoDetail} imageAlt="카카오톡 플러스친구 10,000원 쿠폰 이벤트, 참여 방법, 특별 혜택 및 유의사항" />} />
+
         <Route path="*" element={<Home />} />
       </Routes>
+
       <Footer />
-      <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
+
+      <AIChatWidget
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+      />
     </div>
   )
 }
-export default function App() { return <BrowserRouter><AuthProvider><Layout /></AuthProvider></BrowserRouter> }
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
+    </BrowserRouter>
+  )
+}

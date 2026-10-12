@@ -249,7 +249,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
                   <button ref={shopRef} id="shop-trigger" className="ongyeol-header-menu-label ongyeol-header-shop-trigger" type="button" aria-expanded={shopOpen} aria-controls="shop-dropdown" onFocus={openShop} onBlur={handleBlur} onClick={openShop}>
                     {label}
                   </button>
-                ) : <span className="ongyeol-header-menu-label">{label}</span>}
+                ) : id === 'event' ? <Link className="ongyeol-header-menu-label" to="/event?tab=ongoing" style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : <span className="ongyeol-header-menu-label">{label}</span>}
                 {id === 'shop' && <ShopDropdown ref={dropdownRef} open={shopOpen} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={handleBlur} onClose={closeShop} />}
               </li>
             ))}
