@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-import AIChatWidget from './components/AIChatWidget.jsx'
+import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
