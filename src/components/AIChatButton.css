@@ -1,7 +1,7 @@
 .ongyeol-ai-chat-button {
   position: fixed;
-  right: max(89px, env(safe-area-inset-right, 0px));
-  bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+  right: var(--ongyeol-chat-right, max(89px, env(safe-area-inset-right, 0px)));
+  bottom: calc(var(--ongyeol-chat-bottom, calc(78px + env(safe-area-inset-bottom, 0px))) - 30px);
   z-index: 40;
   display: grid;
   place-items: center;
@@ -62,8 +62,7 @@
 }
 @media (max-width: 834px) {
   .ongyeol-ai-chat-button {
-    right: max(24px, env(safe-area-inset-right, 0px));
-    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    right: var(--ongyeol-chat-right, max(24px, env(safe-area-inset-right, 0px)));
   }
 }
 .ongyeol-ai-chat-button.is-open .ongyeol-ai-chat-visual { background: #ebebeb; }
