@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react'
 import AIChatButton from './AIChatButton.jsx'
-import AIConsultation from './AIConsultation.jsx'
+import AIChat from './AIChat.jsx'
 
 export default function AIChatWidget({ open, onOpenChange, onInquiry, onConversation, onSettings }) {
   const buttonRef = useRef(null)
@@ -22,7 +22,7 @@ export default function AIChatWidget({ open, onOpenChange, onInquiry, onConversa
   }, [open, close])
 
   return <>
-    <AIConsultation open={open} onInquiry={onInquiry} onConversation={onConversation} onSettings={onSettings} />
+    <AIChat open={open} onInquiry={onInquiry} onConversation={onConversation} onSettings={onSettings} />
     <AIChatButton buttonRef={buttonRef} open={open} onClick={() => open ? close() : onOpenChange(true)} />
   </>
 }

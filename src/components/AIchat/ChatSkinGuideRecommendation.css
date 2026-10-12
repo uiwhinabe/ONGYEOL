@@ -1,0 +1,13 @@
+.ongyeol-chat-skin-guide-recommendation-content { position: absolute; left: 40px; top: 138px; display: flex; flex-direction: column; align-items: flex-start; gap: 50px; width: 340px; }
+.ongyeol-chat-skin-guide-recommendation-message { display: flex; align-items: flex-start; gap: 10px; width: 100%; }
+.ongyeol-chat-skin-guide-recommendation-copy { display: flex; flex-direction: column; gap: 30px; flex: none; width: 300px; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; font-size: 15px; line-height: 20px; }
+.ongyeol-chat-skin-guide-recommendation-ingredients { display: flex; flex-direction: column; gap: 5px; width: 320px; margin: 0; padding: 0; list-style: none; }
+.ongyeol-chat-skin-guide-recommendation-copy p,
+.ongyeol-chat-skin-guide-recommendation-ingredients li { white-space: normal; overflow-wrap: anywhere; }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 340px; height: 48px; padding: 0; border: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; font-size: 15px; line-height: 20px; }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-inquiry-composer { left: 22px; top: 646px; }
+.ongyeol-chat-skin-guide-recommendation button { animation: none; transform: translateY(0); transition: none; }
+.ongyeol-chat-skin-guide-recommendation button:hover:not(:disabled) { animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-chat-skin-guide-recommendation button:hover:not(:disabled) { animation: none; transform: translateY(0); }
+}

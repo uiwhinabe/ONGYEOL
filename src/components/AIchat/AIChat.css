@@ -1,0 +1,39 @@
+.ongyeol-consultation {
+  position: fixed;
+  right: max(89px, env(safe-area-inset-right, 0px));
+  bottom: calc(195px + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  width: 420px;
+  height: 760px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 40px;
+  background: white;
+  box-shadow: -7px -10px 40px #00000040, 7px 10px 40px #00000040;
+  color: black;
+  color-scheme: light;
+  font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+.ongyeol-consultation[hidden] { display: none; }
+.ongyeol-consultation.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.ongyeol-consultation p { margin: 0; }
+.ongyeol-consultation button { border: 0; margin: 0; font-family: inherit; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0; cursor: pointer; color: black; }
+.ongyeol-consultation button:disabled { cursor: default; opacity: 1; }
+.ongyeol-consultation button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+@media (max-width: 834px) {
+  .ongyeol-consultation { right: max(24px, env(safe-area-inset-right, 0px)); bottom: calc(141px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-consultation { transition: none; transform: none; }
+}
