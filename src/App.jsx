@@ -1,161 +1,122 @@
+import { useLayoutEffect, useState } from 'react'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
+
+import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
+import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
+
+import Home from './pages/Home.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import SignupComplete from './pages/SignupComplete.jsx'
+import IdentityVerification from './pages/IdentityVerification.jsx'
+
 import Checkout from './pages/Checkout.jsx'
 import Payment from './pages/Payment.jsx'
 import OrderComplete from './pages/OrderComplete.jsx'
-import { useEffect, useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
-import AIChatWidget from './components/AIChatWidget.jsx'
 
-function App() {
-  const [count, setCount] = useState(0)
+import AuthProvider from './components/AuthProvider.jsx'
+import { useAuth } from './components/authContext.js'
+
+function Layout() {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
   const [chatOpen, setChatOpen] = useState(false)
 
-  const [currentPage, setCurrentPage] = useState('checkout')
+  const { isAuthenticated, enterLogin, logout } = useAuth()
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [currentPage])
+  const isLogin = pathname === '/login' || pathname === '/login/'
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
+  }, [pathname])
 
   return (
-    <>
-      <Header chatOpen={chatOpen} />
-      {currentPage === 'checkout' && <Checkout onPayment={() => setCurrentPage('payment')} />}
-      {currentPage === 'payment' && <Payment onComplete={() => setCurrentPage('orderComplete')} onBack={() => setCurrentPage('checkout')} />}
-      {currentPage === 'orderComplete' && <OrderComplete onContinueShopping={() => setCurrentPage('main')} />}
-      {currentPage === 'main' && <>
-      <section id="center">
-        <div className="hero">
-          <img
-            src={heroImg}
-            className="base"
-            width="170"
-            height="179"
-            alt=""
-          />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <div
+      className={`ongyeol-layout${
+        isLogin ? ' ongyeol-layout--login' : ''
+      }`}
+    >
+      <Header
+        chatOpen={chatOpen}
+        isAuthenticated={isAuthenticated}
+        onLogin={enterLogin}
+        onLogout={logout}
+        accountLinks={{
+          login: '/login',
+          signup: '/signup',
+        }}
+      />
 
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup/complete" element={<SignupComplete />} />
+        <Route
+          path="/signup/verify"
+          element={<IdentityVerification />}
+        />
 
-      <div className="ticks"></div>
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              onPayment={() => navigate('/payment')}
+            />
+          }
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
+        <Route
+          path="/payment"
+          element={
+            <Payment
+              onComplete={() => navigate('/order-complete')}
+              onBack={() => navigate('/checkout')}
+            />
+          }
+        />
 
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
+        <Route
+          path="/order-complete"
+          element={
+            <OrderComplete
+              onContinueShopping={() => navigate('/')}
+            />
+          }
+        />
 
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
+        <Route path="*" element={<Home />} />
+      </Routes>
 
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-
-      </>}
       <Footer />
-      <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
-    </>
+
+      <AIChatWidget
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+      />
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
+    </BrowserRouter>
+  )
+}

@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom'
-import logo from '../assets/images/chat/ongyeol-logo.png'
-import hoverIcon from '../assets/images/chat/hover-close.svg'
+import logo from '../../assets/images/chat/ongyeol-logo.png'
+import hoverIcon from '../../assets/images/chat/hover-close.svg'
 import './AIChatButton.css'
 
 export default function AIChatButton({ onClick, open = false, buttonRef }) {
