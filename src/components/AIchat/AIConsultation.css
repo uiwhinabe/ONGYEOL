@@ -1,7 +1,7 @@
 .ongyeol-consultation {
   position: fixed;
   right: max(89px, env(safe-area-inset-right, 0px));
-  bottom: calc(195px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(var(--ongyeol-chat-bottom, calc(78px + env(safe-area-inset-bottom, 0px))) + 60px);
   z-index: 40;
   width: 420px;
   height: 760px;
@@ -53,7 +53,7 @@
 .ongyeol-consultation-navigation button:first-child { width: 24px; }
 .ongyeol-consultation-navigation span { white-space: nowrap; }
 @media (max-width: 834px) {
-  .ongyeol-consultation { right: max(24px, env(safe-area-inset-right, 0px)); bottom: calc(141px + env(safe-area-inset-bottom, 0px)); }
+  .ongyeol-consultation { right: max(24px, env(safe-area-inset-right, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ongyeol-consultation { transition: none; transform: none; }
