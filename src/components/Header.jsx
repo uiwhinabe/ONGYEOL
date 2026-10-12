@@ -94,7 +94,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
   })
   const openShop = () => {
     cancelClose()
-    if (window.matchMedia('(min-width: 1480px)').matches) {
+    if (window.matchMedia('(min-width: 835px)').matches) {
       setSearchOpen(false)
       setMemberOpen(false)
       hamburger.close()
@@ -195,7 +195,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
         headerRef.current.style.setProperty('--search-bridge-width', `${trigger.width}px`)
         headerRef.current.style.setProperty('--search-bridge-height', `${Math.max(0, headerBottom - trigger.bottom)}px`)
       }
-      if (!window.matchMedia('(min-width: 1480px)').matches) setShopOpen(false)
+      if (!window.matchMedia('(min-width: 835px)').matches) setShopOpen(false)
     }
     update()
     window.addEventListener('resize', update)

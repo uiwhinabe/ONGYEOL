@@ -1,9 +1,10 @@
 import './ShopDropdown.css'
+import { navigateToProducts } from '../utils/productNavigation.js'
 import welcomeBenefit from '../assets/images/events/welcome-benefit.png'
 
 const categories = [
   { title: '제품유형별', items: ['토너/패드', '에센스/앰플', '로션/크림', '클렌징', '마스크팩'] },
-  { title: '핵심라인별', items: ['닥열매', '백목이', '오디', '레몬', '장미'] },
+  { title: '핵심라인별', items: ['백목이', '뽕나무', '닥열매', '비타민C', '장미'] },
   { title: '피부고민별', items: ['민감/진정', '수분/보습', '모공/피지', '피부톤/기미잡티', '주름/탄력'] },
 ]
 
@@ -20,8 +21,10 @@ export default function ShopDropdown({ ref, open, onMouseEnter, onMouseLeave, on
                 <ul className="shop-dropdown-list">
                   {items.map((label) => (
                     <li key={label}>
-                      {/* No category routes exist yet. Keep items focusable without inventing URLs. */}
-                      <button type="button" className="shop-dropdown-item" aria-disabled="true">{label}</button>
+                      <button type="button" className="shop-dropdown-item" onClick={() => {
+                        onClose()
+                        navigateToProducts(['type', 'line', 'concern'][index], label)
+                      }}>{label}</button>
                     </li>
                   ))}
                 </ul>

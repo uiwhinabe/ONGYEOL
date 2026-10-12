@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import './HamburgerDropdown.css'
+import { navigateToProducts } from '../utils/productNavigation.js'
 
 const categories = [
   { title: '제품유형별', items: ['토너/패드', '에센스/앰플', '로션/크림', '클렌징', '마스크팩'] },
-  { title: '핵심라인별', items: ['닥열매', '백목이', '오디', '레몬', '장미'] },
+  { title: '핵심라인별', items: ['백목이', '뽕나무', '닥열매', '비타민C', '장미'] },
   { title: '피부고민별', items: ['민감/진정', '수분/보습', '모공/피지', '피부톤/기미잡티', '주름/탄력'] },
 ]
 
@@ -28,7 +29,10 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
                   <span>{title}</span><span className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} aria-hidden="true" />
                 </button>
                 <ul className="ongyeol-hd-items" id={`hd-items-${index}`} hidden={!open}>
-                  {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" aria-disabled="true">{label}</button></li>)}
+                  {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" onClick={() => {
+                    controller.close()
+                    navigateToProducts(['type', 'line', 'concern'][index], label)
+                  }}>{label}</button></li>)}
                 </ul>
               </div>
             )
