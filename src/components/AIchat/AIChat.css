@@ -1,7 +1,13 @@
+.ongyeol-consultation,
+.ongyeol-ai-chat-button {
+  --ongyeol-chat-right: max(71px, env(safe-area-inset-right, 0px));
+  --ongyeol-chat-bottom: calc(39px + env(safe-area-inset-bottom, 0px));
+  --ongyeol-chat-gap: 30px;
+}
 .ongyeol-consultation {
   position: fixed;
-  right: max(89px, env(safe-area-inset-right, 0px));
-  bottom: calc(195px + env(safe-area-inset-bottom, 0px));
+  right: var(--ongyeol-chat-right);
+  bottom: calc(var(--ongyeol-chat-bottom) + 60px + var(--ongyeol-chat-gap));
   z-index: 40;
   width: 420px;
   height: 760px;
@@ -31,8 +37,9 @@
 .ongyeol-consultation button { border: 0; margin: 0; font-family: inherit; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0; cursor: pointer; color: black; }
 .ongyeol-consultation button:disabled { cursor: default; opacity: 1; }
 .ongyeol-consultation button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
-@media (max-width: 834px) {
-  .ongyeol-consultation { right: max(24px, env(safe-area-inset-right, 0px)); bottom: calc(141px + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 599px) {
+  .ongyeol-consultation { right: calc((100% - 420px) / 2); }
+  .ongyeol-ai-chat-button { right: max(16px, calc((100% - 420px) / 2), env(safe-area-inset-right, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ongyeol-consultation { transition: none; transform: none; }
