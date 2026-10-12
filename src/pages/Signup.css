@@ -1,3 +1,58 @@
-﻿.ongyeol-signup { flex: 1; padding: 120px 20px 240px; background: #fff; color: #000; color-scheme: light; font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; }
-.ongyeol-signup h1 { color: inherit; font: inherit; font-size: 24px; }
-.ongyeol-signup a { display: inline-block; margin-top: 24px; color: inherit; }
+.ongyeol-signup { box-sizing: border-box; flex: 1; min-width: 0; padding: 120px 20px 316px; background: #fff; color: #000; color-scheme: light; font: 500 14px/17px 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: left; }
+.ongyeol-signup-form { width: 589px; margin: 0 auto; }
+.ongyeol-signup-tabs { display: flex; justify-content: center; width: 458px; margin: 0 auto; border-bottom: 2px solid #9b9b9b; }
+.ongyeol-signup-tabs a { box-sizing: border-box; flex: 0 1 200px; padding: 10px; border-bottom: 2px solid transparent; color: inherit; font-size: 15px; line-height: 18px; text-align: center; text-decoration: none; }
+.ongyeol-signup-tabs a[aria-current='page'] { border-bottom-color: #000; }
+.ongyeol-signup-fields { display: flex; flex-direction: column; gap: 30px; width: 380px; margin: 20px auto 0; }
+.ongyeol-signup-field { position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ongyeol-signup-field-error { position: absolute; top: calc(100% + 2px); left: 0; right: 0; margin: 0; color: #b41818; font-size: 11px; line-height: 13px; }
+.ongyeol-signup-field [aria-invalid='true'] { border-color: #b41818; }
+.ongyeol-signup-field > label { font-size: 13px; line-height: 16px; }
+.ongyeol-signup-field :is(input, select) { box-sizing: border-box; width: 100%; min-width: 0; height: 45px; padding: 0 12px; border: 1px solid #000; border-radius: 5px; background: #fff; color: #000; font: inherit; }
+.ongyeol-signup-field input::placeholder { color: #000; opacity: .4; }
+.ongyeol-signup-field select { appearance: none; cursor: pointer; }
+.ongyeol-signup-field select.ongyeol-signup-placeholder { color: #999; }
+.ongyeol-signup-field option { color: #000; }
+.ongyeol-signup-code-row { display: grid; grid-template-columns: minmax(0, 267px) 101px; gap: 12px; }
+.ongyeol-signup button { box-sizing: border-box; height: 45px; padding: 0 12px; border: 0; border-radius: 5px; background: #1d1d1d; color: #fff; font: inherit; font-size: 15px; line-height: 18px; cursor: pointer; }
+.ongyeol-signup-password-input { position: relative; width: 100%; min-width: 0; }
+.ongyeol-signup-password-input input { padding-right: 48px; }
+.ongyeol-signup .ongyeol-signup-password-toggle { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: 45px; height: 45px; padding: 0; border: 0; background: transparent; color: #878787; cursor: pointer; }
+.ongyeol-signup-information { display: flex; flex-direction: column; gap: 45px; margin-top: 90px; overflow-wrap: anywhere; }
+.ongyeol-signup-benefits h2 { margin: 0 0 16px; color: inherit; font: inherit; letter-spacing: normal; }
+.ongyeol-signup-benefits ul { display: flex; flex-direction: column; gap: 16px; margin: 0; padding-left: 21px; }
+.ongyeol-signup-agreements { min-width: 0; margin: 0; padding: 0; border: 0; }
+.ongyeol-signup-agreements legend { margin: 0 0 15px; padding: 0; }
+.ongyeol-signup-agreement-error { box-sizing: border-box; height: 17px; margin: 15px 0 0; color: #fa0000; font-size: 13.5px; font-weight: 400; line-height: 17px; word-break: keep-all; overflow-wrap: anywhere; }
+.ongyeol-signup-checks { display: flex; flex-direction: column; gap: 15px; }
+.ongyeol-signup-checks label { display: block; cursor: pointer; }
+.ongyeol-signup-checks input { appearance: none; box-sizing: border-box; width: 11px; height: 11px; margin: 0; border: 1px solid #000; border-radius: 0; background: #fff; vertical-align: baseline; cursor: pointer; }
+.ongyeol-signup-checks input:checked { background: #1d1d1d; box-shadow: inset 0 0 0 2px #fff; }
+.ongyeol-signup-submit-area { position: relative; width: 380px; margin: 90px auto 0; }
+.ongyeol-signup-submit { width: 100%; }
+.ongyeol-signup-status { position: absolute; top: 100%; left: 0; right: 0; margin-top: 12px; color: #b41818; line-height: 20px; }
+.ongyeol-signup-status:empty { margin: 0; }
+.ongyeol-signup :is(a, button, input, select):focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+@media (min-width: 600px) and (max-width: 1359px) {
+  .ongyeol-signup { padding-bottom: 178px; }
+  .ongyeol-signup-information { margin-top: 80px; }
+  .ongyeol-signup-submit-area { margin-top: 100px; }
+}
+/* Keep the fixed desktop form through tablet widths; only outer space shrinks. */
+@media (min-width: 600px) and (max-width: 628px) {
+  .ongyeol-signup { padding-inline: 5px; }
+}
+@media (max-width: 599px) {
+  .ongyeol-signup { padding: 100px 0 63px; }
+  .ongyeol-signup-form { width: 100%; }
+  .ongyeol-signup-tabs { width: 100%; }
+  .ongyeol-signup-tabs a { flex: 1; }
+  .ongyeol-signup-fields { width: min(280px, calc(100% - 40px)); gap: 15px; margin-top: 50px; }
+  .ongyeol-signup-field :is(input, select) { font-size: 13px; }
+  .ongyeol-signup-code-row { grid-template-columns: minmax(0, 1fr) 60px; gap: 10px; }
+  .ongyeol-signup-information { width: min(310px, calc(100% - 40px)); margin: 66px auto 0; }
+  .ongyeol-signup-benefits li { line-height: 20px; }
+  .ongyeol-signup-checks label { line-height: 18px; }
+  .ongyeol-signup-agreement-error { height: 40px; line-height: 20px; }
+  .ongyeol-signup-submit-area { width: min(280px, calc(100% - 40px)); margin-top: 40px; }
+}

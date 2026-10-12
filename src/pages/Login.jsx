@@ -67,7 +67,7 @@ export default function Login() {
     <main className="ongyeol-login" aria-label="로그인">
       <div className="ongyeol-login-panel">
         <nav className="ongyeol-login-tabs" aria-label="회원 페이지">
-          <Link to="/login" aria-current="page">로그인</Link><Link to="/signup">회원가입</Link>
+          <Link to="/login" aria-current="page">로그인</Link><Link to="/signup/verify">회원가입</Link>
         </nav>
         <form className="ongyeol-login-form" noValidate onSubmit={submit} aria-busy={pending}>
           <div className="ongyeol-login-email">
@@ -90,7 +90,7 @@ export default function Login() {
           <nav className="ongyeol-login-links" aria-label="계정 도움말">
             <button type="button" disabled title="아이디 찾기는 준비 중입니다">아이디 찾기</button><span aria-hidden="true">|</span>
             <button type="button" disabled title="비밀번호 찾기는 준비 중입니다">비밀번호 찾기</button><span aria-hidden="true">|</span>
-            <Link to="/signup">회원가입</Link>
+            <Link to="/signup/verify">회원가입</Link>
           </nav>
           <div className="ongyeol-login-social">
             <button className="ongyeol-login-social-kakao" type="button" disabled><svg className="ongyeol-login-social-icon" width="18" height="16" viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M9 0C4 0 0 3 0 6.7c0 2.4 1.6 4.5 4.1 5.7L3 16l4-2.7h2c5 0 9-3 9-6.6S14 0 9 0Z" /></svg>카카오 로그인</button>
