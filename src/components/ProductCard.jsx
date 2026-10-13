@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import './ProductCard.css'
+import { productImageFrames } from '../data/productImageFrames.js'
 
 // A stable, unique product.id preserves each product's wish across page changes.
 export default function ProductCard({ product }) {
@@ -15,6 +16,8 @@ export default function ProductCard({ product }) {
   })
   const rating = Math.min(5, Math.max(0, Number(product.rating) || 0))
   const stars = Math.round(rating)
+  const frame = productImageFrames[product.id]
+  const textureImage = ['닥열매', '장미', '백목이', '뽕나무', '비타민C'].includes(product.line) ? product.textureImage : null
 
   function toggleWish() {
     const next = !wished
@@ -27,11 +30,26 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <article className="ongyeol-product-card">
+    <article className="ongyeol-product-card" data-product-id={product.id}>
       <div className="ongyeol-product-card__visual">
-        {product.image
+        {product.image && frame ? (
+          <div className="ongyeol-product-card__image-stage">
+            <div className="ongyeol-product-card__image-crop" style={{
+              '--product-ratio': frame.width * frame.ratio / frame.height,
+            }}>
+              <img src={product.image} alt={product.name} loading="lazy" style={{
+                width: `${100 / frame.width}%`,
+                left: `${-100 * frame.x / frame.width}%`,
+                top: `${-100 * frame.y / frame.height}%`,
+              }} />
+            </div>
+          </div>
+        ) : product.image
           ? <img className="ongyeol-product-card__image" src={product.image} alt={product.name} loading="lazy" />
           : <div className="ongyeol-product-card__image" role="img" aria-label={`${product.name} 이미지 준비 중`} />}
+        {textureImage && (
+          <img className="ongyeol-product-card__texture" src={textureImage} alt="" aria-hidden="true" />
+        )}
         {product.badge && (
           <span className={`ongyeol-product-card__badge ongyeol-product-card__badge--${product.badge.toLowerCase()}`}>
             {product.badge === 'SALE' ? `${product.discountPercent}% SALE` : product.badge}

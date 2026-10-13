@@ -20,6 +20,50 @@
   background: #f5f5f5;
 }
 .ongyeol-product-card__visual { position: relative; }
+.ongyeol-product-card__texture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .ongyeol-product-card__visual:hover .ongyeol-product-card__texture {
+    visibility: visible;
+  }
+}
+.ongyeol-product-card[data-product-id='odi-toner'] .ongyeol-product-card__image,
+.ongyeol-product-card[data-product-id='baekmogi-pad'] .ongyeol-product-card__image,
+.ongyeol-product-card[data-product-id='baekmogi-cream'] .ongyeol-product-card__image,
+.ongyeol-product-card[data-product-id='baekmogi-mask'] .ongyeol-product-card__image {
+  background: #fff;
+}
+.ongyeol-product-card[data-product-id='baekmogi-mask'] img.ongyeol-product-card__image {
+  filter: brightness(1.04);
+}
+.ongyeol-product-card__image-stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #fff;
+}
+.ongyeol-product-card__image-crop {
+  position: relative;
+  width: min(76%, calc(106.6667% * var(--product-ratio)));
+  aspect-ratio: var(--product-ratio);
+  overflow: hidden;
+}
+.ongyeol-product-card__image-crop img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+}
 .ongyeol-product-card__badge {
   position: absolute;
   top: 9px;
