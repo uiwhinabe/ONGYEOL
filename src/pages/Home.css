@@ -1,0 +1,29 @@
+.ongyeol-home {
+  width: 100%;
+  aspect-ratio: 2047 / 897;
+  flex: none;
+}
+
+.ongyeol-home__banner {
+  position: relative;
+  width: 100%;
+}
+.ongyeol-home__banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ongyeol-home__shop,
+.ongyeol-home__show-more {
+  position: absolute;
+  top: 54.7%;
+  width: 11.45%;
+  height: 4.5%;
+  border-radius: 4px;
+}
+.ongyeol-home__shop { left: 7.72%; }
+.ongyeol-home__show-more { left: 20.22%; }
+.ongyeol-home__shop:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 4px;
+}

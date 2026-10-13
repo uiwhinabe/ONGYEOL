@@ -18,16 +18,26 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
       <div className="ongyeol-hd-overlay" aria-hidden="true" onClick={controller.close} />
       <nav ref={ref} id="hamburger-dropdown" className="ongyeol-hd-panel" aria-label="전체 메뉴"
         onPointerEnter={controller.cancelClose} onPointerLeave={(event) => { if (event.pointerType === 'mouse') controller.scheduleClose() }} onBlur={controller.onBlur}>
-        <h2 className="ongyeol-hd-heading">SHOP</h2>
+        <h2 className="ongyeol-hd-heading">
+          <button className="ongyeol-hd-shop" type="button" onClick={() => {
+            controller.close()
+            navigateToProducts('type', '전체')
+          }}>SHOP</button>
+        </h2>
         <div className="ongyeol-hd-categories">
           {categories.map(({ title, items }, index) => {
             const open = expanded.includes(index)
             return (
               <div key={title}>
-                <button className="ongyeol-hd-category" type="button" aria-expanded={open} aria-controls={`hd-items-${index}`}
-                  onClick={() => setExpanded((values) => open ? values.filter((value) => value !== index) : [...values, index])}>
-                  <span>{title}</span><span className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} aria-hidden="true" />
-                </button>
+                <div className="ongyeol-hd-category">
+                  <button className="ongyeol-hd-title" type="button" onClick={() => {
+                    controller.close()
+                    navigateToProducts(['type', 'line', 'concern'][index], index === 0 ? '전체' : items[0])
+                  }}>{title}</button>
+                  <button className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} type="button"
+                    aria-label={`${title} 하위 메뉴 ${open ? '접기' : '펼치기'}`} aria-expanded={open} aria-controls={`hd-items-${index}`}
+                    onClick={() => setExpanded((values) => open ? values.filter((value) => value !== index) : [...values, index])} />
+                </div>
                 <ul className="ongyeol-hd-items" id={`hd-items-${index}`} hidden={!open}>
                   {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" onClick={() => {
                     controller.close()

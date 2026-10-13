@@ -63,6 +63,24 @@
   cursor: pointer;
 }
 .ongyeol-hd-plus { position: relative; flex: none; width: 24px; height: 24px; }
+.ongyeol-hd-title,
+ .ongyeol-hd-shop,
+button.ongyeol-hd-plus {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ongyeol-hd-title:hover,
+.ongyeol-hd-title:focus-visible,
+.ongyeol-hd-shop:hover,
+.ongyeol-hd-shop:focus-visible { color: #000000; }
 .ongyeol-hd-plus::before, .ongyeol-hd-plus::after {
   content: '';
   position: absolute;
@@ -76,7 +94,9 @@
 .ongyeol-hd-plus.is-expanded::after { display: none; }
 .ongyeol-hd-items { margin: 20px 0 0; padding: 0 0 0 20px; list-style: none; }
 .ongyeol-hd-items li + li { margin-top: 16px; }
-.ongyeol-hd-item { color: #878787; font: 400 18px/24px 'Ongyeol Noto Sans', sans-serif; }
+.ongyeol-hd-item { color: #878787; font: 400 18px/24px 'Ongyeol Noto Sans', sans-serif; cursor: pointer; transition: color 120ms ease; }
+.ongyeol-hd-item:hover,
+.ongyeol-hd-item:focus-visible { color: #000000; }
 .ongyeol-hd-panel button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
 @media (max-width: 402px) {
   .ongyeol-hd-layer { --hd-width: 100%; }

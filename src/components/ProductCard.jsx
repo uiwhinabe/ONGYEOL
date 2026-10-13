@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import './ProductCard.css'
 import { productImageFrames } from '../data/productImageFrames.js'
+import { getProductDetailHref } from '../utils/productNavigation.js'
 
 // A stable, unique product.id preserves each product's wish across page changes.
 export default function ProductCard({ product }) {
@@ -17,6 +18,7 @@ export default function ProductCard({ product }) {
   const rating = Math.min(5, Math.max(0, Number(product.rating) || 0))
   const stars = Math.round(rating)
   const frame = productImageFrames[product.id]
+  const detailHref = getProductDetailHref(product.id)
   const textureImage = ['닥열매', '장미', '백목이', '뽕나무', '비타민C'].includes(product.line) ? product.textureImage : null
 
   function toggleWish() {
@@ -31,7 +33,7 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="ongyeol-product-card" data-product-id={product.id}>
-      <div className="ongyeol-product-card__visual">
+      <a className="ongyeol-product-card__visual ongyeol-product-card__detail-link" href={detailHref} aria-label={`${product.name} 상세 보기`}>
         {product.image && frame ? (
           <div className="ongyeol-product-card__image-stage">
             <div className="ongyeol-product-card__image-crop" style={{
@@ -55,8 +57,12 @@ export default function ProductCard({ product }) {
             {product.badge === 'SALE' ? `${product.discountPercent}% SALE` : product.badge}
           </span>
         )}
-      </div>
-      <h2 className="ongyeol-product-card__name">{product.name}</h2>
+      </a>
+      <h2 className="ongyeol-product-card__name">
+        <a className="ongyeol-product-card__name-link ongyeol-product-card__detail-link" href={detailHref}>
+          <span>{product.name}</span>
+        </a>
+      </h2>
       <p className="ongyeol-product-card__price">
         {product.originalPrice > product.price && <del className="ongyeol-product-card__original-price">{product.originalPrice.toLocaleString('ko-KR')}원</del>}
         <span>{product.price.toLocaleString('ko-KR')}원</span>

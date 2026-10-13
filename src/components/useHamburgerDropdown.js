@@ -12,7 +12,7 @@ export default function useHamburgerDropdown(onOpen) {
   }, [])
   const show = () => {
     cancelClose()
-    if (window.matchMedia('(max-width: 834px)').matches) {
+    if (window.matchMedia('(max-width: 1479px)').matches) {
       onOpen()
       setOpen(true)
     }
@@ -22,7 +22,7 @@ export default function useHamburgerDropdown(onOpen) {
     timer.current = window.setTimeout(() => setOpen(false), 140)
   }
   useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 835px)')
+    const desktop = window.matchMedia('(min-width: 1480px)')
     const change = () => { if (desktop.matches) close() }
     desktop.addEventListener('change', change)
     return () => { desktop.removeEventListener('change', change); window.clearTimeout(timer.current) }
@@ -55,7 +55,7 @@ export default function useHamburgerDropdown(onOpen) {
     onPointerEnter: (event) => { if (event.pointerType === 'mouse') show() },
     onPointerLeave: (event) => { if (event.pointerType === 'mouse') scheduleClose() },
     onClick: (event) => {
-      if (!window.matchMedia('(max-width: 834px)').matches) return
+      if (!window.matchMedia('(max-width: 1479px)').matches) return
       cancelClose()
       if (!open) onOpen()
       setOpen((value) => !value)

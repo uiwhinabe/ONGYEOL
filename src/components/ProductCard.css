@@ -20,6 +20,28 @@
   background: #f5f5f5;
 }
 .ongyeol-product-card__visual { position: relative; }
+.ongyeol-product-card__detail-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ongyeol-product-card__detail-link:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+.ongyeol-product-card__name-link { overflow: hidden; }
+.ongyeol-product-card__name-link span {
+  display: block;
+  transform-origin: left center;
+  transition: transform 0.2s, color 0.2s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ongyeol-product-card__name-link:hover span {
+    transform: scale(1.166667);
+    color: #606060;
+  }
+}
 .ongyeol-product-card__texture {
   position: absolute;
   inset: 0;
@@ -28,12 +50,13 @@
   height: 100%;
   object-fit: contain;
   background: #fff;
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   pointer-events: none;
 }
 @media (hover: hover) {
   .ongyeol-product-card__visual:hover .ongyeol-product-card__texture {
-    visibility: visible;
+    opacity: 1;
   }
 }
 .ongyeol-product-card[data-product-id='odi-toner'] .ongyeol-product-card__image,
@@ -114,6 +137,22 @@
 }
 .ongyeol-product-card__wish[aria-pressed='true'] { color: #ed0000; }
 
-@media (max-width: 360px) {
+@media (max-width: 599px) {
+  .ongyeol-product-card { font-size: 11px; }
+  .ongyeol-product-card__name { font-size: 11px; line-height: 17px; }
+  .ongyeol-product-card__original-price { font-size: 9px; }
+  .ongyeol-product-card__price { gap: 3px; line-height: 17px; }
   .ongyeol-product-card__stars { font-size: 16px; }
+  .ongyeol-product-card__reviews { font-size: 9px; }
+  .ongyeol-product-card__meta { flex-wrap: wrap; gap: 4px; }
+  .ongyeol-product-card__wish { flex: none; margin-right: 0; }
+  .ongyeol-product-card__badge { top: 6px; left: 6px; width: 36px; height: 36px; font-size: 10px; }
+  .ongyeol-product-card__badge--limited { font-size: 7px; }
+  .ongyeol-product-card__badge--sale { top: 0; left: 0; width: auto; height: auto; font-size: 8px; }
+}
+@media (max-width: 599px) and (hover: hover) and (pointer: fine) {
+  .ongyeol-product-card__name-link:hover span { transform: scale(1.181818); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-product-card__name-link span { transition: none; }
 }

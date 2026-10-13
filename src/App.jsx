@@ -4,6 +4,7 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIChatWidget.jsx'
 import Products from './pages/Products.jsx'
+import Home from './pages/Home.jsx'
 import { readProductRoute, navigateToProducts } from './utils/productNavigation.js'
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
   return (
     <>
       <Header chatOpen={chatOpen} />
-      <Products classification={productRoute.classification} initialCategory={productRoute.category}
-        onCategoryChange={navigateToProducts} />
+      {productRoute.isProducts ? <Products classification={productRoute.classification} initialCategory={productRoute.category}
+        onCategoryChange={navigateToProducts} /> : <Home />}
       <Footer />
       <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
     </>

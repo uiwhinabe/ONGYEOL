@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { navigateToProducts } from '../utils/productNavigation.js'
 import './Header.css'
 import ShopDropdown from './ShopDropdown.jsx'
 import SearchDropdown from './SearchDropdown.jsx'
@@ -40,13 +41,6 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     }
   }, [location])
-  const handleLogoClick = (event) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-    if (location.pathname === '/') {
-      event.preventDefault()
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-    }
-  }
   const [memberOpen, setMemberOpen] = useState(false)
   const [memberOpenedAt, setMemberOpenedAt] = useState(null)
   const memberVisible = memberOpen && memberOpenedAt === location
@@ -246,7 +240,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
               <li key={id} className={`ongyeol-header-menu-item${id === 'shop' ? ' ongyeol-header-shop-item' : ''}`} onMouseEnter={id === 'shop' ? openShop : closeShop} onMouseLeave={id === 'shop' ? scheduleClose : undefined}>
                 {/* 페이지 연결 시 이 span을 React Router Link로 교체합니다. */}
                 {id === 'shop' ? (
-                  <button ref={shopRef} id="shop-trigger" className="ongyeol-header-menu-label ongyeol-header-shop-trigger" type="button" aria-expanded={shopOpen} aria-controls="shop-dropdown" onFocus={openShop} onBlur={handleBlur} onClick={openShop}>
+                  <button ref={shopRef} id="shop-trigger" className="ongyeol-header-menu-label ongyeol-header-shop-trigger" type="button" aria-expanded={shopOpen} aria-controls="shop-dropdown" onFocus={openShop} onBlur={handleBlur} onClick={() => { navigateToProducts('type', '전체'); closeShop() }}>
                     {label}
                   </button>
                 ) : <span className="ongyeol-header-menu-label">{label}</span>}
@@ -263,7 +257,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
           </span>
         </button>
         <div className="ongyeol-header-logo" aria-label="온결">
-          <Link className="ongyeol-header-wordmark" to="/" onClick={handleLogoClick} aria-label="온결 홈으로 이동">ONGYEOL</Link>
+          <a className="ongyeol-header-wordmark" href={import.meta.env.BASE_URL} aria-label="온결 홈으로 이동">ONGYEOL</a>
         </div>
         <div className="ongyeol-header-actions">
           <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberVisible} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>

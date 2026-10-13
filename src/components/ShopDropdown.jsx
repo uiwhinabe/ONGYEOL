@@ -17,7 +17,12 @@ export default function ShopDropdown({ ref, open, onMouseEnter, onMouseLeave, on
           <div className="shop-dropdown-categories">
             {categories.map(({ title, items }, index) => (
               <section key={title} aria-labelledby={`shop-category-${index}`}>
-                <h2 id={`shop-category-${index}`} className="shop-dropdown-title">{title}</h2>
+                <h2 id={`shop-category-${index}`} className="shop-dropdown-title">
+                  <button type="button" className="shop-dropdown-title-button" onClick={() => {
+                    onClose()
+                    navigateToProducts(['type', 'line', 'concern'][index], index === 0 ? '전체' : items[0])
+                  }}>{title}</button>
+                </h2>
                 <ul className="shop-dropdown-list">
                   {items.map((label) => (
                     <li key={label}>
