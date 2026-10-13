@@ -143,7 +143,7 @@ export default function Home() {
           <div className="home-hero-overlay"><div className="home-hero-copy">
             <p>{slide.description}</p>
             <h1>{slide.title}</h1>
-            <div className="home-hero-actions"><a href="#home-featured">Shop now</a><a href="#home-skin-guide">Show more</a></div>
+            <div className="home-hero-actions"><button type="button">Shop now</button><button type="button">Show more</button></div>
           </div></div>
         </div>)}
       </div>

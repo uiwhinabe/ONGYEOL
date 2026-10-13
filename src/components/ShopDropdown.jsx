@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './ShopDropdown.css'
 import welcomeBenefit from '../assets/images/events/welcome-benefit.png'
 
@@ -28,6 +29,7 @@ export default function ShopDropdown({ ref, open, onMouseEnter, onMouseLeave, on
               </section>
             ))}
           </div>
+          <Link className="shop-dropdown-banner-link" to="/event/signup-coupon" onClick={onClose} aria-label="신규 가입 회원 쿠폰 이벤트 보기">
           <img
             className="shop-dropdown-banner"
             src={welcomeBenefit}
@@ -35,6 +37,7 @@ export default function ShopDropdown({ ref, open, onMouseEnter, onMouseLeave, on
             height="264"
             alt="온결 신규가입 회원 10,000원 쿠폰 이벤트"
           />
+          </Link>
         </div>
       </div>
     </div>

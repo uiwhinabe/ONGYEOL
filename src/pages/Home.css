@@ -14,8 +14,8 @@
 .home-hero-copy > p { font-family: "Ongyeol Noto Serif", "Ongyeol Footer Noto Sans KR", serif; font-size: 20px; }
 .home-page .home-hero-copy h1 { font-size: 48px; font-weight: 500; line-height: 1.3; margin-top: 5px; white-space: nowrap; }
 .home-hero-actions { display: flex; gap: 22px; margin-top: 22px; }
-.home-hero-actions a { display: flex; align-items: center; justify-content: center; flex: 1; min-height: 36px; padding: 5px 10px; border: 1px solid #000; border-radius: 5px; color: #000; background: transparent; font-size: 20px; font-weight: 400; line-height: 1.2; text-decoration: none; cursor: pointer; }
-.home-hero-actions a:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.home-hero-actions button { display: flex; align-items: center; justify-content: center; flex: 1; min-height: 36px; padding: 5px 10px; border: 1px solid #000; border-radius: 5px; color: #000; background: transparent; font-family: inherit; font-size: 20px; font-weight: 400; line-height: 1.2; letter-spacing: inherit; text-decoration: none; cursor: pointer; }
+.home-hero-actions button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
 .home-hero-pagination { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); display: flex; gap: 26px; }
 .home-hero-dot { width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%; background: #fff; cursor: pointer; }
 .home-hero-dot-active { background: #777; }
@@ -78,7 +78,7 @@
   .home-hero-copy > p { font-size: clamp(12px, 1.6vw, 16px); }
   .home-page .home-hero-copy h1 { font-size: clamp(22px, 3.2vw, 32px); white-space: normal; }
   .home-hero-actions { gap: 10px; margin-top: 18px; }
-  .home-hero-actions a { min-height: 32px; padding: 5px 6px; font-size: clamp(12px, 1.6vw, 16px); }
+  .home-hero-actions button { min-height: 32px; padding: 5px 6px; font-size: clamp(12px, 1.6vw, 16px); }
   .home-hero-pagination { bottom: 28px; gap: 18px; }
   .home-hero-dot { width: 12px; height: 12px; }
 
@@ -135,7 +135,7 @@
   .home-hero-copy > p { font-size: 12px; }
   .home-page .home-hero-copy h1 { font-size: clamp(22px, 5.5vw, 28px); white-space: normal; }
   .home-hero-actions { gap: 12px; margin-top: 14px; max-width: 320px; }
-  .home-hero-actions a { min-height: 32px; padding: 5px 8px; font-size: 12px; }
+  .home-hero-actions button { min-height: 32px; padding: 5px 8px; font-size: 12px; }
   .home-hero-pagination { bottom: 24px; gap: 14px; }
   .home-hero-dot { width: 12px; height: 12px; }
 
@@ -144,7 +144,7 @@
   .home-hero-slide--second .home-hero-copy { top: 20px; bottom: auto; left: 20px; width: calc(100% - 40px); transform: none; }
   .home-page .home-hero-slide--second .home-hero-copy h1 { font-size: 22px; font-weight: 600; }
   .home-hero-slide--second .home-hero-actions { gap: 10px; margin-top: 10px; max-width: none; }
-  .home-hero-slide--second .home-hero-actions a { flex: 0 0 44%; min-height: 32px; }
+  .home-hero-slide--second .home-hero-actions button { flex: 0 0 44%; min-height: 32px; }
 
   .home-skin-guide { width: 100%; max-width: none; height: auto; padding: 60px 16px; }
   .home-page .home-skin-guide h2 { font-size: clamp(23px, 5.5vw, 26px); }
