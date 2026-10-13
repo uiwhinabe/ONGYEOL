@@ -11,3 +11,8 @@
 @media (prefers-reduced-motion: reduce) {
   .ongyeol-chat-skin-guide-recommendation button:hover:not(:disabled) { animation: none; transform: translateY(0); }
 }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action:hover { background: #f6eaea; animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action:active { background: #ecd4d4; }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action:hover { animation: none; transform: translateY(0); }
+}
