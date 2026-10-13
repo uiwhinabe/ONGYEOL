@@ -33,4 +33,4 @@ function Layout() {
     </div>
   )
 }
-export default function App() { return <BrowserRouter><AuthProvider><Layout /></AuthProvider></BrowserRouter> }
+export default function App() { return <BrowserRouter basename={import.meta.env.BASE_URL}><AuthProvider><Layout /></AuthProvider></BrowserRouter> }
