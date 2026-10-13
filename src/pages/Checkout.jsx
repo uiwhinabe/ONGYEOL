@@ -120,14 +120,30 @@ function Amount({ label, amount, large = false }) {
 
 export default function Checkout({ onPayment }) {
   const [products, setProducts] = useState(initialProducts)
+  const [quantityDrafts, setQuantityDrafts] = useState({})
+  const totalProductQuantity = products.reduce((total, product) => total + product.quantity, 0)
   const totalProductPrice = products.reduce((total, product) => total + product.price * product.quantity, 0)
   const shippingFee = products.length === 0 || totalProductPrice >= 50000 ? 0 : 3000
   const totalPaymentPrice = totalProductPrice + shippingFee
 
   function changeQuantity(id, change) {
+    setQuantityDrafts(current => ({ ...current, [id]: undefined }))
     setProducts(current => current.map(product => product.id === id
-      ? { ...product, quantity: Math.max(1, product.quantity + change) }
+      ? { ...product, quantity: Math.min(Number.MAX_SAFE_INTEGER, Math.max(1, product.quantity + change)) }
       : product))
+  }
+
+  function inputQuantity(id, value) {
+    if (!/^\d*$/.test(value)) return
+    if (value !== '' && (!Number.isSafeInteger(Number(value)) || Number(value) < 1)) return
+    setQuantityDrafts(current => ({ ...current, [id]: value }))
+    setProducts(current => current.map(product => product.id === id
+      ? { ...product, quantity: value === '' ? 1 : Number(value) }
+      : product))
+  }
+
+  function finishQuantity(id) {
+    setQuantityDrafts(current => ({ ...current, [id]: undefined }))
   }
 
   function removeProduct(id) {
@@ -136,11 +152,36 @@ export default function Checkout({ onPayment }) {
   const [values, setValues] = useState({ order: { ...initialPerson }, delivery: { ...initialPerson } })
   const [errors, setErrors] = useState({})
   const [addressTarget, setAddressTarget] = useState(null)
-  const [selectedPayment, setSelectedPayment] = useState(() => window.matchMedia('(max-width: 1024px)').matches ? 'card' : null)
+  const [selectedPayment, setSelectedPayment] = useState('card')
+  const [paymentDetails, setPaymentDetails] = useState({ bank: '', depositor: '', carrier: 'SKT', phonePrefix: '010', phoneMiddle: '', phoneLast: '' })
   const [selectedCard, setSelectedCard] = useState('신한카드')
   const [selectedInstallment, setSelectedInstallment] = useState('일시불')
   const [deliveryChoice, setDeliveryChoice] = useState('주문자 정보와 동일')
   const mainRef = useRef(null)
+
+  function selectPayment(method) {
+    setSelectedPayment(method)
+    setErrors(current => {
+      const next = { ...current }
+      for (const key of ['payment.bank', 'payment.depositor', 'payment.carrier', 'payment.phone']) delete next[key]
+      return next
+    })
+  }
+
+  function paymentInput(key, errorKey = key, numeric = false) {
+    const invalid = Boolean(errors[`payment.${errorKey}`])
+    return {
+      value: paymentDetails[key],
+      onChange: event => {
+        const value = numeric ? event.target.value.replace(/\D/g, '').slice(0, 4) : event.target.value
+        setPaymentDetails(current => ({ ...current, [key]: value }))
+        setErrors(current => ({ ...current, [`payment.${errorKey}`]: false }))
+      },
+      'aria-invalid': invalid,
+      'aria-describedby': invalid ? `checkout-payment-${errorKey}-error` : undefined,
+      ...(numeric ? { inputMode: 'numeric', maxLength: 4 } : {}),
+    }
+  }
 
   function updateField(scope, key, value) {
     setValues(current => ({ ...current, [scope]: { ...current[scope], [key]: value } }))
@@ -173,6 +214,13 @@ export default function Checkout({ onPayment }) {
 
   function validatePayment() {
     const nextErrors = {}
+    if (selectedPayment === 'bank') {
+      if (!paymentDetails.bank) nextErrors['payment.bank'] = true
+      if (!paymentDetails.depositor.trim()) nextErrors['payment.depositor'] = true
+    } else if (selectedPayment === 'mobile') {
+      if (!paymentDetails.carrier) nextErrors['payment.carrier'] = true
+      if (!/^\d{3}$/.test(paymentDetails.phonePrefix) || !/^\d{3,4}$/.test(paymentDetails.phoneMiddle) || !/^\d{4}$/.test(paymentDetails.phoneLast)) nextErrors['payment.phone'] = true
+    }
     for (const scope of ['order', 'delivery']) {
       for (const key of ['name', 'address', 'detail']) {
         if (!values[scope][key].trim()) nextErrors[`${scope}.${key}`] = true
@@ -204,17 +252,17 @@ export default function Checkout({ onPayment }) {
       <div className="checkout-heading"><h1>주문서 작성</h1><p>주문 정보를 입력하고 결제 수단을 선택해주세요.</p></div>
       <div className="checkout-layout">
         <div className="checkout-left">
-          <Section title={`주문 상품 (${products.length}개)`} className="checkout-order-section">
+          <Section title={`주문 상품 (${totalProductQuantity}개)`} className="checkout-order-section">
             {products.map(product => <div className="checkout-product" key={product.id}>
               <div className="checkout-product-placeholder" aria-label="상품 이미지 자리" />
               <div className="checkout-product-description"><p>{product.name}</p><small>{product.option}</small></div>
               <span className="checkout-product-price">{formatPrice(product.price)}원</span>
-              <div className="checkout-quantity"><button type="button" aria-label={`${product.name} 수량 감소`} onClick={() => changeQuantity(product.id, -1)}>-</button><span>{product.quantity}</span><button type="button" aria-label={`${product.name} 수량 증가`} onClick={() => changeQuantity(product.id, 1)}>+</button></div>
+              <div className="checkout-quantity"><button type="button" aria-label={`${product.name} 수량 감소`} disabled={product.quantity === 1} onClick={() => changeQuantity(product.id, -1)}>-</button><input className="checkout-quantity-input" type="text" inputMode="numeric" pattern="[0-9]*" aria-label={`${product.name} 수량`} value={quantityDrafts[product.id] ?? product.quantity} onChange={event => inputQuantity(product.id, event.target.value)} onBlur={() => finishQuantity(product.id)} /><button type="button" aria-label={`${product.name} 수량 증가`} onClick={() => changeQuantity(product.id, 1)}>+</button></div>
               <span className="checkout-product-price">{formatPrice(product.price * product.quantity)}원</span>
               <button type="button" className="checkout-remove" aria-label={`${product.name} 삭제`} onClick={() => removeProduct(product.id)}>×</button>
             </div>)}
             {products.length === 0 && <p>주문 상품이 없습니다.</p>}
-            <div className="checkout-product-summary"><span>선택상품 ({products.length}개)</span><span><span className="checkout-summary-subtotal">상품구매금액 <b>{formatPrice(totalProductPrice)}</b> + 배송비 {formatPrice(shippingFee)}{shippingFee === 0 ? ' (무료)' : ''}</span>{' '}<span className="checkout-summary-total">= 합계 : <strong>{formatPrice(totalPaymentPrice)}</strong>원</span></span></div>
+            <div className="checkout-product-summary"><span>선택상품 ({totalProductQuantity}개)</span><span><span className="checkout-summary-subtotal">상품구매금액 <b>{formatPrice(totalProductPrice)}</b> + 배송비 {formatPrice(shippingFee)}{shippingFee === 0 ? ' (무료)' : ''}</span>{' '}<span className="checkout-summary-total">= 합계 : <strong>{formatPrice(totalPaymentPrice)}</strong>원</span></span></div>
           </Section>
 
           <Section title="주문 정보">
@@ -234,9 +282,23 @@ export default function Checkout({ onPayment }) {
           </Section>
 
           <Section title="결제 수단" className="checkout-payment-section">
-            <div className="checkout-payment-methods">{paymentMethods.map(method => <button type="button" key={method.id} className={`checkout-payment-${method.id}${selectedPayment === method.id ? ' checkout-payment-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => setSelectedPayment(method.id)}><img className="checkout-payment-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>)}</div>
+            <div className="checkout-payment-methods">{paymentMethods.map(method => <button type="button" key={method.id} className={`checkout-payment-${method.id}${selectedPayment === method.id ? ' checkout-payment-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => selectPayment(method.id)}><img className="checkout-payment-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>)}</div>
+            {selectedPayment === 'card' && <>
             <div className="checkout-payment-row"><span>카드사 선택</span><div className="checkout-radio-group">{['신한카드', '삼성카드', '현대카드', '국민카드', '롯데카드', '비씨카드'].map(card => <Radio name="checkout-card" key={card} text={card} value={selectedCard} onChange={setSelectedCard} />)}<select aria-label="카드사 직접입력"><option>직접입력</option></select></div></div>
             <div className="checkout-payment-row"><span>할부 선택</span><div className="checkout-radio-group">{['일시불', '2개월', '3개월', '6개월', '12개월'].map(term => <Radio name="checkout-installment" key={term} text={term} value={selectedInstallment} onChange={setSelectedInstallment} />)}</div></div>
+            </>}
+            {selectedPayment === 'bank' && <>
+              <div className="checkout-payment-row"><span>입금은행</span><div className="checkout-payment-detail"><select aria-label="입금은행" {...paymentInput('bank')}><option value="">은행 선택</option>{['신한은행', '국민은행', '우리은행', '하나은행', '농협은행'].map(bank => <option key={bank}>{bank}</option>)}</select><ErrorMessage id="checkout-payment-bank-error" visible={errors['payment.bank']} /></div></div>
+              <div className="checkout-payment-row"><span>입금자명</span><div className="checkout-payment-detail"><input aria-label="입금자명" placeholder="이름 입력" {...paymentInput('depositor')} /><ErrorMessage id="checkout-payment-depositor-error" visible={errors['payment.depositor']} /></div></div>
+              <div className="checkout-payment-row"><span>입금기한</span><p>주문 후 24시간 이내 입금해주세요.</p></div>
+            </>}
+            {selectedPayment === 'mobile' && <>
+              <div className="checkout-payment-row"><span>통신사</span><div className="checkout-payment-detail"><select aria-label="결제 통신사" {...paymentInput('carrier')}>{['SKT', 'KT', 'LG U+', '알뜰폰'].map(carrier => <option key={carrier}>{carrier}</option>)}</select><ErrorMessage id="checkout-payment-carrier-error" visible={errors['payment.carrier']} /></div></div>
+              <div className="checkout-payment-row"><span>휴대폰 번호</span><div className="checkout-payment-detail"><div className="checkout-phone checkout-payment-phone"><select aria-label="결제 휴대폰 앞자리" {...paymentInput('phonePrefix', 'phone')}>{mobileCodes.map(code => <option key={code}>{code}</option>)}</select><span aria-hidden="true">-</span><input aria-label="결제 휴대폰 중간 번호" placeholder="0000" {...paymentInput('phoneMiddle', 'phone', true)} /><span aria-hidden="true">-</span><input aria-label="결제 휴대폰 마지막 번호" placeholder="0000" {...paymentInput('phoneLast', 'phone', true)} /></div><ErrorMessage id="checkout-payment-phone-error" visible={errors['payment.phone']} /></div></div>
+            </>}
+            {selectedPayment === 'escrow' && <div className="checkout-payment-row"><span>에스크로 안전결제</span><p>구매 확인 전까지 결제대금을 안전하게 보호하는 에스크로 결제를 이용합니다.</p></div>}
+            {selectedPayment === 'kakao' && <div className="checkout-payment-row"><span>카카오페이</span><p>결제하기 버튼을 누르면 카카오페이 결제창으로 이동합니다.</p></div>}
+            {selectedPayment === 'naver' && <div className="checkout-payment-row"><span>네이버페이</span><p>결제하기 버튼을 누르면 네이버페이 결제창으로 이동합니다.</p></div>}
           </Section>
         </div>
 
@@ -244,8 +306,10 @@ export default function Checkout({ onPayment }) {
           <Section title="주문 금액 정보" className="checkout-order-amount"><div className="checkout-amount-body"><Amount label="상품금액" amount={totalProductPrice} /><div className="checkout-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="checkout-total-divider"><Amount label="총 상품금액" amount={totalProductPrice} large /></div><div className="checkout-free-shipping"><span>배송비</span><span>{shippingFee === 0 ? '무료' : `${formatPrice(shippingFee)}원`}</span></div></div></Section>
           <Section title="결제 금액 정보" className="checkout-payment-amount"><div className="checkout-amount-body"><Amount label="총 상품금액" amount={totalProductPrice} /><div className="checkout-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="checkout-total-payment"><Amount label="총 결제금액" amount={totalPaymentPrice} large /></div></div></Section>
           <Section title="주문 상품 확인하기" className="checkout-review">{products.map(product => <div className="checkout-review-product" key={product.id}><div className="checkout-product-placeholder" aria-label="상품 이미지 자리" /><div><p>{product.name}</p><p>{formatPrice(product.price)}원 <span className="checkout-review-quantity">{product.quantity}개</span></p></div></div>)}</Section>
-          <button className="checkout-pay-button" type="button" onClick={validatePayment}>결제하기 <span aria-hidden="true">›</span></button>
-          <button className="checkout-back-button" type="button">이전으로</button>
+          <div className="checkout-actions">
+            <button className="checkout-pay-button" type="button" onClick={validatePayment}>결제하기 <svg className="checkout-pay-chevron" width="27" height="27" viewBox="0 0 27 27" fill="none" aria-hidden="true"><path d="M9.89923 21.6001L16.6492 14.8501L9.89923 8.10011" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+            <button className="checkout-back-button" type="button">이전으로</button>
+          </div>
         </aside>
       </div>
     </main>

@@ -22,8 +22,15 @@ const exampleProducts = [
   { id: 'pdrn-set', name: '[SET] PDRN 주름 관리 세트', option: '(옵션: PDRN 세럼 1개 + PDRN 크림 1개)', price: 38900, quantity: 1 },
 ]
 const exampleDelivery = { name: '김ㅇㅇ', phone: '010-0000-0000', address: '서울특별시 ㅇㅇ구 ㅇㅇ로 00, 000동 000호' }
+// Mock member coupons; replace this array when member coupon data is connected.
+const coupons = [
+  { id: 'signup-coupon', name: '신규 가입 회원 10,000원 쿠폰', discount: 10000 },
+  { id: 'kakao-coupon', name: '카카오톡 플러스 친구 10,000원 쿠폰', discount: 10000 },
+]
 const cards = ['신한카드', '삼성카드', '현대카드', '국민카드', '롯데카드', '비씨카드']
 const mobileCodes = ['010', '011', '016', '017', '018', '019']
+const banks = ['신한은행', '국민은행', '우리은행', '하나은행', '농협은행']
+const carriers = ['SKT', 'KT', 'LG U+', '알뜰폰']
 const emailDomains = ['직접입력', '@gmail.com', '@naver.com', '@daum.net', '@nate.com']
 const installmentOptions = ['일시불', '2개월', '3개월', '6개월', '12개월']
 const terms = ['개인정보 수집 및 이용 동의 (필수)', '이용약관 동의 (필수)', '전자금융거래 이용약관 동의 (필수)']
@@ -42,8 +49,10 @@ function Field({ label, id, invalid, children }) {
 }
 
 export default function Payment({ products = exampleProducts, delivery = exampleDelivery, onComplete, onBack }) {
-  const [selectedPayment, setSelectedPayment] = useState(null)
-  const [values, setValues] = useState({ card: '', cardNumber: ['', '', '', ''], month: '', year: '', installment: '일시불', password: '', name: '', mobilePrefix: '010', mobileMiddle: '', mobileLast: '', email: '', emailDomain: '직접입력', coupon: '' })
+  const [selectedPayment, setSelectedPayment] = useState('card')
+  const [values, setValues] = useState({ card: '', cardNumber: ['', '', '', ''], month: '', year: '', installment: '일시불', password: '', name: '', mobilePrefix: '010', mobileMiddle: '', mobileLast: '', email: '', emailDomain: '직접입력' })
+  const [selectedCouponId, setSelectedCouponId] = useState('')
+  const [methodValues, setMethodValues] = useState({ bank: '', depositor: '', carrier: '', phonePrefix: '010', phoneMiddle: '', phoneLast: '' })
   const [billingType, setBillingType] = useState('개인')
   const [saveInfo, setSaveInfo] = useState(true)
   const [sameAsOrder, setSameAsOrder] = useState(true)
@@ -53,6 +62,8 @@ export default function Payment({ products = exampleProducts, delivery = example
   const [currentYear] = useState(() => new Date().getFullYear())
   const totalProductPrice = products.reduce((sum, product) => sum + product.price * product.quantity, 0)
   const shippingFee = !products.length || totalProductPrice >= 50000 ? 0 : 3000
+  const couponDiscount = coupons.find(coupon => coupon.id === selectedCouponId)?.discount ?? 0
+  const totalPaymentPrice = Math.max(0, totalProductPrice + shippingFee - couponDiscount)
   const allAgreed = agreements.every(Boolean)
 
   function update(key, value) {
@@ -68,13 +79,45 @@ export default function Payment({ products = exampleProducts, delivery = example
     return { ...control(key, errorKey, errorId), inputMode: 'numeric', maxLength: length, onChange: event => update(key, event.target.value.replace(/\D/g, '').slice(0, length)) }
   }
 
+  function selectPayment(id) {
+    setSelectedPayment(id)
+    setErrors(current => {
+      const next = { ...current }
+      for (const key of ['card', 'cardNumber', 'expiry', 'installment', 'password', 'bank', 'depositor', 'carrier', 'paymentPhone']) delete next[key]
+      return next
+    })
+  }
+
+  function methodControl(key, errorKey = key, digits) {
+    return {
+      value: methodValues[key],
+      onChange: event => {
+        const value = digits ? event.target.value.replace(/\D/g, '').slice(0, digits) : event.target.value
+        setMethodValues(current => ({ ...current, [key]: value }))
+        setErrors(current => ({ ...current, [errorKey]: false }))
+      },
+      'aria-invalid': Boolean(errors[errorKey]),
+      'aria-describedby': errors[errorKey] ? `payment-${errorKey}-error` : undefined,
+      ...(digits ? { inputMode: 'numeric', maxLength: digits } : {}),
+    }
+  }
+
   function submit(event) {
     event.preventDefault()
     const next = {}
-    for (const key of ['card', 'installment', 'name']) if (!values[key].trim()) next[key] = true
-    if (values.cardNumber.some(part => !/^\d{4}$/.test(part))) next.cardNumber = true
-    if (!values.month || !values.year) next.expiry = true
-    if (!/^\d{2}$/.test(values.password)) next.password = true
+    if (selectedPayment === 'card') {
+      for (const key of ['card', 'installment']) if (!values[key].trim()) next[key] = true
+      if (values.cardNumber.some(part => !/^\d{4}$/.test(part))) next.cardNumber = true
+      if (!values.month || !values.year) next.expiry = true
+      if (!/^\d{2}$/.test(values.password)) next.password = true
+    } else if (selectedPayment === 'bank') {
+      if (!methodValues.bank) next.bank = true
+      if (!methodValues.depositor.trim()) next.depositor = true
+    } else if (selectedPayment === 'mobile') {
+      if (!methodValues.carrier) next.carrier = true
+      if (!/^\d{3}$/.test(methodValues.phonePrefix) || !/^\d{3,4}$/.test(methodValues.phoneMiddle) || !/^\d{4}$/.test(methodValues.phoneLast)) next.paymentPhone = true
+    }
+    if (!values.name.trim()) next.name = true
     if (!/^\d{3}$/.test(values.mobilePrefix) || !/^\d{3,4}$/.test(values.mobileMiddle) || !/^\d{4}$/.test(values.mobileLast)) next.mobile = true
     const email = values.emailDomain === '직접입력' ? values.email.trim() : `${values.email.trim().split('@')[0]}${values.emailDomain}`
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = true
@@ -92,7 +135,8 @@ export default function Payment({ products = exampleProducts, delivery = example
     <form className="payment-layout" ref={formRef} onSubmit={submit} noValidate>
       <div className="payment-left">
         <Section title="결제 수단 선택" className="payment-card-section">
-          <div className="payment-methods">{paymentMethods.map(method => <button key={method.id} type="button" className={`payment-method${selectedPayment === method.id ? ' payment-method-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => setSelectedPayment(method.id)}><img className="payment-method-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>)}</div>
+          <div className="payment-methods">{paymentMethods.map(method => <button key={method.id} type="button" className={`payment-method${selectedPayment === method.id ? ' payment-method-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => selectPayment(method.id)}><img className="payment-method-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>)}</div>
+          {selectedPayment === 'card' && <>
           <h2 className="payment-card-title">카드 정보 입력</h2>
           <div className="payment-card-form">
             <Field label="카드사 선택" id="payment-card" invalid={errors.card}><select id="payment-card" className="payment-long-input" {...control('card')}><option value="">카드사를 선택해주세요.</option>{cards.map(card => <option key={card}>{card}</option>)}</select></Field>
@@ -102,6 +146,30 @@ export default function Payment({ products = exampleProducts, delivery = example
             <Field label="카드 비밀번호 앞 2자리" id="payment-password" invalid={errors.password}><div className="payment-password"><input id="payment-password" type="password" autoComplete="off" {...numeric('password', 2)} /><span>숫자 2자리를 입력해주세요.</span></div></Field>
           </div>
           <div className="payment-save-info"><label className="payment-checkbox"><input type="checkbox" checked={saveInfo} onChange={event => setSaveInfo(event.target.checked)} />위 결제 정보를 다음에도 사용하겠습니다.</label><p>(선택한 경우, 다음 결제 시 더 빠르게 진행할 수 있습니다.)</p></div>
+          </>}
+          {selectedPayment === 'bank' && <>
+            <h2 className="payment-card-title">무통장입금 정보</h2>
+            <div className="payment-card-form">
+              <Field label="입금은행 선택" id="payment-bank" invalid={errors.bank}><select id="payment-bank" className="payment-long-input" {...methodControl('bank')}><option value="">은행 선택</option>{banks.map(bank => <option key={bank}>{bank}</option>)}</select></Field>
+              <Field label="입금자명" id="payment-depositor" invalid={errors.depositor}><input id="payment-depositor" className="payment-long-input" placeholder="입금자명을 입력해주세요." {...methodControl('depositor')} /></Field>
+              <div className="payment-field"><span className="payment-field-label">입금기한</span><div className="payment-field-content"><p className="payment-method-notice">주문 후 24시간 이내 입금해주세요.</p></div></div>
+            </div>
+          </>}
+          {selectedPayment === 'mobile' && <>
+            <h2 className="payment-card-title">휴대폰 결제 정보</h2>
+            <div className="payment-card-form">
+              <Field label="통신사 선택" id="payment-carrier" invalid={errors.carrier}><select id="payment-carrier" className="payment-long-input" {...methodControl('carrier')}><option value="">통신사 선택</option>{carriers.map(carrier => <option key={carrier}>{carrier}</option>)}</select></Field>
+              <Field label="휴대폰 번호" id="payment-paymentPhone" invalid={errors.paymentPhone}><div className="payment-phone"><select id="payment-paymentPhone" aria-label="결제 휴대폰 앞자리" {...methodControl('phonePrefix', 'paymentPhone')}>{mobileCodes.map(code => <option key={code}>{code}</option>)}</select><input aria-label="결제 휴대폰 중간 번호" {...methodControl('phoneMiddle', 'paymentPhone', 4)} /><input aria-label="결제 휴대폰 마지막 번호" {...methodControl('phoneLast', 'paymentPhone', 4)} /></div></Field>
+            </div>
+          </>}
+          {selectedPayment === 'escrow' && <>
+            <h2 className="payment-card-title">에스크로 안전결제</h2>
+            <div className="payment-field"><div className="payment-method-notice payment-method-guide"><p>에스크로 안전결제를 이용합니다.<br />결제 완료 후 판매자에게 바로 대금이 지급되지 않고 구매 확인 후 정산됩니다.</p></div></div>
+          </>}
+          {(selectedPayment === 'kakao' || selectedPayment === 'naver') && <>
+            <h2 className="payment-card-title">{selectedPayment === 'kakao' ? '카카오페이' : '네이버페이'}</h2>
+            <div className="payment-field"><div className="payment-method-notice payment-method-guide"><p>결제하기 버튼을 누르면 {selectedPayment === 'kakao' ? '카카오페이' : '네이버페이'} 결제창으로 이동합니다.</p><p>현재는 mock 화면으로 실제 결제창은 열리지 않습니다.</p></div></div>
+          </>}
         </Section>
         <Section title="청구정보" className="payment-billing">
           <div className="payment-billing-type">{['개인', '법인'].map(type => <label key={type} className="payment-radio"><input type="radio" name="payment-billing-type" value={type} checked={billingType === type} onChange={() => setBillingType(type)} />{type}</label>)}</div>
@@ -110,8 +178,8 @@ export default function Payment({ products = exampleProducts, delivery = example
           <Field label="이메일" id="payment-email" invalid={errors.email}><div className="payment-email"><input id="payment-email" placeholder="이메일을 입력해주세요." autoComplete="email" {...control('email')} /><select aria-label="이메일 도메인" {...control('emailDomain', 'email', 'email')}>{emailDomains.map(domain => <option key={domain}>{domain}</option>)}</select></div><label className="payment-checkbox payment-same-order"><input type="checkbox" checked={sameAsOrder} onChange={event => setSameAsOrder(event.target.checked)} />주문자 정보와 동일합니다.</label></Field>
         </Section>
         <Section title="쿠폰" className="payment-coupon">
-          <div className="payment-field"><label className="payment-field-label" htmlFor="payment-coupon">쿠폰</label><div className="payment-field-content"><select id="payment-coupon" className="payment-long-input" {...control('coupon')}><option value="">쿠폰을 선택해주세요.</option><option value="none">사용 가능한 쿠폰 없음</option></select></div></div>
-          <div className="payment-coupon-footer"><p>*쿠폰은 1개만 선택하여 사용할 수 있습니다.</p><strong>쿠폰 적용 0원</strong></div>
+          <div className="payment-field"><label className="payment-field-label" htmlFor="payment-coupon">쿠폰</label><div className="payment-field-content"><select id="payment-coupon" className="payment-long-input" value={selectedCouponId} onChange={event => setSelectedCouponId(event.target.value)}><option value="">쿠폰 선택 안 함</option>{coupons.map(coupon => <option key={coupon.id} value={coupon.id}>{coupon.name}</option>)}</select></div></div>
+          <div className="payment-coupon-footer"><p>*쿠폰은 1개만 선택하여 사용할 수 있습니다.</p><strong>쿠폰 적용 {couponDiscount > 0 ? '-' : ''}{formatPrice(couponDiscount)}원</strong></div>
         </Section>
         <Section title="결제 동의" className="payment-agreements">
           <label className="payment-checkbox payment-agree-all"><input type="checkbox" checked={allAgreed} onChange={event => { setAgreements(terms.map(() => event.target.checked)); setErrors(current => ({ ...current, agreements: false })) }} />전체 동의하기</label>
@@ -122,7 +190,7 @@ export default function Payment({ products = exampleProducts, delivery = example
       <aside className="payment-sidebar" aria-label="주문 및 배송 요약">
         <Section title="주문 상품 정보" change className="payment-order-summary">
           {products.map(product => <div className="payment-product" key={product.id}><div className="payment-product-placeholder" aria-label="상품 이미지 자리" /><div><p>{product.name}</p><small>{product.option}</small><p className="payment-product-price">{formatPrice(product.price)}원 <span>{product.quantity}개</span></p></div></div>)}
-          <div className="payment-amounts"><div className="payment-amount"><span>총 상품금액</span><span>{formatPrice(totalProductPrice)}원</span></div><div className="payment-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="payment-total"><span>총 결제금액</span><span><strong>{formatPrice(totalProductPrice + shippingFee)}</strong>원</span></div></div>
+          <div className="payment-amounts"><div className="payment-amount"><span>총 상품금액</span><span>{formatPrice(totalProductPrice)}원</span></div><div className="payment-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="payment-total"><span>총 결제금액</span><span><strong>{formatPrice(totalPaymentPrice)}</strong>원</span></div></div>
         </Section>
         <Section title="배송지 정보" change className="payment-delivery">
           <div className="payment-delivery-details"><p>{delivery.name}</p><p>{delivery.phone}</p><p>{delivery.address}</p></div>
