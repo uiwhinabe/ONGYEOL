@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+﻿import { useLayoutEffect, useState } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -20,6 +20,12 @@ import IdentityVerification from './pages/IdentityVerification.jsx'
 import Checkout from './pages/Checkout.jsx'
 import Payment from './pages/Payment.jsx'
 import OrderComplete from './pages/OrderComplete.jsx'
+
+import Event from './pages/Event.jsx'
+import EventDetail from './pages/EventDetail.jsx'
+
+import welcomeBenefitDetail from './assets/images/events/welcome-benefit-detail.png'
+import kakaoDetail from './assets/images/events/kakao-detail.png'
 
 import AuthProvider from './components/AuthProvider.jsx'
 import { useAuth } from './components/authContext.js'
@@ -60,8 +66,10 @@ function Layout() {
       />
 
       <Routes>
+        {/* HOME */}
         <Route path="/" element={<Home />} />
 
+        {/* 회원 */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/complete" element={<SignupComplete />} />
@@ -70,6 +78,32 @@ function Layout() {
           element={<IdentityVerification />}
         />
 
+        {/* EVENT */}
+        <Route path="/event" element={<Event />} />
+
+        <Route
+          path="/event/signup-coupon"
+          element={
+            <EventDetail
+              title="신규 가입 회원 쿠폰 이벤트"
+              detailImage={welcomeBenefitDetail}
+              imageAlt="신규 회원 10,000원 쿠폰 혜택, 쿠폰 사용 안내, 쿠폰 받는 방법 및 쿠폰 이용 안내"
+            />
+          }
+        />
+
+        <Route
+          path="/event/kakao-coupon"
+          element={
+            <EventDetail
+              title="카카오톡 플러스 친구 쿠폰 이벤트"
+              detailImage={kakaoDetail}
+              imageAlt="카카오톡 플러스친구 10,000원 쿠폰 이벤트, 참여 방법, 특별 혜택 및 유의사항"
+            />
+          }
+        />
+
+        {/* 주문서 작성 */}
         <Route
           path="/checkout"
           element={
@@ -79,6 +113,7 @@ function Layout() {
           }
         />
 
+        {/* 결제 */}
         <Route
           path="/payment"
           element={
@@ -89,6 +124,7 @@ function Layout() {
           }
         />
 
+        {/* 주문 완료 */}
         <Route
           path="/order-complete"
           element={
@@ -98,6 +134,7 @@ function Layout() {
           }
         />
 
+        {/* 없는 주소는 HOME */}
         <Route path="*" element={<Home />} />
       </Routes>
 
