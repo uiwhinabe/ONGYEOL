@@ -10,11 +10,17 @@ export default function EventDetail({ title, status = '상시 이벤트', detail
       <Link to="/event?tab=sale">세일상품</Link>
     </div>
     <div className="event-detail-title-area">
-      <h2 className="event-detail-title">{title}</h2>
-      <p className="event-detail-status">{status}</p>
+      <div className="event-detail-title-copy">
+        <h2 className="event-detail-title">{title}</h2>
+        <p className="event-detail-status">{status}</p>
+      </div>
+      <Link className="event-detail-previous-link" to="/event?tab=ongoing">이전으로</Link>
     </div>
     <div className="event-detail-content">
       <img className="event-detail-image" src={detailImage} alt={imageAlt} />
+    </div>
+    <div className="event-detail-actions">
+      <Link className="event-detail-back-link" to="/event?tab=ongoing">목록으로</Link>
     </div>
   </main>
 }
