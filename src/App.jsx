@@ -6,14 +6,25 @@ import './App.css'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIChatWidget.jsx'
+import MypageDesktop from './pages/MypageDesktop.jsx'
+import MypageScreens from './pages/MypageScreens.jsx'
+import { mypageScreens } from './pages/mypageRoutes.js'
 
 function App() {
   const [count, setCount] = useState(0)
   const [chatOpen, setChatOpen] = useState(false)
 
+  if (window.location.pathname === '/mypage') {
+    return <MypageDesktop />
+  }
+
+  if (Object.hasOwn(mypageScreens, window.location.pathname)) {
+    return <MypageScreens pathname={window.location.pathname} />
+  }
+
   return (
     <>
-      <Header chatOpen={chatOpen} />
+      <Header chatOpen={chatOpen} accountLinks={{ mypage: '/mypage' }} />
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
