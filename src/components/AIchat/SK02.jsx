@@ -1,8 +1,8 @@
 import { skinTypes } from './skinGuideData.js'
-import { InquiryAvatar, InquiryHeader, InquiryComposer } from './Inquiry.jsx'
-import './ChatSkinGuideSelect.css'
+import { InquiryAvatar, InquiryHeader, InquiryComposer } from './ChatStart.jsx'
+import './SK02.css'
 
-export default function ChatSkinGuideSelect({ onBack, selectedSkinType, onSelectSkinType }) {
+export default function SK02({ onBack, selectedSkinType, onSelectSkinType }) {
   return (
     <div className="ongyeol-inquiry ongyeol-chat-skin-guide-step-one">
       <InquiryHeader onBack={onBack} backLabel="스킨가이드 안내 화면으로 돌아가기" />

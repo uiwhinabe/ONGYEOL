@@ -1,7 +1,7 @@
-import { InquiryAvatar, InquiryHeader, InquiryComposer } from './Inquiry.jsx'
-import './ChatSkinGuideIntro.css'
+import { InquiryAvatar, InquiryHeader, InquiryComposer } from './ChatStart.jsx'
+import './SK01.css'
 
-export default function ChatSkinGuideIntro({ onBack, onStart }) {
+export default function SK01({ onBack, onStart }) {
   return (
     <div className="ongyeol-inquiry ongyeol-chat-skin-guide-intro">
       <InquiryHeader onBack={onBack} backLabel="문의하기 화면으로 돌아가기" />

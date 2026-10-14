@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
-import { InquiryAvatar, InquiryHeader, InquiryComposer } from './Inquiry.jsx'
-import './ChatSkinGuideTypeDetail.css'
+import { InquiryAvatar, InquiryHeader, InquiryComposer } from './ChatStart.jsx'
+import './SK03TypeText.css'
 
-export default function ChatSkinGuideTypeDetail({ data, onBack, onContinue }) {
+export default function SK03TypeText({ data, onBack, onContinue }) {
   return (
     <div className="ongyeol-inquiry ongyeol-chat-skin-guide-type-detail">
       <InquiryHeader onBack={onBack} backLabel="피부 타입 선택 화면으로 돌아가기" />

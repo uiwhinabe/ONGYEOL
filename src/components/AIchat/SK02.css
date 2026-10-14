@@ -3,7 +3,7 @@
 .ongyeol-chat-skin-guide-step-one-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 19px; flex: none; width: 300px; font-size: 15px; line-height: 20px; }
 .ongyeol-chat-skin-guide-step-one-options { display: grid; grid-template-columns: repeat(2, 150px); gap: 10px; width: 310px; }
 .ongyeol-chat-skin-guide-step-one .ongyeol-chat-skin-guide-step-one-option { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 150px; height: 42px; padding: 0 30px; border: 1px solid #836363; border-radius: 15px; background: #fff; color: #000; font: inherit; cursor: pointer; transform: translateY(0); transition: none; }
-.ongyeol-chat-skin-guide-step-one-option:last-child { grid-column: 1 / -1; justify-self: center; }
+.ongyeol-chat-skin-guide-step-one .ongyeol-chat-skin-guide-step-one-option:last-child { grid-column: 1 / -1; justify-self: center; padding-inline: 15px; white-space: nowrap; }
 .ongyeol-chat-skin-guide-step-one .ongyeol-chat-skin-guide-step-one-option:hover:not(:disabled) { background: #f6eaea; animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
 .ongyeol-chat-skin-guide-step-one .ongyeol-chat-skin-guide-step-one-option:active:not(:disabled) { background: #ecd4d4; }
 .ongyeol-chat-skin-guide-step-one .ongyeol-inquiry-composer { left: 22px; top: 646px; }

@@ -1,7 +1,7 @@
-import { InquiryAvatar, InquiryHeader, InquiryComposer } from './Inquiry.jsx'
-import './ChatSkinGuideRecommendation.css'
+import { InquiryAvatar, InquiryHeader, InquiryComposer } from './ChatStart.jsx'
+import './SK04TypeDetail.css'
 
-export default function ChatSkinGuideRecommendation({ data, onBack }) {
+export default function SK04TypeDetail({ data, onBack, onContinue }) {
   return (
     <div className="ongyeol-inquiry ongyeol-chat-skin-guide-recommendation">
       <InquiryHeader onBack={onBack} backLabel="피부 타입 안내 화면으로 돌아가기" />
@@ -16,7 +16,7 @@ export default function ChatSkinGuideRecommendation({ data, onBack }) {
             </ul>
           </div>
         </div>
-        <button className="ongyeol-chat-skin-guide-recommendation-action" type="button" disabled title="제품 확인 화면은 준비 중입니다">{data.actionLabel}</button>
+        <button className="ongyeol-chat-skin-guide-recommendation-action" type="button" disabled={!onContinue} onClick={onContinue} title={!onContinue ? "제품 확인 화면은 준비 중입니다" : undefined}>{data.actionLabel}</button>
       </div>
       <InquiryComposer />
     </div>

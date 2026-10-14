@@ -7,7 +7,7 @@ import emoji from '../../assets/images/chat/inquiry/emoji.svg'
 import avatarHeader from '../../assets/images/chat/inquiry/avatar-header.svg'
 import avatarMessage from '../../assets/images/chat/inquiry/avatar-message.svg'
 import logo from '../../assets/images/chat/panel-logo.png'
-import './Inquiry.css'
+import './ChatStart.css'
 
 export function InquiryAvatar({ small = false }) {
   return <span className={`ongyeol-inquiry-avatar${small ? ' ongyeol-inquiry-avatar--small' : ''}`}>
@@ -36,7 +36,7 @@ export function InquiryComposer() {
   </div>
 }
 
-export default function Inquiry({ onBack, onSkinGuide, hidden = false }) {
+export default function ChatStart({ onBack, onSkinGuide, hidden = false }) {
   const [topic, setTopic] = useState('')
   return (
     <div className="ongyeol-inquiry" hidden={hidden}>
@@ -45,7 +45,7 @@ export default function Inquiry({ onBack, onSkinGuide, hidden = false }) {
         <InquiryAvatar small />
         <div className="ongyeol-inquiry-copy">
           <p>안녕하세요, 고객님 반갑습니다 😊</p>
-          <p>건강한 피부의 결을 찾아드리는 온결 AI 상담사예요.<br />피부 고민에 맞는 제품 추천부터 주문·배송 문의까지 도와드릴게요.</p>
+          <p>피부 고민에 맞는 제품 추천부터 주문·배송 문의까지 도와드릴게요.</p>
           <p>아직 온결 회원이 아니신가요?</p>
           <p>회원가입 후 스킨가이드 결과를 저장하고, 맞춤 제품 추천과 다양한 회원 혜택을 받아보세요.</p>
         </div>

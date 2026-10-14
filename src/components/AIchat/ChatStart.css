@@ -25,7 +25,9 @@
 .ongyeol-inquiry-tools { position: absolute; left: 17px; top: 51px; display: flex; align-items: center; gap: 10px; }
 .ongyeol-inquiry .ongyeol-inquiry-tools button { display: grid; place-items: center; width: 13px; height: 15px; padding: 0; background: transparent; }
 .ongyeol-inquiry .ongyeol-inquiry-send { position: absolute; left: 329px; top: 36px; display: grid; place-items: center; width: 35px; height: 35px; padding: 0; background: transparent; }
-.ongyeol-inquiry :is(a, textarea):focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.ongyeol-inquiry a:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.ongyeol-inquiry-composer textarea:focus { outline: none; }
+.ongyeol-inquiry-composer:has(textarea:focus-visible) { box-shadow: 0 0 0 2px rgba(164, 70, 70, 0.18); }
 .ongyeol-inquiry-account a,
 .ongyeol-inquiry .ongyeol-inquiry-topic { animation: none; transform: translateY(0); transition: none; }
 .ongyeol-inquiry-account a:hover:not(:disabled):not([aria-disabled='true']),
