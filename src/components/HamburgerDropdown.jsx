@@ -37,7 +37,9 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
         </div>
         {/* Page files have no connected routes yet. Do not invent destinations. */}
         <button className="ongyeol-hd-link ongyeol-hd-mypage" type="button" aria-disabled="true">마이페이지</button>
-        {['SKIN GUIDE', 'EVENT', 'BRAND'].map((label) => label === 'EVENT'
+        {['SKIN GUIDE', 'EVENT', 'BRAND'].map((label) => label === 'SKIN GUIDE'
+          ? <Link className="ongyeol-hd-link" key={label} to="/skin-guide" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
+          : label === 'EVENT'
           ? <Link className="ongyeol-hd-link" key={label} to="/event?tab=ongoing" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
           : <button className="ongyeol-hd-link" key={label} type="button" aria-disabled="true">{label}</button>)}
       </nav>

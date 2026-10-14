@@ -12,6 +12,7 @@ import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 
 import Home from './pages/Home.jsx'
+import SkinGuide from './pages/Skinguide.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
@@ -68,6 +69,7 @@ function Layout() {
       <Routes>
         {/* HOME */}
         <Route path="/" element={<Home />} />
+        <Route path="/skin-guide" element={<SkinGuide />} />
 
         {/* 회원 */}
         <Route path="/login" element={<Login />} />
