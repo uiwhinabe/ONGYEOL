@@ -22,10 +22,68 @@ function Price({ product }) {
   </span>
 }
 
+function CartAddedPopup({ onClose, cartPath = null }) {
+  const dialogRef = useRef(null)
+  const backdropPointer = useRef(false)
+  useEffect(() => {
+    const dialog = dialogRef.current
+    const trigger = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    dialog.showModal()
+    return () => {
+      dialog.close()
+      document.body.style.overflow = previousOverflow
+      if (trigger?.isConnected) trigger.focus({ preventScroll: true })
+    }
+  }, [])
+  function outside(event) {
+    const bounds = event.currentTarget.getBoundingClientRect()
+    return event.clientX < bounds.left || event.clientX > bounds.right
+      || event.clientY < bounds.top || event.clientY > bounds.bottom
+  }
+  return <dialog ref={dialogRef} className="ongyeol-cart-popup" aria-modal="true"
+    aria-labelledby="ongyeol-cart-popup-title" aria-describedby="ongyeol-cart-popup-description"
+    onCancel={(event) => { event.preventDefault(); onClose() }}
+    onPointerDown={(event) => { backdropPointer.current = event.target === event.currentTarget && outside(event) }}
+    onClick={(event) => {
+      if (backdropPointer.current && event.target === event.currentTarget && outside(event)) onClose()
+      backdropPointer.current = false
+    }}
+    onKeyDown={(event) => {
+      if (event.key !== 'Tab') return
+      const controls = event.currentTarget.querySelectorAll('button:not(:disabled), a[href]')
+      const first = controls[0]
+      const last = controls[controls.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus()
+      }
+    }}>
+    <button className="ongyeol-cart-popup-close" type="button" aria-label="장바구니 알림 닫기" onClick={onClose}>
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4L16 16M16 4L4 16" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
+    </button>
+    <div className="ongyeol-cart-popup-content">
+      <div className="ongyeol-cart-popup-heading">
+        <h2 id="ongyeol-cart-popup-title">장바구니에 담았습니다.</h2>
+        <p id="ongyeol-cart-popup-description">선택한 상품이 장바구니에 추가되었습니다.</p>
+      </div>
+      <p className="ongyeol-cart-popup-result">선택한 상품을 장바구니에 담았습니다.</p>
+      <div className="ongyeol-cart-popup-actions">
+        <button className="ongyeol-cart-popup-continue" type="button" autoFocus onClick={onClose}>쇼핑 계속하기</button>
+        {/* Supply cartPath only after the team has registered its cart route. */}
+        {cartPath ? <Link className="ongyeol-cart-popup-view" to={cartPath} onClick={onClose}>장바구니 보기</Link>
+          : <button className="ongyeol-cart-popup-view" type="button" disabled title="장바구니 페이지 준비 중">장바구니 보기</button>}
+      </div>
+    </div>
+  </dialog>
+}
+
 function WishlistPopup({ popup, onClose }) {
   const dialogRef = useRef(null)
   useEffect(() => {
-    if (!popup) return
+    if (!popup || popup.type === 'cart') return
     const dialog = dialogRef.current
     dialog.showModal()
     const timer = popup.type === 'notice' ? window.setTimeout(onClose, 2000) : null
@@ -35,6 +93,7 @@ function WishlistPopup({ popup, onClose }) {
     }
   }, [popup, onClose])
   if (!popup) return null
+  if (popup.type === 'cart') return <CartAddedPopup onClose={onClose} />
   return <dialog ref={dialogRef} className="wishlist-popup" aria-label={popup.message}
     onCancel={(event) => { event.preventDefault(); onClose() }}>
     <p role={popup.type === 'notice' ? 'status' : undefined}>{popup.message}</p>
@@ -50,10 +109,10 @@ function useWishlistPopup() {
   const [popup, setPopup] = useState(null)
   // Stable callback keeps the dismissal timer intact through list updates.
   const [closePopup] = useState(() => () => setPopup(null))
-  async function perform(action, success) {
+  async function perform(action, success, type = 'notice') {
     try {
       await action()
-      setPopup(success ? { type: 'notice', message: success } : null)
+      setPopup(success ? { type, message: success } : null)
     } catch {
       setPopup({ type: 'error', message: '저장하지 못했습니다. 브라우저 저장 공간 설정을 확인하고 다시 시도해 주세요.' })
     }
@@ -161,7 +220,7 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
               ? [...new Set([...current, ...items.map((p) => p.id)])]
               : current.filter((id) => !items.some((p) => p.id === id)))
           }} />전체 선택</label>
-        <button type="button" disabled={!selected.length} onClick={() => perform(() => onAddCart(selected), '선택한 상품을 장바구니에 담았습니다.')}>선택 상품 장바구니 담기</button>
+        <button type="button" disabled={!selected.length} onClick={() => perform(() => onAddCart(selected), '선택한 상품을 장바구니에 담았습니다.', 'cart')}>선택 상품 장바구니 담기</button>
         <button type="button" disabled={!selected.length} onClick={() => remove(selected, true)}>선택 삭제</button>
       </div>
     </div>
@@ -184,7 +243,7 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
             <button className="wishlist-heart" type="button" aria-label={`${product.name} 찜 해제`} aria-pressed="true" onClick={() => unlike(product)}>♥</button>
           </div>
           <div className="wishlist-card-actions">
-            <button type="button" onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.')}>장바구니 담기</button>
+            <button type="button" onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.', 'cart')}>장바구니 담기</button>
             <button type="button" onClick={() => remove([product])}>삭제</button>
           </div>
         </li>)}
@@ -220,7 +279,7 @@ export function WishlistProductDetail() {
         <div className="wishlist-image"><ProductImage key={product.id} product={product} /></div>
         <div><Price product={product} /><div className="wishlist-card-actions">
           <button type="button" aria-pressed={liked} onClick={() => act(() => liked ? removeWishlistProducts([id]) : addWishlistProduct(product), liked ? '찜을 해제했습니다.' : '찜 목록에 추가했습니다.')}>{liked ? '♥ 찜 해제' : '♡ 찜하기'}</button>
-          <button type="button" onClick={() => { setMessage(''); perform(() => addCartProducts([product]), '장바구니에 담았습니다.') }}>장바구니 담기</button>
+          <button type="button" onClick={() => { setMessage(''); perform(() => addCartProducts([product]), '장바구니에 담았습니다.', 'cart') }}>장바구니 담기</button>
         </div></div>
       </div>
     </>}
