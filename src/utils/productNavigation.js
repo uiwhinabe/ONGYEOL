@@ -3,6 +3,7 @@ export function readProductRoute() {
   const classification = params.get('classification') || 'type'
   return {
     isProducts: window.location.hash.split('?')[0] === '#/products',
+    productId: params.get('productId') || undefined,
     classification: ['type', 'concern', 'line'].includes(classification) ? classification : 'type',
     category: params.get('category') || undefined,
   }
@@ -13,7 +14,7 @@ export function navigateToHome() {
   window.scrollTo({ top: 0, behavior: 'auto' })
 }
 
-// Keep the list route usable until a detail view consumes productId.
+// Image and name links share the same product identifier.
 export function getProductDetailHref(productId) {
   const params = new URLSearchParams(window.location.hash.split('?')[1] || '')
   params.set('productId', productId)

@@ -5,6 +5,7 @@ import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIChatWidget.jsx'
 import Products from './pages/Products.jsx'
 import Home from './pages/Home.jsx'
+import ProductDetail from './pages/ProductDetail.jsx'
 import { readProductRoute, navigateToProducts } from './utils/productNavigation.js'
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   return (
     <>
       <Header chatOpen={chatOpen} />
-      {productRoute.isProducts ? <Products classification={productRoute.classification} initialCategory={productRoute.category}
+      {productRoute.isProducts && ['dakyeolmae-body-scrub', 'dakyeolmae-pad', 'dakyeolmae-cream', 'dakyeolmae-ampoule', 'dakyeolmae-mist', 'dakyeolmae-toner', 'dakyeolmae-mask', 'odi-toner', 'odi-ampoule'].includes(productRoute.productId) ? <ProductDetail key={productRoute.productId} productId={productRoute.productId} /> : productRoute.isProducts ? <Products classification={productRoute.classification} initialCategory={productRoute.category}
         onCategoryChange={navigateToProducts} /> : <Home />}
       <Footer />
       <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
