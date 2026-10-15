@@ -4,6 +4,11 @@ import './ProductCard.css'
 import { productImageFrames } from '../data/productImageFrames.js'
 import { getProductDetailHref } from '../utils/productNavigation.js'
 
+// Catalog backgrounds are normalized separately so detail-page originals stay intact.
+const catalogTextures = import.meta.glob('../assets/products/catalog-textures/*-texture.png', {
+  eager: true, query: '?url', import: 'default',
+})
+
 // A stable, unique product.id preserves each product's wish across page changes.
 export default function ProductCard({ product }) {
   const storageKey = `ongyeol:wishlist:${product.id}`
@@ -19,7 +24,7 @@ export default function ProductCard({ product }) {
   const stars = Math.round(rating)
   const frame = productImageFrames[product.id]
   const detailHref = getProductDetailHref(product.id)
-  const textureImage = ['닥열매', '장미', '백목이', '뽕나무', '비타민C'].includes(product.line) ? product.textureImage : null
+  const textureImage = ['닥열매', '장미', '백목이', '뽕나무', '비타민C'].includes(product.line) ? (catalogTextures[`../assets/products/catalog-textures/${product.id}-texture.png`] || product.textureImage) : null
 
   function toggleWish() {
     const next = !wished

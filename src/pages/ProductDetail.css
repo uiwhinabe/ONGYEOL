@@ -48,6 +48,14 @@
 .ongyeol-detail__hero { object-fit: cover; }
 .ongyeol-detail--odi-toner .ongyeol-detail__hero,
 .ongyeol-detail--odi-toner .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--odi-cream .ongyeol-detail__hero,
+.ongyeol-detail--odi-cream .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--odi-balm .ongyeol-detail__hero,
+.ongyeol-detail--odi-balm .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--odi-mask .ongyeol-detail__hero,
+.ongyeol-detail--odi-mask .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--vitamin-toner .ongyeol-detail__hero,
+.ongyeol-detail--vitamin-toner .ongyeol-detail__thumbnails img { object-fit: cover; }
 .ongyeol-detail__thumbnails { align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; }
 .ongyeol-detail__thumbnails .ongyeol-detail__thumbnail { position: relative; width: 24%; height: auto; aspect-ratio: 1; border: 0; cursor: pointer; }
 .ongyeol-detail__thumbnail::after { content: ''; position: absolute; inset: 0; border: 1px solid transparent; pointer-events: none; }
