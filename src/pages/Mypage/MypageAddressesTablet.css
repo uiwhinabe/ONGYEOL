@@ -1,0 +1,42 @@
+.mp-address-period { display: none; }
+
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage-screens:has(.mp-address-empty) { min-height: 1281px; }
+  .ongyeol-mypage-screens:has(.mp-address-empty) .mp-page-heading { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-address-empty { width: 100%; overflow: visible; gap: 60px; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-94 { display: none; }
+  .mp-address-empty .mp-shopping-benefits { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; width: 100%; height: 152px; background: #dedada; border-radius: 5px; }
+  .mp-address-empty .mp-shopping-benefits > p { font-size: 20px; line-height: 27px; }
+  .mp-address-empty .mp-shopping-benefits > p > span { font-weight: 300; }
+  .mp-address-empty .mp-shopping-benefit-items { display: flex; gap: 70px; }
+  .mp-address-empty .mp-shopping-benefit-item { position: relative; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; width: 100px; height: 80px; }
+  .mp-address-empty .mp-shopping-benefit-item h2 { font-size: 18px; line-height: 25px; }
+  .mp-address-empty .mp-shopping-benefit-item p { font-weight: 300; }
+  .mp-address-empty .mp-shopping-benefit-divider { position: absolute; top: 0; left: -35px; width: 0; height: 80px; }
+  .mp-address-empty .mp-shopping-benefit-divider img { position: absolute; top: 80px; left: -2px; transform: rotate(-90deg); transform-origin: top left; }
+
+  .mp-address-empty .mp-address-period { display: flex; align-items: center; gap: 35px; width: 100%; height: 70px; padding: 13px 20px; border: 1px solid #7c7c7c; border-radius: 5px; }
+  .mp-address-period-label { flex: none; width: 77px; padding-left: 5px; font-size: 18px; font-weight: 500; }
+  .mp-address-period button { flex: none; margin: 0; background: transparent; color: black; opacity: 1; font: inherit; }
+  .mp-address-period .mp-address-period-select { display: flex; align-items: center; justify-content: space-between; width: 129px; height: 34px; padding: 0 10px; border: 1px solid #878787; border-radius: 5px; font-family: 'Ongyeol Mypage Inter', sans-serif; }
+  .mp-address-dates { display: flex; align-items: center; gap: 8px; width: 325px; padding: 5px; flex: none; }
+  .mp-address-dates > div { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border: 1px solid #4a4848; border-radius: 5px; }
+  .mp-address-dates input { width: 84px; flex: none; min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; color: black; opacity: 1; -webkit-text-fill-color: black; font: inherit; }
+  .mp-address-dates img { flex: none; }
+  .mp-address-dates > span { width: 19px; font-size: 36px; line-height: 49px; flex: none; }
+  .mp-address-period .mp-address-query { padding: 5px 20px; border: 1px solid #4a4848; border-radius: 5px; }
+
+  .ongyeol-mypage-screens .mp-address-empty :is(.mp-view-84, .mp-view-87) { width: 100%; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-87 { height: 216px; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-38 { line-height: 27px; }
+  .ongyeol-mypage-screens .mp-address-empty :is(.mp-view-41, .mp-view-42) { height: 44px; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-42 { border-top: 1px solid black; }
+  .mp-address-empty :is(.mp-view-43, .mp-view-92) { display: none; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-46 { line-height: 22px; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-77 { left: 45px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-47 { left: 190px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-88 { left: 372px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-89 { left: 541px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-90 { left: 654px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-91 { left: 50%; top: 107px; transform: translateX(-50%); }
+}

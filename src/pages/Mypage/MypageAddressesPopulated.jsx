@@ -1,15 +1,28 @@
-import MypageBenefits from './MypageBenefits.jsx'
+import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
+import periodChevron from './tablet-period-chevron.svg'
+import calendar from '../../assets/mypage/screens/40ae1.svg'
+import './MypageAddressDetailsTablet.css'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/3a1d3.svg'
 
 // Figma frame 2275:24125; content node 2275:24183.
 export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit, onDelete }) {
   return (
-    <div className="mp-view-83" data-node-id="2275:24183">
+    <div className="mp-view-83 mp-address-populated" data-node-id="2275:24183">
               <div className="mp-view-76" data-node-id="2275:24184" data-name="취소">
                 <div className="mp-view-76" data-node-id="2275:24185">
-<MypageBenefits />
+<ShoppingBenefits />
                 </div>
+              </div>
+              <div className="mp-address-period" role="group" aria-label="기간조회">
+                <span className="mp-address-period-label">기간조회</span>
+                <button type="button" disabled className="mp-address-period-select">최근 3개월<img src={periodChevron} alt="" /></button>
+                <div className="mp-address-dates">
+                  <div><input aria-label="시작 날짜" value="2026-09-03" disabled readOnly /><img src={calendar} alt="" /></div>
+                  <span>~</span>
+                  <div><input aria-label="종료 날짜" value="2026-09-10" disabled readOnly /><img src={calendar} alt="" /></div>
+                </div>
+                <button type="button" disabled className="mp-address-query">조회</button>
               </div>
               <div className="mp-view-36" data-node-id="2275:24200" data-name="최근주문정보 전체">
                 <div className="mp-view-84" data-node-id="2275:24201">
@@ -77,7 +90,7 @@ export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit
                   </div>
                   <div style={{ marginTop: 13 }}>
                     {addresses.map(item => (
-                      <div key={item.id} className="mp-view-107" data-address-id={item.id} data-is-default={item.isDefault} style={{ position: 'relative', top: 0, height: 'auto', minHeight: 60, display: 'grid', gridTemplateColumns: '225px 149px 247px 199px 68px', paddingTop: 4 }}>
+                      <div key={item.id} className="mp-view-107" data-address-id={item.id} data-is-default={item.isDefault} style={{ position: 'relative', top: 0, height: 'auto', minHeight: 60, display: 'grid', gridTemplateColumns: 'var(--mp-address-columns, 225px 149px 247px 199px 68px)', paddingTop: 4 }}>
                         <div className="mp-view-108" style={{ position: 'static', width: 180, height: 'auto' }}>
                           <p className="mp-view-109" aria-label={item.isDefault ? `${item.label} (기본 배송지)` : item.label} style={{ position: 'relative', whiteSpace: 'normal', overflowWrap: 'anywhere' }}>{item.label}</p>
                         </div>

@@ -1,3 +1,4 @@
+import './MypageAddressDetailsTablet.css'
 import { useEffect, useRef } from 'react'
 import imgVector from '../../assets/mypage/screens/4d486.svg'
 
@@ -34,7 +35,7 @@ export default function MypageAddressDialog({ value, editing = false, onChange, 
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
   }
   return (
-    <form ref={formRef} noValidate onSubmit={submit} onKeyDown={keyDown} role="dialog" aria-modal="true" aria-label={editing ? '배송지 수정' : '배송지 등록'} className="mp-view-115" data-node-id="2275:24341">
+    <form ref={formRef} noValidate onSubmit={submit} onKeyDown={keyDown} role="dialog" aria-modal="true" aria-label={editing ? '배송지 수정' : '배송지 등록'} className="mp-view-115 mp-address-dialog" data-node-id="2275:24341">
           <div className="mp-view-116" data-node-id="2275:24342">
             <div className="mp-view-117" data-node-id="2275:24343">
               <div className="mp-view-118" data-node-id="2275:24344">

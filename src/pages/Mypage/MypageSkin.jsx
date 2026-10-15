@@ -1,5 +1,7 @@
 import { getIngredients } from './skinProfileData.js'
 import useSkinProfile from './useSkinProfile.js'
+import tabletMore from './tablet-skin-more.svg'
+import './MypageSkinTablet.css'
 
 // Reuse only descriptions present in the Figma concern cards.
 const concernDescriptions = {
@@ -15,7 +17,7 @@ export default function MypageSkin() {
   const isOriginalProfile = profile.skinType === '민감성' && hasOriginalConcerns
 
   return (
-    <div className="mp-view-218" data-node-id="2275:25642" data-name="스킨가이드(상단바제외) F" data-skin-type={profile.skinType}>
+    <div className="mp-view-218 mp-skin-summary" data-node-id="2275:25642" data-name="스킨가이드(상단바제외) F" data-skin-type={profile.skinType}>
           <div className="mp-view-219" data-node-id="2275:25643">
             <div className="mp-view-220" data-node-id="2275:25644">
               <div className="mp-view-221" data-node-id="2275:25645" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -42,6 +44,7 @@ export default function MypageSkin() {
                   다시 설정
                 </p>
               </a>
+              <span className="mp-skin-tablet-more"><img src={tabletMore} alt="추가 메뉴" /></span>
             </div>
           </div>
           <div className="mp-view-228" data-node-id="2275:25648">

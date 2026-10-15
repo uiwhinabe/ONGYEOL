@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useSkinProfile, { skinTypes, skinConcerns } from './useSkinProfile.js'
 import imgEllipse1 from '../../assets/mypage/screens/e97f4.svg'
 import imgGriddyIconsWaterDrop from '../../assets/mypage/screens/feac4.svg'
@@ -7,14 +8,17 @@ import imgGroup1 from '../../assets/mypage/screens/f086a.svg'
 import imgEpCircleCheckFilled from '../../assets/mypage/screens/66631.svg'
 import imgBiEmojiSmile from '../../assets/mypage/screens/ec637.svg'
 import imgVector from '../../assets/mypage/screens/c37a4.svg'
+import './MypageSkinTablet.css'
+import tabletCombination from './tablet-skin-combination.svg'
 
 // Figma frame 2275:25807; content node 2275:25859.
 export default function MypageSkinSettings() {
   const { profile, update, toggleConcern } = useSkinProfile()
+  const [memoDraft, setMemoDraft] = useState(profile.memo)
   const controlStyle = { margin: 0, font: 'inherit', color: 'inherit', textAlign: 'inherit', cursor: 'pointer' }
 
   return (
-    <div className="mp-view-256" data-node-id="2275:25859" data-name="나의 피부정보">
+    <div className="mp-view-256 mp-skin-settings" data-node-id="2275:25859" data-name="나의 피부정보">
           <div className="mp-view-257" data-node-id="2275:25860" data-name="나의 피부 정보 상단">
             <div className="mp-view-258" data-node-id="2275:25861">
               <p className="mp-view-259" data-node-id="2275:25862" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -100,7 +104,7 @@ export default function MypageSkinSettings() {
                     <div className="mp-view-284" data-node-id="2275:25896" data-name="glyphs:venn">
                       <div className="mp-view-285" data-node-id="2275:25897" data-name="Group">
                         <div className="mp-view-286">
-                          <img alt="" className="mp-view-14" src={imgGroup} />
+                            <picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletCombination} /><img alt="" className="mp-view-14" src={imgGroup} /></picture>
                         </div>
                       </div>
                     </div>
@@ -110,6 +114,7 @@ export default function MypageSkinSettings() {
                       </p>
                     </div>
                     <div className="mp-view-289" data-node-id="2275:25903">
+                      <p className="mp-skin-type-tablet-copy">부위별로<br />유분·건조함이<br />달라요</p>
                       <p className="mp-view-290" data-node-id="2275:25904">
                         부위별로 유분·
                         <br aria-hidden />
@@ -135,6 +140,7 @@ export default function MypageSkinSettings() {
                         </p>
                       </div>
                       <div className="mp-view-298" data-node-id="2275:25914">
+                        <p className="mp-skin-type-tablet-copy">성분이나<br />외부 자극에<br />쉽게 반응해요</p>
                         <p className="mp-view-299" data-node-id="2275:25915">
                           {`성분이나 외부 자극에 `}
                           <br aria-hidden />
@@ -159,6 +165,7 @@ export default function MypageSkinSettings() {
                       </p>
                     </div>
                     <div className="mp-view-279" data-node-id="2275:25927">
+                      <p className="mp-skin-type-tablet-copy">유·수분<br />균형이 비교적<br />안정적이에요</p>
                       <p className="mp-view-304" data-node-id="2275:25928">
                         유·수분 균형이
                         <br aria-hidden />
@@ -283,7 +290,11 @@ export default function MypageSkinSettings() {
               </div>
               <div className="mp-view-329" data-node-id="2275:25976">
                 <div className="mp-view-271" data-node-id="2275:25977">
-                  <input aria-label="피부 고민 메모" className="mp-view-330" value={profile.memo} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => update({ memo: event.target.value })} style={{ width: '100%', height: '100%', padding: 0, border: 0, margin: 0, background: 'transparent' }} />
+                  <input aria-label="피부 고민 메모" className="mp-view-330" value={profile.memo} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => { update({ memo: event.target.value }); setMemoDraft(event.target.value) }} style={{ width: '100%', height: '100%', padding: 0, border: 0, margin: 0, background: 'transparent' }} />
+                </div>
+                <div className="mp-skin-tablet-memo">
+                  <textarea aria-label="피부 고민 메모" value={memoDraft} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => setMemoDraft(event.target.value)} />
+                  <div><button type="button" onClick={() => update({ memo: memoDraft })}>저장하기</button></div>
                 </div>
               </div>
             </div>

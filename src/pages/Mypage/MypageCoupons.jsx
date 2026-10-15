@@ -3,6 +3,10 @@ import imgLine9 from '../../assets/mypage/screens/31115.svg'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/e1a1e.svg'
+import tabletSummaryLine from './tablet-summary-line.svg'
+import tabletRowLine from './tablet-coupon-row-line.svg'
+import { ShoppingPeriod } from './MypageShoppingTablet.jsx'
+import './MypageCouponsTablet.css'
 
 
 // Only issuedOn is used by period queries. expiresOn is separate and never filtered here.
@@ -87,7 +91,7 @@ export default function MypageCoupons() {
     setAppliedRange({ ...range })
   }
   return (
-    <div className="mp-view-1" data-node-id="2275:23547" data-applied-start={appliedRange.start} data-applied-end={appliedRange.end}>
+    <div className="mp-view-1 mp-coupons" data-node-id="2275:23547" data-applied-start={appliedRange.start} data-applied-end={appliedRange.end}>
 <CouponBenefits count={results.length} />
             <form ref={formRef} noValidate onSubmit={query} className="mp-view-18" data-node-id="2275:23562" data-name="기간조회 수정탭">
               <div className="mp-view-19" data-node-id="2275:23563">
@@ -97,6 +101,7 @@ export default function MypageCoupons() {
                       기간조회
                     </p>
                   </div>
+                  <ShoppingPeriod value={selectedPeriod} onChange={selectPeriod} />
                   <div className="mp-view-23" data-node-id="2275:23567" data-name="전체 날짜 T">
                     <button type="button" aria-pressed={selectedPeriod === '오늘'} onClick={() => selectPeriod('오늘')} style={controlStyle} className="mp-view-24" data-node-id="2275:23568">
                       <p className="mp-view-25" data-node-id="2275:23569" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -209,7 +214,7 @@ export default function MypageCoupons() {
                         ))}
                       </div>
                       <div className={index === results.length - 1 ? 'mp-view-55' : index === 0 ? 'mp-view-56' : 'mp-view-57'} style={{ top: 109 + index * 61 }}>
-                        <div className="mp-view-13"><img alt="" className="mp-view-14" src={imgLine3} /></div>
+                        <div className="mp-view-13"><picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletRowLine} /><img alt="" className="mp-view-14" src={imgLine3} /></picture></div>
                       </div>
                     </div>
                   ))}
@@ -224,6 +229,7 @@ export default function MypageCoupons() {
 function CouponBenefits({ count }) {
   return (
     <div className="mp-view-94" data-node-id="2275:24087" data-name="1.등급">
+                <p className="mp-coupon-tablet-greeting">김온결님은 Welcome등급 <span>입니다.</span></p>
                 <p className="mp-view-3" data-node-id="2275:24088" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                   <span className="mp-view-4">{`이다빈님의 `}</span>
                   <span className="mp-view-5" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -248,7 +254,7 @@ function CouponBenefits({ count }) {
                     <div className="mp-view-11">
                       <div className="mp-view-12">
                         <div className="mp-view-13">
-                          <img alt="" className="mp-view-14" src={imgLine9} />
+                          <picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
                         </div>
                       </div>
                     </div>
@@ -265,7 +271,7 @@ function CouponBenefits({ count }) {
                     <div className="mp-view-11">
                       <div className="mp-view-12">
                         <div className="mp-view-13">
-                          <img alt="" className="mp-view-14" src={imgLine9} />
+                          <picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
                         </div>
                       </div>
                     </div>

@@ -1,15 +1,30 @@
-import MypageBenefits from './MypageBenefits.jsx'
+import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
+import periodChevron from './tablet-period-chevron.svg'
+import calendar from '../../assets/mypage/screens/40ae1.svg'
+import './MypageAddressesTablet.css'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/3a1d3.svg'
 
 // Figma frame 2275:23787; content node 2275:23845.
 export default function MypageAddresses({ onAdd }) {
   return (
-    <div className="mp-view-83" data-node-id="2275:23845">
+    <div className="mp-view-83 mp-address-empty" data-node-id="2275:23845">
               <div className="mp-view-76" data-node-id="2275:23846" data-name="취소">
                 <div className="mp-view-76" data-node-id="2275:23847">
-<MypageBenefits />
+<ShoppingBenefits />
                 </div>
+              </div>
+              {/* Figma includes this control, but address query dates are undefined.
+                  Keep the original presentation disabled until its contract is supplied. */}
+              <div className="mp-address-period" role="group" aria-label="기간조회">
+                <span className="mp-address-period-label">기간조회</span>
+                <button type="button" disabled className="mp-address-period-select">최근 3개월<img src={periodChevron} alt="" /></button>
+                <div className="mp-address-dates">
+                  <div><input aria-label="시작 날짜" value="2026-09-03" disabled readOnly /><img src={calendar} alt="" /></div>
+                  <span>~</span>
+                  <div><input aria-label="종료 날짜" value="2026-09-10" disabled readOnly /><img src={calendar} alt="" /></div>
+                </div>
+                <button type="button" disabled className="mp-address-query">조회</button>
               </div>
               <div className="mp-view-36" data-node-id="2275:23862" data-name="최근주문정보 전체">
                 <div className="mp-view-84" data-node-id="2275:23863">

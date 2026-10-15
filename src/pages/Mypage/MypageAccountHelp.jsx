@@ -1,3 +1,4 @@
+import './MypageAccountTablet.css'
 import useAccountPreview from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
 import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
@@ -10,7 +11,7 @@ import imgLine32 from '../../assets/mypage/screens/11b76.svg'
 export default function MypageAccountHelp() {
   const account = useAccountPreview()
   return (
-    <div className="mp-view-150" data-node-id="2275:25040" onKeyDown={account.keyDown}>
+    <div className="mp-view-150 mp-account-tablet mp-account-help" data-node-id="2275:25040" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:25041">
             <div className="mp-view-119" data-node-id="2275:25042">
               <div className="mp-view-120" data-node-id="2275:25043" data-name="나의 배송지 관리 F">

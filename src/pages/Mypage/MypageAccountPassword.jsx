@@ -1,3 +1,4 @@
+import './MypageAccountTablet.css'
 import { useRef, useState } from 'react'
 import useAccountPreview, { passwordErrors } from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
@@ -30,7 +31,7 @@ export default function MypageAccountPassword() {
     }} />
   }
   return (
-    <div className="mp-view-150" data-node-id="2275:25342" onKeyDown={account.keyDown}>
+    <div className="mp-view-150 mp-account-tablet mp-account-password" data-node-id="2275:25342" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:25343">
             <div className="mp-view-119" data-node-id="2275:25344">
               <div className="mp-view-120" data-node-id="2275:25345" data-name="나의 배송지 관리 F">

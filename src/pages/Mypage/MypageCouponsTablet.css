@@ -1,0 +1,41 @@
+.mp-coupon-tablet-greeting { display: none; }
+
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage-screens:has(.mp-coupons) { padding-top: 12px; min-height: 1281px; }
+  .ongyeol-mypage-screens:has(.mp-coupons) .mp-page-heading { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-coupons { width: 100%; gap: 60px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-94 { width: 100%; height: 152px; padding: 15px 0; flex-direction: column; align-items: center; gap: 15px; }
+  .mp-coupons .mp-view-94 > .mp-view-3 { display: none; }
+  .mp-coupons .mp-coupon-tablet-greeting { display: block; font-size: 20px; line-height: 27px; text-align: center; }
+  .mp-coupon-tablet-greeting span { font-weight: 300; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-6 { gap: 35px; }
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-7, .mp-view-15, .mp-view-17) { width: 100px; height: 80px; justify-content: center; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-8 { font-size: 18px; line-height: 25px; text-align: center; }
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-9, .mp-view-16) { font-weight: 300; line-height: 22px; text-align: center; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-10 { height: 80px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-12 { width: 80px; }
+
+  .ongyeol-mypage-screens .mp-coupons .mp-view-18 { width: 100%; height: 70px; padding: 13px 19px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-19 { justify-content: flex-start; gap: 35px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-20 { gap: 35px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-21 { width: 77px; justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-23 { display: none; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-27 { height: 44px; justify-content: center; }
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-24, .mp-view-29) { border-radius: 5px; }
+  .mp-coupons .mp-shopping-period { display: block; position: relative; flex: none; width: 129px; height: 34px; }
+
+  .ongyeol-mypage-screens .mp-coupons .mp-view-35 { height: auto; }
+  .mp-coupons .mp-view-36 > .mp-view-37 { display: none; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-39 { height: auto; min-height: 168px; display: flex; flex-direction: column; gap: 11px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-40 { position: static; margin-bottom: -1px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-41 { height: 43px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-42 { height: 43px; display: flex; gap: 60px; align-items: center; justify-content: center; border-top: 1px solid black; }
+  .mp-coupons .mp-view-43 { display: none; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-42 > :not(.mp-view-43) { position: static; padding: 10px; flex: none; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-46 { line-height: 22px; }
+  .mp-coupons [data-coupon-id] { display: flex; flex-direction: column; gap: 12px; }
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-51, .mp-view-53, .mp-view-54) { position: static; display: grid; grid-template-columns: 179px 109px 182px 108px 130px; gap: 0; width: 708px; height: 19px; margin-inline: auto; }
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-51, .mp-view-53, .mp-view-54) > div { justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-coupons .mp-view-52 { line-height: 19px; }
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-55, .mp-view-56, .mp-view-57) { position: relative; inset: auto !important; width: 100%; height: 0; }
+}
