@@ -1,19 +1,22 @@
-import MypageBenefits from './MypageBenefits.jsx'
-import imgLine2 from '../assets/mypage/screens/083a1.svg'
-import imgLine3 from '../assets/mypage/screens/6d799.svg'
+import { ShoppingBenefits, ShoppingOrderStatus } from './MypageShoppingTablet.jsx'
+import imgLine2 from '../../assets/mypage/screens/083a1.svg'
+import imgLine3 from '../../assets/mypage/screens/6d799.svg'
 
 // Figma frame 2275:24028; content node 2275:24086.
 export default function MypageOrders() {
   return (
-    <div className="mp-view-102" data-node-id="2275:24086" data-name="주문목록">
-<MypageBenefits />
+    <div className="mp-view-102 mp-shopping mp-shopping-orders" data-node-id="2275:24086" data-name="주문목록">
+<ShoppingBenefits />
+<ShoppingOrderStatus />
               <div className="mp-view-70" data-node-id="2275:24101" data-name="최근주문정보 전체">
                 <div className="mp-view-103" data-node-id="2275:24102">
                   <div className="mp-view-37" data-node-id="2275:24103">
-                    <p className="mp-view-104" data-node-id="2275:24104" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    <p className="mp-view-104 mp-shopping-desktop-title" data-node-id="2275:24104" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       주문목록 / 배송조회내역
                     </p>
+                  <p className="mp-shopping-tablet-title">최근 주문 정보</p>
                   </div>
+                  <p className="mp-shopping-tablet-caption">(최근 3개월 기준)</p>
                   <div className="mp-view-72" data-node-id="2275:24105">
                     <p className="mp-view-3" data-node-id="2275:24106" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       <span className="mp-view-73">{`총 `}</span>

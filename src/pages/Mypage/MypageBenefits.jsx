@@ -1,4 +1,4 @@
-import imgLine9 from '../assets/mypage/screens/31115.svg'
+import imgLine9 from '../../assets/mypage/screens/31115.svg'
 
 export default function MypageBenefits() {
   return (

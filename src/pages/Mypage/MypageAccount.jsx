@@ -1,12 +1,14 @@
-import imgAkarIconsChevronDownSmall from '../assets/mypage/screens/2ed0f.svg'
-import imgIcBaselineRadioButtonUnchecked from '../assets/mypage/screens/36109.svg'
-import imgCarbonRadioButtonChecked from '../assets/mypage/screens/47e79.svg'
-import imgAkarIconsCheck from '../assets/mypage/screens/91352.svg'
+import useAccountPreview from './useAccountPreview.js'
+import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
+import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
+import imgCarbonRadioButtonChecked from '../../assets/mypage/screens/47e79.svg'
+import imgAkarIconsCheck from '../../assets/mypage/screens/91352.svg'
 
 // Figma frame 2275:24396; content node 2275:24451.
 export default function MypageAccount() {
+  const account = useAccountPreview()
   return (
-    <div className="mp-view-150" data-node-id="2275:24451">
+    <div className="mp-view-150" data-node-id="2275:24451" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:24452">
             <div className="mp-view-119" data-node-id="2275:24453">
               <div className="mp-view-120" data-node-id="2275:24454" data-name="나의 배송지 관리 F">
@@ -195,9 +197,7 @@ export default function MypageAccount() {
                 <div className="mp-view-137" data-node-id="2275:24527">
                   <div className="mp-view-167" data-node-id="2275:24528">
                     <div className="mp-view-168" data-node-id="2275:24529">
-                      <p className="mp-view-25" data-node-id="2275:24530" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        ongyeol@gmail.com
-                      </p>
+                      <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:24530" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
                   <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:24531" data-name="직접입력">

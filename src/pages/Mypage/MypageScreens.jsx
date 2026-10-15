@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
+import Header from '../../components/Header.jsx'
+import Footer from '../../components/Footer.jsx'
 import MypageSidebar from './MypageSidebar.jsx'
 import MypageAddressDialog from './MypageAddressDialog.jsx'
 import { mypageScreens } from './mypageRoutes.js'
@@ -9,6 +9,7 @@ import MypageAddressesPopulated from './MypageAddressesPopulated.jsx'
 import useMypageAddressBook from './useMypageAddressBook.js'
 import './Mypage.css'
 import './MypageScreens.css'
+import './MypageLayout.css'
 
 
 export default function MypageScreens({ pathname }) {
@@ -34,9 +35,9 @@ export default function MypageScreens({ pathname }) {
     <>
       <Header />
       <main className={`ongyeol-mypage ongyeol-mypage-screens${screen.wide ? ' mp-page-wide' : ''}${screen.variant ? ` mp-page-${screen.variant}` : ''}`} data-figma-frame={screen.frame}>
-        <div className="mp-page-layout" inert={isAddresses && addressBook.isOpen}>
+        <div className="mp-page-layout ongyeol-mypage-layout" data-has-title={Boolean(screen.title)} inert={isAddresses && addressBook.isOpen}>
           {screen.title && <h1 className="mp-page-heading"><a href="/mypage">MY PAGE</a></h1>}
-          <div className="mp-page-columns">
+          <div className="mp-page-columns ongyeol-mypage-layout-columns">
             <MypageSidebar active={screen.active} />
             {isAddresses ? (
               addressBook.addresses.length > 0

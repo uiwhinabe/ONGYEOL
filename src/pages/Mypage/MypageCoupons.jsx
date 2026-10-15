@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
-import imgLine9 from '../assets/mypage/screens/31115.svg'
-import imgCalendar from '../assets/mypage/screens/40ae1.svg'
-import imgLine2 from '../assets/mypage/screens/083a1.svg'
-import imgLine3 from '../assets/mypage/screens/e1a1e.svg'
+import imgLine9 from '../../assets/mypage/screens/31115.svg'
+import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
+import imgLine2 from '../../assets/mypage/screens/083a1.svg'
+import imgLine3 from '../../assets/mypage/screens/e1a1e.svg'
 
 
 // Only issuedOn is used by period queries. expiresOn is separate and never filtered here.

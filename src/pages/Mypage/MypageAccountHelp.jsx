@@ -1,14 +1,16 @@
-import imgAkarIconsChevronDownSmall from '../assets/mypage/screens/2ed0f.svg'
-import imgIcBaselineRadioButtonUnchecked from '../assets/mypage/screens/36109.svg'
-import imgCarbonRadioButtonChecked from '../assets/mypage/screens/47e79.svg'
-import imgAkarIconsCheck from '../assets/mypage/screens/91352.svg'
-import imgVector from '../assets/mypage/screens/93ab0.svg'
-import imgLine32 from '../assets/mypage/screens/11b76.svg'
+import useAccountPreview from './useAccountPreview.js'
+import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
+import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
+import imgCarbonRadioButtonChecked from '../../assets/mypage/screens/47e79.svg'
+import imgAkarIconsCheck from '../../assets/mypage/screens/91352.svg'
+import imgVector from '../../assets/mypage/screens/93ab0.svg'
+import imgLine32 from '../../assets/mypage/screens/11b76.svg'
 
 // Figma frame 2275:24985; content node 2275:25040.
 export default function MypageAccountHelp() {
+  const account = useAccountPreview()
   return (
-    <div className="mp-view-150" data-node-id="2275:25040">
+    <div className="mp-view-150" data-node-id="2275:25040" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:25041">
             <div className="mp-view-119" data-node-id="2275:25042">
               <div className="mp-view-120" data-node-id="2275:25043" data-name="나의 배송지 관리 F">
@@ -197,9 +199,7 @@ export default function MypageAccountHelp() {
                 <div className="mp-view-137" data-node-id="2275:25116">
                   <div className="mp-view-167" data-node-id="2275:25117">
                     <div className="mp-view-168" data-node-id="2275:25118">
-                      <p className="mp-view-25" data-node-id="2275:25119" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        ongyeol@gmail.com
-                      </p>
+                      <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:25119" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
                   <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25120" data-name="직접입력">

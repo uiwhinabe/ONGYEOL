@@ -1,12 +1,36 @@
-import imgAkarIconsChevronDownSmall from '../assets/mypage/screens/2ed0f.svg'
-import imgIcBaselineRadioButtonUnchecked from '../assets/mypage/screens/36109.svg'
-import imgCarbonRadioButtonChecked from '../assets/mypage/screens/47e79.svg'
-import imgAkarIconsCheck from '../assets/mypage/screens/91352.svg'
+import { useRef, useState } from 'react'
+import useAccountPreview, { passwordErrors } from './useAccountPreview.js'
+import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
+import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
+import imgCarbonRadioButtonChecked from '../../assets/mypage/screens/47e79.svg'
+import imgAkarIconsCheck from '../../assets/mypage/screens/91352.svg'
 
 // Figma frame 2275:25287; content node 2275:25342.
 export default function MypageAccountPassword() {
+  const account = useAccountPreview()
+  const [passwords, setPasswords] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' })
+  const fields = useRef({})
+
+  function passwordInput(name, label, nodeId) {
+    return <input ref={element => { fields.current[name] = element }} name={name} aria-label={label} type="password" autoComplete={name === 'currentPassword' ? 'current-password' : 'new-password'} required value={passwords[name]} className="mp-view-216" data-node-id={nodeId} style={{ margin: 0, font: 'inherit', color: 'inherit', background: 'transparent' }} onChange={event => {
+      const next = { ...passwords, [name]: event.target.value }
+      setPasswords(next)
+      const errors = passwordErrors(next)
+      Object.entries(fields.current).forEach(([key, field]) => field?.setCustomValidity(errors[key]))
+    }} onBlur={event => {
+      event.target.setCustomValidity(passwordErrors(passwords)[name])
+      if (event.target.value) event.target.reportValidity()
+    }} onKeyDown={event => {
+      if (event.key !== 'Enter') return
+      event.preventDefault()
+      const errors = passwordErrors(passwords)
+      Object.entries(fields.current).forEach(([key, field]) => field?.setCustomValidity(errors[key]))
+      Object.values(fields.current).find(field => field && !field.checkValidity())?.reportValidity()
+      // Validation only. No authentication, password persistence, or account update.
+    }} />
+  }
   return (
-    <div className="mp-view-150" data-node-id="2275:25342">
+    <div className="mp-view-150" data-node-id="2275:25342" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:25343">
             <div className="mp-view-119" data-node-id="2275:25344">
               <div className="mp-view-120" data-node-id="2275:25345" data-name="나의 배송지 관리 F">
@@ -75,13 +99,13 @@ export default function MypageAccountPassword() {
                     현재 비밀번호
                   </p>
                 </div>
-                <div className="mp-view-216" data-node-id="2275:25371" />
+                {passwordInput('currentPassword', '현재 비밀번호', '2275:25371')}
               </div>
               <div className="mp-view-214" data-node-id="2275:25372">
                 <div className="mp-view-215" data-node-id="2275:25373">
                   <p className="mp-view-25" data-node-id="2275:25374" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>{`새 비밀번호 `}</p>
                 </div>
-                <div className="mp-view-216" data-node-id="2275:25375" />
+                {passwordInput('newPassword', '새 비밀번호', '2275:25375')}
               </div>
               <div className="mp-view-214" data-node-id="2275:25376">
                 <div className="mp-view-217" data-node-id="2275:25377">
@@ -89,7 +113,7 @@ export default function MypageAccountPassword() {
                     새 비밀번호 확인
                   </p>
                 </div>
-                <div className="mp-view-216" data-node-id="2275:25379" />
+                {passwordInput('confirmPassword', '새 비밀번호 확인', '2275:25379')}
               </div>
             </div>
             <div className="mp-view-129" data-node-id="2275:25380" data-name="라인" />
@@ -219,9 +243,7 @@ export default function MypageAccountPassword() {
                 <div className="mp-view-137" data-node-id="2275:25431">
                   <div className="mp-view-167" data-node-id="2275:25432">
                     <div className="mp-view-168" data-node-id="2275:25433">
-                      <p className="mp-view-25" data-node-id="2275:25434" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        ongyeol@gmail.com
-                      </p>
+                      <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:25434" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
                   <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25435" data-name="직접입력">

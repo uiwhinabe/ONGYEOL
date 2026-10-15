@@ -1,0 +1,83 @@
+.mp-shopping-benefits, .mp-shopping-period, .mp-shopping-order-status,
+.mp-shopping-tablet-title, .mp-shopping-tablet-caption { display: none; }
+
+@media (min-width: 768px) and (max-width: 1432px) {
+  /* Frame height 1451 minus the 60px browser chrome and 110px site header. */
+  .ongyeol-mypage-screens:has(.mp-shopping) { min-height: 1281px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-shopping {
+    width: 100%;
+    overflow: visible;
+    gap: 60px;
+  }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-94 { display: none; }
+  .ongyeol-mypage-screens:has(.mp-shopping) .mp-page-heading { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }
+  .mp-shopping .mp-shopping-benefits {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 15px; width: 100%; height: 152px; background: #dedada; border-radius: 5px;
+  }
+  .mp-shopping-benefits > p { font-size: 20px; line-height: 27px; }
+  .mp-shopping-benefits > p > span { font-weight: 300; }
+  .mp-shopping-benefit-items { display: flex; gap: 70px; }
+  .mp-shopping-benefit-item { position: relative; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; width: 100px; height: 80px; }
+  .mp-shopping .mp-shopping-benefit-item h2 { font-size: 18px; line-height: 25px; }
+  .mp-shopping-benefit-item p { font-weight: 300; }
+  .mp-shopping-benefit-divider { position: absolute; top: 0; left: -35px; width: 0; height: 80px; }
+  .mp-shopping-benefit-divider img { position: absolute; top: 80px; left: -2px; transform: rotate(-90deg); transform-origin: top left; }
+
+  .ongyeol-mypage-screens .mp-shopping .mp-view-18 { width: 100%; height: 70px; padding: 13px 19px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-19 { justify-content: flex-start; gap: 35px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-20 { gap: 35px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-21 { width: 85px; justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-shopping-refunds .mp-view-21 { width: 77px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-23 { display: none; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-27 { height: 44px; justify-content: center; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-29,
+  .ongyeol-mypage-screens .mp-shopping .mp-view-24 { border-radius: 5px; }
+  .mp-shopping .mp-shopping-period { position: relative; display: block; flex: none; width: 129px; height: 34px; }
+  .mp-shopping-period > button { display: flex; align-items: center; justify-content: space-between; width: 129px; height: 34px; padding: 0 10px; margin: 0; border: 1px solid #878787; border-radius: 5px; background: white; color: black; font: 16px/22px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
+  .mp-shopping-period > button img { flex: none; }
+  .mp-shopping-period > [role='listbox'] { position: absolute; z-index: 5; top: 33px; left: 0; width: 129px; background: white; border: 1px solid #878787; }
+  .mp-shopping-period [role='option'] { display: block; width: 100%; height: 25px; margin: 0; padding: 0 10px; border: 0; border-bottom: 1px solid #878787; border-radius: 0; text-align: left; background: white; color: black; font: 14px/24px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
+  .mp-shopping-period [role='option']:last-child { border-bottom: 0; }
+  .mp-shopping-period [role='option']:hover, .mp-shopping-period [role='option']:focus-visible { background: #efeaea; }
+
+  .ongyeol-mypage-screens .mp-shopping .mp-view-95 { width: 100%; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-63 { width: 187px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-63 + .mp-view-63 { width: 189px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-64 { width: 100%; height: 42px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-70 { gap: 5px; min-height: 216px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-38 { line-height: 27px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-46 { line-height: 22px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-75 { gap: 63px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-41,
+  .ongyeol-mypage-screens .mp-shopping .mp-view-42 { height: 44px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-42 { display: flex; gap: 60px; align-items: center; justify-content: center; border-top: 1px solid black; overflow: visible; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-42 > :not(.mp-view-43) { position: static; padding: 10px; flex: none; }
+  .mp-shopping .mp-view-43, .mp-shopping .mp-view-82 { display: none; }
+  .ongyeol-mypage-screens .mp-shopping [role='listitem'] { grid-template-columns: 1.2fr 1.2fr 1.3fr 1fr .5fr !important; gap: 10px; }
+  .mp-shopping [role='listitem'] > p { min-width: 0; overflow-wrap: anywhere; }
+
+  .mp-shopping .mp-shopping-order-status { display: block; width: 100%; }
+  .mp-shopping-section-title { display: flex; align-items: center; height: 37px; }
+  .mp-shopping .mp-shopping-section-title h2 { padding: 5px 10px; font-weight: 700; }
+  .mp-shopping-section-title > p { padding: 5px 10px; }
+  .mp-shopping-status-card { position: relative; height: 167px; border-radius: 5px; background: #efeaea; }
+  .mp-shopping-stages { position: relative; width: 608px; height: 167px; margin-left: 10px; }
+  .mp-shopping-stage { position: absolute; top: 32px; display: flex; align-items: center; gap: 10px; }
+  .mp-shopping-stage-0 { left: 42.8px; }
+  .mp-shopping-stage-1 { left: 157.8px; }
+  .mp-shopping-stage-2 { left: 272.8px; }
+  .mp-shopping-stage-3 { left: 413.2px; }
+  .mp-shopping-stage-4 { left: 528.2px; }
+  .mp-shopping-stage > div { width: 60px; height: 103px; text-align: center; }
+  .mp-shopping-stage-2 > div { width: 76px; }
+  .mp-shopping-stage span { display: grid; place-items: center; width: 60px; height: 60px; margin-inline: auto; border-radius: 30px; background: #d9d9d9; font-size: 24px; line-height: 33px; }
+  .mp-shopping .mp-shopping-stage p { margin-top: 21px; white-space: nowrap; }
+  .mp-shopping-status-returns { position: absolute; left: 654px; top: 14px; width: 78px; font-size: 18px; line-height: 25px; font-weight: 500; }
+  .mp-shopping-status-returns p { padding: 10px; text-align: center; white-space: nowrap; }
+  .mp-shopping .mp-shopping-desktop-title, .mp-shopping-orders .mp-view-103 > .mp-view-72 { display: none; }
+  .mp-shopping .mp-shopping-tablet-title, .mp-shopping .mp-shopping-tablet-caption { display: block; white-space: nowrap; }
+  .mp-shopping-tablet-title { font-size: 20px; line-height: 27px; font-weight: 700; }
+  .mp-shopping .mp-shopping-tablet-caption { padding: 5px 10px; }
+  .ongyeol-mypage-screens .mp-shopping-orders .mp-view-103 { justify-content: flex-start; width: auto; }
+}

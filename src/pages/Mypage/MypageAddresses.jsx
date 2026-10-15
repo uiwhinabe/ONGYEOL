@@ -1,6 +1,6 @@
 import MypageBenefits from './MypageBenefits.jsx'
-import imgLine2 from '../assets/mypage/screens/083a1.svg'
-import imgLine3 from '../assets/mypage/screens/3a1d3.svg'
+import imgLine2 from '../../assets/mypage/screens/083a1.svg'
+import imgLine3 from '../../assets/mypage/screens/3a1d3.svg'
 
 // Figma frame 2275:23787; content node 2275:23845.
 export default function MypageAddresses({ onAdd }) {

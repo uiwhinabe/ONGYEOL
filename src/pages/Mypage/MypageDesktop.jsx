@@ -1,14 +1,16 @@
-import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
+import Header from '../../components/Header.jsx'
+import Footer from '../../components/Footer.jsx'
 import MypageSidebar from './MypageSidebar.jsx'
-import summaryLine from '../assets/mypage/summary-line.svg'
-import arrow from '../assets/mypage/arrow.svg'
-import paymentArrow from '../assets/mypage/arrow-payment.svg'
-import preparingArrow from '../assets/mypage/arrow-preparing.svg'
-import tableTop from '../assets/mypage/table-top.svg'
-import tableBottom from '../assets/mypage/table-bottom.svg'
-import chatLogo from '../assets/images/chat/ongyeol-logo.png'
+import summaryLine from '../../assets/mypage/summary-line.svg'
+import tabletSummaryLine from './tablet-summary-line.svg'
+import arrow from '../../assets/mypage/arrow.svg'
+import paymentArrow from '../../assets/mypage/arrow-payment.svg'
+import preparingArrow from '../../assets/mypage/arrow-preparing.svg'
+import tableTop from '../../assets/mypage/table-top.svg'
+import tableBottom from '../../assets/mypage/table-bottom.svg'
+import chatLogo from '../../assets/images/chat/ongyeol-logo.png'
 import './Mypage.css'
+import './MypageLayout.css'
 
 const stages = ['주문접수', '결제완료', '상품준비중', '배송중', '배송완료']
 const arrows = [arrow, paymentArrow, preparingArrow, arrow]
@@ -16,19 +18,21 @@ const arrows = [arrow, paymentArrow, preparingArrow, arrow]
 // The application shell can reuse the body without duplicating Header/Footer.
 export function MypageContent() {
   return (
-    <main className="ongyeol-mypage" data-node-id="2275:23333">
-      <div className="ongyeol-mypage-inner">
+    <main className="ongyeol-mypage ongyeol-mypage-home" data-node-id="2275:23333">
+      <div className="ongyeol-mypage-inner ongyeol-mypage-layout">
         <h1>MY PAGE</h1>
-        <div className="ongyeol-mypage-columns">
+        <div className="ongyeol-mypage-columns ongyeol-mypage-layout-columns">
           <MypageSidebar />
           <div className="ongyeol-mypage-content">
             <section className="ongyeol-mypage-summary" aria-label="회원등급 및 혜택">
               <p className="ongyeol-mypage-greeting">이다빈님의 <span>회원등급은</span> Welcome등급 <span>입니다</span>.</p>
               <div className="ongyeol-mypage-benefits">
+                <span className="mp-hub-grade"><h2>등급</h2><p>Welcome</p></span>
+                <span className="mp-hub-divider"><img src={tabletSummaryLine} alt="" /></span>
                 <div><h2>쿠폰</h2><p>1장</p></div>
-                <span className="ongyeol-mypage-summary-divider"><img src={summaryLine} alt="" /></span>
+                <span className="ongyeol-mypage-summary-divider"><img src={summaryLine} alt="" /><img className="mp-hub-line" src={tabletSummaryLine} alt="" /></span>
                 <div><h2>주문현황</h2><p>배송중 1건</p></div>
-                <span className="ongyeol-mypage-summary-divider"><img src={summaryLine} alt="" /></span>
+                <span className="ongyeol-mypage-summary-divider"><img src={summaryLine} alt="" /><img className="mp-hub-line" src={tabletSummaryLine} alt="" /></span>
                 <div><h2>찜한 제품</h2><p>3개</p></div>
               </div>
             </section>

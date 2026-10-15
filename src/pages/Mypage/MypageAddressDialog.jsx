@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import imgVector from '../assets/mypage/screens/4d486.svg'
+import imgVector from '../../assets/mypage/screens/4d486.svg'
 
 // Figma frame 2275:24236; content node 2275:24341.
 const inputStyle = { font: 'inherit', color: 'inherit', background: 'transparent', margin: 0 }

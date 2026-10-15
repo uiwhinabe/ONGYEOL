@@ -1,4 +1,4 @@
-import sidebarLine from '../assets/mypage/sidebar-line.svg'
+import sidebarLine from '../../assets/mypage/sidebar-line.svg'
 import './MypageSidebar.css'
 
 const menus = [

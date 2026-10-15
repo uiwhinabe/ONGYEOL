@@ -1,9 +1,6 @@
 .ongyeol-mypage {
   position: relative;
   flex: none;
-  min-width: 1433px;
-  height: 1177px;
-  padding-top: 120px;
   box-sizing: border-box;
   background: #fff;
   color: #000;
@@ -16,23 +13,9 @@
   text-align: left;
 }
 .ongyeol-mypage *, .ongyeol-mypage *::before, .ongyeol-mypage *::after { box-sizing: border-box; }
-.ongyeol-mypage-inner { width: 1433px; margin-inline: auto; }
 .ongyeol-mypage h1 { margin: 0 0 20px; padding: 10px; height: 74px; text-align: center; font: 700 54px/54px 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 40px; color: #000; letter-spacing: normal; }
 .ongyeol-mypage h2 { margin: 0; color: #000; font-family: 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 20px; font-weight: 500; line-height: 27px; letter-spacing: normal; }
 .ongyeol-mypage p { margin: 0; }
-.ongyeol-mypage-columns { display: grid; grid-template-columns: 240px 1000px; column-gap: 50px; height: 834px; align-items: start; }
-.ongyeol-mypage-menu { width: 240px; height: 758px; padding: 25px 40px; border: 2px solid #000; border-radius: 20px; background: #fff; }
-.ongyeol-mypage-menu section > div { margin-top: 15px; }
-.ongyeol-mypage-menu p { white-space: nowrap; }
-.ongyeol-mypage-menu .group-0 p + p { margin-top: 10px; }
-.ongyeol-mypage-menu-group + .ongyeol-mypage-menu-group { margin-top: 20px; }
-.ongyeol-mypage-menu-line { display: block; margin-top: -1px; margin-bottom: 20px; }
-.ongyeol-mypage-menu .group-1 section { width: 126px; }
-.ongyeol-mypage-menu .group-1 p { text-align: center; }
-.ongyeol-mypage-menu .group-2 section { width: 92px; text-align: center; }
-.ongyeol-mypage-menu .group-3 section { width: 126px; height: 106px; padding-inline: 10px; }
-.ongyeol-mypage-menu .group-3 section > div { margin-top: 21px; }
-.ongyeol-mypage-menu .group-4 section > div, .ongyeol-mypage-menu .group-5 section > div { margin-top: 6px; }
 .ongyeol-mypage-content { display: flex; flex-direction: column; gap: 80px; }
 .ongyeol-mypage-summary { display: flex; gap: 55px; height: 177px; padding: 20px 60px; border-radius: 5px; background: #dedada; }
 .ongyeol-mypage-greeting { flex: none; width: 384px; font-size: 20px; line-height: 27px; white-space: nowrap; }

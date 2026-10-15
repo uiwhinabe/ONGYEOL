@@ -1,13 +1,15 @@
-import imgAkarIconsChevronDownSmall from '../assets/mypage/screens/2ed0f.svg'
-import imgIcBaselineRadioButtonUnchecked from '../assets/mypage/screens/36109.svg'
-import imgCarbonRadioButtonChecked from '../assets/mypage/screens/47e79.svg'
-import imgAkarIconsChevronDownSmall1 from '../assets/mypage/screens/0ff46.svg'
-import imgAkarIconsCheck from '../assets/mypage/screens/91352.svg'
+import useAccountPreview from './useAccountPreview.js'
+import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
+import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
+import imgCarbonRadioButtonChecked from '../../assets/mypage/screens/47e79.svg'
+import imgAkarIconsChevronDownSmall1 from '../../assets/mypage/screens/0ff46.svg'
+import imgAkarIconsCheck from '../../assets/mypage/screens/91352.svg'
 
 // Figma frame 2275:24685; content node 2275:24740.
 export default function MypageAccountEmail() {
+  const account = useAccountPreview()
   return (
-    <div className="mp-view-150" data-node-id="2275:24740">
+    <div className="mp-view-150" data-node-id="2275:24740" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:24741">
             <div className="mp-view-119" data-node-id="2275:24742">
               <div className="mp-view-120" data-node-id="2275:24743" data-name="나의 배송지 관리 F">
@@ -196,9 +198,7 @@ export default function MypageAccountEmail() {
                 <div className="mp-view-137" data-node-id="2275:24816">
                   <div className="mp-view-167" data-node-id="2275:24817">
                     <div className="mp-view-168" data-node-id="2275:24818">
-                      <p className="mp-view-25" data-node-id="2275:24819" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        ongyeol@gmail.com
-                      </p>
+                      <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:24819" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
                   <a href="/mypage/account" className="mp-screen-action mp-view-169" data-node-id="2275:24820" data-name="직접입력">
@@ -305,27 +305,27 @@ export default function MypageAccountEmail() {
               </div>
             </div>
             <div className="mp-view-188" data-node-id="2275:24862" data-name="이메일">
-              <a href="/mypage/account" className="mp-screen-action mp-view-189" data-node-id="2275:24863">
+              <a href="/mypage/account" className="mp-screen-action mp-view-189" onClick={event => account.selectDomain(event, "@gmail.com")} data-node-id="2275:24863">
                 <p className="mp-view-190" data-node-id="2275:24864">
                   @gmail.com
                 </p>
               </a>
-              <a href="/mypage/account" className="mp-screen-action mp-view-191" data-node-id="2275:24865">
+              <a href="/mypage/account" className="mp-screen-action mp-view-191" onClick={event => account.selectDomain(event, "@naver.com")} data-node-id="2275:24865">
                 <p className="mp-view-190" data-node-id="2275:24866">
                   @naver.com
                 </p>
               </a>
-              <a href="/mypage/account" className="mp-screen-action mp-view-192" data-node-id="2275:24867">
+              <a href="/mypage/account" className="mp-screen-action mp-view-192" onClick={event => account.selectDomain(event, "@daum.net")} data-node-id="2275:24867">
                 <p className="mp-view-190" data-node-id="2275:24868">
                   @daum.net
                 </p>
               </a>
-              <a href="/mypage/account" className="mp-screen-action mp-view-193" data-node-id="2275:24869">
+              <a href="/mypage/account" className="mp-screen-action mp-view-193" onClick={event => account.selectDomain(event, "@nate.com")} data-node-id="2275:24869">
                 <p className="mp-view-190" data-node-id="2275:24870">
                   @nate.com
                 </p>
               </a>
-              <a href="/mypage/account" className="mp-screen-action mp-view-194" data-node-id="2275:24871">
+              <a href="/mypage/account" className="mp-screen-action mp-view-194" onClick={event => account.selectDomain(event, "")} data-node-id="2275:24871">
                 <p className="mp-view-190" data-node-id="2275:24872">
                   직접입력
                 </p>

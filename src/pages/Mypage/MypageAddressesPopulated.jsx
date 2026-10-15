@@ -1,6 +1,6 @@
 import MypageBenefits from './MypageBenefits.jsx'
-import imgLine2 from '../assets/mypage/screens/083a1.svg'
-import imgLine3 from '../assets/mypage/screens/3a1d3.svg'
+import imgLine2 from '../../assets/mypage/screens/083a1.svg'
+import imgLine3 from '../../assets/mypage/screens/3a1d3.svg'
 
 // Figma frame 2275:24125; content node 2275:24183.
 export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit, onDelete }) {

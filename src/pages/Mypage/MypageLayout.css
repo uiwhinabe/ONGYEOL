@@ -1,0 +1,84 @@
+/* Shared desktop geometry from Figma main 2275:23333. */
+.ongyeol-mypage {
+  --mypage-container-width: 1433px;
+  --mypage-sidebar-width: 240px;
+  --mypage-content-width: 1000px;
+  --mypage-column-gap: 50px;
+  --mypage-heading-space: 94px;
+  min-width: var(--mypage-container-width);
+  height: auto;
+  min-height: 1177px;
+  padding: 120px 0 129px;
+}
+.ongyeol-mypage-layout {
+  width: var(--mypage-container-width);
+  margin-inline: auto;
+}
+.ongyeol-mypage-layout[data-has-title='false'] {
+  padding-top: var(--mypage-heading-space);
+}
+.ongyeol-mypage-layout-columns {
+  display: grid;
+  grid-template-columns: var(--mypage-sidebar-width) var(--mypage-content-width);
+  column-gap: var(--mypage-column-gap);
+  align-items: start;
+  min-height: 834px;
+}
+
+.mp-hub-grade, .mp-hub-divider, .ongyeol-mypage-summary-divider .mp-hub-line { display: none; }
+
+/* Shared tablet shell. Page-specific cards and tables are adapted separately. */
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage {
+    --mypage-container-width: calc(100vw - 64px);
+    --mypage-content-width: 100%;
+    --mypage-heading-space: 0px;
+    min-width: 0;
+    min-height: 0;
+    padding: 15px 0 70px;
+  }
+  .ongyeol-mypage-layout-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    min-height: 0;
+  }
+  .ongyeol-mypage-layout { margin-inline: 32px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-menu { display: none; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :not(.ongyeol-mypage-menu) {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .ongyeol-mypage h1 { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }
+  .ongyeol-mypage.mp-page-skin, .ongyeol-mypage.mp-page-skin-settings { padding-top: 78px; }
+  .ongyeol-mypage-screens .mp-dialog-overlay { min-width: 0; overflow: auto; justify-content: flex-start; }
+
+  .ongyeol-mypage-home { padding-top: 14px; padding-bottom: 76px; }
+  .ongyeol-mypage-home .ongyeol-mypage-layout-columns { display: flex; flex-direction: column; gap: 76px; }
+  .ongyeol-mypage-home .ongyeol-mypage-content { order: -1; width: 100%; }
+  .ongyeol-mypage-home .ongyeol-mypage-content > section:not(.ongyeol-mypage-summary),
+  .ongyeol-mypage-home .ongyeol-mypage-chat,
+  .ongyeol-mypage-home .ongyeol-mypage-greeting { display: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary { width: 100%; height: 152px; padding: 36px 0; justify-content: center; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits { height: 80px; gap: 35px; align-items: center; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits > div,
+  .ongyeol-mypage-home .mp-hub-grade { display: block; width: 100px; text-align: center; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits h2 { font-size: 18px; line-height: 25px; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits p { font-weight: 300; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary-divider,
+  .ongyeol-mypage-home .mp-hub-divider { display: block; position: relative; width: 0; height: 80px; flex: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary-divider > img { display: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary-divider > .mp-hub-line,
+  .ongyeol-mypage-home .mp-hub-divider > img { display: block; position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
+
+  .ongyeol-mypage-home .ongyeol-mypage-menu { width: 100%; height: auto; padding: 0; border: 0; border-radius: 0; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu-group { height: 75px; padding-bottom: 15px; border-bottom: 1px solid #bab4b4; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu-line { display: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu section { width: 100%; height: auto; padding: 0; text-align: left; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu section > div { display: flex; gap: 10px; margin-top: 10px; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu p { margin: 0; text-align: left; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu .group-0 p + p { margin-top: 0; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu .group-0 p:nth-child(-n+2) { width: 156px; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu .group-0 p:nth-child(3) { width: 112px; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu .group-0 p:nth-child(4) { width: 92px; }
+}
