@@ -1,4 +1,6 @@
 import './MypageAccountTablet.css'
+import './MypageAccountMobile.css'
+import { useEffect, useRef } from 'react'
 import useAccountPreview from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
 import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
@@ -10,6 +12,10 @@ import imgLine32 from '../../assets/mypage/screens/11b76.svg'
 // Figma frame 2275:24985; content node 2275:25040.
 export default function MypageAccountHelp() {
   const account = useAccountPreview()
+  const closeRef = useRef(null)
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) closeRef.current?.focus()
+  }, [])
   return (
     <div className="mp-view-150 mp-account-tablet mp-account-help" data-node-id="2275:25040" onKeyDown={account.keyDown}>
           <div className="mp-view-118" data-node-id="2275:25041">
@@ -313,7 +319,7 @@ export default function MypageAccountHelp() {
                     <p className="mp-view-199" data-node-id="2275:25166" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       비밀번호 도움말
                     </p>
-                    <a href="/mypage/account" className="mp-screen-action mp-view-200" data-node-id="2275:25167" data-name="Vector" aria-label="비밀번호 도움말 닫기">
+                    <a ref={closeRef} href="/mypage/account" className="mp-screen-action mp-view-200" data-node-id="2275:25167" data-name="Vector" aria-label="비밀번호 도움말 닫기">
                       <div className="mp-view-201">
                         <img alt="" className="mp-view-14" src={imgVector} />
                       </div>

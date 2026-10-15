@@ -2,6 +2,9 @@ import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
 import periodChevron from './tablet-period-chevron.svg'
 import calendar from '../../assets/mypage/screens/40ae1.svg'
 import './MypageAddressDetailsTablet.css'
+import './MypageAddressesMobile.css'
+import mobileRadio from './mobile-address-radio.svg'
+import mobileMore from './mobile-address-more.svg'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/3a1d3.svg'
 
@@ -91,7 +94,10 @@ export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit
                   <div style={{ marginTop: 13 }}>
                     {addresses.map(item => (
                       <div key={item.id} className="mp-view-107" data-address-id={item.id} data-is-default={item.isDefault} style={{ position: 'relative', top: 0, height: 'auto', minHeight: 60, display: 'grid', gridTemplateColumns: 'var(--mp-address-columns, 225px 149px 247px 199px 68px)', paddingTop: 4 }}>
+                        {item.isDefault && <img className="mp-address-mobile-only mp-address-mobile-radio" src={mobileRadio} alt="" />}
+                        <img className="mp-address-mobile-only mp-address-mobile-more" src={mobileMore} alt="" />
                         <div className="mp-view-108" style={{ position: 'static', width: 180, height: 'auto' }}>
+                          <span className="mp-address-mobile-only mp-address-mobile-badge" aria-label={item.isDefault ? `${item.label} (기본 배송지)` : item.label}>{item.isDefault ? '기본 배송지' : item.label}</span>
                           <p className="mp-view-109" aria-label={item.isDefault ? `${item.label} (기본 배송지)` : item.label} style={{ position: 'relative', whiteSpace: 'normal', overflowWrap: 'anywhere' }}>{item.label}</p>
                         </div>
                         <div className="mp-view-110" style={{ position: 'static', width: 120, height: 'auto' }}>

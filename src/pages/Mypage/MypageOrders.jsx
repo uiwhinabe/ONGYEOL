@@ -1,9 +1,14 @@
 import { ShoppingBenefits, ShoppingOrderStatus } from './MypageShoppingTablet.jsx'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/6d799.svg'
+import MypageShoppingMobileCards from './MypageShoppingMobileCards.jsx'
+import './MypageShoppingMobile.css'
 
 // Figma frame 2275:24028; content node 2275:24086.
-export default function MypageOrders() {
+export default function MypageOrders({ testRecords = [] }) {
+  // Like the other shopping screens, only explicitly injected test fixtures
+  // can populate this presentation. The normal route remains empty.
+  const records = testRecords.filter(record => record.isTest === true)
   return (
     <div className="mp-view-102 mp-shopping mp-shopping-orders" data-node-id="2275:24086" data-name="주문목록">
 <ShoppingBenefits />
@@ -20,7 +25,7 @@ export default function MypageOrders() {
                   <div className="mp-view-72" data-node-id="2275:24105">
                     <p className="mp-view-3" data-node-id="2275:24106" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       <span className="mp-view-73">{`총 `}</span>
-                      <span className="mp-view-74">0</span>
+                      <span className="mp-view-74">{records.length}</span>
                       <span className="mp-view-73">건</span>
                     </p>
                   </div>
@@ -62,11 +67,12 @@ export default function MypageOrders() {
                       </div>
                     </div>
                   </div>
-                  <div className="mp-view-37" data-node-id="2275:24122">
+                  <div className={`mp-view-37${records.length ? ' mp-shopping-fixture-empty' : ''}`} data-node-id="2275:24122">
                     <p className="mp-view-81" data-node-id="2275:24123" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       조회 내역이 없습니다.
                     </p>
                   </div>
+                  <MypageShoppingMobileCards records={records} variant="orders" />
                   <div className="mp-view-82" data-node-id="2275:24124">
                     <div className="mp-view-13">
                       <img alt="" className="mp-view-14" src={imgLine3} />

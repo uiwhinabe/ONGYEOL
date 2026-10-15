@@ -11,6 +11,7 @@ import tableBottom from '../../assets/mypage/table-bottom.svg'
 import chatLogo from '../../assets/images/chat/ongyeol-logo.png'
 import './Mypage.css'
 import './MypageLayout.css'
+import './MypageMobile.css'
 
 const stages = ['주문접수', '결제완료', '상품준비중', '배송중', '배송완료']
 const arrows = [arrow, paymentArrow, preparingArrow, arrow]
@@ -25,6 +26,7 @@ export function MypageContent() {
           <MypageSidebar />
           <div className="ongyeol-mypage-content">
             <section className="ongyeol-mypage-summary" aria-label="회원등급 및 혜택">
+              <p className="mp-hub-mobile-greeting">김온결님은 Welcome등급 입니다.</p>
               <p className="ongyeol-mypage-greeting">이다빈님의 <span>회원등급은</span> Welcome등급 <span>입니다</span>.</p>
               <div className="ongyeol-mypage-benefits">
                 <span className="mp-hub-grade"><h2>등급</h2><p>Welcome</p></span>

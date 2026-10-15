@@ -1,4 +1,5 @@
 import './MypageAccountTablet.css'
+import './MypageAccountMobile.css'
 import useAccountPreview from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
 import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'

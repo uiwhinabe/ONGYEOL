@@ -7,6 +7,7 @@ import tabletSummaryLine from './tablet-summary-line.svg'
 import tabletRowLine from './tablet-coupon-row-line.svg'
 import { ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import './MypageCouponsTablet.css'
+import './MypageCouponsMobile.css'
 
 
 // Only issuedOn is used by period queries. expiresOn is separate and never filtered here.
@@ -60,8 +61,10 @@ export default function MypageCoupons() {
   const formRef = useRef(null)
 
   function selectPeriod(period) {
+    const nextRange = calculateRange(period)
     setSelectedPeriod(period)
-    setRange(calculateRange(period))
+    setRange(nextRange)
+    if (window.matchMedia('(max-width: 767px)').matches) applyRange(nextRange)
     formRef.current.elements.startDate.setCustomValidity('')
     formRef.current.elements.endDate.setCustomValidity('')
   }
@@ -87,8 +90,12 @@ export default function MypageCoupons() {
     endInput.setCustomValidity(parseDate(range.end) ? '' : '종료 날짜를 YYYY-MM-DD 형식의 올바른 날짜로 입력해 주세요.')
     if (parseDate(range.start) && parseDate(range.end) && range.start > range.end) endInput.setCustomValidity('종료 날짜는 시작 날짜보다 빠를 수 없습니다.')
     if (!formRef.current.reportValidity()) return
-    setResults(coupons.filter(coupon => coupon.issuedOn >= range.start && coupon.issuedOn <= range.end))
-    setAppliedRange({ ...range })
+    applyRange(range)
+  }
+
+  function applyRange(nextRange) {
+    setResults(coupons.filter(coupon => coupon.issuedOn >= nextRange.start && coupon.issuedOn <= nextRange.end))
+    setAppliedRange({ ...nextRange })
   }
   return (
     <div className="mp-view-1 mp-coupons" data-node-id="2275:23547" data-applied-start={appliedRange.start} data-applied-end={appliedRange.end}>
@@ -160,6 +167,7 @@ export default function MypageCoupons() {
             </form>
             <div className="mp-view-35" data-node-id="2275:23593">
               <div className="mp-view-36" data-node-id="2275:23594">
+                <div className="mp-coupon-mobile-heading"><h2>쿠폰 내역</h2><p>(사용 가능한 쿠폰 <span>{results.length}</span>장)</p></div>
                 <div className="mp-view-37" data-node-id="2275:23595">
                   <p className="mp-view-38" data-node-id="2275:23596" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     나의 쿠폰
@@ -206,6 +214,7 @@ export default function MypageCoupons() {
                     <p className="mp-view-52" role="status" style={{ position: 'absolute', top: 117, left: 0, width: '100%', textAlign: 'center' }}>조회 내역이 없습니다.</p>
                   ) : results.map((coupon, index) => (
                     <div key={coupon.id} data-coupon-id={coupon.id}>
+                      <MobileCouponCard coupon={coupon} />
                       <div className={['mp-view-51', 'mp-view-53', 'mp-view-54'][index]} data-name="쿠폰 상세 T + f">
                         {[coupon.name, coupon.benefit, coupon.condition, coupon.applicableProducts, coupon.validityLabel].map((text, column) => (
                           <div className="mp-view-34" key={column}>
@@ -223,6 +232,15 @@ export default function MypageCoupons() {
             </div>
           </div>
   )
+}
+
+export function MobileCouponCard({ coupon }) {
+  return <article className="mp-coupon-mobile-card" aria-label={coupon.name}>
+    <h3>{coupon.name}</h3>
+    <dl>{[['쿠폰 혜택', coupon.benefit], ['유효기간', coupon.validityLabel], ['취득일자', coupon.issuedOn]].map(([label, value]) =>
+      <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+    <p>적용 상품: {coupon.applicableProducts} · {coupon.condition}</p>
+  </article>
 }
 
 // Coupon-only summary: the shared summary and other pages remain unchanged.

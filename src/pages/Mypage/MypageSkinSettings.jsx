@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useSkinProfile, { skinTypes, skinConcerns } from './useSkinProfile.js'
 import imgEllipse1 from '../../assets/mypage/screens/e97f4.svg'
 import imgGriddyIconsWaterDrop from '../../assets/mypage/screens/feac4.svg'
@@ -9,12 +9,21 @@ import imgEpCircleCheckFilled from '../../assets/mypage/screens/66631.svg'
 import imgBiEmojiSmile from '../../assets/mypage/screens/ec637.svg'
 import imgVector from '../../assets/mypage/screens/c37a4.svg'
 import './MypageSkinTablet.css'
+import './MypageSkinMobile.css'
 import tabletCombination from './tablet-skin-combination.svg'
 
 // Figma frame 2275:25807; content node 2275:25859.
 export default function MypageSkinSettings() {
   const { profile, update, toggleConcern } = useSkinProfile()
   const [memoDraft, setMemoDraft] = useState(profile.memo)
+  useEffect(() => {
+    // Tablet keeps its explicit save action. Leaving that layout commits the
+    // current draft so switching to an immediate editor never loses typing.
+    const tablet = window.matchMedia('(min-width: 768px) and (max-width: 1432px)')
+    const syncDraft = event => { if (!event.matches) update({ memo: memoDraft }) }
+    tablet.addEventListener('change', syncDraft)
+    return () => tablet.removeEventListener('change', syncDraft)
+  }, [memoDraft, update])
   const controlStyle = { margin: 0, font: 'inherit', color: 'inherit', textAlign: 'inherit', cursor: 'pointer' }
 
   return (
@@ -27,7 +36,7 @@ export default function MypageSkinSettings() {
             </div>
             <div className="mp-view-260" data-node-id="2275:25863">
               <p className="mp-view-261" data-node-id="2275:25864" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                내 피부 상태를 입력하면, 더 정확한 맞춤 케어를 추천해드려요.
+                내 피부 상태를 입력하면,<br className="mp-skin-mobile-break" /> 더 정확한 맞춤 케어를 추천해드려요.
               </p>
             </div>
           </div>
@@ -290,7 +299,7 @@ export default function MypageSkinSettings() {
               </div>
               <div className="mp-view-329" data-node-id="2275:25976">
                 <div className="mp-view-271" data-node-id="2275:25977">
-                  <input aria-label="피부 고민 메모" className="mp-view-330" value={profile.memo} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => { update({ memo: event.target.value }); setMemoDraft(event.target.value) }} style={{ width: '100%', height: '100%', padding: 0, border: 0, margin: 0, background: 'transparent' }} />
+                  <input aria-label="피부 고민 메모" className="mp-view-330" value={memoDraft} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => { update({ memo: event.target.value }); setMemoDraft(event.target.value) }} style={{ width: '100%', height: '100%', padding: 0, border: 0, margin: 0, background: 'transparent' }} />
                 </div>
                 <div className="mp-skin-tablet-memo">
                   <textarea aria-label="피부 고민 메모" value={memoDraft} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => setMemoDraft(event.target.value)} />

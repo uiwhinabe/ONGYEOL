@@ -1,4 +1,5 @@
 import './MypageAccountTablet.css'
+import './MypageAccountMobile.css'
 import { useRef, useState } from 'react'
 import useAccountPreview, { passwordErrors } from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'

@@ -10,6 +10,7 @@ import useMypageAddressBook from './useMypageAddressBook.js'
 import './Mypage.css'
 import './MypageScreens.css'
 import './MypageLayout.css'
+import './MypageMobile.css'
 
 
 export default function MypageScreens({ pathname }) {

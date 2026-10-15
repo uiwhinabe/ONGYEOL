@@ -1,0 +1,70 @@
+.mp-hub-mobile-greeting { display: none; }
+
+@media (max-width: 767px) {
+  /* Shared shell only. Individual subpages keep their existing content until
+     their mobile layouts are implemented in the following stages. */
+  .ongyeol-mypage {
+    --mypage-container-width: calc(100% - 40px);
+    --mypage-content-width: 100%;
+    --mypage-heading-space: 0px;
+    min-width: 0;
+    min-height: 0;
+    padding: 15px 0 70px;
+  }
+  .ongyeol-mypage-layout { width: var(--mypage-container-width); margin-inline: auto; }
+  .ongyeol-mypage-layout-columns { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; }
+  .ongyeol-mypage-screens .ongyeol-mypage-menu { display: none; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :not(.ongyeol-mypage-menu) {
+    min-width: 0;
+    max-width: 100%;
+    /* Keep pending desktop-width details scrollable inside their own region,
+       rather than allowing them to widen the document or clipping content. */
+    overflow-x: auto;
+  }
+  .ongyeol-mypage-screens .mp-dialog-overlay { min-width: 0; overflow: auto; justify-items: start; align-items: start; }
+  .ongyeol-mypage h1 { height: auto; min-height: 43px; padding: 5px 10px; font-size: 24px; line-height: 33px; }
+
+  /* Figma 2275:28315: exclude the 60px device UI. The website Header remains
+     unchanged; the body begins 15px below it at both 360px and 402px. */
+  .ongyeol-mypage-home h1 { margin-bottom: 26px; }
+  .ongyeol-mypage-home .ongyeol-mypage-layout-columns { display: flex; flex-direction: column; gap: 36px; }
+  .ongyeol-mypage-home .ongyeol-mypage-content { order: -1; width: 100%; min-width: 0; }
+  .ongyeol-mypage-home .ongyeol-mypage-content > section:not(.ongyeol-mypage-summary),
+  .ongyeol-mypage-home .ongyeol-mypage-chat,
+  .ongyeol-mypage-home .ongyeol-mypage-greeting { display: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    min-height: 132px;
+    padding: 10px 15px;
+  }
+  .ongyeol-mypage-home .mp-hub-mobile-greeting { display: block; max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; overflow-wrap: anywhere; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 0 minmax(0, 1fr) 0 minmax(0, 1fr);
+    column-gap: clamp(12px, calc((100vw - 302px) / 4), 25px);
+    align-items: center;
+    width: 100%;
+    max-width: 322px;
+    min-height: 80px;
+  }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits > div { display: flex; flex-direction: column; justify-content: space-between; width: auto; min-width: 0; min-height: 54px; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits h2 { font-size: 16px; line-height: 22px; font-weight: 500; }
+  .ongyeol-mypage-home .ongyeol-mypage-benefits p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary-divider { display: block; position: relative; width: 0; height: 80px; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary-divider > img { display: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-summary-divider > .mp-hub-line { display: block; position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
+
+  .ongyeol-mypage-home .ongyeol-mypage-menu { width: 100%; height: auto; padding: 0; border: 0; border-radius: 0; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu-group { height: auto; padding-bottom: 15px; border-bottom: 1px solid #bab4b4; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu-group + .ongyeol-mypage-menu-group { margin-top: 20px; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu-line { display: none; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu section { width: 100%; height: auto; padding: 0; text-align: left; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu h2 { font-size: 20px; line-height: 27px; font-weight: 500; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu section > div { display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu p { margin: 0; font-size: 16px; line-height: 22px; white-space: normal; overflow-wrap: anywhere; text-align: left; }
+  .ongyeol-mypage-home .ongyeol-mypage-menu .group-0 p + p { margin-top: 0; }
+}

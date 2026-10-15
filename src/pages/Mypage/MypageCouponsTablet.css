@@ -1,5 +1,10 @@
 .mp-coupon-tablet-greeting { display: none; }
 
+@media (min-width: 1433px) {
+  /* Align the existing full-width SVG separators with their table. */
+  .ongyeol-mypage-screens .mp-coupons :is(.mp-view-56, .mp-view-57) { left: 0; right: 0; }
+}
+
 @media (min-width: 768px) and (max-width: 1432px) {
   .ongyeol-mypage-screens:has(.mp-coupons) { padding-top: 12px; min-height: 1281px; }
   .ongyeol-mypage-screens:has(.mp-coupons) .mp-page-heading { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }

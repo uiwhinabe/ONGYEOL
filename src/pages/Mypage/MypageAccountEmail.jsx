@@ -1,4 +1,5 @@
 import './MypageAccountTablet.css'
+import './MypageAccountMobile.css'
 import useAccountPreview from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
 import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
@@ -209,6 +210,33 @@ export default function MypageAccountEmail() {
                     <div className="mp-view-30" data-node-id="2275:24822" data-name="akar-icons:chevron-down-small">
                       <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall1} />
                     </div>
+                  </a>
+                </div>
+                <div className="mp-view-188 mp-account-mobile-domains" data-name="이메일">
+                  <a href="/mypage/account" className="mp-screen-action mp-view-189" onClick={event => account.selectDomain(event, "@gmail.com")}>
+                    <p className="mp-view-190">
+                      @gmail.com
+                    </p>
+                  </a>
+                  <a href="/mypage/account" className="mp-screen-action mp-view-191" onClick={event => account.selectDomain(event, "@naver.com")}>
+                    <p className="mp-view-190">
+                      @naver.com
+                    </p>
+                  </a>
+                  <a href="/mypage/account" className="mp-screen-action mp-view-192" onClick={event => account.selectDomain(event, "@daum.net")}>
+                    <p className="mp-view-190">
+                      @daum.net
+                    </p>
+                  </a>
+                  <a href="/mypage/account" className="mp-screen-action mp-view-193" onClick={event => account.selectDomain(event, "@nate.com")}>
+                    <p className="mp-view-190">
+                      @nate.com
+                    </p>
+                  </a>
+                  <a href="/mypage/account" className="mp-screen-action mp-view-194" onClick={event => account.selectDomain(event, "")}>
+                    <p className="mp-view-190">
+                      직접입력
+                    </p>
                   </a>
                 </div>
                 <div className="mp-view-171" data-node-id="2275:24824" data-name="수신동의 문구">

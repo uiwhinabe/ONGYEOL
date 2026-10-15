@@ -2,6 +2,7 @@ import { getIngredients } from './skinProfileData.js'
 import useSkinProfile from './useSkinProfile.js'
 import tabletMore from './tablet-skin-more.svg'
 import './MypageSkinTablet.css'
+import './MypageSkinMobile.css'
 
 // Reuse only descriptions present in the Figma concern cards.
 const concernDescriptions = {
@@ -44,7 +45,15 @@ export default function MypageSkin() {
                   다시 설정
                 </p>
               </a>
-              <span className="mp-skin-tablet-more"><img src={tabletMore} alt="추가 메뉴" /></span>
+              <button
+                type="button"
+                className="mp-skin-tablet-more"
+                aria-label="피부 정보 다시 설정"
+                onClick={() => {
+                  window.history.pushState(null, '', '/mypage/skin/settings')
+                  window.dispatchEvent(new PopStateEvent('popstate'))
+                }}
+              ><img src={tabletMore} alt="" /></button>
             </div>
           </div>
           <div className="mp-view-228" data-node-id="2275:25648">

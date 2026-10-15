@@ -3,6 +3,8 @@ import { ShoppingBenefits, ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/6d799.svg'
+import MypageShoppingMobileCards from './MypageShoppingMobileCards.jsx'
+import './MypageShoppingMobile.css'
 
 const INITIAL_RANGE = { start: '2026-09-03', end: '2026-09-10' }
 const controlStyle = { margin: 0, font: 'inherit', color: 'inherit', background: 'transparent', cursor: 'pointer' }
@@ -45,11 +47,17 @@ export default function MypageReturns({ testRecords = [] }) {
   const visibleResults = activeTab === 'requests' ? results : processingResults
   const tabStyle = { margin: 0, padding: 0, border: 0, background: 'transparent', font: 'inherit', color: 'inherit', textAlign: 'inherit', cursor: 'pointer' }
   const formRef = useRef(null)
+  function applyRange(nextRange) {
+    setResults(records.filter(record => record.requestedOn >= nextRange.start && record.requestedOn <= nextRange.end))
+    setAppliedRange({ ...nextRange })
+  }
   function selectPeriod(period) {
     setSelectedPeriod(period)
-    setRange(calculateRange(period))
+    const nextRange = calculateRange(period)
+    setRange(nextRange)
     formRef.current.elements.startDate.setCustomValidity('')
     formRef.current.elements.endDate.setCustomValidity('')
+    if (window.matchMedia('(max-width: 767px)').matches) applyRange(nextRange)
   }
 
   function dateInput(name, label, originalText) {
@@ -73,8 +81,7 @@ export default function MypageReturns({ testRecords = [] }) {
     endInput.setCustomValidity(parseDate(range.end) ? '' : '종료 날짜를 YYYY-MM-DD 형식의 올바른 날짜로 입력해 주세요.')
     if (parseDate(range.start) && parseDate(range.end) && range.start > range.end) endInput.setCustomValidity('종료 날짜는 시작 날짜보다 빠를 수 없습니다.')
     if (!formRef.current.reportValidity()) return
-    setResults(records.filter(record => record.requestedOn >= range.start && record.requestedOn <= range.end))
-    setAppliedRange({ ...range })
+    applyRange(range)
   }
 
   return (
@@ -169,9 +176,10 @@ export default function MypageReturns({ testRecords = [] }) {
               <div className="mp-view-70" role="tabpanel" id="returns-tab-panel" aria-labelledby={activeTab === 'requests' ? 'returns-requests-tab' : 'returns-processing-tab'} data-node-id="2275:23975" data-name="최근주문정보 전체">
                 <div className="mp-view-71" data-node-id="2275:23976">
                   <div className="mp-view-37" data-node-id="2275:23977">
-                    <p className="mp-view-38" data-node-id="2275:23978" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    <p className="mp-view-38 mp-shopping-desktop-heading" data-node-id="2275:23978" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       주문목록 / 배송조회내역
                     </p>
+                    <p className="mp-shopping-mobile-heading">{activeTab === 'requests' ? '취소/반품/교환 신청 내역' : '취소/반품/교환 처리 현황'}</p>
                   </div>
                   <div className="mp-view-72" data-node-id="2275:23979">
                     <p className="mp-view-3" data-node-id="2275:23980" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -225,7 +233,7 @@ export default function MypageReturns({ testRecords = [] }) {
                     </p>
                   </div>
                   ) : (
-                    <div role="list" aria-label="테스트 취소·반품·교환 내역" style={{ width: '100%' }}>
+                    <div className="mp-shopping-desktop-records" role="list" aria-label="테스트 취소·반품·교환 내역" style={{ width: '100%' }}>
                       {visibleResults.map(record => (
                         <div role="listitem" key={record.id} style={{ display: 'grid', gridTemplateColumns: '200px 230px 220px 190px 1fr', alignItems: 'center', padding: '15px 10px', fontSize: 14, textAlign: 'center' }}>
                           <p>{record.requestedOn}<br />[테스트] {record.id}</p>
@@ -237,6 +245,7 @@ export default function MypageReturns({ testRecords = [] }) {
                       ))}
                     </div>
                   )}
+                  <MypageShoppingMobileCards records={visibleResults} variant="returns" />
                   <div className="mp-view-82" data-node-id="2275:23998">
                     <div className="mp-view-13">
                       <img alt="" className="mp-view-14" src={imgLine3} />

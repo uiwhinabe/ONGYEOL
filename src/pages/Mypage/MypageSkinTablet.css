@@ -1,13 +1,25 @@
 .mp-skin-tablet-more, .mp-skin-tablet-memo, .mp-skin-type-tablet-copy { display: none; }
 
+@media (min-width: 1433px) {
+  /* Keep the 250px cards and 60px gaps; the negative right inset only
+     stretched the wrapper beyond its parent, not the visible cards. */
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-315 { right: auto; width: max-content; max-width: calc(100% - 30px); }
+}
+
 @media (min-width: 768px) and (max-width: 1432px) {
-  .ongyeol-mypage-screens.mp-page-skin { padding-top: 78px; }
-  .ongyeol-mypage-screens.mp-page-skin-settings { padding-top: 77px; }
+  /* Figma 2275:27005: content ends at 921, Footer starts at 954.
+     Figma 2275:26800: content ends at 1525, Footer starts at 1702.
+     Use the design's bottom spacing in normal flow so added content
+     moves the Footer down without fixed page heights or spacer nodes. */
+  .ongyeol-mypage-screens.mp-page-skin { padding-top: 78px; padding-bottom: 33px; }
+  .ongyeol-mypage-screens.mp-page-skin-settings { padding-top: 77px; padding-bottom: 177px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-skin-summary, .mp-skin-settings) { width: 100%; overflow: visible; gap: 60px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-219 { height: 132px; padding: 31px 35px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-220 { height: 70px; padding-left: 30px; align-items: flex-start; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-227 { display: none; }
-  .mp-skin-summary .mp-skin-tablet-more { display: block; flex: none; }
+  .mp-skin-summary .mp-skin-tablet-more { display: block; flex: none; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .mp-skin-summary .mp-skin-tablet-more img { display: block; }
+  .mp-skin-summary .mp-skin-tablet-more:focus-visible { outline: 2px solid #363434; outline-offset: 4px; }
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-228, .mp-view-235) { gap: 60px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-118 { gap: 15px; }
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-239, .mp-view-242) { width: 330px; padding-inline: 10px; }

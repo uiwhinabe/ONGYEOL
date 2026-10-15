@@ -1,4 +1,5 @@
 import './MypageAddressDetailsTablet.css'
+import './MypageAddressesMobile.css'
 import { useEffect, useRef } from 'react'
 import imgVector from '../../assets/mypage/screens/4d486.svg'
 

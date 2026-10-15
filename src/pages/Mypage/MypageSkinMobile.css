@@ -1,0 +1,67 @@
+.mp-skin-mobile-break { display: none; }
+
+@media (max-width: 767px) {
+  /* Figma 2275:29229 / 2275:29347. Both leave 118px between the
+     last content block and Footer; keep it in normal flow as content grows. */
+  .ongyeol-mypage-screens:is(.mp-page-skin, .mp-page-skin-settings) { padding-top: 10px; padding-bottom: 118px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-skin-summary, .mp-skin-settings) { width: 100%; overflow: visible; gap: 35px; }
+
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-219 { padding: 20px 15px 20px 20px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-220 { padding: 0; align-items: flex-start; gap: 12px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-221 { flex: 1; min-width: 0; max-width: 229px; white-space: normal; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-223 { font-size: 22px; line-height: 30px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-222 { display: flex; align-items: center; font-size: 22px; line-height: 30px; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-222 .mp-view-4, .mp-view-224 .mp-view-225, .mp-view-224 .mp-view-226) { line-height: inherit; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-224 { white-space: normal; font-size: 20px; line-height: 27px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-227 { display: none; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-skin-tablet-more { display: flex; align-items: flex-start; justify-content: center; flex: none; width: 24px; min-height: 27px; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .mp-skin-summary .mp-skin-tablet-more:focus-visible { outline: 2px solid #363434; outline-offset: 4px; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-228, .mp-view-235) { gap: 35px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-229 { width: 100%; gap: 10px; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-232, .mp-view-234) { width: 100%; height: auto; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-233 { position: static; white-space: normal; overflow-wrap: anywhere; line-height: 33px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-234 .mp-view-231 { position: static; max-width: 227px; white-space: normal; line-height: 22px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-118 { gap: 15px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px !important; width: 100%; max-width: 360px; height: auto; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-239, .mp-view-242) { width: 100%; max-width: 160px; height: auto !important; min-height: 100px; padding: 10px 8px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 > :nth-child(even) { justify-self: end; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-240, .mp-view-240 .mp-view-34) { width: 100%; min-width: 0; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-241, .mp-view-243) { font-size: 16px; line-height: 22px; white-space: normal; text-align: center; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-240 .mp-view-52 { width: 100%; min-width: 0; flex-shrink: 1; font-size: 12px; line-height: 16px; white-space: normal; text-align: center; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-245 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; max-width: 360px; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-246 { width: 100%; max-width: 110px; height: auto; min-height: 90px; padding-inline: 4px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 { width: 100%; min-width: 0; gap: 8px !important; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-249 { max-width: 100%; font-size: 16px; line-height: 22px; white-space: normal; overflow-wrap: anywhere; text-align: center; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 .mp-view-182 { max-width: 100%; font-size: 12px; line-height: 16px !important; overflow-wrap: anywhere; }
+
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-257 { width: 100%; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-259 { font-size: 24px; line-height: 33px; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-260 { height: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-261 { position: static; font-size: 16px; line-height: 25px; white-space: normal; }
+  .mp-skin-settings .mp-skin-mobile-break { display: inline; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-262, .mp-view-305, .mp-view-326) { width: 100%; height: auto; padding: 0; border: 0; overflow: visible; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-263, .mp-view-306, .mp-view-327) { position: static; display: flex; flex-direction: column; gap: 33px; width: 100%; height: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-306 { gap: 26px; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-327 { gap: 30px; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-264, .mp-view-307, .mp-view-328) { position: static; width: 100%; padding: 0; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-268, .mp-view-308) { flex: 1; width: auto; min-width: 0; height: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-309, .mp-view-310) { position: static; width: 100%; height: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-271, .mp-view-314) { height: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-272 { position: static; white-space: normal; overflow-wrap: anywhere; line-height: 19px; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-273 { position: static; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 10px; width: 100%; max-width: 350px; height: auto; margin-inline: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-273 > :is(button, .mp-view-291) { position: relative; inset: auto; width: 100%; min-width: 0; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-274, .mp-view-281, .mp-view-282, .mp-view-292, .mp-view-301) { width: 100%; height: auto; min-height: 200px; padding: 10px 3px; border-radius: 5px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-275, .mp-view-283, .mp-view-302) { width: 92px; max-width: 100%; height: auto; min-height: 148px; gap: 10px; justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-293 { position: static; translate: none; width: 92px; max-width: 100%; height: auto; min-height: 160px; gap: 10px; padding-block: 3px; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-290, .mp-view-299, .mp-view-304) { display: none; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-skin-type-tablet-copy { display: block; font: 300 14px/17px 'Ongyeol Mypage Pretendard', sans-serif; text-align: center; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-300, .mp-view-322) { display: none; }
+  .ongyeol-mypage-screens .mp-skin-settings button[aria-pressed='true'] { background-color: #ffe6e6 !important; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-315 { position: static; display: flex; flex-direction: column; gap: 20px; width: 180px; max-width: 100%; margin-inline: auto; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-316, .mp-view-325) { display: contents; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-317 { width: 100%; }
+  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-318, .mp-view-323) { width: 100%; height: 54px; padding-inline: 10px; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-329 { position: static; width: 100%; min-height: 51px; padding: 15px 20px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-329 > .mp-view-271 { width: 100%; height: 19px; min-width: 0; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-330 { min-width: 0; font-size: 16px; line-height: 19px; }
+}

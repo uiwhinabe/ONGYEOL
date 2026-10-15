@@ -1,0 +1,72 @@
+﻿.ongyeol-mypage-screens .mp-address-mobile-only { display: none; }
+
+@media (max-width: 767px) {
+  /* Figma 2277:42209; device UI is excluded. All rules are address-scoped. */
+  .ongyeol-mypage-screens:has(:is(.mp-address-empty, .mp-address-populated)) { padding-top: 10px; }
+  .ongyeol-mypage-screens:has(:is(.mp-address-empty, .mp-address-populated)) .mp-page-heading { min-height: 43px; height: auto; margin-bottom: 35px; padding: 5px 10px; font-size: 24px; line-height: 33px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-address-empty, .mp-address-populated) { width: 100%; gap: 35px; overflow: visible; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) > .mp-view-36 { margin-top: 15px; gap: 10px; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-94 { display: none; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefits { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-height: 132px; padding: 10px 15px; border-radius: 5px; background: #dedada; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefits > p { max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefits > p > span { font-weight: 300; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, calc((100vw - 302px) / 2), 50px); width: 100%; max-width: 322px; min-height: 80px; align-items: center; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item { position: relative; min-width: 0; min-height: 54px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item h2 { font-size: 16px; line-height: 22px; font-weight: 500; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; white-space: nowrap; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-divider { position: absolute; top: -13px; left: calc(-1 * clamp(24px, calc((100vw - 302px) / 2), 50px) / 2); width: 0; height: 80px; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-divider img { position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-address-period { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 34px; gap: 10px; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-address-period-label { font-size: 16px; line-height: 22px; font-weight: 500; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-address-period-select { display: flex; align-items: center; justify-content: space-between; flex: none; width: 129px; height: 34px; margin: 0; padding: 5px 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; opacity: 1; font: 14px/22px 'Ongyeol Mypage Inter', sans-serif; }
+  :is(.mp-address-empty, .mp-address-populated) :is(.mp-address-dates, .mp-address-query) { display: none; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) :is(.mp-view-84, .mp-view-87) { width: 100%; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-84 { min-height: 37px; gap: 5px; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-71 { width: auto; min-width: 0; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-37 { padding: 5px 0; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-72 { padding: 5px 0; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-38 { font-size: 20px; line-height: 27px; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) :is(.mp-view-73, .mp-view-74) { font-size: 14px; line-height: 19px; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-85 { width: 120px; height: 35px; overflow: visible; background: rgb(0 0 0 / 90%); }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-86 { font-size: 15px; line-height: 20px; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-87 { height: auto !important; min-height: 0 !important; padding-bottom: 0 !important; }
+  .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) :is(.mp-view-40, .mp-view-92) { display: none; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-91 { position: static; width: 100%; min-height: 120px; padding: 20px 0; }
+  .ongyeol-mypage-screens .mp-address-empty .mp-view-81 { white-space: normal; text-align: center; }
+  .mp-address-populated .mp-view-87 > div:last-child { display: flex; flex-direction: column; gap: 15px; margin-top: 0 !important; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-107 { left: auto; width: 100%; min-height: 164px !important; padding: 10px 20px !important; grid-template-columns: 24px 18px minmax(0, 1fr) 55px 5px !important; column-gap: 0; row-gap: 3px; align-content: center; border: 1px solid black; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-107 > div { width: auto !important; min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-address-mobile-only { display: block; }
+  .mp-address-populated .mp-address-mobile-radio { grid-column: 1; grid-row: 1; }
+  .mp-address-populated .mp-address-mobile-more { grid-column: 5; grid-row: 1; }
+  .mp-address-populated .mp-view-108 { grid-column: 3; grid-row: 1; margin-bottom: 7px; }
+  .mp-address-populated .mp-view-108 > p { display: none; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-address-mobile-badge { width: fit-content; max-width: 100%; min-height: 25px; padding: 2px 7px; border-radius: 5px; background: #afd5ff; font-size: 15px; line-height: 21px; overflow-wrap: anywhere; }
+  .mp-address-populated [data-is-default='true'] .mp-address-mobile-badge { width: 90px; }
+  .mp-address-populated [data-is-default='false'] .mp-address-mobile-badge { background: transparent; padding-left: 0; }
+  .mp-address-populated .mp-view-110 { grid-column: 3; grid-row: 2; }
+  .mp-address-populated .mp-view-113 { grid-column: 3; grid-row: 3; }
+  .mp-address-populated .mp-view-111 { grid-column: 3; grid-row: 4; }
+  .mp-address-populated .mp-view-114 { grid-column: 3; grid-row: 5; }
+  .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-109, .mp-view-112) { font-family: 'Ongyeol Noto Sans', sans-serif; font-size: 15px; line-height: 20px; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-110 p { font-weight: 500; line-height: 18px; }
+  .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-111, .mp-view-113) p { color: rgb(0 0 0 / 70%); }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-114 p { font-size: 13px; line-height: 18px; white-space: normal; }
+
+  /* Reflow the existing dialog; keep all fields, validation, and close handlers. */
+  .ongyeol-mypage-screens .mp-dialog-overlay:has(.mp-address-dialog) { display: flex; align-items: center; justify-content: center; min-width: 0; padding: 16px 20px; }
+  .ongyeol-mypage-screens .mp-view-115.mp-address-dialog { width: 100%; min-width: 0; max-width: 500px; height: auto; max-height: calc(100dvh - 32px); padding: 20px; border-radius: 20px; overflow-y: auto; align-items: stretch; justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-116, .mp-view-123) { width: 100%; min-width: 0; align-items: stretch; gap: 20px; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-117 { gap: 20px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-119, .mp-view-120) { position: static; width: 100%; height: auto; min-height: 33px; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-121 { position: static; font-size: 24px; line-height: 33px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-62, .mp-view-130, .mp-view-141, .mp-view-132, .mp-view-137) { flex-direction: column; align-items: stretch; width: 100%; gap: 8px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-131, .mp-view-128, .mp-view-133, .mp-view-138, .mp-view-140, .mp-view-142) { width: 100%; min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-131 { gap: 8px; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-135 { width: 110px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-128, .mp-view-133, .mp-view-138, .mp-view-140, .mp-view-142) { height: 36px; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-144 { min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-145 { flex-shrink: 1; min-width: 0; font-size: 16px; line-height: 22px; white-space: normal; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-146 { width: 100%; gap: 12px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-147, .mp-view-148) { width: calc((100% - 12px) / 2); min-width: 0; }
+}

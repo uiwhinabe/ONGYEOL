@@ -2,6 +2,7 @@ import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
 import periodChevron from './tablet-period-chevron.svg'
 import calendar from '../../assets/mypage/screens/40ae1.svg'
 import './MypageAddressesTablet.css'
+import './MypageAddressesMobile.css'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/3a1d3.svg'
 

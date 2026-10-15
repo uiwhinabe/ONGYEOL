@@ -5,6 +5,7 @@ import chevron from './tablet-period-chevron.svg'
 import arrow from '../../assets/mypage/arrow.svg'
 import paymentArrow from '../../assets/mypage/arrow-payment.svg'
 import preparingArrow from '../../assets/mypage/arrow-preparing.svg'
+import mobileArrow from './mobile-shopping-stage-arrow.svg'
 import './MypageShoppingTablet.css'
 
 // Only the three shopping screens use this tablet presentation.
@@ -70,6 +71,7 @@ export function ShoppingOrderStatus() {
         {stages.map((stage, index) => <div className={`mp-shopping-stage mp-shopping-stage-${index}`} key={stage}>
           <div><span>0</span><p>{stage}</p></div>
           {arrows[index] && <img src={arrows[index]} alt="" />}
+          {arrows[index] && <img className="mp-shopping-mobile-stage-arrow" src={mobileArrow} alt="" />}
         </div>)}
       </div>
       <div className="mp-shopping-status-returns">{['취소', '교환', '반품'].map(label => <p key={label}>{label} : 0</p>)}</div>
