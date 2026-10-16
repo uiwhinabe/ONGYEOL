@@ -41,7 +41,7 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
           ? <Link className="ongyeol-hd-link" key={label} to="/skin-guide" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
           : label === 'EVENT'
           ? <Link className="ongyeol-hd-link" key={label} to="/event?tab=ongoing" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
-          : <button className="ongyeol-hd-link" key={label} type="button" aria-disabled="true">{label}</button>)}
+          : <Link className="ongyeol-hd-link" key={label} to="/brand" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>)}
       </nav>
     </div>
   )

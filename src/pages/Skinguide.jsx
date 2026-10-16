@@ -43,6 +43,29 @@ function DetailLabel({ children }) {
   return <p className="skin-guide-detail-label">{children}<img src={labelLine} alt="" /></p>
 }
 
+function MobileRoutine({ products }) {
+  const [productIndex, setProductIndex] = useState(0)
+  const product = products[productIndex]
+  const moveProduct = direction => setProductIndex(index => (index + direction + products.length) % products.length)
+  return <div className="skin-guide-mobile-routine-product">
+    <article aria-label={`${product.step} 추천 제품`} aria-live="polite" aria-atomic="true">
+      <div className={`skin-guide-routine-image skin-guide-routine-image--${product.id}`}><img src={product.image ?? undefined} alt={product.imageAlt ?? ''} loading="lazy" /></div>
+      <div className="skin-guide-routine-copy">
+        <span className="skin-guide-product-step">{product.step}</span>
+        <h4>{product.name}</h4>
+        <p className="skin-guide-product-english" lang="en">{product.englishName}</p>
+        <p className="skin-guide-product-description">{product.descriptionLines?.map((line, index) => <span key={index}>{line}{index === 0 ? ' ' : ''}</span>) ?? product.description}</p>
+        <button type="button" aria-disabled={!product.image || undefined} aria-label={`${product.imageAlt} 제품 보러가기`}>제품 보러가기 <img src={buttonChevron} alt="" /></button>
+      </div>
+    </article>
+    <div className="skin-guide-mobile-routine-controls" aria-label="추천 제품 이동">
+      <button type="button" onClick={() => moveProduct(-1)} aria-label="이전 추천 제품"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M9 3L5 7L9 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+      <div>{products.map((item, index) => <button key={item.id} type="button" aria-label={`${item.step} 추천 제품 보기`} aria-pressed={index === productIndex} onClick={() => setProductIndex(index)} />)}</div>
+      <button type="button" onClick={() => moveProduct(1)} aria-label="다음 추천 제품"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M5 3L9 7L5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+    </div>
+  </div>
+}
+
 export default function SkinGuide() {
   const [searchParams] = useSearchParams()
   const location = useLocation()
@@ -187,11 +210,20 @@ export default function SkinGuide() {
   }, [])
 
   const [selectedConcern, setSelectedConcern] = useState(() => validConcern ?? 'moisture')
+  const [mobileSelection, setMobileSelection] = useState(() => validConcern)
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 540px)').matches)
+  useLayoutEffect(() => {
+    const mobile = window.matchMedia('(max-width: 540px)')
+    const update = () => setIsMobile(mobile.matches)
+    mobile.addEventListener('change', update)
+    return () => mobile.removeEventListener('change', update)
+  }, [])
   const [selectionRequest, setSelectionRequest] = useState(() => validConcern ? 1 : 0)
   const [queryEntryKey, setQueryEntryKey] = useState(location.key)
   if (queryEntryKey !== location.key) {
     setQueryEntryKey(location.key)
     setSelectedConcern(validConcern ?? 'moisture')
+    setMobileSelection(validConcern)
     setSelectionRequest(request => validConcern ? request + 1 : 0)
   }
   const currentConcern = concernData[selectedConcern]
@@ -220,8 +252,22 @@ export default function SkinGuide() {
     return () => window.cancelAnimationFrame(frame)
   }, [selectionRequest])
   function handleConcernSelect(id) {
+    if (window.matchMedia('(max-width: 540px)').matches) {
+      setMobileSelection(id)
+      setSelectedConcern(id)
+      return
+    }
     setSelectedConcern(id)
     setSelectionRequest(request => request + 1)
+  }
+  function handleMobileNext() {
+    if (!window.matchMedia('(max-width: 540px)').matches || !mobileSelection) return
+    setSelectedConcern(mobileSelection)
+    setSelectionRequest(request => request + 1)
+  }
+  function handleMobileSolutionNext() {
+    if (!window.matchMedia('(max-width: 540px)').matches || !mobileSelection) return
+    requestSectionScroll.current?.(solutionRef.current)
   }
   function scrollToSection(id) {
     requestSectionScroll.current?.(document.getElementById(id))
@@ -258,13 +304,13 @@ export default function SkinGuide() {
           <p>가장 고민되는 항목을 하나 선택해주세요.</p>
         </div>
         <div className="skin-guide-type-list" role="group" aria-labelledby="skin-guide-types-title">
-          {skinConcerns.map(item => <button key={item.id} type="button" className={`skin-guide-type-button${selectedConcern === item.id ? ' is-active' : ''}`} aria-pressed={selectedConcern === item.id} onClick={() => handleConcernSelect(item.id)}>
+          {skinConcerns.map(item => <button key={item.id} type="button" className={`skin-guide-type-button${(isMobile ? mobileSelection : selectedConcern) === item.id ? ' is-active' : ''}`} aria-pressed={(isMobile ? mobileSelection : selectedConcern) === item.id} onClick={() => handleConcernSelect(item.id)}>
             <ConcernImage concern={item} />
             <span className="skin-guide-type-name">{item.label}</span>
             <span className="skin-guide-type-description">{item.description}</span>
           </button>)}
         </div>
-        <div className="skin-guide-mobile-next" hidden><button type="button" onClick={() => scrollToSection('skin-guide-concerns')}>다음으로</button></div>
+        <div className="skin-guide-mobile-next" hidden><button type="button" disabled={isMobile && !mobileSelection} onClick={handleMobileNext}>다음으로</button></div>
       </div>
     </section>
 
@@ -273,6 +319,7 @@ export default function SkinGuide() {
         <GuideSteps activeStep={2} />
         <div className="skin-guide-why-columns">
           <div className="skin-guide-summary">
+            <div className="skin-guide-mobile-summary-steps" hidden><GuideSteps activeStep={2} /></div>
             <div><h2>{currentConcern.concernTitle ?? `${currentConcern.concernName} 피부 분석 준비 중`}</h2><p className="skin-guide-moisture-label">{currentConcern.solutionEnglish ?? '결과 정보 준비 중'}</p></div>
             <div className="skin-guide-summary-type"><ConcernImage concern={currentConcern.concern} /><p>{currentConcern.concernName}</p></div>
             <p className="skin-guide-summary-copy"><GuideText>{currentConcern.intro}</GuideText></p>
@@ -288,12 +335,14 @@ export default function SkinGuide() {
                 <h3>{cause.title ?? '원인 준비 중'}</h3><p>{cause.description ?? '원인 정보 확인 후\n안내해 드립니다.\n현재는 준비 중입니다.'}</p>
               </li>)}
             </ul>
+            <div className="skin-guide-mobile-next" hidden><button type="button" disabled={isMobile && !mobileSelection} onClick={handleMobileSolutionNext}>다음으로</button></div>
           </div>
         </div>
       </div>
     </section>
 
     <section ref={solutionRef} className="skin-guide-solution skin-guide-surface" aria-labelledby="skin-guide-solution-title">
+      <div className="skin-guide-solution-content">
       <GuideSteps activeStep={3} />
       <div className="skin-guide-solution-heading"><p>YOUR SKIN SOLUTION</p><h2 id="skin-guide-solution-title">당신의 피부를 위한 맞춤 솔루션</h2><p className="skin-guide-solution-intro" hidden><GuideText>{currentConcern.solutionIntro ?? `${currentConcern.concernName} 피부의 맞춤 케어를 준비하고 있습니다.\n확정된 루틴은 추후 안내해 드립니다.`}</GuideText></p></div>
       <div className="skin-guide-solution-details">
@@ -317,6 +366,7 @@ export default function SkinGuide() {
         <button type="button" aria-label="추천 제품 영역으로 이동" onClick={() => scrollToSection('skin-guide-routine')}><img src={scrollDoubleChevron} alt="" /></button>
         <p>SCROLL OR TAP</p>
       </div>
+      </div>
       <div ref={routineRef} className="skin-guide-routine" id="skin-guide-routine">
         <div className="skin-guide-mobile-routine-steps" hidden><GuideSteps activeStep={3} /></div>
         <div className="skin-guide-routine-heading">
@@ -334,6 +384,7 @@ export default function SkinGuide() {
           </div>
           {index < currentConcern.products.length - 1 && <img className="skin-guide-routine-chevron" src={routineChevron} alt="" />}
         </li>)}</ol>
+        <MobileRoutine key={selectedConcern} products={currentConcern.products} />
       </div>
     </section>
 

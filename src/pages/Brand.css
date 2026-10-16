@@ -1,0 +1,309 @@
+.brand-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  color: #000;
+  background: #fff;
+  color-scheme: light;
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.brand-page *, .brand-page *::before, .brand-page *::after {
+  box-sizing: border-box;
+}
+
+.brand-page img { display: block; }
+
+.brand-hero { height: calc(100vh - var(--brand-header-height, 110px)); }
+.brand-hero-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.brand-transition { position: relative; height: 838px; }
+.brand-transition-sticky {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  container-type: size;
+}
+.brand-nature-panel { position: absolute; inset: 0 auto 0 0; width: 100%; overflow: hidden; }
+.brand-nature-panel img, .brand-water-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.brand-nature-panel img { width: 100cqw; max-width: none; object-position: center 57.02%; transform: translateX(0); }
+.brand-water-panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 50%;
+  transform: translateX(100%);
+  will-change: transform;
+}
+.brand-water-panel img { object-position: center 46.2%; }
+.brand-nature-message, .brand-keywords {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: 'Ongyeol Noto Serif', 'Batang', '바탕', serif;
+  font-weight: 400;
+  color: #000;
+}
+.brand-nature-message { left: 0; opacity: 0; transform: scale(.92); }
+.brand-nature-message p {
+  display: grid;
+  place-content: center;
+  width: min(32.9167vw, 75.24cqh);
+  aspect-ratio: 1;
+  margin: 0;
+  background: url('../assets/images/brand/nature-ring.svg') center / 94.9367% 94.9367% no-repeat, url('../assets/images/brand/nature-disc.svg') center / 100% 100% no-repeat;
+  font-size: min(3.125vw, 7.143cqh);
+  line-height: 1.43;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.brand-keywords { right: 0; flex-direction: column; --brand-keyword-size: min(13.8021vw, 31.62cqh); }
+.brand-keyword-circle {
+  display: grid;
+  place-items: center;
+  width: var(--brand-keyword-size);
+  height: var(--brand-keyword-size);
+  flex: 0 0 var(--brand-keyword-size);
+  background: url('../assets/images/brand/keyword-ring.svg') center / 94.9367% 94.9367% no-repeat, url('../assets/images/brand/keyword-disc.svg') center / 100% 100% no-repeat;
+  font-size: min(2.0833vw, 4.773cqh);
+  line-height: normal;
+  letter-spacing: 0;
+  opacity: 0;
+  transform: translateY(20px) scale(.94);
+}
+.brand-keyword-circle + .brand-keyword-circle { margin-top: calc(var(--brand-keyword-size) * -.2132); }
+.brand-transition.is-active .brand-nature-panel { width: 50%; transition: width 1.3s cubic-bezier(.22, 1, .36, 1) .1s; }
+.brand-transition.is-active .brand-nature-panel img { transform: translateX(-19.065%); transition: transform 1.3s cubic-bezier(.22, 1, .36, 1) .1s; }
+.brand-transition.is-active .brand-water-panel { transform: translateX(0); transition: transform 1.3s cubic-bezier(.22, 1, .36, 1) .1s; }
+.brand-transition.is-active .brand-nature-message { opacity: 1; transform: scale(1); transition: opacity .8s cubic-bezier(.22, 1, .36, 1) 1.15s, transform .8s cubic-bezier(.22, 1, .36, 1) 1.15s; }
+.brand-transition.is-active .brand-keyword-circle { opacity: 1; transform: translateY(0) scale(1); transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1); }
+.brand-transition.is-active .brand-keyword-circle--nature { transition-delay: 1.35s; }
+.brand-transition.is-active .brand-keyword-circle--science { transition-delay: 1.55s; }
+.brand-transition.is-active .brand-keyword-circle--skincare { transition-delay: 1.75s; }
+
+@media (min-width: 1025px) {
+  .brand-transition { height: calc(100vh - var(--brand-header-height, 110px)); }
+}
+
+.brand-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  height: 840px;
+}
+
+@media (min-width: 1025px) {
+  .brand-story { height: calc(100vh - var(--brand-header-height, 110px)); }
+  .brand-hero, .brand-transition, .brand-story, .brand-ingredients { scroll-margin-top: var(--brand-header-height, 110px); }
+}
+
+.brand-story-image { display: block; width: 100%; max-width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; background: #fbf8f6; }
+.brand-story-copy { display: grid; place-items: center; min-width: 0; padding: 40px; background: #fff; }
+.brand-story-text { display: flex; flex-direction: column; gap: 50px; width: 100%; max-width: 691px; }
+.brand-story--science .brand-story-text { max-width: 652px; }
+.brand-story--pure .brand-story-text { max-width: 661px; }
+
+.brand-page .brand-story-title {
+  margin: 0;
+  font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Serif', serif;
+  font-size: 80px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  color: inherit;
+  opacity: 0;
+}
+
+.brand-story-description {
+  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .9px;
+  opacity: 0;
+}
+.brand-story-description p { margin: 0; }
+.brand-story-description p + p { margin-top: 1.5em; }
+
+.brand-story-copy.is-visible .brand-story-title {
+  opacity: 1;
+  transition: opacity 800ms ease;
+}
+.brand-story-copy.is-visible .brand-story-description {
+  opacity: 1;
+  transition: opacity 800ms ease 200ms;
+}
+
+.brand-ingredients {
+  position: relative;
+  height: 800px;
+  background: #fff;
+}
+.brand-ingredients-sticky { position: relative; width: 100%; height: 100%; overflow: hidden; background: #fff; container-type: size; }
+.brand-ingredient {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--ingredient-start-left);
+  width: var(--ingredient-start-width);
+  min-width: 0;
+}
+.brand-ingredient-media {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0;
+}
+.brand-ingredient--rose { --ingredient-start-left: 0%; --ingredient-start-width: 19.114583%; --ingredient-final-left: 5.729167%; }
+.brand-ingredient--berries { --ingredient-start-left: 19.114583%; --ingredient-start-width: 20.3125%; --ingredient-final-left: 23.958333%; }
+.brand-ingredient--lemon { --ingredient-start-left: 39.427083%; --ingredient-start-width: 20.3125%; --ingredient-final-left: 42.1875%; }
+.brand-ingredient--tremella { --ingredient-start-left: 59.739583%; --ingredient-start-width: 19.166667%; --ingredient-final-left: 60.416667%; }
+.brand-ingredient--mulberry { --ingredient-start-left: 78.90625%; --ingredient-start-width: 21.09375%; --ingredient-final-left: 78.645833%; }
+.brand-ingredient .brand-ingredient-strip {
+  position: absolute;
+  top: -2.4375%;
+  width: 100%;
+  height: 104.875%;
+  object-fit: cover;
+  object-position: left center;
+  opacity: 1;
+}
+.brand-ingredient--rose .brand-ingredient-strip, .brand-ingredient--tremella .brand-ingredient-strip { top: -1.8125%; height: 103.625%; }
+.brand-ingredient .brand-ingredient-circle { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.brand-ingredient-copy {
+  position: absolute;
+  top: calc(12.75% + 18.75cqw);
+  left: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(25px, 1.3021vw);
+  color: #000;
+  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif;
+  line-height: 1.4;
+  letter-spacing: 0;
+  opacity: 0;
+  transform: translate(-50%, 10px);
+}
+.brand-page .brand-ingredient-name {
+  margin: 0;
+  font-family: inherit;
+  font-size: min(28px, 1.4583vw);
+  font-weight: 700;
+  line-height: inherit;
+  letter-spacing: 0;
+  color: inherit;
+  white-space: nowrap;
+}
+.brand-ingredient-active { margin: 0; font-size: min(24px, 1.25vw); font-weight: 500; white-space: nowrap; }
+.brand-ingredient-description { margin: 0; font-size: min(16px, .8333vw); font-weight: 400; text-align: left; white-space: nowrap; }
+.brand-ingredient-description span { display: block; }
+.brand-ingredient-tag {
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #ffd4d4;
+  color: #000;
+  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif;
+  font-size: min(20px, 1.0417vw);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+@media (min-width: 1025px) {
+  .brand-ingredients { height: calc(100vh - var(--brand-header-height, 110px)); }
+  .brand-ingredient { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .brand-ingredient-copy { text-align: center; }
+  .brand-page .brand-ingredient-name, .brand-ingredient-active {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: 260px;
+    min-height: 2lh;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .brand-ingredient-active { max-width: 280px; }
+  .brand-ingredient-description { width: 100%; max-width: 280px; white-space: normal; word-break: keep-all; overflow-wrap: break-word; text-align: center; line-height: 1.6; }
+  .brand-ingredient-tag { margin-inline: auto; text-align: center; }
+  .brand-ingredients.is-active .brand-ingredient { left: var(--ingredient-final-left); width: 15.625%; transition: left 1.45s cubic-bezier(.22, 1, .36, 1) .15s, width 1.45s cubic-bezier(.22, 1, .36, 1) .15s; }
+  .brand-ingredients.is-active .brand-ingredient-media { top: 12.75%; height: 15.625cqw; border-radius: 50%; transition: top 1.45s cubic-bezier(.22, 1, .36, 1) .15s, height 1.45s cubic-bezier(.22, 1, .36, 1) .15s, border-radius 1.45s cubic-bezier(.22, 1, .36, 1) .15s; }
+  .brand-ingredients.is-active .brand-ingredient-strip { opacity: 0; transition: opacity .65s ease .65s; }
+  .brand-ingredients.is-active .brand-ingredient-circle { opacity: 1; transition: opacity .65s ease .65s; }
+  .brand-ingredients.is-active .brand-ingredient-copy { opacity: 1; transform: translate(-50%, 0); transition: opacity .6s ease 1.6s, transform .6s ease 1.6s; }
+  .brand-ingredients.is-active.is-complete .brand-ingredient { transform: translateY(0); transition: transform .35s ease; }
+  .brand-ingredients.is-active.is-complete .brand-ingredient-media { box-shadow: 0 4px 12px rgba(0, 0, 0, .04); transition: box-shadow .35s ease; }
+}
+
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+  .brand-ingredients.is-active.is-complete .brand-ingredient:hover { transform: translateY(-8px); }
+  .brand-ingredients.is-active.is-complete .brand-ingredient:hover .brand-ingredient-media { box-shadow: 0 16px 32px rgba(0, 0, 0, .14); }
+}
+
+@media (max-width: 1024px) {
+  .brand-hero { height: clamp(430px, 72vw, 700px); }
+  .brand-hero-video { object-position: center; }
+
+  .brand-transition { height: calc(100svh - var(--brand-header-height, 110px)); }
+  .brand-transition-sticky { position: relative; height: 100%; }
+  .brand-nature-message p { font-size: clamp(12px, 3.125vw, 32px); }
+  .brand-keywords { --brand-keyword-size: min(20vw, 24cqh); }
+  .brand-keyword-circle { font-size: clamp(10px, 2.5vw, 24px); }
+
+  .brand-story { display: flex; flex-direction: column; height: auto; }
+  .brand-story-image { order: 0; width: 100%; height: auto; aspect-ratio: 838 / 840; object-fit: cover; }
+  .brand-story--science .brand-story-image { aspect-ratio: 838 / 776; }
+  .brand-story--pure .brand-story-image { aspect-ratio: 838 / 733; }
+  .brand-story-copy { order: 1; width: 100%; padding: clamp(70px, 10vw, 100px) 40px; }
+  .brand-story-text { max-width: 691px; gap: clamp(28px, 5vw, 42px); }
+  .brand-page .brand-story-title { font-size: clamp(34px, 5vw, 50px); }
+  .brand-story-description { font-size: clamp(16px, 2.4vw, 22px); line-height: 1.6; letter-spacing: .03em; }
+
+  .brand-ingredients { height: auto; padding: 40px 32px 100px; }
+  .brand-ingredients-sticky { display: flex; flex-direction: column; align-items: center; gap: clamp(140px, 22vw, 180px); height: auto; overflow: visible; container-type: normal; }
+  .brand-ingredient { position: static; display: flex; flex-direction: column; align-items: center; gap: clamp(32px, 7.2vw, 60px); width: min(420px, 100%); opacity: 0; transform: translateY(20px); }
+  .brand-ingredient.is-revealed { opacity: 1; transform: translateY(0); transition: opacity 700ms ease, transform 700ms ease; }
+  .brand-ingredient-media { position: relative; top: auto; width: clamp(220px, 36vw, 300px); max-width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; }
+  .brand-ingredient .brand-ingredient-strip { display: none; }
+  .brand-ingredient .brand-ingredient-circle { opacity: 1; }
+  .brand-ingredient-copy { position: static; width: 100%; gap: 20px; opacity: 1; transform: none; }
+  .brand-page .brand-ingredient-name { max-width: 100%; font-size: clamp(20px, 3vw, 28px); white-space: normal; }
+  .brand-ingredient-active { max-width: 100%; font-size: clamp(17px, 2.5vw, 24px); white-space: normal; }
+  .brand-ingredient-tag { font-size: clamp(14px, 2vw, 20px); }
+  .brand-ingredient-description { max-width: 100%; font-size: clamp(13px, 1.8vw, 16px); line-height: 1.6; text-align: center; white-space: normal; }
+}
+
+@media (max-width: 540px) {
+  .brand-hero { height: clamp(360px, 125vw, 620px); }
+  .brand-story-copy { padding: 64px 24px; }
+  .brand-story-text { gap: 28px; }
+  .brand-page .brand-story-title { font-size: clamp(28px, 8vw, 38px); }
+  .brand-story-description { font-size: clamp(13px, 3.8vw, 16px); line-height: 1.65; }
+  .brand-ingredients { padding: 24px 24px 80px; }
+  .brand-ingredients-sticky { gap: clamp(90px, 24vw, 120px); }
+  .brand-ingredient { gap: 28px; }
+  .brand-ingredient-media { width: clamp(160px, 52vw, 230px); }
+  .brand-ingredient-copy { gap: 16px; }
+  .brand-page .brand-ingredient-name { font-size: clamp(16px, 5vw, 21px); }
+  .brand-ingredient-active { font-size: clamp(14px, 4vw, 18px); }
+  .brand-ingredient-tag { font-size: clamp(12px, 3.5vw, 15px); }
+  .brand-ingredient-description { font-size: clamp(11px, 3.2vw, 14px); }
+}
