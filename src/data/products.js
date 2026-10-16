@@ -77,7 +77,7 @@ export const products = [
     originalPrice: 28000, price: 22400, discountPercent: 20, badge: null, rating: 5, reviewCount: 3, defaultWished: false,
     line: '닥열매', type: '토너/패드', concerns: ['수분/보습', '모공/피지', '피부톤/기미잡티'] },
   { id: 'dakyeolmae-mask', name: '닥열매 콜라겐 마스크팩, 8+1매', image: mask, textureImage: maskTexture,
-    price: 34000, badge: 'LIMITED', rating: 5, reviewCount: 5, defaultWished: true,
+    price: 46000, badge: 'LIMITED', rating: 5, reviewCount: 5, defaultWished: true,
     line: '닥열매', type: '마스크팩', concerns: ['민감/진정', '수분/보습', '주름/탄력'] },
   // Vitamin C display order and review values follow the supplied screenshot.
   // Concern tags follow the team's Vitamin C category mapping.
@@ -103,7 +103,7 @@ export const products = [
     originalPrice: 30000, price: 24000, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 5, defaultWished: false,
     line: '비타민C', type: '로션/크림', concerns: ['수분/보습', '피부톤/기미잡티'] },
   { id: 'vitamin-c-mask', name: '비타민 C 마스크팩, 1매', image: vitaminMask, textureImage: vitaminMaskTexture,
-    originalPrice: 3000, price: 3000, badge: null, rating: 5, reviewCount: 5, defaultWished: false,
+    originalPrice: 5000, price: 5000, badge: null, rating: 5, reviewCount: 5, defaultWished: false,
     line: '비타민C', type: '마스크팩', concerns: ['피부톤/기미잡티', '수분/보습'] },
   // Team source files are unavailable; values and order follow the supplied
   // finished-page screenshot. Five stars and empty initial hearts are requested.
@@ -135,13 +135,13 @@ export const products = [
     originalPrice: 32000, price: 32000, badge: 'BEST', rating: 5, reviewCount: 5, defaultWished: false,
     line: '백목이', type: '로션/크림', concerns: ['수분/보습', '민감/진정'] },
   { id: 'baekmogi-lotion', name: '백목이 딥 모이스처 로션, 150ml', image: baekmogiLotion, textureImage: baekmogiLotionTexture,
-    originalPrice: 26000, price: 20800, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 5, defaultWished: false,
+    originalPrice: 24000, price: 19200, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 5, defaultWished: false,
     line: '백목이', type: '로션/크림', concerns: ['수분/보습', '민감/진정'] },
   { id: 'baekmogi-toner', name: '백목이 딥 모이스처 토너, 250ml', image: baekmogiToner, textureImage: baekmogiTonerTexture,
-    originalPrice: 26000, price: 20800, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 5, defaultWished: false,
+    originalPrice: 22000, price: 17600, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 5, defaultWished: false,
     line: '백목이', type: '토너/패드', concerns: ['수분/보습', '민감/진정'] },
   { id: 'baekmogi-mask', name: '백목이 수분 베일 마스크, 1매', image: baekmogiMask, textureImage: baekmogiMaskTexture,
-    originalPrice: 3000, price: 3000, badge: null, rating: 5, reviewCount: 5, defaultWished: false,
+    originalPrice: 5000, price: 5000, badge: null, rating: 5, reviewCount: 5, defaultWished: false,
     line: '백목이', type: '마스크팩', concerns: ['수분/보습', '주름/탄력'] },
   { id: 'rose-pdrn-eyecream', name: 'PDRN 리페어 로즈 아이크림, 30ml',
     englishName: 'PDRN REPAIR ROSE EYECREAM', image: roseEyecream, textureImage: roseEyecreamTexture,

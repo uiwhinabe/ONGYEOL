@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <Header chatOpen={chatOpen} />
-      {productRoute.isProducts && ['dakyeolmae-body-scrub', 'dakyeolmae-pad', 'dakyeolmae-cream', 'dakyeolmae-ampoule', 'dakyeolmae-mist', 'dakyeolmae-toner', 'dakyeolmae-mask', 'odi-toner', 'odi-ampoule', 'odi-cream', 'odi-cleansing-balm', 'odi-mask', 'vitamin-c-toner', 'vitamin-c-cleanser', 'vitamin-c-lotion', 'vitamin-c-ampoule', 'vitamin-c-essence', 'vitamin-c-cream', 'vitamin-c-pad', 'vitamin-c-mask', 'rose-pdrn-balancing-cream', 'rose-pdrn-eyecream', 'baekmogi-ampoule'].includes(productRoute.productId) ? <ProductDetail key={productRoute.productId} productId={productRoute.productId} /> : productRoute.isProducts ? <Products classification={productRoute.classification} initialCategory={productRoute.category}
+      {productRoute.isProducts && ['dakyeolmae-body-scrub', 'dakyeolmae-pad', 'dakyeolmae-cream', 'dakyeolmae-ampoule', 'dakyeolmae-mist', 'dakyeolmae-toner', 'dakyeolmae-mask', 'odi-toner', 'odi-ampoule', 'odi-cream', 'odi-cleansing-balm', 'odi-mask', 'vitamin-c-toner', 'vitamin-c-cleanser', 'vitamin-c-lotion', 'vitamin-c-ampoule', 'vitamin-c-essence', 'vitamin-c-cream', 'vitamin-c-pad', 'vitamin-c-mask', 'rose-pdrn-balancing-cream', 'rose-pdrn-eyecream', 'baekmogi-ampoule', 'baekmogi-pad', 'baekmogi-cream', 'baekmogi-toner', 'baekmogi-lotion', 'baekmogi-mask'].includes(productRoute.productId) ? <ProductDetail key={productRoute.productId} productId={productRoute.productId} /> : productRoute.isProducts ? <Products classification={productRoute.classification} initialCategory={productRoute.category}
         onCategoryChange={navigateToProducts} /> : <Home />}
       <Footer />
       <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
