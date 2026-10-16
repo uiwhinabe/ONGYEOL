@@ -240,7 +240,7 @@
     --ongyeol-header-tracking: 18px;
     font-size: 40px;
   }
-  .ongyeol-header-tagline { font-size: 14px; }
+  .ongyeol-header-tagline { font-size: 14px; font-family: "Noto Sans KR", sans-serif; }
   .ongyeol-header-action { min-width: 20px; height: 20px; }
   .ongyeol-header-hamburger {
     display: flex;
@@ -264,7 +264,7 @@
     --ongyeol-header-tracking: 9px;
     font-size: 40px;
   }
-  .ongyeol-header-tagline { font-size: 13px; }
+  .ongyeol-header-tagline { font-size: 13px; font-family: "Noto Sans KR", sans-serif; }
   .ongyeol-header-hamburger-line { width: 28px; height: 3px; }
   .ongyeol-header-icon:has(img[src*="member-"]) { top: -0.5px; }
 }
@@ -275,4 +275,30 @@
 
 @media (max-width: 1199px) {
   .ongyeol-header-bar { padding-right: 24px; }
+}
+
+/* Figma 1104:7378: 30px banner, 80px menu, centered 20px wordmark. */
+@media (max-width: 599px) {
+  .ongyeol-header-banner {
+    box-sizing: content-box;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .ongyeol-header-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    width: 100%; min-width: 0;
+    padding-inline: max(clamp(16px, 6.22vw, 25px), env(safe-area-inset-left, 0px)) max(clamp(16px, 6.22vw, 25px), env(safe-area-inset-right, 0px));
+    gap: 0;
+  }
+  .ongyeol-header-menu-button { justify-self: start; }
+  .ongyeol-header-logo {
+    --ongyeol-header-tracking: clamp(6px, 2.24vw, 9px);
+    position: static; transform: none; min-width: 0;
+    font-size: 20px; font-weight: 400;
+  }
+  .ongyeol-header-actions { justify-self: end; gap: clamp(12px, 5vw, 20px); }
+  .ongyeol-header-tagline {
+    max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis;
+    font-family: 'Noto Sans KR', serif; font-size: 10px; font-weight: 400;
+  }
 }

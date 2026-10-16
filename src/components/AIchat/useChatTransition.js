@@ -8,6 +8,7 @@ export default function useChatTransition(elementRef, transitionKey) {
     previousKey.current = transitionKey
     const panel = elementRef.current?.closest('.ongyeol-consultation')
     if (!panel || panel.getAttribute('aria-hidden') === 'true') return
+    if (window.matchMedia('(width < 520px)').matches) panel.scrollTop = 0
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (reducedMotion.matches) return
     const screen = [...panel.querySelectorAll('.ongyeol-inquiry')].find((node) => !node.closest('[hidden]'))

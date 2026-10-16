@@ -37,7 +37,7 @@
 .ongyeol-consultation button { border: 0; margin: 0; font-family: inherit; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0; cursor: pointer; color: black; }
 .ongyeol-consultation button:disabled { cursor: default; opacity: 1; }
 .ongyeol-consultation button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
-@media (max-width: 599px) {
+@media (width < 520px) {
   .ongyeol-consultation { right: calc((100% - 420px) / 2); }
   .ongyeol-ai-chat-button { right: max(16px, calc((100% - 420px) / 2), env(safe-area-inset-right, 0px)); }
 }

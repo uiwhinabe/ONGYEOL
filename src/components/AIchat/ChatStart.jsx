@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import back from '../../assets/images/chat/inquiry/back.svg'
 import send from '../../assets/images/chat/inquiry/send.svg'
+import mobileSend from '../../assets/images/chat/inquiry/mobile-send.svg'
 import attachment from '../../assets/images/chat/inquiry/attachment.svg'
 import emoji from '../../assets/images/chat/inquiry/emoji.svg'
 import avatarHeader from '../../assets/images/chat/inquiry/avatar-header.svg'
@@ -36,7 +37,7 @@ export function InquiryComposer() {
       <button type="button" disabled aria-label="파일 첨부" title="파일 첨부는 준비 중입니다"><img src={attachment} alt="" /></button>
       <button type="button" aria-label="웃는 이모지 입력" onClick={() => setQuestion((value) => value + '😊')}><img src={emoji} alt="" /></button>
     </div>
-    <button className="ongyeol-inquiry-send" type="button" disabled aria-label="질문 전송" title="질문 전송은 준비 중입니다"><img src={send} alt="" /></button>
+    <button className="ongyeol-inquiry-send" type="button" disabled aria-label="질문 전송" title="질문 전송은 준비 중입니다"><img src={send} alt="" /><img className="ongyeol-inquiry-mobile-send" src={mobileSend} alt="" /></button>
   </div>
 }
 

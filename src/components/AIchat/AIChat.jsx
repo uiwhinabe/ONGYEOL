@@ -10,6 +10,8 @@ import SK05Recommend from './SK05Recommend.jsx'
 import { skinGuideData } from './skinGuideData.js'
 import './AIChat.css'
 import useChatTransition from './useChatTransition.js'
+import useMobileChatLayout from './useMobileChatLayout.js'
+import './AIChatMobile.css'
 
 export default function AIChat({ open, onInquiry, onConversation, onSettings }) {
   const [screen, setScreen] = useState('home')
@@ -18,6 +20,7 @@ export default function AIChat({ open, onInquiry, onConversation, onSettings }) 
   const [present, setPresent] = useState(false)
   const [previousOpen, setPreviousOpen] = useState(open)
   const panelRef = useRef(null)
+  useMobileChatLayout(open, panelRef)
   // Adjust before committing the reopened panel; closing retains its content.
   if (previousOpen !== open) {
     setPreviousOpen(open)
