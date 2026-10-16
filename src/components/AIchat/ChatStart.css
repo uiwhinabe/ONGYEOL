@@ -13,6 +13,9 @@
 .ongyeol-inquiry-message { position: absolute; left: 40px; top: 157px; display: flex; align-items: flex-start; gap: 10px; width: 340px; }
 .ongyeol-inquiry-copy { display: flex; flex-direction: column; flex: none; gap: 18px; width: 300px; }
 .ongyeol-inquiry-account { position: absolute; left: 80px; top: 388px; display: flex; gap: 9px; width: 300px; }
+.ongyeol-chat-start { --ongyeol-start-account-right: 40px; }
+.ongyeol-chat-start > .ongyeol-inquiry-account { left: auto; right: var(--ongyeol-start-account-right); }
+.ongyeol-chat-start:not(.ongyeol-inquiry--authenticated) > .ongyeol-inquiry-topics { position: absolute; top: 0; right: var(--ongyeol-start-account-right); width: 408px; }
 .ongyeol-inquiry-account a { box-sizing: border-box; display: flex; flex: 1; align-items: center; justify-content: center; height: 42px; border: 1px solid #919191; border-radius: 20px; color: #000; text-decoration: none; }
 .ongyeol-inquiry .ongyeol-inquiry-topic { position: absolute; box-sizing: border-box; display: flex; flex: 0 0 115px; align-items: center; justify-content: center; width: 115px; height: 38px; padding: 0 20px; border: 1px solid #919191; border-radius: 20px; background: #fff; line-height: 20px; white-space: nowrap; }
 .ongyeol-inquiry-topic--skin { left: 293px; top: 536px; }
@@ -28,6 +31,11 @@
 .ongyeol-inquiry a:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
 .ongyeol-inquiry-composer textarea:focus { outline: none; }
 .ongyeol-inquiry-composer:has(textarea:focus-visible) { box-shadow: 0 0 0 2px rgba(164, 70, 70, 0.18); }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-message { top: 129px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-topics { position: absolute; left: 91px; top: 499px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 15px 9px; width: 300.5px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-topic { position: static; flex: 0 0 145.75px; width: 145.75px; height: 42px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-topic--skin { flex-basis: 145.5px; width: 145.5px; margin-left: 155px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-composer { left: 22px; top: 635px; }
 .ongyeol-inquiry-account a,
 .ongyeol-inquiry .ongyeol-inquiry-topic { animation: none; transform: translateY(0); transition: none; }
 .ongyeol-inquiry-account a:hover:not(:disabled):not([aria-disabled='true']),

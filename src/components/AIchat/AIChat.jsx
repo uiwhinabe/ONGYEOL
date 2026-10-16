@@ -9,13 +9,25 @@ import SK04TypeDetail from './SK04TypeDetail.jsx'
 import SK05Recommend from './SK05Recommend.jsx'
 import { skinGuideData } from './skinGuideData.js'
 import './AIChat.css'
+import useChatTransition from './useChatTransition.js'
 
 export default function AIChat({ open, onInquiry, onConversation, onSettings }) {
   const [screen, setScreen] = useState('home')
   const [selectedSkinType, setSelectedSkinType] = useState('')
   const [visible, setVisible] = useState(false)
   const [present, setPresent] = useState(false)
+  const [previousOpen, setPreviousOpen] = useState(open)
   const panelRef = useRef(null)
+  // Adjust before committing the reopened panel; closing retains its content.
+  if (previousOpen !== open) {
+    setPreviousOpen(open)
+    if (open) {
+      setScreen('home')
+      setSelectedSkinType('')
+      setVisible(false)
+    }
+  }
+  useChatTransition(panelRef, screen)
 
   useEffect(() => {
     let frame

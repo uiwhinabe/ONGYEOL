@@ -1,3 +1,15 @@
+import tremellaIngredient from '../../assets/images/chat/ingredients/tremella.png'
+import panthenolIngredient from '../../assets/images/chat/ingredients/panthenol.png'
+import mulberryIngredient from '../../assets/images/chat/ingredients/mulberry.png'
+import hyaluronicIngredient from '../../assets/images/chat/ingredients/hyaluronic-acid.png'
+import ceramideIngredient from '../../assets/images/chat/ingredients/ceramide.png'
+import paperMulberryIngredient from '../../assets/images/chat/ingredients/paper-mulberry.png'
+import niacinamideIngredient from '../../assets/images/chat/ingredients/niacinamide.png'
+import vitaminCIngredient from '../../assets/images/chat/ingredients/vitamin-c.png'
+import pdrnIngredient from '../../assets/images/chat/ingredients/pdrn.png'
+import roseIngredient from '../../assets/images/chat/ingredients/rose.png'
+import adenosineIngredient from '../../assets/images/chat/ingredients/adenosine.png'
+
 import ampouleTexture from '../../assets/images/chat/products/ampoule-texture.png'
 import ampoule from '../../assets/images/chat/products/ampoule.png'
 import creamTexture from '../../assets/images/chat/products/cream-texture.png'
@@ -101,9 +113,9 @@ export const skinGuideData = {
       title: '수분이 부족한 피부에는 수분을 채우고 피부 장벽을 보호해 주는 성분이 필요해요.',
       description: '추천 성분은 다음과 같아요.',
       ingredients: [
-        '히알루론산 — 피부에 수분을 공급해요',
-        '판테놀 — 피부 장벽을 편안하게 보호해요',
-        '세라마이드 — 수분이 빠져나가지 않도록 도와줘요',
+        { name: '백목이', description: '수분 유지', image: tremellaIngredient },
+        { name: '히알루론산', description: '수분 공급', image: hyaluronicIngredient },
+        { name: '세라마이드', description: '장벽 강화', image: ceramideIngredient },
       ],
       actionLabel: '온결 추천 제품 확인하기',
     },
@@ -168,9 +180,9 @@ export const skinGuideData = {
       title: '예민해진 피부에는 진정과 피부 장벽 보호를 도와주는 성분이 필요해요.',
       description: '추천 성분은 다음과 같아요.',
       ingredients: [
-        '판테놀 — 피부 보습과 장벽 관리에 도움을 줘요',
-        '알란토인 — 피부를 편안하게 진정시키는 데 도움을 줘요',
-        '세라마이드 — 수분이 빠져나가지 않도록 도와줘요',
+        { name: '백목이', description: '보습 유지', image: tremellaIngredient },
+        { name: '판테놀', description: '진정/장벽', image: panthenolIngredient },
+        { name: '오디', description: '항산화', image: mulberryIngredient },
       ],
       actionLabel: '온결 추천 제품 확인하기',
     },
@@ -219,9 +231,9 @@ export const skinGuideData = {
       title: '주름과 탄력이 고민인 피부에는 보습과 탄력 관리를 도와주는 성분이 필요해요.',
       description: '추천 성분은 다음과 같아요.',
       ingredients: [
-        '아데노신 — 주름 개선에 도움을 줘요',
-        '펩타이드 — 피부 탄력 관리에 도움을 줘요',
-        '히알루론산 — 피부에 수분을 공급해 촉촉하게 유지해 줘요',
+        { name: 'PDRN', description: '탄력 케어', image: pdrnIngredient },
+        { name: '장미', description: '생기·보습', image: roseIngredient },
+        { name: '아데노신', description: '주름 개선', image: adenosineIngredient },
       ],
       actionLabel: '온결 추천 제품 확인하기',
     },
@@ -286,9 +298,9 @@ export const skinGuideData = {
       title: '모공과 피지가 고민인 피부에는 유분과 각질 관리를 도와주는 성분이 필요해요.',
       description: '추천 성분은 다음과 같아요.',
       ingredients: [
-        '나이아신아마이드 — 피부 유분 관리에 도움을 줘요',
-        'PHA — 피부 표면의 각질을 부드럽게 정돈하는 데 도움을 줘요',
-        '히알루론산 — 피부에 수분을 공급해요',
+        { name: '닥나무', description: '피지·모공 케어', image: paperMulberryIngredient },
+        { name: '나이아신아마이드', description: '유분 균형', image: niacinamideIngredient },
+        { name: '비타민 C', description: '항산화', image: vitaminCIngredient },
       ],
       actionLabel: '온결 추천 제품 확인하기',
     },
@@ -350,9 +362,9 @@ export const skinGuideData = {
       title: '피부톤과 잡티가 고민인 피부에는 밝고 균일한 피부톤 관리를 도와주는 성분이 필요해요.',
       description: '추천 성분은 다음과 같아요.',
       ingredients: [
-        '나이아신아마이드 — 피부 미백에 도움을 줘요',
-        '비타민 C 유도체 — 밝고 균일한 피부톤 관리에 도움을 줘요',
-        '히알루론산 — 피부에 수분을 공급해 촉촉하게 유지해 줘요',
+        { name: '비타민 C', description: '브라이트닝', image: vitaminCIngredient },
+        { name: '오디', description: '톤 정돈', image: mulberryIngredient },
+        { name: '나이아신아마이드', description: '잡티 케어', image: niacinamideIngredient },
       ],
       actionLabel: '온결 추천 제품 확인하기',
     },
