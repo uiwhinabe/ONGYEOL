@@ -44,6 +44,11 @@
   margin: 0;
   font: 500 25px/30px 'Ongyeol Noto Sans', sans-serif;
 }
+.ongyeol-hd-heading,
+.ongyeol-hd-heading .ongyeol-hd-shop {
+  color: #000;
+  -webkit-text-fill-color: currentColor;
+}
 .ongyeol-hd-categories { display: flex; flex-direction: column; gap: 40px; }
 .ongyeol-hd-category, .ongyeol-hd-link, .ongyeol-hd-item {
   width: 100%;

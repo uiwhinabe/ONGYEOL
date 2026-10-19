@@ -160,6 +160,7 @@
   position: relative;
   width: 100%;
   min-width: 0;
+  touch-action: pan-y pinch-zoom;
 }
 .ongyeol-detail--mobile .ongyeol-detail__thumbnails { display: none; }
 .ongyeol-detail--mobile .ongyeol-detail__mobile-pager {

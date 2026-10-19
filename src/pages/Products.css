@@ -83,6 +83,16 @@
   }
   .ongyeol-products__category { flex: none; }
   .ongyeol-products button.ongyeol-products__category { padding-inline: 4px; font-size: 14px; }
+  .ongyeol-products[data-classification='line'] .ongyeol-products__categories {
+    display: block;
+  }
+  .ongyeol-products[data-classification='line'] .ongyeol-products__category-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: max-content;
+    min-width: 100%;
+  }
   .ongyeol-products__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 16px; }
   .ongyeol-products__pagination { flex-wrap: wrap; gap: 4px; margin-top: 60px; }
   .ongyeol-products__pagination button { width: 36px; height: 40px; }

@@ -10,7 +10,7 @@
   text-align: left;
 }
 .ongyeol-product-card * { box-sizing: border-box; }
-.ongyeol-product-card__wish { font: inherit; cursor: pointer; }
+.ongyeol-product-card__wish { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .ongyeol-product-card__wish:focus-visible { outline: 2px solid #111; outline-offset: 4px; }
 .ongyeol-product-card__image {
   display: block;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { products } from '../data/products.js'
 import { navigateToProducts } from '../utils/productNavigation.js'
 import './ProductDetail.css'
@@ -457,22 +457,75 @@ export default function ProductDetail({ productId }) {
   const [imageIndex, setImageIndex] = useState(0)
   const [thumbnailStart, setThumbnailStart] = useState(1)
   const [quantity, setQuantity] = useState(1)
+  const galleryTouch = useRef(null)
+  const galleryImage = useRef(null)
+  const galleryDirection = useRef(1)
+  const previousGalleryIndex = useRef(imageIndex)
+  useEffect(() => {
+    const changed = previousGalleryIndex.current !== imageIndex
+    previousGalleryIndex.current = imageIndex
+    if (!mobileLayout || !changed || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const image = galleryImage.current
+    if (!image) return
+    let active = true
+    let animation
+    const play = () => {
+      if (!active) return
+      animation = image.animate([
+        { translate: `${galleryDirection.current * 8}% 0`, opacity: 0.55 },
+        { translate: '0 0', opacity: 1 },
+      ], { duration: 420, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })
+    }
+    image.decode().then(play, play)
+    return () => { active = false; animation?.cancel() }
+  }, [imageIndex, mobileLayout])
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [productId])
   if (!product) return <main className="ongyeol-detail"><h1>상품을 찾을 수 없습니다.</h1><button type="button" onClick={() => navigateToProducts('type', '전체')}>상품 목록으로 돌아가기</button></main>
   const isScrub = product.id === 'dakyeolmae-body-scrub'
   const images = isScrub ? [scrubMain, product.textureImage, scrubSecondary, scrubSecondary2].filter(Boolean) : isPad ? [padMain, padSecondary1, padSecondary2, padSecondary3] : isCream ? [creamMain, creamSecondary1, creamSecondary2, creamSecondary3] : isAmpoule ? [ampouleMain, ampouleSecondary1, ampouleSecondary2, ampouleSecondary3] : isMist ? [mistMain, mistSecondary1, mistSecondary2, mistSecondary3] : isToner ? [tonerMain, tonerSecondary2, tonerSecondary1, tonerSecondary3] : isMask ? [maskMain, maskSecondary3, maskSecondary2, maskSecondary1] : isOdiToner ? [odiTonerMain, odiTonerSecondary1, odiTonerSecondary2, odiTonerSecondary3] : isOdiAmpoule ? [odiAmpouleMain, odiAmpouleSecondary1, odiAmpouleSecondary2, odiAmpouleSecondary3] : isOdiCream ? [odiCreamMain, odiCreamSecondary1, odiCreamSecondary2, odiCreamSecondary3] : isOdiBalm ? [odiBalmMain, odiBalmSecondary1, odiBalmSecondary2, odiBalmSecondary3] : isOdiMask ? [odiMaskMain, odiMaskSecondary1, odiMaskSecondary2, odiMaskSecondary3] : isVitaminToner ? [vitaminTonerMain, vitaminTonerSecondary1, vitaminTonerSecondary2, vitaminTonerSecondary3] : isVitaminCleanser ? [vitaminCleanserMain, vitaminCleanserSecondary1, vitaminCleanserSecondary2, vitaminCleanserSecondary3] : isVitaminLotion ? [vitaminLotionMain, vitaminLotionSecondary1, vitaminLotionSecondary2, vitaminCleanserSecondary3] : isVitaminAmpoule ? [vitaminAmpouleMain, vitaminAmpouleSecondary1, vitaminAmpouleSecondary2, vitaminCleanserSecondary3] : isVitaminEssence ? [vitaminEssenceMain, vitaminEssenceSecondary1, vitaminEssenceSecondary2, vitaminCleanserSecondary3] : isVitaminCream ? [vitaminCreamMain, vitaminCreamSecondary1, vitaminCreamSecondary2, vitaminCleanserSecondary3] : isVitaminPad ? [vitaminPadMain, vitaminPadSecondary1, vitaminPadSecondary2, vitaminCleanserSecondary3] : isVitaminMask ? [vitaminMaskMain, vitaminMaskSecondary1, vitaminMaskSecondary2, vitaminCleanserSecondary3] : isRoseCream ? [roseCreamMain, roseCreamSecondary1, roseCreamDetail2, roseCreamSecondary3] : isRoseEyecream ? [roseEyecreamMain, roseEyecreamSecondary1, roseEyecreamSecondary2, roseEyecreamSecondary3] : isBaekmogiAmpoule ? [baekmogiAmpouleMain, baekmogiAmpouleSecondary1, baekmogiAmpouleSecondary2, baekmogiAmpouleSecondary3] : isBaekmogiPad ? [baekmogiPadMain, baekmogiPadSecondary1, baekmogiPadSecondary2, baekmogiPadSecondary3] : isBaekmogiCream ? [baekmogiCreamMain, baekmogiCreamSecondary1, baekmogiCreamSecondary2, baekmogiCreamSecondary3] : isBaekmogiToner ? [baekmogiTonerMain, baekmogiTonerSecondary1, baekmogiTonerSecondary2, baekmogiTonerSecondary3] : isBaekmogiLotion ? [baekmogiLotionMain, baekmogiLotionSecondary1, baekmogiLotionSecondary2, baekmogiTonerSecondary3] : isBaekmogiMask ? [baekmogiMaskMain, baekmogiMaskSecondary1, baekmogiMaskSecondary2, baekmogiMaskSecondary3] : [product.image, product.textureImage].filter(Boolean)
   const thumbnailIndexes = Array.from({ length: Math.min(3, images.length) }, (_, offset) => thumbnailStart + offset)
   const slideGallery = (direction) => {
+    galleryDirection.current = direction
     const nextIndex = (imageIndex + direction + images.length) % images.length
     setImageIndex(nextIndex)
     setThumbnailStart((start) => Math.max(0, Math.min(Math.max(0, images.length - 3), nextIndex < start ? nextIndex : nextIndex >= start + 3 ? nextIndex - 2 : start)))
   }
+  const startGallerySwipe = (event) => {
+    galleryTouch.current = null
+    if (!mobileLayout || event.touches.length !== 1 || event.target.closest('button')) return
+    const touch = event.touches[0]
+    galleryTouch.current = { id: touch.identifier, x: touch.clientX, y: touch.clientY }
+  }
+  const moveGallerySwipe = (event) => {
+    const start = galleryTouch.current
+    if (!start) return
+    const touch = Array.from(event.touches).find((item) => item.identifier === start.id)
+    if (event.touches.length !== 1 || !touch ||
+      (Math.abs(touch.clientY - start.y) > 12 && Math.abs(touch.clientY - start.y) > Math.abs(touch.clientX - start.x))) {
+      galleryTouch.current = null
+    }
+  }
+  const endGallerySwipe = (event) => {
+    const start = galleryTouch.current
+    galleryTouch.current = null
+    if (!mobileLayout || !start) return
+    const touch = Array.from(event.changedTouches).find((item) => item.identifier === start.id)
+    if (!touch) return
+    const dx = touch.clientX - start.x
+    const dy = touch.clientY - start.y
+    const threshold = Math.max(40, event.currentTarget.clientWidth * 0.1)
+    if (Math.abs(dx) >= threshold && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      slideGallery(dx < 0 ? 1 : -1)
+    }
+  }
   const detailImages = isScrub ? [scrubDetail1, scrubDetail2, scrubDetail3, scrubDetail4, scrubDetail5, scrubDetail6, scrubDetail7, scrubDetail8] : isPad ? [padDetail1, padDetail2, padDetail3, padDetail4, padDetail5, padDetail6, padDetail7, padDetail8] : isCream ? [creamDetail1, creamDetail2, creamDetail3, creamDetail4, creamDetail5, creamDetail6, creamDetail7] : isAmpoule ? [ampouleDetail1, ampouleDetail2, ampouleDetail3, ampouleDetail4, ampouleDetail5, ampouleDetail6, ampouleDetail7] : isMist ? [mistDetail1, mistDetail2, mistDetail3, mistDetail4, mistDetail5, mistDetail6, mistDetail7] : isToner ? [tonerDetail1, tonerDetail2, tonerDetail3, tonerDetail4, tonerDetail5, tonerDetail6, tonerDetail7, tonerDetail8] : isMask ? [maskDetail1, maskDetail2, maskDetail3, maskDetail4, maskDetail5, maskDetail6, maskDetail7, maskDetail8, maskDetail9] : isOdiToner ? [odiTonerDetail1, odiTonerDetail2, odiTonerDetail3, odiTonerDetail4, odiTonerDetail5, odiTonerDetail6, odiTonerDetail7, odiTonerDetail8] : isOdiAmpoule ? [odiAmpouleDetail1, odiAmpouleDetail2, odiAmpouleDetail3, odiAmpouleDetail4, odiAmpouleDetail5, odiAmpouleDetail6, odiAmpouleDetail7, odiAmpouleDetail8] : isOdiCream ? [odiCreamDetail1, odiCreamDetail2, odiCreamDetail3, odiCreamDetail4, odiCreamDetail5, odiCreamDetail6, odiCreamDetail7, odiCreamDetail8] : isOdiBalm ? [odiBalmDetail1, odiBalmDetail2, odiBalmDetail3, odiBalmDetail4, odiBalmDetail5, odiBalmDetail6, odiBalmDetail7] : isOdiMask ? [odiMaskDetail1, odiMaskDetail2, odiMaskDetail3, odiMaskDetail4, odiMaskDetail5, odiMaskDetail6, odiMaskDetail7] : isVitaminToner ? [vitaminTonerDetail1, vitaminTonerDetail2, vitaminTonerIngredients, vitaminTonerHowToUse, vitaminTonerDetail4, vitaminTonerDetail5] : isVitaminCleanser ? [vitaminCleanserDetail1, vitaminCleanserDetail2, vitaminTonerIngredients, vitaminCleanserUsage, vitaminCleanserHowToUse, vitaminCleanserBeforeAfter] : isVitaminLotion ? [vitaminLotionDetail1, vitaminLotionDetail2, vitaminTonerIngredients, vitaminLotionUsage, vitaminLotionHowToUse, vitaminLotionBeforeAfter] : isVitaminAmpoule ? [vitaminAmpouleDetail1, vitaminAmpouleDetail2, vitaminTonerIngredients, vitaminAmpouleUsage, vitaminAmpouleHowToUse, vitaminAmpouleBeforeAfter] : isVitaminEssence ? [vitaminEssenceDetail1, vitaminEssenceDetail2, vitaminTonerIngredients, vitaminEssenceUsage, vitaminEssenceHowToUse, vitaminEssenceBeforeAfter] : isVitaminCream ? [vitaminCreamDetail1, vitaminCreamDetail2, vitaminTonerIngredients, vitaminCreamUsage, vitaminCreamHowToUse, vitaminCreamBeforeAfter] : isVitaminPad ? [vitaminPadDetail1, vitaminPadDetail2, vitaminTonerIngredients, vitaminPadUsage, vitaminPadHowToUse, vitaminPadBeforeAfter] : isVitaminMask ? [vitaminMaskDetail1, vitaminMaskDetail2, vitaminTonerIngredients, vitaminMaskUsage, vitaminMaskHowToUse, vitaminMaskBeforeAfter] : isRoseCream ? [roseCreamDetail1, roseCreamDetail2, roseCreamDetail3, roseCreamDetail4, roseCreamDetail5, roseCreamDetail6, roseCreamDetail7] : isRoseEyecream ? [roseEyecreamDetail1, roseEyecreamDetail2, roseEyecreamDetail3, roseEyecreamDetail4, roseEyecreamDetail5, roseEyecreamDetail6, roseEyecreamDetail7] : isBaekmogiAmpoule ? [baekmogiAmpouleDetail1, baekmogiAmpouleDetail2, baekmogiAmpouleDetail3, baekmogiAmpouleDetail4, baekmogiAmpouleDetail5, baekmogiAmpouleDetail6, baekmogiAmpouleDetail7, baekmogiAmpouleDetail8, baekmogiAmpouleDetail9, baekmogiAmpouleDetail10, baekmogiAmpouleDetail11, baekmogiAmpouleDetail12, baekmogiAmpouleDetail13] : isBaekmogiPad ? [baekmogiPadDetail1, baekmogiPadDetail2, baekmogiPadDetail3, baekmogiPadDetail4, baekmogiPadDetail5, baekmogiPadDetail6] : isBaekmogiCream ? [baekmogiCreamDetail1, baekmogiCreamDetail2, baekmogiCreamDetail3, baekmogiCreamDetail4, baekmogiCreamDetail5, baekmogiCreamDetail6, baekmogiCreamDetail7, baekmogiCreamDetail8] : isBaekmogiToner ? [baekmogiTonerDetail1, baekmogiTonerDetail2, baekmogiTonerDetail3, baekmogiTonerDetail4, baekmogiTonerDetail5, baekmogiTonerDetail6, baekmogiTonerDetail7, baekmogiTonerDetail8] : isBaekmogiLotion ? [baekmogiTonerDetail1, baekmogiTonerDetail2, baekmogiTonerDetail3, baekmogiLotionDetail1, baekmogiLotionDetail2, baekmogiLotionDetail3, baekmogiTonerDetail7, baekmogiLotionDetail4] : isBaekmogiMask ? [baekmogiMaskDetail1, baekmogiMaskDetail2, baekmogiMaskDetail3, baekmogiMaskDetail4, baekmogiMaskDetail5, baekmogiMaskDetail6] : product.detailImages
   return <main className={`ongyeol-detail${tabletLayout ? ' ongyeol-detail--tablet' : ''}${mobileLayout ? ' ongyeol-detail--mobile' : ''}${isOdiToner ? ' ongyeol-detail--odi-toner' : isOdiAmpoule ? ' ongyeol-detail--odi-ampoule' : isOdiCream ? ' ongyeol-detail--odi-cream' : isOdiBalm ? ' ongyeol-detail--odi-balm' : isOdiMask ? ' ongyeol-detail--odi-mask' : (isVitaminToner || isVitaminCleanser || isVitaminLotion || isVitaminAmpoule || isVitaminEssence || isVitaminCream || isVitaminPad || isVitaminMask) ? ' ongyeol-detail--vitamin-toner' : ''}`} aria-labelledby="product-detail-title">
     <section className="ongyeol-detail__top">
-      <div className="ongyeol-detail__gallery">
-        <div style={(isBaekmogiToner || isBaekmogiLotion || isBaekmogiMask) ? { width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' } : { display: 'contents' }}>
-        <img className="ongyeol-detail__hero" src={images[imageIndex]} alt={`${product.name} 이미지 ${imageIndex + 1}`} style={(isBaekmogiToner || isBaekmogiLotion || isBaekmogiMask) ? { width: '100%', height: '100%', objectFit: imageIndex === 0 ? 'contain' : 'cover', background: '#fff' } : isBaekmogiAmpoule && imageIndex === 0 ? { objectFit: 'contain', background: '#fff' } : isRoseEyecream && (imageIndex === 0 || imageIndex === 3) ? { objectFit: 'contain', transform: 'scale(1.08)', clipPath: 'inset(3.703704%)' } : isRoseCream && (imageIndex === 2 || imageIndex === 3) ? { objectFit: 'cover', objectPosition: 'center top' } : (isVitaminLotion || isVitaminAmpoule || isVitaminEssence || isVitaminCream || isVitaminPad || isVitaminMask) && imageIndex === 2 ? { objectFit: 'cover', objectPosition: 'center top' } : (isOdiAmpoule || isVitaminToner || isVitaminCleanser || isVitaminLotion || isVitaminAmpoule || isVitaminEssence || isVitaminCream || isVitaminPad || isVitaminMask) && imageIndex === 0 ? { objectFit: 'contain' } : isOdiMask && (imageIndex === 1 || imageIndex === 3) ? { objectFit: 'cover' } : undefined} />
+      <div className="ongyeol-detail__gallery"
+        onTouchStart={startGallerySwipe} onTouchMove={moveGallerySwipe} onTouchEnd={endGallerySwipe}
+        onTouchCancel={() => { galleryTouch.current = null }}>
+        <div style={(mobileLayout || isBaekmogiToner || isBaekmogiLotion || isBaekmogiMask) ? { width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' } : { display: 'contents' }}>
+        <img ref={galleryImage} className="ongyeol-detail__hero" src={images[imageIndex]} alt={`${product.name} 이미지 ${imageIndex + 1}`} style={(isBaekmogiToner || isBaekmogiLotion || isBaekmogiMask) ? { width: '100%', height: '100%', objectFit: imageIndex === 0 ? 'contain' : 'cover', background: '#fff' } : isBaekmogiAmpoule && imageIndex === 0 ? { objectFit: 'contain', background: '#fff' } : isRoseEyecream && (imageIndex === 0 || imageIndex === 3) ? { objectFit: 'contain', transform: 'scale(1.08)', clipPath: 'inset(3.703704%)' } : isRoseCream && (imageIndex === 2 || imageIndex === 3) ? { objectFit: 'cover', objectPosition: 'center top' } : (isVitaminLotion || isVitaminAmpoule || isVitaminEssence || isVitaminCream || isVitaminPad || isVitaminMask) && imageIndex === 2 ? { objectFit: 'cover', objectPosition: 'center top' } : (isOdiAmpoule || isVitaminToner || isVitaminCleanser || isVitaminLotion || isVitaminAmpoule || isVitaminEssence || isVitaminCream || isVitaminPad || isVitaminMask) && imageIndex === 0 ? { objectFit: 'contain' } : isOdiMask && (imageIndex === 1 || imageIndex === 3) ? { objectFit: 'cover' } : undefined} />
         </div>
         <div className="ongyeol-detail__mobile-pager" role="group" aria-label="상품 이미지 이동">
           <button type="button" aria-label="이전 상품 이미지" onClick={() => slideGallery(-1)}>‹</button>
