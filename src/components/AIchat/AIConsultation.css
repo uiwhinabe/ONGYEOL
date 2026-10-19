@@ -51,7 +51,7 @@
 .ongyeol-consultation-lines { display: flex; flex-direction: column; gap: 2px; }
 .ongyeol-consultation-hours { width: 178px; font-size: 15px; font-weight: 500; line-height: 20px; font-variation-settings: 'CTGR' 0, 'wdth' 100; }
 .ongyeol-consultation-ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ongyeol-consultation-inquiry { margin-top: 66px !important; padding: 10px; width: 292px; height: 44px; display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(to right, #ffe9e0, #efdbd3); color: #000c !important; }
+.ongyeol-consultation-inquiry { margin-top: 66px !important; padding: 10px; width: 292px; height: 44px; display: flex; align-items: center; border-radius: 15px; justify-content: center; gap: 10px; background: linear-gradient(to right, #ffe9e0, #efdbd3); color: #000c !important; }
 .ongyeol-consultation-inquiry { animation: none; transform: translateY(0); transition: none; }
 .ongyeol-consultation-inquiry:hover:not(:disabled) { animation: ongyeol-consultation-inquiry-bounce 0.4s ease-in-out 1; }
 @keyframes ongyeol-consultation-inquiry-bounce {
