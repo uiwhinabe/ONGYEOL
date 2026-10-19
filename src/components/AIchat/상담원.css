@@ -1,0 +1,16 @@
+.ongyeol-counselor-content { position: absolute; left: calc(50% + 0.2px); top: 144px; display: flex; flex-direction: column; align-items: flex-end; gap: 39px; width: 342.4px; transform: translateX(-50%); }
+.ongyeol-counselor-request { padding: 8px 10px; border-radius: 15px; background: rgba(155, 155, 155, 0.2); }
+.ongyeol-counselor-message { display: flex; align-items: flex-start; gap: 10px; width: 100%; }
+.ongyeol-counselor-copy { display: flex; flex: none; flex-direction: column; align-items: flex-start; gap: 23px; width: 300px; }
+.ongyeol-counselor-hours { display: flex; flex-direction: column; gap: 6px; padding: 10px 20px; border-radius: 5px; background: rgba(155, 155, 155, 0.2); font-size: 12px; line-height: 16px; }
+.ongyeol-counselor .ongyeol-counselor-return { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 145.5px; height: 42px; padding: 0 20px; border: 1px solid #919191; border-radius: 20px; background: #fff; color: #515151; line-height: 20px; transform: translateY(0); transition: none; }
+.ongyeol-counselor .ongyeol-counselor-return:hover { background: #f0f0f0; box-shadow: -2px -2px 7.5px rgba(196, 196, 196, 0.25), 2px 2px 7.5px rgba(196, 196, 196, 0.25); animation: ongyeol-counselor-button-pop 0.4s ease-in-out 1; }
+.ongyeol-counselor .ongyeol-counselor-return:active { background: #dadada; color: #383838; }
+.ongyeol-counselor .ongyeol-inquiry-composer { left: calc(50% + 0.5px); top: 635px; transform: translateX(-50%); }
+@keyframes ongyeol-counselor-button-pop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-counselor .ongyeol-counselor-return:hover { animation: none; transform: translateY(0); }
+}
