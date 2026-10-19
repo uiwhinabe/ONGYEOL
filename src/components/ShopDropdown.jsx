@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { navigateToProducts } from '../utils/productNavigation.js'
 import './ShopDropdown.css'
 import welcomeBenefit from '../assets/images/events/welcome-benefit.png'
 
@@ -9,6 +10,7 @@ const categories = [
 ]
 
 export default function ShopDropdown({ ref, open, onMouseEnter, onMouseLeave, onBlur, onClose }) {
+  const navigate = useNavigate()
   return (
     <div className={`shop-dropdown-layer${open ? ' is-open' : ''}`} inert={!open} aria-hidden={!open}>
       <div className="shop-dropdown-overlay" aria-hidden="true" onClick={onClose} onMouseEnter={onMouseLeave} />
@@ -21,8 +23,10 @@ export default function ShopDropdown({ ref, open, onMouseEnter, onMouseLeave, on
                 <ul className="shop-dropdown-list">
                   {items.map((label) => (
                     <li key={label}>
-                      {/* No category routes exist yet. Keep items focusable without inventing URLs. */}
-                      <button type="button" className="shop-dropdown-item" aria-disabled="true">{label}</button>
+                      <button type="button" className="shop-dropdown-item" onClick={() => {
+                        onClose()
+                        navigateToProducts(['type', 'line', 'concern'][index], label, navigate)
+                      }}>{label}</button>
                     </li>
                   ))}
                 </ul>

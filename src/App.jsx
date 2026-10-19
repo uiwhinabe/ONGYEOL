@@ -12,6 +12,9 @@ import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 
 import Home from './pages/Home.jsx'
+import Products from './pages/Products.jsx'
+import ProductDetail from './pages/ProductDetail.jsx'
+import { readProductRoute, navigateToProducts } from './utils/productNavigation.js'
 import Brand from './pages/Brand.jsx'
 import SkinGuide from './pages/Skinguide.jsx'
 import Login from './pages/Login.jsx'
@@ -33,8 +36,17 @@ import AuthProvider from './components/AuthProvider.jsx'
 import { useAuth } from './components/authContext.js'
 import './pages/paymentControls.css'
 
+function ProductPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const route = readProductRoute(location)
+  if (route.productId) return <ProductDetail key={route.productId} productId={route.productId} />
+  return <Products classification={route.classification} initialCategory={route.category}
+    onCategoryChange={(classification, category) => navigateToProducts(classification, category, navigate)} />
+}
+
 function Layout() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   const navigate = useNavigate()
 
   const [chatOpen, setChatOpen] = useState(false)
@@ -42,6 +54,13 @@ function Layout() {
   const { isAuthenticated, enterLogin, logout } = useAuth()
 
   const isLogin = pathname === '/login' || pathname === '/login/'
+
+  // Keep existing product bookmarks working with the shared BrowserRouter.
+  useLayoutEffect(() => {
+    if (hash.split('?')[0] === '#/products') {
+      navigate(`/products${hash.includes('?') ? `?${hash.split('?')[1]}` : ''}`, { replace: true })
+    }
+  }, [hash, navigate])
 
   useLayoutEffect(() => {
     window.scrollTo({
@@ -71,6 +90,7 @@ function Layout() {
       <Routes>
         {/* HOME */}
         <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductPage />} />
         <Route path="/skin-guide" element={<SkinGuide />} />
         <Route path="/brand" element={<Brand />} />
 

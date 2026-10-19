@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { navigateToProducts } from '../utils/productNavigation.js'
 import './HamburgerDropdown.css'
 
 const categories = [
@@ -9,6 +10,7 @@ const categories = [
 ]
 
 export default function HamburgerDropdown({ ref, open: panelOpen, controller }) {
+  const navigate = useNavigate()
   const [expanded, setExpanded] = useState([])
   return (
     <div className={`ongyeol-hd-layer${panelOpen ? ' is-open' : ''}`} inert={!panelOpen} aria-hidden={!panelOpen}
@@ -29,7 +31,10 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
                   <span>{title}</span><span className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} aria-hidden="true" />
                 </button>
                 <ul className="ongyeol-hd-items" id={`hd-items-${index}`} hidden={!open}>
-                  {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" aria-disabled="true">{label}</button></li>)}
+                  {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" onClick={() => {
+                    controller.close()
+                    navigateToProducts(['type', 'line', 'concern'][index], label, navigate)
+                  }}>{label}</button></li>)}
                 </ul>
               </div>
             )
