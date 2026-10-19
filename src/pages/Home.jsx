@@ -83,6 +83,43 @@ export default function Home() {
   const isAutoScrolling = useRef(false)
 
   useLayoutEffect(() => {
+    const section = skinGuideRef.current
+    const desktop = window.matchMedia('(min-width: 1025px)')
+    let revealed = false
+    let completed = false
+    const observer = new IntersectionObserver(entries => {
+      if (!desktop.matches || revealed || !entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .3)) return
+      revealed = true
+      section.dataset.guideReveal = 'visible'
+      observer.disconnect()
+    }, { threshold: .3 })
+    const finish = event => {
+      if (event.animationName !== 'home-guide-fade-up' || event.target !== section.querySelector('.home-concerns li:last-child')) return
+      completed = true
+      section.dataset.guideReveal = 'complete'
+    }
+    const update = () => {
+      observer.disconnect()
+      if (!desktop.matches) {
+        if (revealed) completed = true
+        section.removeAttribute('data-guide-reveal')
+        return
+      }
+      section.dataset.guideReveal = completed ? 'complete' : revealed ? 'visible' : 'pending'
+      if (!revealed) observer.observe(section)
+    }
+    update()
+    section.addEventListener('animationend', finish)
+    desktop.addEventListener('change', update)
+    return () => {
+      observer.disconnect()
+      section.removeEventListener('animationend', finish)
+      desktop.removeEventListener('change', update)
+      section.removeAttribute('data-guide-reveal')
+    }
+  }, [])
+
+  useLayoutEffect(() => {
     const desktop = window.matchMedia('(min-width: 1025px)')
     const header = document.querySelector('.ongyeol-header')
     const guide = skinGuideRef.current

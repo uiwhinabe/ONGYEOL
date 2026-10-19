@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
+import { HEADER_SCROLL_TOP_EVENT } from '../headerNavigation.js'
 import './Brand.css'
 import brandFilm from '../assets/videos/brand/ongyeol-brand-film.mp4'
 import landscapeImage from '../assets/images/brand/landscape.png'
@@ -70,7 +71,10 @@ export default function Brand() {
       const startedAt = performance.now()
       const finish = () => {
         wheelScrolling.current = false
-        if (section === heroRef.current) transitionRef.current.classList.remove('is-active')
+        if (section === heroRef.current) {
+          transitionRef.current.classList.remove('is-active')
+          ingredientsRef.current.classList.remove('is-active', 'is-complete')
+        }
         if (section === pureRef.current) ingredientsRef.current.classList.remove('is-active')
         sections.slice(2, 5).forEach(ref => {
           if (ref.current !== section) ref.current.querySelector('.brand-story-copy').classList.remove('is-visible')
@@ -145,10 +149,21 @@ export default function Brand() {
       if (event.cancelable) event.preventDefault()
       moveTo(next === sections.length ? last.bottom - offset : positions[next].top - offset, sections[next]?.current)
     }
+    const handleHeaderScrollTop = event => {
+      if (!desktop.matches || event.detail?.pathname !== '/brand') return
+      event.preventDefault()
+      stop()
+      lastWheelAt = -Infinity
+      transitionUnlockAt.current = 0
+      ingredientUnlockAt.current = 0
+      moveTo(0, heroRef.current)
+    }
+    window.addEventListener(HEADER_SCROLL_TOP_EVENT, handleHeaderScrollTop)
     window.addEventListener('wheel', handleWheel, { passive: false })
     window.addEventListener('resize', stop)
     desktop.addEventListener('change', stop)
     return () => {
+      window.removeEventListener(HEADER_SCROLL_TOP_EVENT, handleHeaderScrollTop)
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('resize', stop)
       desktop.removeEventListener('change', stop)

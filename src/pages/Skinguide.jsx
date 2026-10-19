@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
+import { HEADER_SCROLL_TOP_EVENT } from '../headerNavigation.js'
 import heroImage from '../assets/images/skin-guide/hero.png'
 import howType from '../assets/images/skin-guide/how-type.png'
 import howConcern from '../assets/images/skin-guide/how-concern.png'
@@ -25,9 +26,9 @@ function GuideText({ children }) {
   return String(children).split('\n').map((line, index) => <span key={index}>{index > 0 && <br />}{line}</span>)
 }
 
-function GuideSteps({ activeStep, hidden = false }) {
+function GuideSteps({ activeStep, hidden = false, isStep2Unlocked = false, isStep3Unlocked = false }) {
   return <ol className="skin-guide-steps" aria-label="스킨 가이드 진행 단계" hidden={hidden}>
-    {['피부 고민', '고민 원인', '맞춤 솔루션'].map((label, index) => <li key={label} aria-current={activeStep === index + 1 ? 'step' : undefined}>
+    {['피부 타입', '피부 고민', '맞춤 솔루션'].map((label, index) => <li key={label} aria-disabled={(index === 1 && !isStep2Unlocked) || (index === 2 && !isStep3Unlocked) || undefined} aria-current={activeStep === index + 1 ? 'step' : undefined}>
       <span><span className="skin-guide-step-number" data-mobile-number={index + 1}>{String(index + 1).padStart(2, '0')}</span>{' '}<span className="skin-guide-step-label">{label}</span></span>
     </li>)}
   </ol>
@@ -80,6 +81,38 @@ export default function SkinGuide() {
   const routineRef = useRef(null)
   const isAutoScrolling = useRef(false)
   const requestSectionScroll = useRef(null)
+  const step2EndRef = useRef(null)
+  const [isStep2Unlocked, setIsStep2Unlocked] = useState(false)
+  const [isStep3Unlocked, setIsStep3Unlocked] = useState(false)
+  const [solutionRequest, setSolutionRequest] = useState(0)
+
+  useLayoutEffect(() => {
+    const section = concernSelectionRef.current
+    const desktop = window.matchMedia('(min-width: 1025px)')
+    let revealed = false
+    const observer = new IntersectionObserver(entries => {
+      if (!desktop.matches || revealed || !entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .3)) return
+      revealed = true
+      section.dataset.entryReveal = 'visible'
+      observer.disconnect()
+    }, { threshold: .3 })
+    const update = () => {
+      observer.disconnect()
+      if (!desktop.matches) {
+        section.removeAttribute('data-entry-reveal')
+        return
+      }
+      section.dataset.entryReveal = revealed ? 'visible' : 'pending'
+      if (!revealed) observer.observe(section)
+    }
+    update()
+    desktop.addEventListener('change', update)
+    return () => {
+      observer.disconnect()
+      desktop.removeEventListener('change', update)
+      section.removeAttribute('data-entry-reveal')
+    }
+  }, [])
 
   useLayoutEffect(() => {
     const desktop = window.matchMedia('(min-width: 1025px)')
@@ -134,7 +167,7 @@ export default function SkinGuide() {
       unlockTimer = window.setTimeout(unlockWhenIdle, 850)
     }
     requestSectionScroll.current = section => {
-      if (!section) return
+      if (!section || section.closest('[data-step-locked="true"]')) return
       stopAnimation()
       updateHeaderHeight()
       moveTo(Math.max(0, window.scrollY + section.getBoundingClientRect().top - headerHeight()))
@@ -153,16 +186,16 @@ export default function SkinGuide() {
         if (/(auto|scroll)/.test(getComputedStyle(node).overflowY) && node.scrollHeight > node.clientHeight) return
       }
       const offset = headerHeight()
-      const positions = sections.map(ref => {
+      const positions = sections.filter(ref => !ref.current.closest('[data-step-locked="true"]')).map(ref => {
         const bounds = ref.current.getBoundingClientRect()
         return { top: bounds.top + window.scrollY, bottom: bounds.bottom + window.scrollY }
       })
       // The solution and its nested routine are consecutive logical sections.
-      positions[4].bottom = positions[5].top
+      if (positions.length === 6) positions[4].bottom = positions[5].top
       const anchor = window.scrollY + offset
       const availableHeight = window.innerHeight - offset
       const center = anchor + availableHeight / 2
-      if (center >= positions[5].bottom || center < positions[0].top) return
+      if (center >= positions.at(-1).bottom || center < positions[0].top) return
       // Prefer a section aligned under the header. Otherwise infer the current
       // section from the visible center, including scrollbar/footer re-entry.
       let index = positions.findIndex(position => Math.abs(position.top - anchor) <= 4)
@@ -198,9 +231,17 @@ export default function SkinGuide() {
       if (!desktop.matches) stopAnimation()
       updateHeaderHeight()
     }
+    const handleHeaderScrollTop = event => {
+      if (!desktop.matches || event.detail?.pathname !== '/skin-guide') return
+      event.preventDefault()
+      stopAnimation()
+      moveTo(0)
+    }
+    window.addEventListener(HEADER_SCROLL_TOP_EVENT, handleHeaderScrollTop)
     window.addEventListener('wheel', handleWheel, { passive: false })
     desktop.addEventListener('change', handleBreakpointChange)
     return () => {
+      window.removeEventListener(HEADER_SCROLL_TOP_EVENT, handleHeaderScrollTop)
       window.removeEventListener('wheel', handleWheel)
       desktop.removeEventListener('change', handleBreakpointChange)
       observer.disconnect()
@@ -210,7 +251,7 @@ export default function SkinGuide() {
   }, [])
 
   const [selectedConcern, setSelectedConcern] = useState(() => validConcern ?? 'moisture')
-  const [mobileSelection, setMobileSelection] = useState(() => validConcern)
+  const [selectedSkinType, setSelectedSkinType] = useState(() => validConcern)
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 540px)').matches)
   useLayoutEffect(() => {
     const mobile = window.matchMedia('(max-width: 540px)')
@@ -218,13 +259,16 @@ export default function SkinGuide() {
     mobile.addEventListener('change', update)
     return () => mobile.removeEventListener('change', update)
   }, [])
-  const [selectionRequest, setSelectionRequest] = useState(() => validConcern ? 1 : 0)
+  const [selectionRequest, setSelectionRequest] = useState(0)
   const [queryEntryKey, setQueryEntryKey] = useState(location.key)
   if (queryEntryKey !== location.key) {
     setQueryEntryKey(location.key)
     setSelectedConcern(validConcern ?? 'moisture')
-    setMobileSelection(validConcern)
-    setSelectionRequest(request => validConcern ? request + 1 : 0)
+    setSelectedSkinType(validConcern)
+    setSelectionRequest(0)
+    setIsStep2Unlocked(false)
+    setIsStep3Unlocked(false)
+    setSolutionRequest(0)
   }
   const currentConcern = concernData[selectedConcern]
   useLayoutEffect(() => {
@@ -243,31 +287,50 @@ export default function SkinGuide() {
       observer.disconnect()
       routine.style.removeProperty('--routine-description-height')
     }
-  }, [selectedConcern])
+  }, [selectedConcern, isStep3Unlocked])
   useLayoutEffect(() => {
-    if (!selectionRequest) return
+    if (!isStep2Unlocked || isMobile || isStep3Unlocked) return
+    // Desktop/tablet complete STEP 02 by reading through its content.
+    // Mobile completes it with the existing Next button instead.
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) setIsStep3Unlocked(true)
+    })
+    observer.observe(step2EndRef.current)
+    return () => observer.disconnect()
+  }, [isStep2Unlocked, isStep3Unlocked, isMobile])
+  useLayoutEffect(() => {
+    if (!isStep2Unlocked || !isStep3Unlocked || !solutionRequest) return
+    const frame = window.requestAnimationFrame(() => requestSectionScroll.current?.(solutionRef.current))
+    return () => window.cancelAnimationFrame(frame)
+  }, [solutionRequest, isStep2Unlocked, isStep3Unlocked])
+  useLayoutEffect(() => {
+    if (!isStep2Unlocked || !selectionRequest) return
     // Run after the selected data is committed and the shared route layout
     // has restored its initial scroll position.
     const frame = window.requestAnimationFrame(() => requestSectionScroll.current?.(concernRef.current))
     return () => window.cancelAnimationFrame(frame)
-  }, [selectionRequest])
+  }, [selectionRequest, isStep2Unlocked])
   function handleConcernSelect(id) {
+    if (!skinConcerns.some(item => item.id === id)) return
+    setSelectedSkinType(id)
     if (window.matchMedia('(max-width: 540px)').matches) {
-      setMobileSelection(id)
       setSelectedConcern(id)
       return
     }
     setSelectedConcern(id)
+    setIsStep2Unlocked(true)
     setSelectionRequest(request => request + 1)
   }
   function handleMobileNext() {
-    if (!window.matchMedia('(max-width: 540px)').matches || !mobileSelection) return
-    setSelectedConcern(mobileSelection)
+    if (!window.matchMedia('(max-width: 540px)').matches || !selectedSkinType) return
+    setSelectedConcern(selectedSkinType)
+    setIsStep2Unlocked(true)
     setSelectionRequest(request => request + 1)
   }
   function handleMobileSolutionNext() {
-    if (!window.matchMedia('(max-width: 540px)').matches || !mobileSelection) return
-    requestSectionScroll.current?.(solutionRef.current)
+    if (!isStep2Unlocked || !window.matchMedia('(max-width: 540px)').matches || !selectedSkinType) return
+    setIsStep3Unlocked(true)
+    setSolutionRequest(request => request + 1)
   }
   function scrollToSection(id) {
     requestSectionScroll.current?.(document.getElementById(id))
@@ -297,29 +360,29 @@ export default function SkinGuide() {
 
     <section ref={concernSelectionRef} className="skin-guide-types skin-guide-surface" aria-labelledby="skin-guide-types-title">
       <div className="skin-guide-types-content">
-        <GuideSteps activeStep={1} />
+        <GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={1} />
         <div className="skin-guide-type-heading">
           <h2 id="skin-guide-types-title">지금 가장 신경 쓰이는 피부 고민을 선택해주세요.</h2>
           <h2 className="skin-guide-mobile-type-title" hidden>피부 고민을 선택해주세요.</h2>
           <p>가장 고민되는 항목을 하나 선택해주세요.</p>
         </div>
         <div className="skin-guide-type-list" role="group" aria-labelledby="skin-guide-types-title">
-          {skinConcerns.map(item => <button key={item.id} type="button" className={`skin-guide-type-button${(isMobile ? mobileSelection : selectedConcern) === item.id ? ' is-active' : ''}`} aria-pressed={(isMobile ? mobileSelection : selectedConcern) === item.id} onClick={() => handleConcernSelect(item.id)}>
+          {skinConcerns.map(item => <button key={item.id} type="button" className={`skin-guide-type-button${selectedSkinType === item.id ? ' is-active' : ''}`} aria-pressed={selectedSkinType === item.id} onClick={() => handleConcernSelect(item.id)}>
             <ConcernImage concern={item} />
             <span className="skin-guide-type-name">{item.label}</span>
             <span className="skin-guide-type-description">{item.description}</span>
           </button>)}
         </div>
-        <div className="skin-guide-mobile-next" hidden><button type="button" disabled={isMobile && !mobileSelection} onClick={handleMobileNext}>다음으로</button></div>
+        <div className="skin-guide-mobile-next" hidden><button type="button" disabled={!selectedSkinType} onClick={handleMobileNext}>다음으로</button></div>
       </div>
     </section>
 
-    <section ref={concernRef} className="skin-guide-why skin-guide-surface" id="skin-guide-concerns" aria-labelledby="skin-guide-why-title">
+    <section ref={concernRef} data-step-locked={!isStep2Unlocked} hidden={!isStep2Unlocked} inert={!isStep2Unlocked} className="skin-guide-why skin-guide-surface" id="skin-guide-concerns" aria-labelledby="skin-guide-why-title">
       <div className="skin-guide-why-content">
-        <GuideSteps activeStep={2} />
+        <GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={2} />
         <div className="skin-guide-why-columns">
           <div className="skin-guide-summary">
-            <div className="skin-guide-mobile-summary-steps" hidden><GuideSteps activeStep={2} /></div>
+            <div className="skin-guide-mobile-summary-steps" hidden><GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={2} /></div>
             <div><h2>{currentConcern.concernTitle ?? `${currentConcern.concernName} 피부 분석 준비 중`}</h2><p className="skin-guide-moisture-label">{currentConcern.solutionEnglish ?? '결과 정보 준비 중'}</p></div>
             <div className="skin-guide-summary-type"><ConcernImage concern={currentConcern.concern} /><p>{currentConcern.concernName}</p></div>
             <p className="skin-guide-summary-copy"><GuideText>{currentConcern.intro}</GuideText></p>
@@ -335,15 +398,16 @@ export default function SkinGuide() {
                 <h3>{cause.title ?? '원인 준비 중'}</h3><p>{cause.description ?? '원인 정보 확인 후\n안내해 드립니다.\n현재는 준비 중입니다.'}</p>
               </li>)}
             </ul>
-            <div className="skin-guide-mobile-next" hidden><button type="button" disabled={isMobile && !mobileSelection} onClick={handleMobileSolutionNext}>다음으로</button></div>
+            <div className="skin-guide-mobile-next" hidden><button type="button" disabled={isMobile && !selectedSkinType} onClick={handleMobileSolutionNext}>다음으로</button></div>
           </div>
         </div>
       </div>
+      <div ref={step2EndRef} className="skin-guide-step-end" aria-hidden="true" />
     </section>
 
-    <section ref={solutionRef} className="skin-guide-solution skin-guide-surface" aria-labelledby="skin-guide-solution-title">
+    <section ref={solutionRef} data-step-locked={!isStep3Unlocked} hidden={!isStep3Unlocked} inert={!isStep3Unlocked} className="skin-guide-solution skin-guide-surface" aria-labelledby="skin-guide-solution-title">
       <div className="skin-guide-solution-content">
-      <GuideSteps activeStep={3} />
+      <GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={3} />
       <div className="skin-guide-solution-heading"><p>YOUR SKIN SOLUTION</p><h2 id="skin-guide-solution-title">당신의 피부를 위한 맞춤 솔루션</h2><p className="skin-guide-solution-intro" hidden><GuideText>{currentConcern.solutionIntro ?? `${currentConcern.concernName} 피부의 맞춤 케어를 준비하고 있습니다.\n확정된 루틴은 추후 안내해 드립니다.`}</GuideText></p></div>
       <div className="skin-guide-solution-details">
         <div className="skin-guide-my-skin">
@@ -368,7 +432,7 @@ export default function SkinGuide() {
       </div>
       </div>
       <div ref={routineRef} className="skin-guide-routine" id="skin-guide-routine">
-        <div className="skin-guide-mobile-routine-steps" hidden><GuideSteps activeStep={3} /></div>
+        <div className="skin-guide-mobile-routine-steps" hidden><GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={3} /></div>
         <div className="skin-guide-routine-heading">
           <h3>ONGYEOL RECOMMENDED ROUTINE</h3>
           <span className="skin-guide-routine-line"><img src={routineLine} alt="" /></span>
@@ -388,7 +452,7 @@ export default function SkinGuide() {
       </div>
     </section>
 
-    <section className="skin-guide-ending" aria-labelledby="skin-guide-ending-title" style={{ backgroundImage: `url(${endingTexture})` }}>
+    <section data-step-locked={!isStep3Unlocked} hidden={!isStep3Unlocked} inert={!isStep3Unlocked} className="skin-guide-ending" aria-labelledby="skin-guide-ending-title" style={{ backgroundImage: `url(${endingTexture})` }}>
       <h2 id="skin-guide-ending-title">Find Your Skin Balance</h2>
       <div className="skin-guide-ending-logo"><img src={endingLogo} alt="ONGYEOL" loading="lazy" /></div>
       <p>당신의 피부에 필요한 것만, 온결답게.</p>
