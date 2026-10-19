@@ -89,9 +89,12 @@
   .ongyeol-products[data-classification='line'] .ongyeol-products__category-list {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 18px;
     width: max-content;
     min-width: 100%;
+  }
+  .ongyeol-products[data-classification='line'] button.ongyeol-products__category {
+    font-size: 18px;
   }
   .ongyeol-products__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 16px; }
   .ongyeol-products__pagination { flex-wrap: wrap; gap: 4px; margin-top: 60px; }
