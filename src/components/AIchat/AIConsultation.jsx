@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
 import background from '../../assets/images/chat/background.png'
 import logo from '../../assets/images/chat/panel-logo.png'
 import avatar from '../../assets/images/chat/avatar.svg'
@@ -11,32 +9,9 @@ import send from '../../assets/images/chat/send.svg'
 import './AIConsultation.css'
 
 // Optional actions connect to existing screens when those screens are available.
-export default function AIConsultation({ open, onInquiry, onConversation, onSettings }) {
-  const [visible, setVisible] = useState(false)
-  const [present, setPresent] = useState(false)
-  const panelRef = useRef(null)
-
-  useEffect(() => {
-    let frame
-    let timer
-    if (open) {
-      frame = requestAnimationFrame(() => {
-        setPresent(true)
-        setVisible(true)
-        panelRef.current?.focus({ preventScroll: true })
-      })
-    } else {
-      frame = requestAnimationFrame(() => setVisible(false))
-      timer = setTimeout(() => setPresent(false), 250)
-    }
-    return () => {
-      cancelAnimationFrame(frame)
-      clearTimeout(timer)
-    }
-  }, [open])
-
-  return createPortal(
-    <section id="ai-consultation" ref={panelRef} role="dialog" aria-modal="false" aria-label="온결 AI 상담" aria-hidden={!open} inert={!open} tabIndex={-1} hidden={!open && !present} className={`ongyeol-consultation${visible && open ? ' is-visible' : ''}`}>
+export default function AIConsultation({ onInquiry, onConversation, onSettings, onHome }) {
+  return (
+    <>
       <img className="ongyeol-consultation-background" src={background} alt="" />
       <div className="ongyeol-consultation-gradient" />
       <p className="ongyeol-consultation-wordmark">ONGYEOL</p>
@@ -57,10 +32,10 @@ export default function AIConsultation({ open, onInquiry, onConversation, onSett
         </div>
       </div>
       <nav className="ongyeol-consultation-navigation" aria-label="상담 메뉴">
-        <button type="button" aria-current="page" onClick={() => panelRef.current?.focus({ preventScroll: true })}><img src={home} alt="" /><span>홈</span></button>
+        <button type="button" aria-current="page" onClick={onHome}><img src={home} alt="" /><span>홈</span></button>
         <button type="button" disabled={!onConversation} onClick={onConversation}><img src={conversation} alt="" /><span>대화</span></button>
         <button type="button" disabled={!onSettings} onClick={onSettings}><img src={settings} alt="" /><span>설정</span></button>
       </nav>
-    </section>, document.body,
+    </>
   )
 }

@@ -13,7 +13,7 @@ import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 
 import Home from './pages/Home.jsx'
 import Brand from './pages/Brand.jsx'
-import SkinGuide from './pages/SkinGuide.jsx'
+import SkinGuide from './pages/Skinguide.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
@@ -155,7 +155,7 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>
         <Layout />
       </AuthProvider>

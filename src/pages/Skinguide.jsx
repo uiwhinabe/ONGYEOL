@@ -173,17 +173,17 @@ export default function SkinGuide() {
       moveTo(Math.max(0, window.scrollY + section.getBoundingClientRect().top - headerHeight()))
     }
     const handleWheel = event => {
-      if (!desktop.matches || !/^\/skin-guide\/?$/.test(window.location.pathname) || event.ctrlKey || event.defaultPrevented) return
-      if (isAutoScrolling.current) {
-        lastWheelAt = performance.now()
-        if (event.cancelable) event.preventDefault()
-        return
-      }
+      if (!desktop.matches || !/^\/skin-guide\/?$/.test(location.pathname) || event.ctrlKey || event.defaultPrevented) return
       if (event.target instanceof Element && event.target.closest('header, [role="dialog"]')) return
       if (!event.deltaY) return
       // Leave independently scrollable panels to their own wheel handling.
       for (let node = event.target; node instanceof Element && node !== page && node !== document.body && node !== document.documentElement; node = node.parentElement) {
         if (/(auto|scroll)/.test(getComputedStyle(node).overflowY) && node.scrollHeight > node.clientHeight) return
+      }
+      if (isAutoScrolling.current) {
+        lastWheelAt = performance.now()
+        if (event.cancelable) event.preventDefault()
+        return
       }
       const offset = headerHeight()
       const positions = sections.filter(ref => !ref.current.closest('[data-step-locked="true"]')).map(ref => {
@@ -248,7 +248,7 @@ export default function SkinGuide() {
       stopAnimation()
       requestSectionScroll.current = null
     }
-  }, [])
+  }, [location.pathname])
 
   const [selectedConcern, setSelectedConcern] = useState(() => validConcern ?? 'moisture')
   const [selectedSkinType, setSelectedSkinType] = useState(() => validConcern)

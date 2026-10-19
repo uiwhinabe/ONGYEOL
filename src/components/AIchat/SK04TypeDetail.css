@@ -1,0 +1,36 @@
+.ongyeol-chat-skin-guide-recommendation-content { position: absolute; left: 40px; top: 138px; display: flex; flex-direction: column; align-items: center; gap: 50px; width: 340px; }
+.ongyeol-chat-skin-guide-recommendation-message { display: flex; align-items: flex-start; gap: 10px; width: 100%; }
+.ongyeol-chat-skin-guide-recommendation-copy { display: flex; flex-direction: column; gap: 30px; flex: none; width: 300px; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; font-size: 15px; line-height: 20px; }
+.ongyeol-chat-skin-guide-recommendation-ingredients { width: 93px; }
+.ongyeol-chat-skin-guide-recommendation-ingredient { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 93px; margin: 0; font: 400 15px/20px 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; text-align: center; }
+.ongyeol-chat-skin-guide-recommendation-ingredient[hidden] { display: none; }
+.ongyeol-chat-skin-guide-recommendation-ingredient > img { display: block; width: 93px; height: 93px; border-radius: 50%; object-fit: cover; transform: translateY(0); box-shadow: none; transition: transform 220ms ease-out, box-shadow 220ms ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  .ongyeol-chat-skin-guide-recommendation-ingredient > img:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(80, 60, 45, 0.14); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-chat-skin-guide-recommendation-ingredient > img,
+  .ongyeol-chat-skin-guide-recommendation-ingredient > img:hover { transform: none; transition: none; }
+}
+.ongyeol-chat-skin-guide-recommendation-ingredient figcaption { min-width: 93px; white-space: nowrap; }
+.ongyeol-chat-skin-guide-recommendation-copy p { white-space: normal; overflow-wrap: anywhere; }
+.ongyeol-chat-skin-guide-recommendation-navigation { position: absolute; left: calc(50% + 0.21px); top: 50%; transform: translate(-50%, -50%); display: flex; justify-content: space-between; width: 344.417px; pointer-events: none; }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-navigation button { display: grid; place-items: center; width: 20px; height: 21px; padding: 0; border-radius: 100px; background: #d9d9d9; pointer-events: auto; }
+.ongyeol-chat-skin-guide-recommendation-navigation button:disabled { visibility: hidden; }
+.ongyeol-chat-skin-guide-recommendation-navigation img { display: block; }
+.ongyeol-chat-skin-guide-recommendation-navigation button:last-child img { transform: scaleX(-1); }
+.ongyeol-chat-skin-guide-recommendation-navigation button:not(:disabled):not([hidden]) { cursor: pointer; animation: none; transform: scale(1); transform-origin: center; transition: transform 180ms ease-out; }
+.ongyeol-chat-skin-guide-recommendation-navigation button:not(:disabled):not([hidden]):hover { transform: scale(1.1); animation: none; }
+.ongyeol-chat-skin-guide-recommendation-navigation button:not(:disabled):not([hidden]):active { transform: scale(0.96); }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 340px; height: 48px; padding: 0; border: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; font-size: 15px; line-height: 20px; }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-inquiry-composer { left: 22px; top: 646px; }
+.ongyeol-chat-skin-guide-recommendation button { animation: none; transform: translateY(0); transition: none; }
+.ongyeol-chat-skin-guide-recommendation button:hover:not(:disabled) { animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-chat-skin-guide-recommendation button:hover:not(:disabled) { animation: none; transform: translateY(0); }
+}
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action:hover { background: #f6eaea; animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+.ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action:active { background: #ecd4d4; }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-chat-skin-guide-recommendation .ongyeol-chat-skin-guide-recommendation-action:hover { animation: none; transform: translateY(0); }
+}

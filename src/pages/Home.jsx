@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import heroImage from '../assets/images/home/image 228.png'
 import moistureHeroImage from '../assets/images/home/image 228-1.png'
 import vitaminHeroImage from '../assets/images/home/image 228-2.png'
@@ -78,6 +78,7 @@ const lineTrackSlides = [...lineSlides, { ...lineSlides[0], id: 'tremella-loop' 
 const formatPrice = price => price.toLocaleString('ko-KR') + '원'
 
 export default function Home() {
+  const { pathname } = useLocation()
   const heroRef = useRef(null)
   const skinGuideRef = useRef(null)
   const isAutoScrolling = useRef(false)
@@ -136,14 +137,14 @@ export default function Home() {
     if (header) headerObserver.observe(header)
 
     const handleWheel = event => {
-      if (window.location.pathname !== '/' || !desktop.matches || event.ctrlKey || event.defaultPrevented) return
+      if (pathname !== '/' || !desktop.matches || event.ctrlKey || event.defaultPrevented) return
+      const hero = heroRef.current
+      if (!event.deltaY || !hero || !guide || !hero.closest('.home-page')?.contains(event.target)) return
       if (isAutoScrolling.current) {
         lastWheelAt = performance.now()
         if (event.cancelable) event.preventDefault()
         return
       }
-      const hero = heroRef.current
-      if (!event.deltaY || !hero || !guide || !hero.closest('.home-page')?.contains(event.target)) return
 
       const bounds = hero.getBoundingClientRect()
       const headerHeight = header?.getBoundingClientRect().height ?? 0
@@ -213,7 +214,7 @@ export default function Home() {
       window.cancelAnimationFrame(animationFrame)
       isAutoScrolling.current = false
     }
-  }, [])
+  }, [pathname])
 
   const [heroState, setHeroState] = useState({ index: 0, animate: true })
   const [heroHovered, setHeroHovered] = useState(false)

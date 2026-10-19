@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { HEADER_SCROLL_TOP_EVENT } from '../headerNavigation.js'
 import './Brand.css'
 import brandFilm from '../assets/videos/brand/ongyeol-brand-film.mp4'
@@ -30,6 +31,7 @@ const brandIngredients = [
 ]
 
 export default function Brand() {
+  const { pathname } = useLocation()
   const pageRef = useRef(null)
   const heroRef = useRef(null)
   const natureRef = useRef(null)
@@ -107,7 +109,7 @@ export default function Brand() {
       } else animationFrame = window.requestAnimationFrame(animate)
     }
     const handleWheel = event => {
-      if (!desktop.matches || !/^\/brand\/?$/.test(window.location.pathname) || event.ctrlKey || event.defaultPrevented || !event.deltaY) return
+      if (!desktop.matches || !/^\/brand\/?$/.test(pathname) || event.ctrlKey || event.defaultPrevented || !event.deltaY) return
       if (event.target instanceof Element && event.target.closest('header, [role="dialog"]')) return
       for (let node = event.target; node instanceof Element && node !== page && node !== document.body && node !== document.documentElement; node = node.parentElement) {
         if (/(auto|scroll)/.test(getComputedStyle(node).overflowY) && node.scrollHeight > node.clientHeight) return
@@ -169,7 +171,7 @@ export default function Brand() {
       desktop.removeEventListener('change', stop)
       stop()
     }
-  }, [])
+  }, [pathname])
 
   useLayoutEffect(() => {
     const section = ingredientsRef.current
