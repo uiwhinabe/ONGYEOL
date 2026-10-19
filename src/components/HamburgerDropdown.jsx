@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './HamburgerDropdown.css'
 
 const categories = [
@@ -36,7 +37,11 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
         </div>
         {/* Page files have no connected routes yet. Do not invent destinations. */}
         <button className="ongyeol-hd-link ongyeol-hd-mypage" type="button" aria-disabled="true">마이페이지</button>
-        {['SKIN GUIDE', 'EVENT', 'BRAND'].map((label) => <button className="ongyeol-hd-link" key={label} type="button" aria-disabled="true">{label}</button>)}
+        {['SKIN GUIDE', 'EVENT', 'BRAND'].map((label) => label === 'SKIN GUIDE'
+          ? <Link className="ongyeol-hd-link" key={label} to="/skin-guide" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
+          : label === 'EVENT'
+          ? <Link className="ongyeol-hd-link" key={label} to="/event?tab=ongoing" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
+          : <Link className="ongyeol-hd-link" key={label} to="/brand" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>)}
       </nav>
     </div>
   )

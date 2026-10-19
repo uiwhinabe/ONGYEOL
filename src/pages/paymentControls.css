@@ -1,0 +1,73 @@
+/* Loaded after page styles so responsive padding/background shorthands do not
+   restore native arrows. Existing control dimensions remain on each page. */
+.payment-page select,
+.checkout-page select,
+.checkout-page .checkout-payment-row select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: var(--payment-select-padding, 42px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='m2 3.5 3 3 3-3' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 10px 10px;
+}
+
+/* Preserve the existing flex sizing of narrow phone/domain fields. Reserving
+   42px inside these selects would shrink their adjacent inputs. The arrow
+   itself still uses the same image and right inset as every other select. */
+.payment-phone select,
+.payment-email select,
+.checkout-phone select,
+.checkout-email select,
+.checkout-payment-phone select { --payment-select-padding: 9px; }
+
+@media (min-width: 1025px) {
+  .checkout-payment-phone select { --payment-select-padding: 7px; }
+  .payment-method-scroll {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb transparent;
+  }
+  .payment-method-scroll::-webkit-scrollbar { height: 5px; }
+  .payment-method-scroll::-webkit-scrollbar-thumb { background: #bbb; border-radius: 999px; }
+  .payment-method-scroll::-webkit-scrollbar-track { background: transparent; }
+  .payment-page .payment-method-row,
+  .checkout-page .payment-method-row {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    min-width: max-content;
+  }
+  .payment-method-row > button { flex: 0 0 auto; white-space: nowrap; }
+  .payment-page .payment-card-section,
+  .checkout-page .checkout-payment-section { min-width: 0; }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .payment-billing .payment-field {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    align-items: stretch;
+  }
+  .payment-billing .payment-field-label { padding-top: 0; }
+  .payment-billing .payment-field-content { width: 100%; min-width: 0; }
+  .payment-billing #payment-name { width: 100%; max-width: none; }
+  .payment-billing .payment-phone {
+    display: grid;
+    grid-template-columns: minmax(70px, 90px) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+  .payment-billing .payment-phone > :is(select, input) { width: 100%; min-width: 0; }
+  .payment-billing .payment-email { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; width: 100%; }
+  .payment-billing .payment-email > :is(select, input) { width: 100%; min-width: 0; }
+  .payment-billing :is(.payment-phone, .payment-email) select { --payment-select-padding: 42px; }
+  .payment-billing .payment-same-order { display: flex; align-items: flex-start; gap: 8px; word-break: keep-all; }
+}
