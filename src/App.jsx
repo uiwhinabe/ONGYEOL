@@ -1,31 +1,184 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+﻿import { useLayoutEffect, useState } from 'react'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
+
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-import AIChatWidget from './components/AIChatWidget.jsx'
-import Products from './pages/Products.jsx'
+import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
+
 import Home from './pages/Home.jsx'
+import Products from './pages/Products.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
 import { readProductRoute, navigateToProducts } from './utils/productNavigation.js'
+import Brand from './pages/Brand.jsx'
+import SkinGuide from './pages/Skinguide.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import SignupComplete from './pages/SignupComplete.jsx'
+import IdentityVerification from './pages/IdentityVerification.jsx'
 
-function App() {
+import Checkout from './pages/Checkout.jsx'
+import Payment from './pages/Payment.jsx'
+import OrderComplete from './pages/OrderComplete.jsx'
+
+import Event from './pages/Event.jsx'
+import EventDetail from './pages/EventDetail.jsx'
+
+import welcomeBenefitDetail from './assets/images/events/welcome-benefit-detail.png'
+import kakaoDetail from './assets/images/events/kakao-detail.png'
+
+import AuthProvider from './components/AuthProvider.jsx'
+import { useAuth } from './components/authContext.js'
+import './pages/paymentControls.css'
+
+function ProductPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const route = readProductRoute(location)
+  if (route.productId) return <ProductDetail key={route.productId} productId={route.productId} />
+  return <Products classification={route.classification} initialCategory={route.category}
+    onCategoryChange={(classification, category) => navigateToProducts(classification, category, navigate)} />
+}
+
+function Layout() {
+  const { pathname, hash } = useLocation()
+  const navigate = useNavigate()
+
   const [chatOpen, setChatOpen] = useState(false)
-  const [productRoute, setProductRoute] = useState(readProductRoute)
-  useEffect(() => {
-    const updateRoute = () => setProductRoute(readProductRoute())
-    window.addEventListener('hashchange', updateRoute)
-    return () => window.removeEventListener('hashchange', updateRoute)
-  }, [])
+
+  const { isAuthenticated, enterLogin, logout } = useAuth()
+
+  const isLogin = pathname === '/login' || pathname === '/login/'
+
+  // Keep existing product bookmarks working with the shared BrowserRouter.
+  useLayoutEffect(() => {
+    if (hash.split('?')[0] === '#/products') {
+      navigate(`/products${hash.includes('?') ? `?${hash.split('?')[1]}` : ''}`, { replace: true })
+    }
+  }, [hash, navigate])
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
+  }, [pathname])
 
   return (
-    <>
-      <Header chatOpen={chatOpen} />
-      {productRoute.isProducts && ['dakyeolmae-body-scrub', 'dakyeolmae-pad', 'dakyeolmae-cream', 'dakyeolmae-ampoule', 'dakyeolmae-mist', 'dakyeolmae-toner', 'dakyeolmae-mask', 'odi-toner', 'odi-ampoule', 'odi-cream', 'odi-cleansing-balm', 'odi-mask', 'vitamin-c-toner', 'vitamin-c-cleanser', 'vitamin-c-lotion', 'vitamin-c-ampoule', 'vitamin-c-essence', 'vitamin-c-cream', 'vitamin-c-pad', 'vitamin-c-mask', 'rose-pdrn-balancing-cream', 'rose-pdrn-eyecream', 'baekmogi-ampoule', 'baekmogi-pad', 'baekmogi-cream', 'baekmogi-toner', 'baekmogi-lotion', 'baekmogi-mask'].includes(productRoute.productId) ? <ProductDetail key={productRoute.productId} productId={productRoute.productId} /> : productRoute.isProducts ? <Products classification={productRoute.classification} initialCategory={productRoute.category}
-        onCategoryChange={navigateToProducts} /> : <Home />}
+    <div
+      className={`ongyeol-layout${
+        isLogin ? ' ongyeol-layout--login' : ''
+      }`}
+    >
+      <Header
+        chatOpen={chatOpen}
+        isAuthenticated={isAuthenticated}
+        onLogin={enterLogin}
+        onLogout={logout}
+        accountLinks={{
+          login: '/login',
+          signup: '/signup',
+        }}
+      />
+
+      <Routes>
+        {/* HOME */}
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/skin-guide" element={<SkinGuide />} />
+        <Route path="/brand" element={<Brand />} />
+
+        {/* 회원 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup/complete" element={<SignupComplete />} />
+        <Route
+          path="/signup/verify"
+          element={<IdentityVerification />}
+        />
+
+        {/* EVENT */}
+        <Route path="/event" element={<Event />} />
+
+        <Route
+          path="/event/signup-coupon"
+          element={
+            <EventDetail
+              title="신규 가입 회원 쿠폰 이벤트"
+              detailImage={welcomeBenefitDetail}
+              imageAlt="신규 회원 10,000원 쿠폰 혜택, 쿠폰 사용 안내, 쿠폰 받는 방법 및 쿠폰 이용 안내"
+            />
+          }
+        />
+
+        <Route
+          path="/event/kakao-coupon"
+          element={
+            <EventDetail
+              title="카카오톡 플러스 친구 쿠폰 이벤트"
+              detailImage={kakaoDetail}
+              imageAlt="카카오톡 플러스친구 10,000원 쿠폰 이벤트, 참여 방법, 특별 혜택 및 유의사항"
+            />
+          }
+        />
+
+        {/* 주문서 작성 */}
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              onPayment={() => navigate('/payment')}
+            />
+          }
+        />
+
+        {/* 결제 */}
+        <Route
+          path="/payment"
+          element={
+            <Payment
+              onComplete={() => navigate('/order-complete')}
+              onBack={() => navigate('/checkout')}
+            />
+          }
+        />
+
+        {/* 주문 완료 */}
+        <Route
+          path="/order-complete"
+          element={
+            <OrderComplete
+              onContinueShopping={() => navigate('/')}
+            />
+          }
+        />
+
+        {/* 없는 주소는 HOME */}
+        <Route path="*" element={<Home />} />
+      </Routes>
+
       <Footer />
-      <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
-    </>
+
+      <AIChatWidget
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+      />
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
+    </BrowserRouter>
+  )
+}

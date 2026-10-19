@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { products } from '../data/products.js'
 import { navigateToProducts } from '../utils/productNavigation.js'
 import './ProductDetail.css'
@@ -415,6 +416,7 @@ function usesMobileDetailLayout() {
 }
 
 export default function ProductDetail({ productId }) {
+  const navigate = useNavigate()
   const [tabletLayout, setTabletLayout] = useState(usesTabletDetailLayout)
   const [mobileLayout, setMobileLayout] = useState(usesMobileDetailLayout)
   useEffect(() => {
@@ -480,7 +482,7 @@ export default function ProductDetail({ productId }) {
     return () => { active = false; animation?.cancel() }
   }, [imageIndex, mobileLayout])
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [productId])
-  if (!product) return <main className="ongyeol-detail"><h1>상품을 찾을 수 없습니다.</h1><button type="button" onClick={() => navigateToProducts('type', '전체')}>상품 목록으로 돌아가기</button></main>
+  if (!product) return <main className="ongyeol-detail"><h1>상품을 찾을 수 없습니다.</h1><button type="button" onClick={() => navigateToProducts('type', '전체', navigate)}>상품 목록으로 돌아가기</button></main>
   const isScrub = product.id === 'dakyeolmae-body-scrub'
   const images = isScrub ? [scrubMain, product.textureImage, scrubSecondary, scrubSecondary2].filter(Boolean) : isPad ? [padMain, padSecondary1, padSecondary2, padSecondary3] : isCream ? [creamMain, creamSecondary1, creamSecondary2, creamSecondary3] : isAmpoule ? [ampouleMain, ampouleSecondary1, ampouleSecondary2, ampouleSecondary3] : isMist ? [mistMain, mistSecondary1, mistSecondary2, mistSecondary3] : isToner ? [tonerMain, tonerSecondary2, tonerSecondary1, tonerSecondary3] : isMask ? [maskMain, maskSecondary3, maskSecondary2, maskSecondary1] : isOdiToner ? [odiTonerMain, odiTonerSecondary1, odiTonerSecondary2, odiTonerSecondary3] : isOdiAmpoule ? [odiAmpouleMain, odiAmpouleSecondary1, odiAmpouleSecondary2, odiAmpouleSecondary3] : isOdiCream ? [odiCreamMain, odiCreamSecondary1, odiCreamSecondary2, odiCreamSecondary3] : isOdiBalm ? [odiBalmMain, odiBalmSecondary1, odiBalmSecondary2, odiBalmSecondary3] : isOdiMask ? [odiMaskMain, odiMaskSecondary1, odiMaskSecondary2, odiMaskSecondary3] : isVitaminToner ? [vitaminTonerMain, vitaminTonerSecondary1, vitaminTonerSecondary2, vitaminTonerSecondary3] : isVitaminCleanser ? [vitaminCleanserMain, vitaminCleanserSecondary1, vitaminCleanserSecondary2, vitaminCleanserSecondary3] : isVitaminLotion ? [vitaminLotionMain, vitaminLotionSecondary1, vitaminLotionSecondary2, vitaminCleanserSecondary3] : isVitaminAmpoule ? [vitaminAmpouleMain, vitaminAmpouleSecondary1, vitaminAmpouleSecondary2, vitaminCleanserSecondary3] : isVitaminEssence ? [vitaminEssenceMain, vitaminEssenceSecondary1, vitaminEssenceSecondary2, vitaminCleanserSecondary3] : isVitaminCream ? [vitaminCreamMain, vitaminCreamSecondary1, vitaminCreamSecondary2, vitaminCleanserSecondary3] : isVitaminPad ? [vitaminPadMain, vitaminPadSecondary1, vitaminPadSecondary2, vitaminCleanserSecondary3] : isVitaminMask ? [vitaminMaskMain, vitaminMaskSecondary1, vitaminMaskSecondary2, vitaminCleanserSecondary3] : isRoseCream ? [roseCreamMain, roseCreamSecondary1, roseCreamDetail2, roseCreamSecondary3] : isRoseEyecream ? [roseEyecreamMain, roseEyecreamSecondary1, roseEyecreamSecondary2, roseEyecreamSecondary3] : isBaekmogiAmpoule ? [baekmogiAmpouleMain, baekmogiAmpouleSecondary1, baekmogiAmpouleSecondary2, baekmogiAmpouleSecondary3] : isBaekmogiPad ? [baekmogiPadMain, baekmogiPadSecondary1, baekmogiPadSecondary2, baekmogiPadSecondary3] : isBaekmogiCream ? [baekmogiCreamMain, baekmogiCreamSecondary1, baekmogiCreamSecondary2, baekmogiCreamSecondary3] : isBaekmogiToner ? [baekmogiTonerMain, baekmogiTonerSecondary1, baekmogiTonerSecondary2, baekmogiTonerSecondary3] : isBaekmogiLotion ? [baekmogiLotionMain, baekmogiLotionSecondary1, baekmogiLotionSecondary2, baekmogiTonerSecondary3] : isBaekmogiMask ? [baekmogiMaskMain, baekmogiMaskSecondary1, baekmogiMaskSecondary2, baekmogiMaskSecondary3] : [product.image, product.textureImage].filter(Boolean)
   const thumbnailIndexes = Array.from({ length: Math.min(3, images.length) }, (_, offset) => thumbnailStart + offset)

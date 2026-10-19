@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './ProductCard.css'
 import { productImageFrames } from '../data/productImageFrames.js'
 import { getProductDetailHref } from '../utils/productNavigation.js'
@@ -38,7 +39,7 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="ongyeol-product-card" data-product-id={product.id}>
-      <a className="ongyeol-product-card__visual ongyeol-product-card__detail-link" href={detailHref} aria-label={`${product.name} 상세 보기`}>
+      <Link className="ongyeol-product-card__visual ongyeol-product-card__detail-link" to={detailHref} aria-label={`${product.name} 상세 보기`}>
         {product.image && frame ? (
           <div className="ongyeol-product-card__image-stage">
             <div className="ongyeol-product-card__image-crop" style={{
@@ -62,11 +63,11 @@ export default function ProductCard({ product }) {
             {product.badge === 'SALE' ? `${product.discountPercent}% SALE` : product.badge}
           </span>
         )}
-      </a>
+      </Link>
       <h2 className="ongyeol-product-card__name">
-        <a className="ongyeol-product-card__name-link ongyeol-product-card__detail-link" href={detailHref}>
+        <Link className="ongyeol-product-card__name-link ongyeol-product-card__detail-link" to={detailHref}>
           <span>{product.name}</span>
-        </a>
+        </Link>
       </h2>
       <p className="ongyeol-product-card__price">
         {product.originalPrice > product.price && <del className="ongyeol-product-card__original-price">{product.originalPrice.toLocaleString('ko-KR')}원</del>}

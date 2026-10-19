@@ -1,0 +1,63 @@
+.ongyeol-inquiry { position: relative; width: 100%; height: 100%; background: #fff; font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 15px; line-height: 20px; font-variation-settings: 'CTGR' 0, 'wdth' 100; }
+.ongyeol-inquiry-header { position: absolute; left: 35px; top: 43px; display: flex; align-items: center; gap: 14px; }
+.ongyeol-inquiry .ongyeol-inquiry-back { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; background: transparent; }
+.ongyeol-inquiry-avatar { position: relative; display: block; flex: none; width: 39px; height: 39px; }
+.ongyeol-inquiry-avatar > img { display: block; }
+.ongyeol-inquiry-avatar-logo { position: absolute; left: 50%; top: 50%; width: 26.897px; height: 26.897px; overflow: hidden; transform: translate(-50%, -50%); }
+.ongyeol-inquiry-avatar-logo img { position: absolute; width: 137.3%; height: 145.77%; left: -24.82%; top: -9.13%; max-width: none; }
+.ongyeol-inquiry-avatar--small { width: 32px; height: 32px; }
+.ongyeol-inquiry-avatar--small .ongyeol-inquiry-avatar-logo { width: 22.069px; height: 22.069px; }
+.ongyeol-inquiry-heading { width: 130px; }
+.ongyeol-inquiry-heading p:first-child { font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; }
+.ongyeol-inquiry-heading p:last-child { color: #0008; font-size: 10px; line-height: 14px; white-space: nowrap; }
+.ongyeol-inquiry-message { position: absolute; left: 40px; top: 157px; display: flex; align-items: flex-start; gap: 10px; width: 340px; }
+.ongyeol-inquiry-copy { display: flex; flex-direction: column; flex: none; gap: 18px; width: 300px; }
+.ongyeol-inquiry-account { position: absolute; left: 80px; top: 388px; display: flex; gap: 9px; width: 300px; }
+.ongyeol-chat-start { --ongyeol-start-account-right: 40px; }
+.ongyeol-chat-start > .ongyeol-inquiry-account { left: auto; right: var(--ongyeol-start-account-right); }
+.ongyeol-chat-start:not(.ongyeol-inquiry--authenticated) > .ongyeol-inquiry-topics { position: absolute; top: 0; right: var(--ongyeol-start-account-right); width: 408px; }
+.ongyeol-inquiry-account a { box-sizing: border-box; display: flex; flex: 1; align-items: center; justify-content: center; height: 42px; border: 1px solid #919191; border-radius: 20px; color: #000; text-decoration: none; }
+.ongyeol-inquiry .ongyeol-inquiry-topic { position: absolute; box-sizing: border-box; display: flex; flex: 0 0 115px; align-items: center; justify-content: center; width: 115px; height: 38px; padding: 0 20px; border: 1px solid #919191; border-radius: 20px; background: #fff; line-height: 20px; white-space: nowrap; }
+.ongyeol-inquiry-topic--skin { left: 293px; top: 536px; }
+.ongyeol-inquiry-topic--agent { left: 168px; top: 584px; }
+.ongyeol-inquiry-topic--delivery { left: 293px; top: 584px; }
+.ongyeol-inquiry .ongyeol-inquiry-topic[aria-pressed='true'] { background: #f0eded; border-color: #111928; }
+.ongyeol-inquiry-composer { position: absolute; box-sizing: border-box; left: 21px; top: 654px; width: 377px; height: 80px; border: 1px solid #6b6b6b; border-radius: 20px; background: #f0eded; }
+.ongyeol-inquiry-composer textarea { position: absolute; box-sizing: border-box; left: 20px; top: 13px; width: 320px; height: 25px; padding: 0; border: 0; resize: none; background: transparent; color: #000; font: 400 14px/19px 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; }
+.ongyeol-inquiry-composer textarea::placeholder { color: #0008; opacity: 1; }
+.ongyeol-inquiry-tools { position: absolute; left: 17px; top: 51px; display: flex; align-items: center; gap: 10px; }
+.ongyeol-inquiry .ongyeol-inquiry-tools button { display: grid; place-items: center; width: 13px; height: 15px; padding: 0; background: transparent; }
+.ongyeol-inquiry .ongyeol-inquiry-send { position: absolute; left: 329px; top: 36px; display: grid; place-items: center; width: 35px; height: 35px; padding: 0; background: transparent; }
+.ongyeol-inquiry a:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.ongyeol-inquiry-composer textarea:focus { outline: none; }
+.ongyeol-inquiry-composer:has(textarea:focus-visible) { box-shadow: 0 0 0 2px rgba(164, 70, 70, 0.18); }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-message { top: 129px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-topics { position: absolute; left: 91px; top: 499px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 15px 9px; width: 300.5px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-topic { position: static; flex: 0 0 145.75px; width: 145.75px; height: 42px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-topic--skin { flex-basis: 145.5px; width: 145.5px; margin-left: 155px; }
+.ongyeol-inquiry--authenticated .ongyeol-inquiry-composer { left: 22px; top: 635px; }
+.ongyeol-inquiry-account a,
+.ongyeol-inquiry .ongyeol-inquiry-topic { animation: none; transform: translateY(0); transition: none; }
+.ongyeol-inquiry-account a:hover:not(:disabled):not([aria-disabled='true']),
+.ongyeol-inquiry .ongyeol-inquiry-topic:hover:not(:disabled) {
+  background: #fee0e0;
+  color: #000;
+  border-color: #836363;
+  animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1;
+}
+.ongyeol-inquiry-account a:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: -4px -4px 10px rgba(119, 54, 54, 0.3), 4px 4px 10px rgba(119, 54, 54, 0.3);
+}
+.ongyeol-inquiry .ongyeol-inquiry-topic:hover:not(:disabled) {
+  box-shadow: -4px -4px 10px rgba(119, 54, 54, 0.3), 4px 4px 5px rgba(119, 54, 54, 0.3);
+}
+.ongyeol-inquiry-account a:active:not(:disabled):not([aria-disabled='true']),
+.ongyeol-inquiry .ongyeol-inquiry-topic:active:not(:disabled) { background: #fec9c9; }
+@keyframes ongyeol-inquiry-button-pop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-inquiry-account a:hover:not(:disabled):not([aria-disabled='true']),
+  .ongyeol-inquiry .ongyeol-inquiry-topic:hover:not(:disabled) { animation: none; transform: translateY(0); }
+}
