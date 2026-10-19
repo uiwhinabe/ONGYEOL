@@ -46,7 +46,7 @@ export default function Event() {
   const pageCount = Math.ceil(saleProducts.length / pageSize)
   const visibleProducts = saleProducts.slice((salePage - 1) * pageSize, salePage * pageSize)
 
-  return <main className="event-page">
+  return <main className="event-page"><div className="event-content">
     <h1 className="event-page-title">이벤트</h1>
     <div className="event-tabs" aria-label="이벤트 분류">
       <button className={`event-tab${activeTab === 'ongoing' ? ' event-tab-active' : ''}`} type="button" aria-pressed={activeTab === 'ongoing'} onClick={() => setActiveTab('ongoing')}>진행중 이벤트</button>
@@ -84,5 +84,5 @@ export default function Event() {
         <button type="button" className="sale-pagination-arrow" aria-label="다음 페이지" disabled={salePage === pageCount} onClick={() => setSalePage(page => Math.min(pageCount, page + 1))}>›</button>
       </nav>
     </>}
-  </main>
+  </div></main>
 }

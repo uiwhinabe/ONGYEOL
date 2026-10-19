@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import './EventDetail.css'
 
 export default function EventDetail({ title, status = '상시 이벤트', detailImage, imageAlt = title }) {
-  return <main className="event-detail-page">
+  return <main className="event-detail-page"><div className="event-detail-inner">
     <h1 className="event-detail-page-title">이벤트</h1>
     <div className="event-detail-tabs" aria-label="이벤트 분류">
       <Link className="event-detail-tab-active" to="/event?tab=ongoing">진행중 이벤트</Link>
@@ -22,5 +22,5 @@ export default function EventDetail({ title, status = '상시 이벤트', detail
     <div className="event-detail-actions">
       <Link className="event-detail-back-link" to="/event?tab=ongoing">목록으로</Link>
     </div>
-  </main>
+  </div></main>
 }

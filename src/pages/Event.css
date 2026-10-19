@@ -1,4 +1,5 @@
-.event-page { width: calc(100% - 48px); max-width: 980px; margin: 110px auto 0; padding-bottom: 130px; background: #fff; color: #111; font-family: Arial, "Noto Sans KR", sans-serif; font-size: 14px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
+.event-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; color-scheme: light; }
+.event-content { width: calc(100% - 48px); max-width: 980px; margin: 110px auto 0; padding-bottom: 130px; background: #fff; color: #111; font-family: Arial, "Noto Sans KR", sans-serif; font-size: 14px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
 .event-page *, .event-page *::before, .event-page *::after { box-sizing: border-box; }
 .event-page .event-page-title { margin: 0 0 32px; color: #111; font-family: inherit; font-size: 24px; font-weight: 700; line-height: 1.35; letter-spacing: 0; }
 .event-tabs { display: flex; align-items: center; gap: 24px; padding-bottom: 16px; border-bottom: 2px solid #222; margin-bottom: 28px; }
@@ -32,7 +33,7 @@
 .sale-pagination-number[aria-current="page"] { color: #111; font-weight: 600; }
 
 @media (min-width: 541px) and (max-width: 1024px) {
-  .event-page:has(.sale-product-grid) {
+  .event-content:has(.sale-product-grid) {
     padding-bottom: 100px;
   }
 
@@ -73,7 +74,7 @@
     font-size: 14px;
   }
 
-  .event-page {
+  .event-content {
     width: calc(100% - 52px);
     max-width: none;
     margin: 130px auto 0;
@@ -111,7 +112,7 @@
 }
 
 @media (max-width: 540px) {
-  .event-page:has(.sale-product-grid) {
+  .event-content:has(.sale-product-grid) {
     padding-bottom: 110px;
   }
 
@@ -154,7 +155,7 @@
     font-size: 14px;
   }
 
-  .event-page {
+  .event-content {
     width: calc(100% - 40px);
     max-width: none;
     margin: 100px auto 0;
