@@ -130,7 +130,7 @@ export default function Payment({ products = exampleProducts, delivery = example
     onComplete?.()
   }
 
-  return <main className="payment-page payment-main">
+  return <main className="payment-page"><div className="payment-main">
     <div className="payment-heading"><h1>결제하기</h1><p>선택하신 결제 수단으로 안전하게 결제할 수 있습니다.</p></div>
     <form className="payment-layout" ref={formRef} onSubmit={submit} noValidate>
       <div className="payment-left">
@@ -199,5 +199,5 @@ export default function Payment({ products = exampleProducts, delivery = example
         <div className="payment-actions"><button className="payment-pay-button" type="submit">결제하기 <Chevron white /></button><button className="payment-back-button" type="button" onClick={onBack}>이전으로</button></div>
       </aside>
     </form>
-  </main>
+  </div></main>
 }

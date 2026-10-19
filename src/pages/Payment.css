@@ -1,6 +1,6 @@
-.payment-page { background: #fff; color: #222; font-family: "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
+.payment-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; font-family: "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
 .payment-page *, .payment-page *::before, .payment-page *::after { box-sizing: border-box; }
-.payment-main { max-width: 1450px; width: calc(100% - 160px); margin: 78px auto 118px; }
+.payment-main { color: #222; max-width: 1450px; width: calc(100% - 160px); margin: 78px auto 118px; }
 .payment-page p { margin: 0; }
 .payment-page button, .payment-page input, .payment-page select, .payment-page textarea { font: inherit; letter-spacing: 0; }
 .payment-page h1, .payment-page h2, .payment-page h3 { font-family: inherit; }
@@ -107,7 +107,7 @@
 
 /* Payment body only: preserve desktop and future mobile styles. */
 @media (min-width: 541px) and (max-width: 1024px) {
-  .payment-main { width: calc(100% - 32px); max-width: none; margin: 48px auto 80px; }
+  .payment-main { color: #222; width: calc(100% - 32px); max-width: none; margin: 48px auto 80px; }
   .payment-heading { margin-bottom: 20px; }
   .payment-page .payment-heading h1 { font-size: 25px; }
   .payment-heading p { font-size: 14px; }
@@ -140,7 +140,7 @@
 }
 
 @media (max-width: 540px) {
-  .payment-main { width: calc(100% - 20px); max-width: none; margin: 40px auto 28px; }
+  .payment-main { color: #222; width: calc(100% - 20px); max-width: none; margin: 40px auto 28px; }
   .payment-heading { margin-bottom: 20px; padding: 0 8px; }
   .payment-page .payment-heading h1 { font-size: 20px; }
   .payment-heading p { font-size: 11px; }

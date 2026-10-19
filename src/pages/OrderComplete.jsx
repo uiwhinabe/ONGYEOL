@@ -27,7 +27,7 @@ function DeliveryNotice({ thankYou = false }) {
 
 export default function OrderComplete({ orderData = mockOrderData, onContinueShopping }) {
   const totalProductPrice = orderData.products.reduce((sum, product) => sum + product.price * product.quantity, 0)
-  return <main className="order-complete-page order-complete-main">
+  return <main className="order-complete-page"><div className="order-complete-main">
     <section className="order-complete-hero" aria-labelledby="order-complete-title">
       <img className="order-complete-success-icon" src={assets.complete} alt="" aria-hidden="true" />
       <h1 id="order-complete-title">주문이 완료되었습니다.</h1>
@@ -49,5 +49,5 @@ export default function OrderComplete({ orderData = mockOrderData, onContinueSho
         <Section title="결제 정보"><dl className="order-complete-payment-info">{[['결제수단', orderData.paymentMethod], ['카드사', orderData.payment.cardCompany], ['카드번호', orderData.payment.maskedCardNumber]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></Section>
       </aside>
     </div>
-  </main>
+  </div></main>
 }
