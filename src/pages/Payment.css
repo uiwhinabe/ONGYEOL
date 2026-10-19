@@ -32,13 +32,18 @@
 .payment-required { color: #f00; margin-left: 2px; }
 .payment-field-content { min-width: 0; }
 .payment-page input:not([type="radio"]):not([type="checkbox"]), .payment-page select { height: 35px; min-width: 0; padding: 6px 9px; border: 1px solid #aaa; border-radius: 4px; background: #fff; color: #333; }
+.payment-select-wrap { position: relative; display: inline-block; min-width: 0; vertical-align: top; }
+.payment-page .payment-select-wrap > select {
+  display: block;
+  width: 100%;
+}
 .payment-page input::placeholder { color: #ccc; opacity: 1; font-size: 12px; }
 .payment-long-input { width: 100%; }
 .payment-card-number, .payment-expiry, .payment-password, .payment-phone, .payment-email { display: flex; align-items: center; }
 .payment-card-number { gap: 9px; }
 .payment-card-number input, .payment-password input { width: 72px; }
 .payment-expiry { gap: 12px; }
-.payment-expiry select { width: 110px; }
+.payment-expiry .payment-select-wrap { width: 110px; }
 .payment-installment { width: 230px; }
 .payment-password { gap: 24px; }
 .payment-password span { color: #bbb; }
@@ -92,6 +97,14 @@
 .payment-agreement-error { padding: 0 32px 12px; }
 .payment-page input:focus-visible, .payment-page select:focus-visible, .payment-page button:focus-visible { outline: 2px solid #777; outline-offset: 2px; }
 
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .payment-card-form .payment-field {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding-inline: 24px;
+  }
+}
+
 /* Payment body only: preserve desktop and future mobile styles. */
 @media (min-width: 541px) and (max-width: 1024px) {
   .payment-main { width: calc(100% - 32px); max-width: none; margin: 48px auto 80px; }
@@ -108,7 +121,7 @@
   .payment-card-number { gap: 6px; }
   .payment-card-number input { width: 72px; flex: 0 1 72px; }
   .payment-card-number > span { flex-shrink: 0; }
-  .payment-expiry select { width: 100px; }
+  .payment-expiry .payment-select-wrap { width: 100px; }
   .payment-installment { width: 230px; max-width: 100%; }
   .payment-password { gap: 16px; }
   .payment-password input { flex-shrink: 0; width: 64px; }
@@ -150,7 +163,7 @@
   .payment-card-number input { flex: 1 1 0; width: 0; }
   .payment-card-number > span { flex-shrink: 0; }
   .payment-expiry { gap: 12px; }
-  .payment-expiry select { width: 105px; max-width: calc(50% - 6px); }
+  .payment-expiry .payment-select-wrap { width: 105px; max-width: calc(50% - 6px); }
   .payment-installment { width: 85%; }
   .payment-password { gap: 8px; }
   .payment-password input { width: 65px; flex-shrink: 0; }

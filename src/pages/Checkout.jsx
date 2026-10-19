@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import './Payment.css'
 import './Checkout.css'
 import cardIcon from '../assets/payment/card.svg'
 import bankIcon from '../assets/payment/bank.svg'
@@ -247,6 +248,8 @@ export default function Checkout({ onPayment }) {
     return () => tablet.removeEventListener('change', resetHiddenPayment)
   }, [])
 
+  const renderPaymentMethod = method => <button type="button" key={method.id} className={`payment-method checkout-payment-${method.id}${selectedPayment === method.id ? ' payment-method-active checkout-payment-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => selectPayment(method.id)}><img className="payment-method-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>
+
   return <div className="checkout-page">
     <main className="checkout-main" ref={mainRef}>
       <div className="checkout-heading"><h1>주문서 작성</h1><p>주문 정보를 입력하고 결제 수단을 선택해주세요.</p></div>
@@ -282,7 +285,11 @@ export default function Checkout({ onPayment }) {
           </Section>
 
           <Section title="결제 수단" className="checkout-payment-section">
-            <div className="checkout-payment-methods">{paymentMethods.map(method => <button type="button" key={method.id} className={`checkout-payment-${method.id}${selectedPayment === method.id ? ' checkout-payment-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => selectPayment(method.id)}><img className="checkout-payment-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>)}</div>
+            <div className="payment-method-scroll checkout-payment-methods-standard"><div className="payment-methods payment-method-row">{paymentMethods.map(renderPaymentMethod)}</div></div>
+            <div className="checkout-payment-methods-mobile">
+              <div className="checkout-payment-methods-mobile-row">{paymentMethods.slice(0, 3).map(renderPaymentMethod)}</div>
+              <div className="checkout-payment-methods-mobile-row">{paymentMethods.filter(method => method.id === 'kakao' || method.id === 'naver').map(renderPaymentMethod)}</div>
+            </div>
             {selectedPayment === 'card' && <>
             <div className="checkout-payment-row"><span>카드사 선택</span><div className="checkout-radio-group">{['신한카드', '삼성카드', '현대카드', '국민카드', '롯데카드', '비씨카드'].map(card => <Radio name="checkout-card" key={card} text={card} value={selectedCard} onChange={setSelectedCard} />)}<select aria-label="카드사 직접입력"><option>직접입력</option></select></div></div>
             <div className="checkout-payment-row"><span>할부 선택</span><div className="checkout-radio-group">{['일시불', '2개월', '3개월', '6개월', '12개월'].map(term => <Radio name="checkout-installment" key={term} text={term} value={selectedInstallment} onChange={setSelectedInstallment} />)}</div></div>

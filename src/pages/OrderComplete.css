@@ -70,6 +70,19 @@
   .order-complete-payment-info { font-size: 13px; line-height: 16.5px; }
 }
 
+/* Stack the desktop cards before product columns become cramped. */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .order-complete-layout { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .order-complete-order-box, .order-complete-sidebar { width: 100%; min-width: 0; }
+  .order-complete-order-info > div { min-width: 0; }
+  .order-complete-order-info dd { word-break: keep-all; overflow-wrap: break-word; }
+  .order-complete-product { grid-template-columns: 92px minmax(0, 1fr) 90px 60px 90px; gap: 16px; }
+  .order-complete-product-placeholder { width: 92px; height: 92px; aspect-ratio: 1; object-fit: cover; }
+  .order-complete-product-description { min-width: 0; word-break: keep-all; overflow-wrap: break-word; white-space: normal; }
+  .order-complete-product-price { min-width: 90px; text-align: right; }
+  .order-complete-product-quantity { min-width: 60px; }
+}
+
 @media (min-width: 541px) and (max-width: 1024px) {
   .order-complete-main { width: calc(100% - 32px); max-width: none; padding-bottom: 80px; }
   .order-complete-hero { padding: 150px 0 170px; }

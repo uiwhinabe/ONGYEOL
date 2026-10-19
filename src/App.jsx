@@ -31,6 +31,7 @@ import kakaoDetail from './assets/images/events/kakao-detail.png'
 
 import AuthProvider from './components/AuthProvider.jsx'
 import { useAuth } from './components/authContext.js'
+import './pages/paymentControls.css'
 
 function Layout() {
   const { pathname } = useLocation()
