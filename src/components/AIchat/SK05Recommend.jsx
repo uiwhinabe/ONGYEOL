@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
+import useTouchSwipe from './useTouchSwipe.js'
 import { InquiryAvatar, InquiryHeader, InquiryComposer } from './ChatStart.jsx'
 import stepChevron from '../../assets/images/chat/products/step-chevron.svg'
 import productChevron from '../../assets/images/chat/products/product-chevron.svg'
@@ -67,13 +68,15 @@ export default function SK05Recommend({ products, onBack, onBrowseConcerns }) {
       }
     }
   }
+  const { swipeRef, onClickCapture } = useTouchSwipe(moveProduct)
   const product = products[productStep]
   const actionContent = <>제품 보러가기<img src={productChevron} alt="" /></>
 
-  return <div className="ongyeol-inquiry ongyeol-chat-products">
+  return <div className="ongyeol-inquiry ongyeol-chat-products" onClickCapture={onClickCapture}>
     <InquiryHeader onBack={onBack} backLabel="추천 성분 화면으로 돌아가기" />
     <div className="ongyeol-chat-products-avatar"><InquiryAvatar small /></div>
-    <article className="ongyeol-chat-products-content" aria-label="추천제품" aria-live="polite"
+    <div className="ongyeol-chat-products-carousel" style={{ '--product-image-height': `${product.imageSize.height}px` }}>
+    <article ref={swipeRef} className="ongyeol-chat-products-content" aria-label="추천제품" aria-live="polite"
       data-presentation={product.presentation}
       style={{ width: product.contentWidth, top: product.contentTop }}>
       <div className="ongyeol-chat-products-motion" ref={motionRef}>
@@ -92,18 +95,19 @@ export default function SK05Recommend({ products, onBack, onBrowseConcerns }) {
       </div>
       </div>
     </article>
-    <div className="ongyeol-chat-products-actions">
-        <button className="ongyeol-chat-products-action ongyeol-chat-products-view" type="button">{actionContent}</button>
-        {productStep === products.length - 1 && <button className="ongyeol-chat-products-action ongyeol-chat-products-browse" type="button" onClick={onBrowseConcerns}>
-          다른 고민 둘러보기<img src={browseChevron} alt="" />
-        </button>}
-    </div>
     <nav className="ongyeol-chat-products-navigation" aria-label="추천제품 단계 이동">
       <button type="button" aria-label="이전 추천제품" disabled={productStep === 0}
         onClick={() => moveProduct(-1)}><img src={stepChevron} alt="" /></button>
       <button type="button" aria-label="다음 추천제품" disabled={productStep === products.length - 1}
         onClick={() => moveProduct(1)}><img src={stepChevron} alt="" /></button>
     </nav>
+    </div>
+    <div className="ongyeol-chat-products-actions">
+        <button className="ongyeol-chat-products-action ongyeol-chat-products-view" type="button">{actionContent}</button>
+        {productStep === products.length - 1 && <button className="ongyeol-chat-products-action ongyeol-chat-products-browse" type="button" onClick={onBrowseConcerns}>
+          다른 고민 둘러보기<img src={browseChevron} alt="" />
+        </button>}
+    </div>
     <InquiryComposer />
   </div>
 }

@@ -114,9 +114,26 @@
   #ai-consultation .ongyeol-chat-skin-guide-type-detail-action,
   #ai-consultation .ongyeol-chat-skin-guide-recommendation-action,
   #ai-consultation .ongyeol-delivery-action { width: 100%; }
-  #ai-consultation .ongyeol-chat-skin-guide-recommendation-content { gap: 40px; }
+  /* Both carousels reserve 20px arrow columns and 12px inner gaps.
+     The shared outer gutter grows with the viewport and respects safe areas. */
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation,
+  #ai-consultation .ongyeol-chat-products {
+    --carousel-inset-left: max(clamp(20px, 5vw, 24px), env(safe-area-inset-left, 0px));
+    --carousel-inset-right: max(clamp(20px, 5vw, 24px), env(safe-area-inset-right, 0px));
+    --carousel-width: min(404px, 100%, calc(100vw - var(--carousel-inset-left) - var(--carousel-inset-right)));
+  }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-content {
+    display: grid; grid-template-columns: 20px minmax(0, 1fr) 20px;
+    column-gap: 12px; row-gap: 40px; width: var(--carousel-width);
+  }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-message,
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-action { grid-column: 1 / -1; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-ingredients { grid-column: 2; grid-row: 2; justify-self: center; }
   #ai-consultation .ongyeol-chat-skin-guide-recommendation-action { margin-top: 10px; }
-  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation { width: calc(100% + 4px); }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation { display: contents; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button { grid-row: 2; align-self: center; justify-self: center; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button:first-child { grid-column: 1; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button:last-child { grid-column: 3; }
   #ai-consultation .ongyeol-counselor-hours { box-sizing: border-box; max-width: 100%; }
   #ai-consultation .ongyeol-delivery-action-group { width: 100%; }
   #ai-consultation .ongyeol-delivery-choices--menu { width: min(310px, 100%); grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -124,14 +141,16 @@
   #ai-consultation .ongyeol-delivery-return { width: 150px; }
 
   #ai-consultation .ongyeol-chat-products-avatar { display: none; }
-  #ai-consultation .ongyeol-chat-products-content { position: relative; top: auto !important; left: auto; transform: none; flex: none; align-self: center; width: 100% !important; max-width: 340px; margin: 50px auto 24px; }
+  #ai-consultation .ongyeol-chat-products-carousel { display: block; position: relative; flex: none; align-self: center; width: var(--carousel-width); margin: 50px auto 24px; }
+  #ai-consultation .ongyeol-chat-products-content { position: relative; top: auto !important; left: auto; transform: none; width: calc(100% - 64px) !important; min-width: 0; max-width: 340px; margin: 0 auto; }
   #ai-consultation .ongyeol-chat-products-names { width: 100%; }
   #ai-consultation .ongyeol-chat-products-names h2 { max-width: 100%; font-size: 22px; white-space: normal; text-align: center; overflow-wrap: anywhere; }
   #ai-consultation .ongyeol-chat-products-english { width: 100%; white-space: normal !important; overflow-wrap: anywhere; }
   #ai-consultation .ongyeol-chat-products-description { max-width: 100%; }
   #ai-consultation .ongyeol-chat-products-actions { position: static; transform: none; flex: none; align-self: center; width: min(296px, 100%); margin: 8px auto 32px; }
   #ai-consultation .ongyeol-chat-products-action { padding-inline: 20px; white-space: normal; }
-  #ai-consultation .ongyeol-chat-products-navigation { left: 8px; top: calc(env(safe-area-inset-top, 0px) + 230px); transform: none; width: calc(100% - 16px); }
+  #ai-consultation .ongyeol-chat-products-navigation { left: 0; top: calc(var(--product-image-height) / 2); transform: translateY(-50%); width: 100%; pointer-events: none; }
+  #ai-consultation .ongyeol-chat-products-navigation button { flex: none; pointer-events: auto; }
 
   #ai-consultation:has(.ongyeol-consultation-card) { box-sizing: border-box; padding: calc(env(safe-area-inset-top, 0px) + 80px) 20px max(20px, env(safe-area-inset-bottom, 0px)); }
   #ai-consultation .ongyeol-consultation-background { position: fixed; width: 100%; height: 100%; }
