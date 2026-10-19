@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
+import useTouchSwipe from './useTouchSwipe.js'
 import { InquiryAvatar, InquiryHeader, InquiryComposer } from './ChatStart.jsx'
 import stepChevron from '../../assets/images/chat/products/step-chevron.svg'
 import './SK04TypeDetail.css'
@@ -60,10 +61,11 @@ export default function SK04TypeDetail({ data, onBack, onContinue }) {
       }
     }
   }
+  const { swipeRef, onClickCapture } = useTouchSwipe(moveIngredient)
   return (
-    <div className="ongyeol-inquiry ongyeol-chat-skin-guide-recommendation">
+    <div className="ongyeol-inquiry ongyeol-chat-skin-guide-recommendation" onClickCapture={onClickCapture}>
       <InquiryHeader onBack={onBack} backLabel="피부 타입 안내 화면으로 돌아가기" />
-      <div className="ongyeol-chat-skin-guide-recommendation-content">
+      <div ref={swipeRef} className="ongyeol-chat-skin-guide-recommendation-content">
         <div className="ongyeol-chat-skin-guide-recommendation-message">
           <InquiryAvatar small />
           <div className="ongyeol-chat-skin-guide-recommendation-copy">

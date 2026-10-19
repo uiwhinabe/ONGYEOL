@@ -35,3 +35,4 @@
 .ongyeol-chat-products-navigation img { display: block; width: 15px; height: 15px; }
 .ongyeol-chat-products-navigation button:last-child img { transform: scaleX(-1); }
 .ongyeol-chat-products .ongyeol-inquiry-composer { left: 22px; top: 646px; }
+.ongyeol-chat-products-carousel { display: contents; }
