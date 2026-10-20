@@ -9,6 +9,7 @@ import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
 import IdentityVerification from './pages/IdentityVerification.jsx'
 import Wishlist, { WishlistProductDetail } from './pages/Wishlist.jsx'
+import ContactUs from './pages/Contact Us.jsx'
 import AuthProvider from './components/AuthProvider.jsx'
 import { useAuth } from './components/authContext.js'
 function Layout() {
@@ -24,6 +25,7 @@ function Layout() {
     <div className={`ongyeol-layout${isLogin ? ' ongyeol-layout--login' : ''}${isWishlist ? ' ongyeol-layout--wishlist' : ''}`}>
       <Header chatOpen={chatOpen} isAuthenticated={isAuthenticated} onLogin={enterLogin} onLogout={logout} accountLinks={{ login: '/login', signup: '/signup' }} />
       <Routes>
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/products/:id" element={<WishlistProductDetail />} />
         <Route path="/login" element={<Login />} />

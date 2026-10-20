@@ -276,3 +276,6 @@
 @media (max-width: 1199px) {
   .ongyeol-header-bar { padding-right: 24px; }
 }
+
+/* Keep the existing desktop support icon clickable. */
+.ongyeol-header-support { cursor: pointer; }

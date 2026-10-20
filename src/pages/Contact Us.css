@@ -112,7 +112,7 @@
 @media (max-width: 599px) {
   .contact-page { padding: 48px 16px 80px; }
   .contact-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .contact-sidebar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 20px; border-radius: 12px; }
+  .contact-sidebar { display: none; }
   .contact-sidebar-group { margin: 0; padding: 0 0 12px; }
   .contact-sidebar-group:last-child { border-bottom: 1px solid #ccc; }
   .contact-sidebar-heading { font-size: 16px; }
@@ -123,5 +123,10 @@
   .contact-faq { margin-top: 60px; }
   .contact-faq-trigger { min-height: 44px; }
   .contact-faq-note { font-size: 12px; }
-  .contact-benefits { margin-top: 48px; }
+  .contact-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 48px; }
+  .contact-benefit { min-width: 0; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .contact-benefit-icon { width: 36px; height: 36px; color: #000; }
+  .contact-benefit-text { width: 100%; min-width: 0; overflow-wrap: anywhere; }
+  .contact-benefit-title { margin-bottom: 6px; color: #000; font-size: 14px; font-weight: 700; }
+  .contact-benefit-description { font-size: 11px; line-height: 1.5; }
 }
