@@ -62,6 +62,19 @@
   letter-spacing: normal;
 }
 
+.shop-dropdown-title-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.shop-dropdown-title-button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+
 .shop-dropdown-list {
   display: flex;
   flex-direction: column;

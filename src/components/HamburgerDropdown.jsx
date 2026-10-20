@@ -26,10 +26,16 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
             const open = expanded.includes(index)
             return (
               <div key={title}>
-                <button className="ongyeol-hd-category" type="button" aria-expanded={open} aria-controls={`hd-items-${index}`}
-                  onClick={() => setExpanded((values) => open ? values.filter((value) => value !== index) : [...values, index])}>
-                  <span>{title}</span><span className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} aria-hidden="true" />
-                </button>
+                <div className="ongyeol-hd-category">
+                  <button className="ongyeol-hd-title" type="button" onClick={() => {
+                    controller.close()
+                    navigateToProducts(['type', 'line', 'concern'][index], index === 0 ? '전체' : items[0], navigate)
+                  }}>{title}</button>
+                  <button className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} type="button"
+                    aria-label={`${title} 하위 메뉴 ${open ? '접기' : '펼치기'}`}
+                    aria-expanded={open} aria-controls={`hd-items-${index}`}
+                    onClick={() => setExpanded((values) => open ? values.filter((value) => value !== index) : [...values, index])} />
+                </div>
                 <ul className="ongyeol-hd-items" id={`hd-items-${index}`} hidden={!open}>
                   {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" onClick={() => {
                     controller.close()
