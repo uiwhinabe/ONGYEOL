@@ -28,11 +28,13 @@
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-240, .mp-view-240 .mp-view-34) { width: 100%; min-width: 0; }
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-241, .mp-view-243) { font-size: 16px; line-height: 22px; white-space: normal; text-align: center; overflow-wrap: anywhere; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-240 .mp-view-52 { width: 100%; min-width: 0; flex-shrink: 1; font-size: 12px; line-height: 16px; white-space: normal; text-align: center; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-245 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; max-width: 360px; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-246 { width: 100%; max-width: 110px; height: auto; min-height: 90px; padding-inline: 4px; overflow: visible; }
+  /* Use two full-width columns for readable mobile copy; stretch cards to each row's content height.
+     Override the shared JSX's inline start alignment only for the mobile summary. */
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-245 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: start; justify-items: stretch; align-items: stretch !important; gap: 15px; width: 100%; margin-inline: 0; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-246 { width: 100%; min-width: 0; height: auto; min-height: 90px; padding-inline: 4px; overflow: visible; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 { width: 100%; min-width: 0; gap: 8px !important; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-249 { max-width: 100%; font-size: 16px; line-height: 22px; white-space: normal; overflow-wrap: anywhere; text-align: center; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 .mp-view-182 { max-width: 100%; font-size: 12px; line-height: 16px !important; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-249 { width: 100%; min-width: 0; max-width: 100%; font-size: 16px; line-height: 22px; white-space: normal; overflow-wrap: anywhere; text-align: center; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 .mp-view-182 { width: 100%; min-width: 0; max-width: 100%; font-size: 12px; line-height: 16px !important; overflow-wrap: anywhere; }
 
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-257 { width: 100%; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-259 { font-size: 24px; line-height: 33px; }
