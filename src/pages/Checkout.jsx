@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocation } from 'react-router-dom'
+import { calculateShippingFee } from '../utils/orderPricing.js'
 import './Payment.css'
 import './Checkout.css'
 import cardIcon from '../assets/payment/card.svg'
@@ -120,11 +122,12 @@ function Amount({ label, amount, large = false }) {
 }
 
 export default function Checkout({ onPayment }) {
-  const [products, setProducts] = useState(initialProducts)
+  const location = useLocation()
+  const [products, setProducts] = useState(() => location.state?.cartItems ?? initialProducts)
   const [quantityDrafts, setQuantityDrafts] = useState({})
   const totalProductQuantity = products.reduce((total, product) => total + product.quantity, 0)
   const totalProductPrice = products.reduce((total, product) => total + product.price * product.quantity, 0)
-  const shippingFee = products.length === 0 || totalProductPrice >= 50000 ? 0 : 3000
+  const shippingFee = calculateShippingFee(totalProductPrice, products.length)
   const totalPaymentPrice = totalProductPrice + shippingFee
 
   function changeQuantity(id, change) {

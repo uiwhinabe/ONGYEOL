@@ -23,6 +23,7 @@ import SignupComplete from './pages/SignupComplete.jsx'
 import IdentityVerification from './pages/IdentityVerification.jsx'
 
 import Checkout from './pages/Checkout.jsx'
+import Cart from './pages/Cart.jsx'
 import Payment from './pages/Payment.jsx'
 import OrderComplete from './pages/OrderComplete.jsx'
 
@@ -129,6 +130,7 @@ function Layout() {
         />
 
         {/* 주문서 작성 */}
+        <Route path="/cart" element={<Cart />} />
         <Route
           path="/checkout"
           element={
