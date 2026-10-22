@@ -1,4 +1,4 @@
-.contact-page { box-sizing: border-box; width: 100%; min-width: 0; padding: 240px 24px 160px; background: #fff; color: #111; color-scheme: light; font: 400 16px/1.5 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif; letter-spacing: normal; text-align: left; }
+.contact-page { box-sizing: border-box; width: 100%; min-width: 0; padding: 240px 24px 460px; background: #fff; color: #111; color-scheme: light; font: 400 16px/1.5 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif; letter-spacing: normal; text-align: left; }
 .contact-page * { box-sizing: border-box; }
 .contact-page :where(button, input, textarea) { font: inherit; color: inherit; }
 .contact-page :is(button, input, textarea, a):focus-visible { outline: 2px solid #111; outline-offset: 3px; }
@@ -35,7 +35,7 @@
 .contact-input { width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; background: #fff; font-size: 14px; }
 .contact-field-content { margin-bottom: 0; }
 .contact-textarea-wrap { position: relative; min-width: 0; }
-.contact-textarea { display: block; width: 100%; min-height: 145px; padding: 12px 12px 36px; border: 1px solid #111; border-radius: 4px; background: #fff; resize: vertical; font-size: 14px; line-height: 1.5; }
+.contact-textarea { display: block; width: 100%; min-height: 145px; padding: 12px 12px 36px; border: 1px solid #111; border-radius: 4px; background: #fff; resize: none; font-size: 14px; line-height: 1.5; }
 .contact-character-count { position: absolute; right: 12px; bottom: 10px; color: #777; font-size: 12px; pointer-events: none; }
 .contact-file-controls { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
 .contact-attachment { min-width: 0; }
@@ -96,7 +96,7 @@
   .contact-benefit { gap: 10px; }
 }
 @media (max-width: 834px) {
-  .contact-page { padding: 80px 20px 100px; }
+  .contact-page { padding: 80px 20px 400px; }
   .contact-layout { grid-template-columns: 170px minmax(0, 1fr); gap: 20px; }
   .contact-sidebar { padding: 20px 14px; }
   .contact-sidebar-heading { font-size: 17px; }
@@ -110,7 +110,7 @@
   .contact-benefits { flex-wrap: wrap; gap: 28px; }
 }
 @media (max-width: 599px) {
-  .contact-page { padding: 48px 16px 80px; }
+  .contact-page { padding: 48px 16px 380px; }
   .contact-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .contact-sidebar { display: none; }
   .contact-sidebar-group { margin: 0; padding: 0 0 12px; }

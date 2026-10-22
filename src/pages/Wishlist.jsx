@@ -153,18 +153,8 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
   const [previousWishlist, setPreviousWishlist] = useState(wishlist)
   const { popup, setPopup, closePopup, perform } = useWishlistPopup()
   const { page, pageCount, items } = paginateWishlist(wishlist, requestedPage)
-  const listTopRef = useRef(null)
-  const previousPageRef = useRef(page)
   const [heartError, setHeartError] = useState('')
-  useEffect(() => {
-    if (previousPageRef.current !== page) {
-      listTopRef.current?.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-        block: 'start',
-      })
-      previousPageRef.current = page
-    }
-  }, [page])
+  const [animatingHearts, setAnimatingHearts] = useState([])
   const selected = wishlist.filter((p) => selection.includes(p.id))
   const allChecked = wishlist.length > 0 && selected.length === wishlist.length
   if (previousWishlist !== wishlist) {
@@ -184,6 +174,7 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
   }
   function movePage(next) {
     setPage(Math.max(1, Math.min(next, pageCount)))
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
   function unlike(product) {
     try {
@@ -201,7 +192,7 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
     }
   }
   return <main className="wishlist-page">
-    <h1 ref={listTopRef}>찜 목록</h1>
+    <h1>찜 목록</h1>
     <div className="wishlist-toolbar">
       <span>전체 ({wishlist.length})</span>
       <div className="wishlist-tools">
@@ -210,7 +201,7 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
             const checked = event.target.checked
             setSelection(checked ? wishlist.map((p) => p.id) : [])
           }} />전체 선택</label>
-        <button className="wishlist-hover-cart" type="button" disabled={!selected.length} onClick={() => perform(() => onAddCart(selected), '선택한 상품을 장바구니에 담았습니다.', 'cart')}>선택 상품 장바구니 담기</button>
+        <button className="wishlist-hover-cart" type="button" disabled={!selected.length} onClick={() => perform(() => onAddCart(selected), '선택한 상품을 장바구니에 담았습니다.', 'cart')}><span>선택 상품 장바구니 담기</span></button>
         <button className="wishlist-hover-delete" type="button" disabled={!selected.length} onClick={() => remove(selected, true)}><span className="wishlist-delete-label">선택 삭제</span></button>
       </div>
     </div>
@@ -229,20 +220,33 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
           </div>
           <Link className="wishlist-product-name" to={preview ? '/wishlist' : `/products/${encodeURIComponent(product.id)}`} onClick={handleProductLink}>{product.name}</Link>
           <div className="wishlist-price-row"><Price product={product} />
-            <button className="wishlist-heart" type="button" aria-label={`${product.name} 찜 해제`} aria-pressed="true" onClick={() => unlike(product)}>♥</button>
+            <button className={`wishlist-heart${animatingHearts.includes(product.id) ? ' wishlist-heart-animating' : ''}`} type="button" aria-label={`${product.name} 찜 해제`} aria-pressed="true"
+              onClick={(event) => {
+                if (animatingHearts.includes(product.id)) return
+                const touch = event.nativeEvent.pointerType === 'touch'
+                  || !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+                if (touch && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  setAnimatingHearts((current) => [...current, product.id])
+                } else unlike(product)
+              }}
+              onAnimationEnd={() => {
+                if (!animatingHearts.includes(product.id)) return
+                setAnimatingHearts((current) => current.filter((id) => id !== product.id))
+                unlike(product)
+              }}>♥</button>
           </div>
           <div className="wishlist-card-actions">
-            <button className="wishlist-cart-button wishlist-hover-cart" type="button" aria-label={`${product.name} 장바구니 담기`} onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.', 'cart')}><svg className="wishlist-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M3 3h2l3 12h11l2-8H6" /><circle cx="9" cy="20" r="1" /><circle cx="18" cy="20" r="1" /></svg><span className="wishlist-cart-text">장바구니 담기</span></button>
-            <button className="wishlist-desktop-delete wishlist-hover-delete" type="button" onClick={() => remove([product])}><span className="wishlist-delete-label">삭제</span></button>
-            <button className="wishlist-mobile-cart-text wishlist-hover-cart" type="button" onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.', 'cart')}> 장바구니 담기</button>
+            <button className="wishlist-cart-button wishlist-hover-cart" type="button" aria-label={`${product.name} 장바구니 담기`} onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.', 'cart')}><span className="wishlist-cart-text">장바구니 담기</span></button>
+            <button className="wishlist-buy-button" type="button" disabled title="구매 기능 준비 중"><span>바로구매</span></button>
           </div>
         </li>)}
       </ul>
     </>}
       <nav className="wishlist-pagination" aria-label="찜 목록 페이지">
-        <button className="wishlist-pagination-arrow" type="button" disabled={page === 1} aria-label="이전 페이지" onClick={() => movePage(page - 1)}><span aria-hidden="true">&lt;</span></button>
-        <button type="button" aria-label={`${page} 페이지`} aria-current="page">{page}</button>
-        <button className="wishlist-pagination-arrow" type="button" disabled={page === pageCount} aria-label="다음 페이지" onClick={() => movePage(page + 1)}><span aria-hidden="true">&gt;</span></button>
+        <button className="wishlist-pagination-arrow" type="button" disabled={page === 1} aria-label="이전 페이지" onClick={() => movePage(page - 1)}><span aria-hidden="true">◀</span></button>
+        {Array.from({ length: pageCount }, (_, index) => index + 1).map((number) =>
+          <button key={number} type="button" aria-label={`${number} 페이지`} aria-current={page === number ? 'page' : undefined} onClick={() => movePage(number)}>{number}</button>)}
+        <button className="wishlist-pagination-arrow" type="button" disabled={page === pageCount} aria-label="다음 페이지" onClick={() => movePage(page + 1)}><span aria-hidden="true">▶</span></button>
       </nav>
     <WishlistPopup popup={popup} onClose={closePopup} />
   </main>
