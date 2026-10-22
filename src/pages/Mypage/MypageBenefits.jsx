@@ -1,10 +1,11 @@
+import { DEFAULT_USER_NAME } from './mypageUser.js'
 import imgLine9 from '../../assets/mypage/screens/31115.svg'
 
 export default function MypageBenefits() {
   return (
     <div className="mp-view-94" data-node-id="2275:24087" data-name="1.등급">
                 <p className="mp-view-3" data-node-id="2275:24088" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                  <span className="mp-view-4">{`이다빈님의 `}</span>
+                  <span className="mp-view-4">{`${DEFAULT_USER_NAME}님의 `}</span>
                   <span className="mp-view-5" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     회원등급은
                   </span>

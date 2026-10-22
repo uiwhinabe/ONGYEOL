@@ -1,3 +1,4 @@
+import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { useId, useRef, useState } from 'react'
 import MypageBenefits from './MypageBenefits.jsx'
 import summaryLine from './tablet-summary-line.svg'
@@ -13,7 +14,7 @@ export function ShoppingBenefits() {
   return <>
     <MypageBenefits />
     <section className="mp-shopping-benefits" aria-label="회원등급 및 혜택">
-      <p>김온결님은 Welcome등급 <span>입니다.</span></p>
+      <p>{DEFAULT_USER_NAME}님은 Welcome등급 <span>입니다.</span></p>
       <div className="mp-shopping-benefit-items">
         {[['쿠폰', '1장'], ['주문현황', '배송중 1건'], ['찜한 제품', '3개']].map(([label, value], index) =>
           <div className="mp-shopping-benefit-item" key={label}>
@@ -53,7 +54,7 @@ export function ShoppingPeriod({ value, onChange }) {
     }
   }}>
     <button ref={trigger} type="button" aria-label="기간 선택" aria-haspopup="listbox" aria-expanded={open} aria-controls={id} onClick={() => setOpen(previous => !previous)}>
-      <span>{label}</span><img src={chevron} alt="" />
+      <span className="mp-button-label"><span className="mp-button-text">{label}</span></span><img src={chevron} alt="" />
     </button>
     {open && <div id={id} role="listbox" aria-label="조회 기간">
       {periods.map(period => <button key={period} type="button" role="option" aria-selected={value === period} onClick={() => choose(period)}>{period}</button>)}

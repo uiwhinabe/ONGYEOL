@@ -1,3 +1,4 @@
+import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { getIngredients } from './skinProfileData.js'
 import useSkinProfile from './useSkinProfile.js'
 import tabletMore from './tablet-skin-more.svg'
@@ -24,7 +25,7 @@ export default function MypageSkin() {
               <div className="mp-view-221" data-node-id="2275:25645" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                 <p className="mp-view-222">
                   <span className="mp-view-223" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                    이다빈님
+                    {DEFAULT_USER_NAME}님
                   </span>
                   <span className="mp-view-4">{` `}</span>
                 </p>
@@ -41,8 +42,8 @@ export default function MypageSkin() {
                 </p>
               </div>
               <a href="/mypage/skin/settings" className="mp-screen-action mp-view-227" data-node-id="2275:25646">
-                <p className="mp-view-25" data-node-id="2275:25647" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                  다시 설정
+                <p className="mp-view-25 mp-button-label" data-node-id="2275:25647" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  <span className="mp-button-text">다시 설정</span>
                 </p>
               </a>
               <button

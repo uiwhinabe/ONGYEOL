@@ -143,8 +143,8 @@ export default function MypageAddressDialog({ value, editing = false, onChange, 
             </div>
             <div className="mp-view-146" data-node-id="2275:24389">
               <button type="button" onClick={onClose} style={{ ...inputStyle, cursor: 'pointer' }} className="mp-screen-action mp-view-147" data-node-id="2275:24390">
-                <p className="mp-view-145" data-node-id="2275:24391" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                  취소
+                <p className="mp-view-145 mp-button-label" data-node-id="2275:24391" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  <span className="mp-button-text">취소</span>
                 </p>
               </button>
               <button type="submit" style={{ margin: 0, cursor: 'pointer', font: 'inherit' }} className="mp-screen-action mp-view-148" data-node-id="2275:24392">

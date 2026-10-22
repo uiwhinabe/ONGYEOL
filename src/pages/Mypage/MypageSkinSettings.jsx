@@ -26,6 +26,10 @@ export default function MypageSkinSettings() {
   }, [memoDraft, update])
   const controlStyle = { margin: 0, font: 'inherit', color: 'inherit', textAlign: 'inherit', cursor: 'pointer' }
 
+  function saveProfile() {
+    update({ skinType: profile.skinType, concerns: profile.concerns, memo: memoDraft })
+  }
+
   return (
     <div className="mp-view-256 mp-skin-settings" data-node-id="2275:25859" data-name="나의 피부정보">
           <div className="mp-view-257" data-node-id="2275:25860" data-name="나의 피부 정보 상단">
@@ -264,6 +268,7 @@ export default function MypageSkinSettings() {
               </div>
             </div>
           </div>
+          <div className="mp-skin-settings-final">
           <div className="mp-view-326" data-node-id="2275:25961">
             <div className="mp-view-327" data-node-id="2275:25962">
               <div className="mp-view-328" data-node-id="2275:25963" data-name="피부타입 T + F">
@@ -299,14 +304,18 @@ export default function MypageSkinSettings() {
               </div>
               <div className="mp-view-329" data-node-id="2275:25976">
                 <div className="mp-view-271" data-node-id="2275:25977">
-                  <input aria-label="피부 고민 메모" className="mp-view-330" value={memoDraft} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => { update({ memo: event.target.value }); setMemoDraft(event.target.value) }} style={{ width: '100%', height: '100%', padding: 0, border: 0, margin: 0, background: 'transparent' }} />
+                  <textarea rows={1} aria-label="피부 고민 메모" className="mp-view-330" value={memoDraft} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => { update({ memo: event.target.value }); setMemoDraft(event.target.value) }} style={{ width: '100%', height: '100%', padding: 0, border: 0, margin: 0, background: 'transparent' }} />
                 </div>
                 <div className="mp-skin-tablet-memo">
                   <textarea aria-label="피부 고민 메모" value={memoDraft} placeholder="ex) 환절기에 피부가 더 예민해져요" onChange={event => setMemoDraft(event.target.value)} />
-                  <div><button type="button" onClick={() => update({ memo: memoDraft })}>저장하기</button></div>
+                  <div><button type="button" onClick={saveProfile}>저장하기</button></div>
                 </div>
               </div>
             </div>
+          </div>
+          <button type="button" className="mp-screen-action mp-skin-settings-save" onClick={saveProfile} data-node-id="2814:5576">
+            <span className="mp-button-label"><span className="mp-button-text">저장</span></span>
+          </button>
           </div>
         </div>
   )

@@ -20,6 +20,16 @@
   border-color: currentColor;
 }
 .ongyeol-mypage-screens p { margin: 0; }
+@media (max-width: 767px) {
+  /* All total-count headings share the same spacing after a title or period. */
+  .ongyeol-mypage-screens :is(.mp-shopping, .mp-address-empty, .mp-address-populated) :is(.mp-view-71, .mp-view-103) > .mp-view-72 {
+    margin-inline-start: 8px;
+  }
+  .ongyeol-mypage-screens :is(.mp-shopping, .mp-address-empty, .mp-address-populated) :is(.mp-view-71, .mp-view-103):has(> .mp-view-72) {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
 .ongyeol-mypage-screens ul { margin: 0; padding-left: 18px; }
 .ongyeol-mypage-screens li { margin: 0; }
 .ongyeol-mypage-screens img { display: block; max-width: none; }
@@ -27,6 +37,39 @@
 .ongyeol-mypage-screens .mp-page-heading a { color: inherit; text-decoration: none; }
 .ongyeol-mypage-screens .mp-screen-action { color: inherit; text-decoration: none; cursor: pointer; }
 .ongyeol-mypage-screens .mp-screen-action:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+/* Keep the original line box (and auto-sized button geometry) while centering
+   the font's cap-to-baseline text box inside it. No positional offsets. */
+.ongyeol-mypage-screens .mp-button-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1lh;
+  text-align: center;
+}
+.ongyeol-mypage-screens .mp-button-text {
+  text-box: trim-both cap alphabetic;
+}
+/* Noto Sans KR contributes a taller normal line box than the Latin face.
+   Retain that 24px box for the content-sized 16px period/query buttons. */
+.ongyeol-mypage-screens .mp-view-25.mp-button-label,
+.ongyeol-mypage-screens .mp-address-query > .mp-button-label {
+  min-height: 1.5em;
+}
+/* This label was exported as two absolutely positioned text frames. */
+.ongyeol-mypage-screens .mp-skin-settings .mp-view-318 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ongyeol-mypage-screens .mp-skin-settings .mp-view-319 {
+  position: static;
+  translate: none;
+  width: auto;
+  height: auto;
+}
+.ongyeol-mypage-screens .mp-skin-settings .mp-view-320 {
+  position: static;
+}
 .ongyeol-mypage-screens .mp-dialog-overlay {
   position: fixed;
   inset: 0;

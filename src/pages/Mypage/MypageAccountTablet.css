@@ -1,3 +1,10 @@
+.ongyeol-mypage-screens .mp-account-help .mp-view-123 > .mp-view-62:has(> [data-name='이름']),
+.ongyeol-mypage-screens .mp-account-help .mp-view-123 > .mp-view-62:has(> [data-name='이름']) ~ :not(.mp-view-195) {
+  /* Hide name through address, including their separators, only in help.
+     Keep the mounted fields and layout so values and popup geometry survive. */
+  visibility: hidden;
+}
+
 @media (min-width: 768px) and (max-width: 1432px) {
   .ongyeol-mypage-screens:has(.mp-account-tablet) { padding-top: 15px; min-height: 1183px; }
   .ongyeol-mypage-screens:has(.mp-account-password) { min-height: 1312px; }

@@ -19,13 +19,13 @@ export default function MypageAddresses({ onAdd }) {
                   Keep the original presentation disabled until its contract is supplied. */}
               <div className="mp-address-period" role="group" aria-label="기간조회">
                 <span className="mp-address-period-label">기간조회</span>
-                <button type="button" disabled className="mp-address-period-select">최근 3개월<img src={periodChevron} alt="" /></button>
+                <button type="button" disabled className="mp-address-period-select"><span className="mp-button-label"><span className="mp-button-text">최근 3개월</span></span><img src={periodChevron} alt="" /></button>
                 <div className="mp-address-dates">
                   <div><input aria-label="시작 날짜" value="2026-09-03" disabled readOnly /><img src={calendar} alt="" /></div>
                   <span>~</span>
                   <div><input aria-label="종료 날짜" value="2026-09-10" disabled readOnly /><img src={calendar} alt="" /></div>
                 </div>
-                <button type="button" disabled className="mp-address-query">조회</button>
+                <button type="button" disabled className="mp-address-query"><span className="mp-button-label"><span className="mp-button-text">조회</span></span></button>
               </div>
               <div className="mp-view-36" data-node-id="2275:23862" data-name="최근주문정보 전체">
                 <div className="mp-view-84" data-node-id="2275:23863">

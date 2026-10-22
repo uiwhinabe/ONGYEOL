@@ -1,3 +1,4 @@
+import { DEFAULT_USER_NAME } from './mypageUser.js'
 import './MypageAccountTablet.css'
 import './MypageAccountMobile.css'
 import { useRef, useState } from 'react'
@@ -77,16 +78,16 @@ export default function MypageAccountPassword() {
               </div>
               <div className="mp-view-132" data-node-id="2275:25358">
                 <a href="/mypage/account" className="mp-screen-action mp-view-155" data-node-id="2275:25359" data-name="비밀번호 설정">
-                  <p className="mp-view-46" data-node-id="2275:25360" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                    비밀번호 설정
+                  <p className="mp-view-46 mp-button-label" data-node-id="2275:25360" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    <span className="mp-button-text">비밀번호 설정</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:25361" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
                 </a>
                 <a href="/mypage/account/password-help" className="mp-screen-action mp-view-156" data-node-id="2275:25363" data-name="비밀번호 도움말">
-                  <p className="mp-view-46" data-node-id="2275:25364" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                    비밀번호 도움말
+                  <p className="mp-view-46 mp-button-label" data-node-id="2275:25364" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    <span className="mp-button-text">비밀번호 도움말</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:25365" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
@@ -133,7 +134,7 @@ export default function MypageAccountPassword() {
               </div>
               <div className="mp-view-154" data-node-id="2275:25384">
                 <p className="mp-view-25" data-node-id="2275:25385" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                  이다빈
+                  {DEFAULT_USER_NAME}
                 </p>
               </div>
             </div>
@@ -249,8 +250,8 @@ export default function MypageAccountPassword() {
                     </div>
                   </div>
                   <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25435" data-name="직접입력">
-                    <p className="mp-view-170" data-node-id="2275:25436" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      직접입력
+                    <p className="mp-view-170 mp-button-label" data-node-id="2275:25436" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                      <span className="mp-button-text">직접입력</span>
                     </p>
                     <div className="mp-view-30" data-node-id="2275:25437" data-name="akar-icons:chevron-down-small">
                       <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />

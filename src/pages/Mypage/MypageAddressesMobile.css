@@ -16,7 +16,8 @@
   :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; white-space: nowrap; }
   :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-divider { position: absolute; top: -13px; left: calc(-1 * clamp(24px, calc((100vw - 302px) / 2), 50px) / 2); width: 0; height: 80px; }
   :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-divider img { position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-address-period { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 34px; gap: 10px; }
+  /* Address lists need no date filter on mobile; remove its entire layout box. */
+  :is(.mp-address-empty, .mp-address-populated) .mp-address-period { display: none; }
   :is(.mp-address-empty, .mp-address-populated) .mp-address-period-label { font-size: 16px; line-height: 22px; font-weight: 500; }
   :is(.mp-address-empty, .mp-address-populated) .mp-address-period-select { display: flex; align-items: center; justify-content: space-between; flex: none; width: 129px; height: 34px; margin: 0; padding: 5px 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; opacity: 1; font: 14px/22px 'Ongyeol Mypage Inter', sans-serif; }
   :is(.mp-address-empty, .mp-address-populated) :is(.mp-address-dates, .mp-address-query) { display: none; }

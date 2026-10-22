@@ -1,3 +1,4 @@
+import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { useRef, useState } from 'react'
 import imgLine9 from '../../assets/mypage/screens/31115.svg'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
@@ -111,28 +112,28 @@ export default function MypageCoupons() {
                   <ShoppingPeriod value={selectedPeriod} onChange={selectPeriod} />
                   <div className="mp-view-23" data-node-id="2275:23567" data-name="전체 날짜 T">
                     <button type="button" aria-pressed={selectedPeriod === '오늘'} onClick={() => selectPeriod('오늘')} style={controlStyle} className="mp-view-24" data-node-id="2275:23568">
-                      <p className="mp-view-25" data-node-id="2275:23569" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        오늘
+                      <p className="mp-view-25 mp-button-label" data-node-id="2275:23569" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        <span className="mp-button-text">오늘</span>
                       </p>
                     </button>
                     <button type="button" aria-pressed={selectedPeriod === '7일'} onClick={() => selectPeriod('7일')} style={controlStyle} className="mp-view-24" data-node-id="2275:23570">
-                      <p className="mp-view-25" data-node-id="2275:23571" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        7일
+                      <p className="mp-view-25 mp-button-label" data-node-id="2275:23571" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        <span className="mp-button-text">7일</span>
                       </p>
                     </button>
                     <button type="button" aria-pressed={selectedPeriod === '1개월'} onClick={() => selectPeriod('1개월')} style={controlStyle} className="mp-view-26" data-node-id="2275:23572">
-                      <p className="mp-view-25" data-node-id="2275:23573" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        1개월
+                      <p className="mp-view-25 mp-button-label" data-node-id="2275:23573" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        <span className="mp-button-text">1개월</span>
                       </p>
                     </button>
                     <button type="button" aria-pressed={selectedPeriod === '3개월'} onClick={() => selectPeriod('3개월')} style={controlStyle} className="mp-view-26" data-node-id="2275:23574">
-                      <p className="mp-view-25" data-node-id="2275:23575" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        3개월
+                      <p className="mp-view-25 mp-button-label" data-node-id="2275:23575" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        <span className="mp-button-text">3개월</span>
                       </p>
                     </button>
                     <button type="button" aria-pressed={selectedPeriod === '1년'} onClick={() => selectPeriod('1년')} style={controlStyle} className="mp-view-24" data-node-id="2275:23576">
-                      <p className="mp-view-25" data-node-id="2275:23577" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                        1년
+                      <p className="mp-view-25 mp-button-label" data-node-id="2275:23577" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        <span className="mp-button-text">1년</span>
                       </p>
                     </button>
                   </div>
@@ -159,8 +160,8 @@ export default function MypageCoupons() {
                   </div>
                 </div>
                 <button type="submit" style={controlStyle} className="mp-view-24" data-node-id="2275:23591">
-                  <p className="mp-view-25" data-node-id="2275:23592" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                    조회
+                  <p className="mp-view-25 mp-button-label" data-node-id="2275:23592" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    <span className="mp-button-text">조회</span>
                   </p>
                 </button>
               </div>
@@ -247,9 +248,9 @@ export function MobileCouponCard({ coupon }) {
 function CouponBenefits({ count }) {
   return (
     <div className="mp-view-94" data-node-id="2275:24087" data-name="1.등급">
-                <p className="mp-coupon-tablet-greeting">김온결님은 Welcome등급 <span>입니다.</span></p>
+                <p className="mp-coupon-tablet-greeting">{DEFAULT_USER_NAME}님은 Welcome등급 <span>입니다.</span></p>
                 <p className="mp-view-3" data-node-id="2275:24088" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                  <span className="mp-view-4">{`이다빈님의 `}</span>
+                  <span className="mp-view-4">{`${DEFAULT_USER_NAME}님의 `}</span>
                   <span className="mp-view-5" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     회원등급은
                   </span>

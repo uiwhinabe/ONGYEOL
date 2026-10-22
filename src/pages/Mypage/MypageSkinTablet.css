@@ -1,12 +1,59 @@
 .mp-skin-tablet-more, .mp-skin-tablet-memo, .mp-skin-type-tablet-copy { display: none; }
 
+/* Wrap long notes and scroll vertically without moving the save action. */
+.ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-330, .mp-skin-tablet-memo textarea) {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none;
+}
+
+/* Figma 2814:5576: 200 x 50, 45px below the desktop memo section.
+   Keep the existing section gaps and place the new action in normal flow. */
+.ongyeol-mypage-screens .mp-skin-settings .mp-skin-settings-final {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  width: 100%;
+}
+.ongyeol-mypage-screens .mp-skin-settings .mp-skin-settings-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex: none;
+  width: 200px;
+  max-width: 100%;
+  height: 50px;
+  margin: 0;
+  padding: 10px;
+  border: 0;
+  border-radius: 50px;
+  background: #000;
+  color: #fff;
+  font: 400 20px/normal 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .ongyeol-mypage-screens .mp-skin-settings .mp-skin-settings-final { gap: 35px; }
+}
+
 @media (min-width: 1433px) {
+  /* Match the existing tablet/mobile selected state; retain card type colors. */
+  .ongyeol-mypage-screens .mp-skin-settings button[aria-pressed='true'] { background-color: #ffe6e6 !important; }
   /* Keep the 250px cards and 60px gaps; the negative right inset only
      stretched the wrapper beyond its parent, not the visible cards. */
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-315 { right: auto; width: max-content; max-width: calc(100% - 30px); }
 }
 
 @media (min-width: 768px) and (max-width: 1432px) {
+  /* Tablet already has its explicit memo save action. */
+  .ongyeol-mypage-screens .mp-skin-settings .mp-skin-settings-save { display: none; }
   /* Figma 2275:27005: content ends at 921, Footer starts at 954.
      Figma 2275:26800: content ends at 1525, Footer starts at 1702.
      Use the design's bottom spacing in normal flow so added content
@@ -50,12 +97,13 @@
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-318, .mp-view-323) { width: 180px; height: 54px; padding-inline: 10px; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-322 { display: none; }
   .ongyeol-mypage-screens .mp-skin-settings button[aria-pressed='true'] { background-color: #ffe6e6 !important; }
-  .ongyeol-mypage-screens .mp-skin-settings .mp-view-327 { position: relative; inset: auto; width: 680px; height: 291px; }
+  /* Fill the memo card content box after its border and padding. */
+  .ongyeol-mypage-screens .mp-skin-settings .mp-view-327 { position: relative; inset: auto; width: 100%; max-width: 100%; min-width: 0; height: 291px; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-329 { top: 75px; left: 0; right: 0; height: 216px; padding: 0; border-color: #d1d5db; border-radius: 8px; }
   .mp-skin-settings .mp-view-329 > .mp-view-271 { display: none; }
-  .mp-skin-settings .mp-skin-tablet-memo { display: block; width: 100%; height: 100%; }
+  .mp-skin-settings .mp-skin-tablet-memo { display: block; width: 100%; max-width: 100%; min-width: 0; height: 100%; box-sizing: border-box; }
   .mp-skin-tablet-memo textarea { display: block; width: 100%; height: 166px; padding: 13px 20px; margin: 0; resize: none; border: 0; border-bottom: 1px solid #d1d5db; border-radius: 7px 7px 0 0; background: white; color: #363434; font: 300 16px/20px 'Ongyeol Mypage Pretendard', sans-serif; }
   .mp-skin-tablet-memo textarea::placeholder { color: rgb(54 52 52 / 75%); }
-  .mp-skin-tablet-memo > div { display: flex; height: 48px; align-items: center; justify-content: flex-end; padding: 12px; }
+  .mp-skin-tablet-memo > div { display: flex; width: 100%; box-sizing: border-box; height: 48px; align-items: center; justify-content: flex-end; padding: 12px; }
   .mp-skin-tablet-memo button { margin: 0; padding: 8px 12px; border: 1px solid #515151; border-radius: 8px; background: white; color: #515151; font: 600 12px/18px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
 }

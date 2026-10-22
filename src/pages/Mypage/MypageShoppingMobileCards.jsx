@@ -30,7 +30,7 @@ export default function MypageShoppingMobileCards({ records, variant }) {
                 {variant === 'refunds' && <p className="mp-shopping-mobile-note">{record.requestedOn}</p>}
                 {description && <p className="mp-shopping-mobile-note">{description}</p>}
               </div>
-              {action && <button type="button" disabled>{action}</button>}
+              {action && <button type="button" disabled><span className="mp-button-label"><span className="mp-button-text">{action}</span></span></button>}
             </div>
           </article>
         )
