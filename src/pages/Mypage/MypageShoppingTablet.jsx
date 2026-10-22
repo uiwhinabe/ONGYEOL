@@ -4,10 +4,9 @@ import MypageBenefits from './MypageBenefits.jsx'
 import summaryLine from './tablet-summary-line.svg'
 import chevron from './tablet-period-chevron.svg'
 import arrow from '../../assets/mypage/arrow.svg'
-import paymentArrow from '../../assets/mypage/arrow-payment.svg'
-import preparingArrow from '../../assets/mypage/arrow-preparing.svg'
 import mobileArrow from './mobile-shopping-stage-arrow.svg'
 import './MypageShoppingTablet.css'
+import './ShoppingBenefits.css'
 
 // Only the three shopping screens use this tablet presentation.
 export function ShoppingBenefits() {
@@ -16,7 +15,7 @@ export function ShoppingBenefits() {
     <section className="mp-shopping-benefits" aria-label="회원등급 및 혜택">
       <p>{DEFAULT_USER_NAME}님은 Welcome등급 <span>입니다.</span></p>
       <div className="mp-shopping-benefit-items">
-        {[['쿠폰', '1장'], ['주문현황', '배송중 1건'], ['찜한 제품', '3개']].map(([label, value], index) =>
+        {[['쿠폰', '1장'], ['주문현황', '배송중 0건'], ['찜한 제품', '0개']].map(([label, value], index) =>
           <div className="mp-shopping-benefit-item" key={label}>
             {index > 0 && <span className="mp-shopping-benefit-divider"><img src={summaryLine} alt="" /></span>}
             <h2>{label}</h2><p>{value}</p>
@@ -64,7 +63,7 @@ export function ShoppingPeriod({ value, onChange }) {
 
 export function ShoppingOrderStatus() {
   const stages = ['주문접수', '결제완료', '상품준비중', '배송중', '배송완료']
-  const arrows = [arrow, paymentArrow, preparingArrow, arrow]
+  const arrows = [arrow, arrow, arrow, arrow]
   return <section className="mp-shopping-order-status" aria-label="나의 주문 처리 현황">
     <div className="mp-shopping-section-title"><h2>나의 주문 처리 현황</h2><p>(최근 3개월 기준)</p></div>
     <div className="mp-shopping-status-card">

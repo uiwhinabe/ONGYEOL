@@ -38,7 +38,7 @@ export default function MypageBenefits() {
                       주문현황
                     </p>
                     <p className="mp-view-16" data-node-id="2275:24096" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      배송중 1건
+                      배송중 0건
                     </p>
                   </div>
                   <div className="mp-view-10" data-node-id="2275:24097">
@@ -55,7 +55,7 @@ export default function MypageBenefits() {
                       찜한 제품
                     </p>
                     <p className="mp-view-9" data-node-id="2275:24100" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      3개
+                      0개
                     </p>
                   </div>
                 </div>

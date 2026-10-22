@@ -35,7 +35,7 @@
   border-radius: 50px;
   background: #000;
   color: #fff;
-  font: 400 20px/normal 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif;
+  font: 400 20px/normal 'Ongyeol Noto Sans', 'Noto Sans KR', sans-serif;
   cursor: pointer;
 }
 
@@ -58,8 +58,8 @@
      Figma 2275:26800: content ends at 1525, Footer starts at 1702.
      Use the design's bottom spacing in normal flow so added content
      moves the Footer down without fixed page heights or spacer nodes. */
-  .ongyeol-mypage-screens.mp-page-skin { padding-top: 78px; padding-bottom: 33px; }
-  .ongyeol-mypage-screens.mp-page-skin-settings { padding-top: 77px; padding-bottom: 177px; }
+  .ongyeol-mypage-screens.mp-page-skin { padding-top: 78px; }
+  .ongyeol-mypage-screens.mp-page-skin-settings { padding-top: 77px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-skin-summary, .mp-skin-settings) { width: 100%; overflow: visible; gap: 60px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-219 { height: 132px; padding: 31px 35px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-220 { height: 70px; padding-left: 30px; align-items: flex-start; }
@@ -69,10 +69,10 @@
   .mp-skin-summary .mp-skin-tablet-more:focus-visible { outline: 2px solid #363434; outline-offset: 4px; }
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-228, .mp-view-235) { gap: 60px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-118 { gap: 15px; }
-  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-239, .mp-view-242) { width: 330px; padding-inline: 10px; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 { height: auto; min-height: 96px; flex-wrap: wrap; row-gap: 20px; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-239, .mp-view-242) { width: 100%; min-width: 0; padding-inline: clamp(12px, 3vw, 40px); }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 { height: auto; min-height: 96px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-245 { gap: 55px; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-246 { width: 220px; height: auto; min-height: 90px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-246 { min-width: 0; height: auto; min-height: 90px; overflow: visible; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-232 { width: 100%; height: auto; min-height: 27px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-233 { position: relative; white-space: normal; overflow-wrap: anywhere; line-height: 27px; }
 
@@ -91,11 +91,9 @@
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-304 { width: 92px; white-space: normal; text-align: center; line-height: 17px; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-290, .mp-view-299, .mp-view-304) { display: none; }
   .mp-skin-settings .mp-skin-type-tablet-copy { display: block; font: 300 14px/17px 'Ongyeol Mypage Pretendard', sans-serif; text-align: center; white-space: nowrap; }
-  .ongyeol-mypage-screens .mp-skin-settings .mp-view-300 { display: none; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-315 { left: 0; right: 0; top: 101px; gap: 30px; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-316, .mp-view-325) { gap: 50px; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-318, .mp-view-323) { width: 180px; height: 54px; padding-inline: 10px; }
-  .ongyeol-mypage-screens .mp-skin-settings .mp-view-322 { display: none; }
   .ongyeol-mypage-screens .mp-skin-settings button[aria-pressed='true'] { background-color: #ffe6e6 !important; }
   /* Fill the memo card content box after its border and padding. */
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-327 { position: relative; inset: auto; width: 100%; max-width: 100%; min-width: 0; height: 291px; }

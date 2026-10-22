@@ -1,6 +1,5 @@
+import { MyPageButton } from './MyPageButton.jsx'
 import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
-import periodChevron from './tablet-period-chevron.svg'
-import calendar from '../../assets/mypage/screens/40ae1.svg'
 import './MypageAddressesTablet.css'
 import './MypageAddressesMobile.css'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
@@ -14,18 +13,6 @@ export default function MypageAddresses({ onAdd }) {
                 <div className="mp-view-76" data-node-id="2275:23847">
 <ShoppingBenefits />
                 </div>
-              </div>
-              {/* Figma includes this control, but address query dates are undefined.
-                  Keep the original presentation disabled until its contract is supplied. */}
-              <div className="mp-address-period" role="group" aria-label="기간조회">
-                <span className="mp-address-period-label">기간조회</span>
-                <button type="button" disabled className="mp-address-period-select"><span className="mp-button-label"><span className="mp-button-text">최근 3개월</span></span><img src={periodChevron} alt="" /></button>
-                <div className="mp-address-dates">
-                  <div><input aria-label="시작 날짜" value="2026-09-03" disabled readOnly /><img src={calendar} alt="" /></div>
-                  <span>~</span>
-                  <div><input aria-label="종료 날짜" value="2026-09-10" disabled readOnly /><img src={calendar} alt="" /></div>
-                </div>
-                <button type="button" disabled className="mp-address-query"><span className="mp-button-label"><span className="mp-button-text">조회</span></span></button>
               </div>
               <div className="mp-view-36" data-node-id="2275:23862" data-name="최근주문정보 전체">
                 <div className="mp-view-84" data-node-id="2275:23863">
@@ -43,11 +30,11 @@ export default function MypageAddresses({ onAdd }) {
                       </p>
                     </div>
                   </div>
-                  <a href="/mypage/addresses/new" onClick={onAdd} className="mp-screen-action mp-view-85" data-node-id="2275:23869" data-name="배송지추가버튼">
+                  <MyPageButton to="/mypage/addresses/new" onClick={onAdd} className="mp-screen-action mp-view-85" data-node-id="2275:23869" data-name="배송지추가버튼">
                     <p className="mp-view-86" data-node-id="2275:23870" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       + 새 배송지 추가
                     </p>
-                  </a>
+                  </MyPageButton>
                 </div>
                 <div className="mp-view-87" data-node-id="2275:23871" data-name="최근주문 정보">
                   <div className="mp-view-40" data-node-id="2275:23872">

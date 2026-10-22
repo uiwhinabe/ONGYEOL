@@ -7,15 +7,6 @@
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-address-empty, .mp-address-populated) { width: 100%; gap: 35px; overflow: visible; }
   .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) > .mp-view-36 { margin-top: 15px; gap: 10px; }
   .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-94 { display: none; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefits { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-height: 132px; padding: 10px 15px; border-radius: 5px; background: #dedada; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefits > p { max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefits > p > span { font-weight: 300; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, calc((100vw - 302px) / 2), 50px); width: 100%; max-width: 322px; min-height: 80px; align-items: center; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item { position: relative; min-width: 0; min-height: 54px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item h2 { font-size: 16px; line-height: 22px; font-weight: 500; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-item p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; white-space: nowrap; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-divider { position: absolute; top: -13px; left: calc(-1 * clamp(24px, calc((100vw - 302px) / 2), 50px) / 2); width: 0; height: 80px; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-shopping-benefit-divider img { position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
   /* Address lists need no date filter on mobile; remove its entire layout box. */
   :is(.mp-address-empty, .mp-address-populated) .mp-address-period { display: none; }
   :is(.mp-address-empty, .mp-address-populated) .mp-address-period-label { font-size: 16px; line-height: 22px; font-weight: 500; }

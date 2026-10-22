@@ -1,6 +1,5 @@
+import { MyPageButton } from './MyPageButton.jsx'
 import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
-import periodChevron from './tablet-period-chevron.svg'
-import calendar from '../../assets/mypage/screens/40ae1.svg'
 import './MypageAddressDetailsTablet.css'
 import './MypageAddressesMobile.css'
 import mobileRadio from './mobile-address-radio.svg'
@@ -16,16 +15,6 @@ export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit
                 <div className="mp-view-76" data-node-id="2275:24185">
 <ShoppingBenefits />
                 </div>
-              </div>
-              <div className="mp-address-period" role="group" aria-label="기간조회">
-                <span className="mp-address-period-label">기간조회</span>
-                <button type="button" disabled className="mp-address-period-select"><span className="mp-button-label"><span className="mp-button-text">최근 3개월</span></span><img src={periodChevron} alt="" /></button>
-                <div className="mp-address-dates">
-                  <div><input aria-label="시작 날짜" value="2026-09-03" disabled readOnly /><img src={calendar} alt="" /></div>
-                  <span>~</span>
-                  <div><input aria-label="종료 날짜" value="2026-09-10" disabled readOnly /><img src={calendar} alt="" /></div>
-                </div>
-                <button type="button" disabled className="mp-address-query"><span className="mp-button-label"><span className="mp-button-text">조회</span></span></button>
               </div>
               <div className="mp-view-36" data-node-id="2275:24200" data-name="최근주문정보 전체">
                 <div className="mp-view-84" data-node-id="2275:24201">
@@ -43,11 +32,11 @@ export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit
                       </p>
                     </div>
                   </div>
-                  <a href="/mypage/addresses/new" onClick={onAdd} className="mp-screen-action mp-view-85" data-node-id="2275:24207" data-name="배송지추가버튼">
+                  <MyPageButton to="/mypage/addresses/new" onClick={onAdd} className="mp-screen-action mp-view-85" data-node-id="2275:24207" data-name="배송지추가버튼">
                     <p className="mp-view-86" data-node-id="2275:24208" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       + 새 배송지 추가
                     </p>
-                  </a>
+                  </MyPageButton>
                 </div>
                 <div className="mp-view-87" style={{ height: 'auto', minHeight: 215, paddingBottom: 30 }} data-node-id="2275:24209" data-name="최근주문 정보">
                   <div className="mp-view-40" style={{ position: 'relative' }} data-node-id="2275:24210">
@@ -113,7 +102,7 @@ export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit
                         </div>
                         <div className="mp-view-114" style={{ position: 'static', height: 'auto' }}>
                           <p className="mp-view-109" style={{ position: 'relative' }}>
-                            <a className="mp-screen-action" href="/mypage/addresses/new" onClick={event => { event.preventDefault(); onEdit(item.id) }} aria-label={`${item.label} 수정`}>수정</a> · <a className="mp-screen-action" href="/mypage/addresses" onClick={event => { event.preventDefault(); onDelete(item.id) }} aria-label={`${item.label} 삭제`}>삭제</a>
+                            <MyPageButton className="mp-screen-action" to="/mypage/addresses/new" onClick={event => { event.preventDefault(); onEdit(item.id) }} aria-label={`${item.label} 수정`}>수정</MyPageButton> · <MyPageButton className="mp-screen-action" to="/mypage/addresses" onClick={event => { event.preventDefault(); onDelete(item.id) }} aria-label={`${item.label} 삭제`}>삭제</MyPageButton>
                           </p>
                         </div>
                       </div>

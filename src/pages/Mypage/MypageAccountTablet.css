@@ -6,8 +6,8 @@
 }
 
 @media (min-width: 768px) and (max-width: 1432px) {
-  .ongyeol-mypage-screens:has(.mp-account-tablet) { padding-top: 15px; min-height: 1183px; }
-  .ongyeol-mypage-screens:has(.mp-account-password) { min-height: 1312px; }
+  .ongyeol-mypage-screens:has(.mp-account-tablet) { padding-top: 15px; }
+
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-account-tablet { width: 100%; overflow: visible; }
   .ongyeol-mypage-screens .mp-account-tablet .mp-view-123 { width: 100%; }
   .ongyeol-mypage-screens :is(.mp-account-basic, .mp-account-email) .mp-view-123 { gap: 20px; }

@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useMyPage } from './MyPageContext.js'
+import { useEffect } from 'react'
 import useSkinProfile, { skinTypes, skinConcerns } from './useSkinProfile.js'
 import imgEllipse1 from '../../assets/mypage/screens/e97f4.svg'
 import imgGriddyIconsWaterDrop from '../../assets/mypage/screens/feac4.svg'
 import imgSparkles from '../../assets/mypage/screens/32349.svg'
 import imgGroup from '../../assets/mypage/screens/a5630.svg'
 import imgGroup1 from '../../assets/mypage/screens/f086a.svg'
-import imgEpCircleCheckFilled from '../../assets/mypage/screens/66631.svg'
 import imgBiEmojiSmile from '../../assets/mypage/screens/ec637.svg'
-import imgVector from '../../assets/mypage/screens/c37a4.svg'
 import './MypageSkinTablet.css'
 import './MypageSkinMobile.css'
 import tabletCombination from './tablet-skin-combination.svg'
@@ -15,7 +14,7 @@ import tabletCombination from './tablet-skin-combination.svg'
 // Figma frame 2275:25807; content node 2275:25859.
 export default function MypageSkinSettings() {
   const { profile, update, toggleConcern } = useSkinProfile()
-  const [memoDraft, setMemoDraft] = useState(profile.memo)
+  const { memoDraft, setMemoDraft } = useMyPage()
   useEffect(() => {
     // Tablet keeps its explicit save action. Leaving that layout commits the
     // current draft so switching to an immediate editor never loses typing.
@@ -70,7 +69,7 @@ export default function MypageSkinSettings() {
               </div>
               <div className="mp-view-273" data-node-id="2275:25876" data-name="피부타입 카드">
                 <button type="button" aria-label={skinTypes[0]} aria-pressed={profile.skinType === skinTypes[0]} onClick={() => update({ skinType: skinTypes[0] })} style={controlStyle}  className="mp-view-274" data-node-id="2275:25877" data-name="건성">
-                  {profile.skinType === skinTypes[0] && <span className="mp-view-300"><img alt="" className="mp-view-31" src={imgEpCircleCheckFilled} /></span>}
+
                   <div className="mp-view-275" data-node-id="2275:25878">
                     <div className="mp-view-276" data-node-id="2275:25879" data-name="griddy-icons:water-drop">
                       <img alt="" className="mp-view-31" src={imgGriddyIconsWaterDrop} />
@@ -90,7 +89,7 @@ export default function MypageSkinSettings() {
                   </div>
                 </button>
                 <button type="button" aria-label={skinTypes[1]} aria-pressed={profile.skinType === skinTypes[1]} onClick={() => update({ skinType: skinTypes[1] })} style={controlStyle}  className="mp-view-281" data-node-id="2275:25885" data-name="지성">
-                  {profile.skinType === skinTypes[1] && <span className="mp-view-300"><img alt="" className="mp-view-31" src={imgEpCircleCheckFilled} /></span>}
+
                   <div className="mp-view-62" data-node-id="2275:25886">
                     <div className="mp-view-275" data-node-id="2275:25887" data-name="지성">
                       <div className="mp-view-276" data-node-id="2275:25888" data-name="sparkles">
@@ -112,7 +111,7 @@ export default function MypageSkinSettings() {
                   </div>
                 </button>
                 <button type="button" aria-label={skinTypes[2]} aria-pressed={profile.skinType === skinTypes[2]} onClick={() => update({ skinType: skinTypes[2] })} style={controlStyle}  className="mp-view-282" data-node-id="2275:25894" data-name="복합성">
-                  {profile.skinType === skinTypes[2] && <span className="mp-view-300"><img alt="" className="mp-view-31" src={imgEpCircleCheckFilled} /></span>}
+
                   <div className="mp-view-283" data-node-id="2275:25895">
                     <div className="mp-view-284" data-node-id="2275:25896" data-name="glyphs:venn">
                       <div className="mp-view-285" data-node-id="2275:25897" data-name="Group">
@@ -138,7 +137,7 @@ export default function MypageSkinSettings() {
                 </button>
                 <div className="mp-view-291" data-node-id="2275:25905">
                   <button type="button" aria-label={skinTypes[3]} aria-pressed={profile.skinType === skinTypes[3]} onClick={() => update({ skinType: skinTypes[3] })} style={controlStyle}  className="mp-view-292" data-node-id="2275:25906" data-name="민감성">
-                  {profile.skinType === skinTypes[3] && <span className="mp-view-300"><img alt="" className="mp-view-31" src={imgEpCircleCheckFilled} /></span>}
+
                     <div className="mp-view-293" data-node-id="2275:25907">
                       <div className="mp-view-294" data-node-id="2275:25908" data-name="akar-icons:circle-alert">
                         <div className="mp-view-295" data-node-id="2275:25909" data-name="Group">
@@ -165,7 +164,7 @@ export default function MypageSkinSettings() {
                   </button>
                 </div>
                 <button type="button" aria-label={skinTypes[4]} aria-pressed={profile.skinType === skinTypes[4]} onClick={() => update({ skinType: skinTypes[4] })} style={controlStyle}  className="mp-view-301" data-node-id="2275:25918" data-name="중성">
-                  {profile.skinType === skinTypes[4] && <span className="mp-view-300"><img alt="" className="mp-view-31" src={imgEpCircleCheckFilled} /></span>}
+
                   <div className="mp-view-302" data-node-id="2275:25919" data-name="중성">
                     <div className="mp-view-284" data-node-id="2275:25920" data-name="codicon:sparkle-compact">
                       <div className="mp-view-303" data-node-id="2275:25921" data-name="bi:emoji-smile">
@@ -232,20 +231,17 @@ export default function MypageSkinSettings() {
                           민감 · 진정
                         </p>
                       </div>
-                      <div className="mp-view-321" data-node-id="2275:25950" data-name="ep:circle-check-filled" />
-                      <div className="mp-view-322" style={{ visibility: profile.concerns.includes(skinConcerns[0]) ? 'visible' : 'hidden' }} data-node-id="2275:25951" data-name="Vector">
-                        <img alt="" className="mp-view-31" src={imgVector} />
-                      </div>
+
                     </button>
                   </div>
                   <button type="button" aria-label={skinConcerns[1]} aria-pressed={profile.concerns.includes(skinConcerns[1])} onClick={() => toggleConcern(skinConcerns[1])} style={{ ...controlStyle, background: 'transparent' }}  className="mp-view-323" data-node-id="2275:25952">
-                    {profile.concerns.includes(skinConcerns[1]) && <span className="mp-view-322"><img alt="" className="mp-view-31" src={imgVector} /></span>}
+
                     <p className="mp-view-324" data-node-id="2275:25953">
                       수분·보습
                     </p>
                   </button>
                   <button type="button" aria-label={skinConcerns[2]} aria-pressed={profile.concerns.includes(skinConcerns[2])} onClick={() => toggleConcern(skinConcerns[2])} style={{ ...controlStyle, background: 'transparent' }}  className="mp-view-323" data-node-id="2275:25954">
-                    {profile.concerns.includes(skinConcerns[2]) && <span className="mp-view-322"><img alt="" className="mp-view-31" src={imgVector} /></span>}
+
                     <p className="mp-view-324" data-node-id="2275:25955">
                       모공·피지
                     </p>
@@ -253,13 +249,13 @@ export default function MypageSkinSettings() {
                 </div>
                 <div className="mp-view-325" data-node-id="2275:25956">
                   <button type="button" aria-label={skinConcerns[3]} aria-pressed={profile.concerns.includes(skinConcerns[3])} onClick={() => toggleConcern(skinConcerns[3])} style={{ ...controlStyle, background: 'transparent' }}  className="mp-view-323" data-node-id="2275:25957">
-                    {profile.concerns.includes(skinConcerns[3]) && <span className="mp-view-322"><img alt="" className="mp-view-31" src={imgVector} /></span>}
+
                     <p className="mp-view-324" data-node-id="2275:25958">
                       피부톤·잡티
                     </p>
                   </button>
                   <button type="button" aria-label={skinConcerns[4]} aria-pressed={profile.concerns.includes(skinConcerns[4])} onClick={() => toggleConcern(skinConcerns[4])} style={{ ...controlStyle, background: 'transparent' }}  className="mp-view-323" data-node-id="2275:25959">
-                    {profile.concerns.includes(skinConcerns[4]) && <span className="mp-view-322"><img alt="" className="mp-view-31" src={imgVector} /></span>}
+
                     <p className="mp-view-324" data-node-id="2275:25960">
                       주름·탄력
                     </p>

@@ -1,3 +1,4 @@
+import { MyPageButton } from './MyPageButton.jsx'
 import { DEFAULT_USER_NAME } from './mypageUser.js'
 import './MypageAccountTablet.css'
 import './MypageAccountMobile.css'
@@ -62,22 +63,22 @@ export default function MypageAccountHelp() {
                 </p>
               </div>
               <div className="mp-view-132" data-node-id="2275:25056">
-                <a href="/mypage/account/password" className="mp-screen-action mp-view-155" data-node-id="2275:25057" data-name="비밀번호 설정">
+                <MyPageButton to="/mypage/account/password" className="mp-screen-action mp-view-155" data-node-id="2275:25057" data-name="비밀번호 설정">
                   <p className="mp-view-46 mp-button-label" data-node-id="2275:25058" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     <span className="mp-button-text">비밀번호 설정</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:25059" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
-                </a>
-                <a href="/mypage/account" className="mp-screen-action mp-view-156" data-node-id="2275:25061" data-name="비밀번호 도움말">
+                </MyPageButton>
+                <MyPageButton to="/mypage/account" className="mp-screen-action mp-view-156" data-node-id="2275:25061" data-name="비밀번호 도움말">
                   <p className="mp-view-46 mp-button-label" data-node-id="2275:25062" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     <span className="mp-button-text">비밀번호 도움말</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:25063" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
-                </a>
+                </MyPageButton>
               </div>
             </div>
             <div className="mp-view-129" data-node-id="2275:25065" data-name="라인" />
@@ -210,14 +211,14 @@ export default function MypageAccountHelp() {
                       <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:25119" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
-                  <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25120" data-name="직접입력">
+                  <MyPageButton to="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25120" data-name="직접입력">
                     <p className="mp-view-170 mp-button-label" data-node-id="2275:25121" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       <span className="mp-button-text">직접입력</span>
                     </p>
                     <div className="mp-view-30" data-node-id="2275:25122" data-name="akar-icons:chevron-down-small">
                       <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                     </div>
-                  </a>
+                  </MyPageButton>
                 </div>
                 <div className="mp-view-171" data-node-id="2275:25124" data-name="수신동의 문구">
                   <div className="mp-view-172" data-node-id="2275:25125">
@@ -320,11 +321,11 @@ export default function MypageAccountHelp() {
                     <p className="mp-view-199" data-node-id="2275:25166" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       비밀번호 도움말
                     </p>
-                    <a ref={closeRef} href="/mypage/account" className="mp-screen-action mp-view-200" data-node-id="2275:25167" data-name="Vector" aria-label="비밀번호 도움말 닫기">
+                    <MyPageButton ref={closeRef} to="/mypage/account" className="mp-screen-action mp-view-200" data-node-id="2275:25167" data-name="Vector" aria-label="비밀번호 도움말 닫기">
                       <div className="mp-view-201">
                         <img alt="" className="mp-view-14" src={imgVector} />
                       </div>
-                    </a>
+                    </MyPageButton>
                   </div>
                   <div className="mp-view-82" data-node-id="2275:25169">
                     <div className="mp-view-202">

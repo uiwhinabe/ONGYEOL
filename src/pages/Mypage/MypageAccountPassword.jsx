@@ -1,7 +1,9 @@
+import { useMyPage } from './MyPageContext.js'
+import { MyPageButton } from './MyPageButton.jsx'
 import { DEFAULT_USER_NAME } from './mypageUser.js'
 import './MypageAccountTablet.css'
 import './MypageAccountMobile.css'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import useAccountPreview, { passwordErrors } from './useAccountPreview.js'
 import imgAkarIconsChevronDownSmall from '../../assets/mypage/screens/2ed0f.svg'
 import imgIcBaselineRadioButtonUnchecked from '../../assets/mypage/screens/36109.svg'
@@ -11,7 +13,7 @@ import imgAkarIconsCheck from '../../assets/mypage/screens/91352.svg'
 // Figma frame 2275:25287; content node 2275:25342.
 export default function MypageAccountPassword() {
   const account = useAccountPreview()
-  const [passwords, setPasswords] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' })
+  const { passwords, setPasswords } = useMyPage()
   const fields = useRef({})
 
   function passwordInput(name, label, nodeId) {
@@ -77,22 +79,22 @@ export default function MypageAccountPassword() {
                 </p>
               </div>
               <div className="mp-view-132" data-node-id="2275:25358">
-                <a href="/mypage/account" className="mp-screen-action mp-view-155" data-node-id="2275:25359" data-name="비밀번호 설정">
+                <MyPageButton to="/mypage/account" className="mp-screen-action mp-view-155" data-node-id="2275:25359" data-name="비밀번호 설정">
                   <p className="mp-view-46 mp-button-label" data-node-id="2275:25360" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     <span className="mp-button-text">비밀번호 설정</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:25361" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
-                </a>
-                <a href="/mypage/account/password-help" className="mp-screen-action mp-view-156" data-node-id="2275:25363" data-name="비밀번호 도움말">
+                </MyPageButton>
+                <MyPageButton to="/mypage/account/password-help" className="mp-screen-action mp-view-156" data-node-id="2275:25363" data-name="비밀번호 도움말">
                   <p className="mp-view-46 mp-button-label" data-node-id="2275:25364" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     <span className="mp-button-text">비밀번호 도움말</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:25365" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
-                </a>
+                </MyPageButton>
               </div>
             </div>
             <div className="mp-view-213" data-node-id="2275:25367">
@@ -249,14 +251,14 @@ export default function MypageAccountPassword() {
                       <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:25434" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
-                  <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25435" data-name="직접입력">
+                  <MyPageButton to="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:25435" data-name="직접입력">
                     <p className="mp-view-170 mp-button-label" data-node-id="2275:25436" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       <span className="mp-button-text">직접입력</span>
                     </p>
                     <div className="mp-view-30" data-node-id="2275:25437" data-name="akar-icons:chevron-down-small">
                       <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                     </div>
-                  </a>
+                  </MyPageButton>
                 </div>
                 <div className="mp-view-171" data-node-id="2275:25439" data-name="수신동의 문구">
                   <div className="mp-view-172" data-node-id="2275:25440">

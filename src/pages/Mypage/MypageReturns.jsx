@@ -1,3 +1,4 @@
+import useMyPageDraft from './useMyPageDraft.js'
 import { useRef, useState } from 'react'
 import { ShoppingBenefits, ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
@@ -37,13 +38,13 @@ function calculateRange(period) {
 // Figma frame 2275:23889; content node 2275:23918.
 export default function MypageReturns({ testRecords = [] }) {
   const [records] = useState(() => testRecords.filter(record => record.isTest === true))
-  const [activeTab, setActiveTab] = useState('requests')
+  const [activeTab, setActiveTab] = useMyPageDraft('MypageReturns.activeTab', 'requests')
   // No processing records exist yet. Never infer them from request fixtures.
   const [processingResults] = useState([])
-  const [selectedPeriod, setSelectedPeriod] = useState(null)
-  const [range, setRange] = useState(INITIAL_RANGE)
-  const [results, setResults] = useState(() => records.filter(record => record.requestedOn >= INITIAL_RANGE.start && record.requestedOn <= INITIAL_RANGE.end))
-  const [appliedRange, setAppliedRange] = useState(INITIAL_RANGE)
+  const [selectedPeriod, setSelectedPeriod] = useMyPageDraft('MypageReturns.selectedPeriod', null)
+  const [range, setRange] = useMyPageDraft('MypageReturns.range', INITIAL_RANGE)
+  const [results, setResults] = useMyPageDraft('MypageReturns.results', () => records.filter(record => record.requestedOn >= INITIAL_RANGE.start && record.requestedOn <= INITIAL_RANGE.end))
+  const [appliedRange, setAppliedRange] = useMyPageDraft('MypageReturns.appliedRange', INITIAL_RANGE)
   const visibleResults = activeTab === 'requests' ? results : processingResults
   const tabStyle = { margin: 0, padding: 0, border: 0, background: 'transparent', font: 'inherit', color: 'inherit', textAlign: 'inherit', cursor: 'pointer' }
   const formRef = useRef(null)
@@ -97,27 +98,27 @@ export default function MypageReturns({ testRecords = [] }) {
                   </div>
                   <ShoppingPeriod value={selectedPeriod} onChange={selectPeriod} />
                   <div className="mp-view-23" data-node-id="2275:23938" data-name="전체 날짜 T">
-                    <button type="button" aria-pressed={selectedPeriod === '오늘'} onClick={() => selectPeriod('오늘')} style={controlStyle} className="mp-view-24" data-node-id="2275:23939">
+                    <button type="button" aria-pressed={selectedPeriod === '오늘'} onClick={() => selectPeriod('오늘')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-24" data-node-id="2275:23939">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23940" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">오늘</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '7일'} onClick={() => selectPeriod('7일')} style={controlStyle} className="mp-view-24" data-node-id="2275:23941">
+                    <button type="button" aria-pressed={selectedPeriod === '7일'} onClick={() => selectPeriod('7일')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-24" data-node-id="2275:23941">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23942" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">7일</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '1개월'} onClick={() => selectPeriod('1개월')} style={controlStyle} className="mp-view-26" data-node-id="2275:23943">
+                    <button type="button" aria-pressed={selectedPeriod === '1개월'} onClick={() => selectPeriod('1개월')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-26" data-node-id="2275:23943">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23944" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">1개월</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '3개월'} onClick={() => selectPeriod('3개월')} style={controlStyle} className="mp-view-26" data-node-id="2275:23945">
+                    <button type="button" aria-pressed={selectedPeriod === '3개월'} onClick={() => selectPeriod('3개월')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-26" data-node-id="2275:23945">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23946" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">3개월</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '1년'} onClick={() => selectPeriod('1년')} style={controlStyle} className="mp-view-24" data-node-id="2275:23947">
+                    <button type="button" aria-pressed={selectedPeriod === '1년'} onClick={() => selectPeriod('1년')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-24" data-node-id="2275:23947">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23948" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">1년</span>
                       </p>
@@ -153,7 +154,7 @@ export default function MypageReturns({ testRecords = [] }) {
               </div>
             </form>
               <div className="mp-view-95" data-node-id="2275:23964">
-                <div className="mp-view-62" role="tablist" data-node-id="2275:23965">
+                <div className="mp-view-62 mp-noto-kr" role="tablist" data-node-id="2275:23965">
                   <button type="button" role="tab" id="returns-requests-tab" aria-controls="returns-tab-panel" aria-selected={activeTab === 'requests'} onClick={() => setActiveTab('requests')} style={tabStyle}  className="mp-view-96" data-node-id="2275:23966">
                     <div className="mp-view-97" data-node-id="2275:23967">
                       <p className="mp-view-98" style={ { color: activeTab === 'requests' ? '#000' : '#3f3d3d' } } data-node-id="2275:23968">

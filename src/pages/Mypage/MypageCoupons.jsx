@@ -1,11 +1,10 @@
+import useMyPageDraft from './useMyPageDraft.js'
 import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { useRef, useState } from 'react'
 import imgLine9 from '../../assets/mypage/screens/31115.svg'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
-import imgLine3 from '../../assets/mypage/screens/e1a1e.svg'
 import tabletSummaryLine from './tablet-summary-line.svg'
-import tabletRowLine from './tablet-coupon-row-line.svg'
 import { ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import './MypageCouponsTablet.css'
 import './MypageCouponsMobile.css'
@@ -55,10 +54,10 @@ function calculateRange(period) {
 // Figma frame 2275:23490; content node 2275:23547.
 export default function MypageCoupons() {
   const [coupons] = useState(() => MOCK_COUPONS)
-  const [selectedPeriod, setSelectedPeriod] = useState(null)
-  const [range, setRange] = useState(INITIAL_RANGE)
-  const [results, setResults] = useState(coupons)
-  const [appliedRange, setAppliedRange] = useState(INITIAL_RANGE)
+  const [selectedPeriod, setSelectedPeriod] = useMyPageDraft('MypageCoupons.selectedPeriod', null)
+  const [range, setRange] = useMyPageDraft('MypageCoupons.range', INITIAL_RANGE)
+  const [results, setResults] = useMyPageDraft('MypageCoupons.results', coupons)
+  const [appliedRange, setAppliedRange] = useMyPageDraft('MypageCoupons.appliedRange', INITIAL_RANGE)
   const formRef = useRef(null)
 
   function selectPeriod(period) {
@@ -111,27 +110,27 @@ export default function MypageCoupons() {
                   </div>
                   <ShoppingPeriod value={selectedPeriod} onChange={selectPeriod} />
                   <div className="mp-view-23" data-node-id="2275:23567" data-name="전체 날짜 T">
-                    <button type="button" aria-pressed={selectedPeriod === '오늘'} onClick={() => selectPeriod('오늘')} style={controlStyle} className="mp-view-24" data-node-id="2275:23568">
+                    <button type="button" aria-pressed={selectedPeriod === '오늘'} onClick={() => selectPeriod('오늘')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-24" data-node-id="2275:23568">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23569" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">오늘</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '7일'} onClick={() => selectPeriod('7일')} style={controlStyle} className="mp-view-24" data-node-id="2275:23570">
+                    <button type="button" aria-pressed={selectedPeriod === '7일'} onClick={() => selectPeriod('7일')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-24" data-node-id="2275:23570">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23571" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">7일</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '1개월'} onClick={() => selectPeriod('1개월')} style={controlStyle} className="mp-view-26" data-node-id="2275:23572">
+                    <button type="button" aria-pressed={selectedPeriod === '1개월'} onClick={() => selectPeriod('1개월')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-26" data-node-id="2275:23572">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23573" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">1개월</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '3개월'} onClick={() => selectPeriod('3개월')} style={controlStyle} className="mp-view-26" data-node-id="2275:23574">
+                    <button type="button" aria-pressed={selectedPeriod === '3개월'} onClick={() => selectPeriod('3개월')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-26" data-node-id="2275:23574">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23575" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">3개월</span>
                       </p>
                     </button>
-                    <button type="button" aria-pressed={selectedPeriod === '1년'} onClick={() => selectPeriod('1년')} style={controlStyle} className="mp-view-24" data-node-id="2275:23576">
+                    <button type="button" aria-pressed={selectedPeriod === '1년'} onClick={() => selectPeriod('1년')} style={{ ...controlStyle, background: undefined }} className="mp-period-button mp-view-24" data-node-id="2275:23576">
                       <p className="mp-view-25 mp-button-label" data-node-id="2275:23577" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                         <span className="mp-button-text">1년</span>
                       </p>
@@ -166,7 +165,7 @@ export default function MypageCoupons() {
                 </button>
               </div>
             </form>
-            <div className="mp-view-35" data-node-id="2275:23593">
+            <div className="mp-view-35 mp-noto-kr" data-node-id="2275:23593">
               <div className="mp-view-36" data-node-id="2275:23594">
                 <div className="mp-coupon-mobile-heading"><h2>쿠폰 내역</h2><p>(사용 가능한 쿠폰 <span>{results.length}</span>장)</p></div>
                 <div className="mp-view-37" data-node-id="2275:23595">
@@ -223,8 +222,7 @@ export default function MypageCoupons() {
                           </div>
                         ))}
                       </div>
-                      <div className={index === results.length - 1 ? 'mp-view-55' : index === 0 ? 'mp-view-56' : 'mp-view-57'} style={{ top: 109 + index * 61 }}>
-                        <div className="mp-view-13"><picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletRowLine} /><img alt="" className="mp-view-14" src={imgLine3} /></picture></div>
+                      <div className={`mp-coupon-row-divider ${index === results.length - 1 ? 'mp-view-55' : index === 0 ? 'mp-view-56' : 'mp-view-57'}`} style={{ top: 109 + index * 61 }}>
                       </div>
                     </div>
                   ))}
@@ -273,7 +271,7 @@ function CouponBenefits({ count }) {
                     <div className="mp-view-11">
                       <div className="mp-view-12">
                         <div className="mp-view-13">
-                          <picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
+                          <picture><source media="(max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
                         </div>
                       </div>
                     </div>
@@ -283,14 +281,14 @@ function CouponBenefits({ count }) {
                       주문현황
                     </p>
                     <p className="mp-view-16" data-node-id="2275:24096" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      배송중 1건
+                      배송중 0건
                     </p>
                   </div>
                   <div className="mp-view-10" data-node-id="2275:24097">
                     <div className="mp-view-11">
                       <div className="mp-view-12">
                         <div className="mp-view-13">
-                          <picture><source media="(min-width: 768px) and (max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
+                          <picture><source media="(max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
                         </div>
                       </div>
                     </div>
@@ -300,7 +298,7 @@ function CouponBenefits({ count }) {
                       찜한 제품
                     </p>
                     <p className="mp-view-9" data-node-id="2275:24100" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      3개
+                      0개
                     </p>
                   </div>
                 </div>

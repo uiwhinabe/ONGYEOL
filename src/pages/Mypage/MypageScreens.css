@@ -37,6 +37,25 @@
 .ongyeol-mypage-screens .mp-page-heading a { color: inherit; text-decoration: none; }
 .ongyeol-mypage-screens .mp-screen-action { color: inherit; text-decoration: none; cursor: pointer; }
 .ongyeol-mypage-screens .mp-screen-action:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+/* Figma 2865:5572: hover is independent of the selected period (aria-pressed). */
+.ongyeol-mypage-screens .mp-period-button { background: transparent; }
+@media (hover: hover) {
+  .ongyeol-mypage-screens .mp-period-button:hover {
+    background: #d6d6d6;
+    border-color: #8e8e8e;
+  }
+  .ongyeol-mypage-screens .mp-period-button:hover .mp-button-label { color: #000; }
+}
+/* Date text fields use a scoped focus style instead of the native black ring. */
+.ongyeol-mypage-screens input:is([name='startDate'], [name='endDate']) {
+  caret-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+.ongyeol-mypage-screens input:is([name='startDate'], [name='endDate']):focus-visible {
+  outline: 1px solid #9b9b9b;
+  outline-offset: 2px;
+}
 /* Keep the original line box (and auto-sized button geometry) while centering
    the font's cap-to-baseline text box inside it. No positional offsets. */
 .ongyeol-mypage-screens .mp-button-label {
@@ -85,29 +104,33 @@
 .ongyeol-mypage-screens:is([data-figma-frame='2275:23648'], [data-figma-frame='2275:23787'], [data-figma-frame='2275:24125'], [data-figma-frame='2275:24236']) [data-node-id='2275:24087'] { border-radius: 10px; }
 .ongyeol-mypage-screens .mp-view-1 { align-content:stretch;display:flex;flex-direction:column;gap:59px;align-items:flex-start;position:relative;flex-shrink:0;width:1005px; }
 .ongyeol-mypage-screens .mp-view-2 { background-color:#dedada;align-content:stretch;display:flex;gap:55px;height:177px;align-items:flex-start;overflow:clip;padding-inline:60px;padding-block:20px;position:relative;border-radius:5px;flex-shrink:0;width:1005px; }
-.ongyeol-mypage-screens .mp-view-3 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-3 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-4 { line-height:normal;font-size:20px; }
-.ongyeol-mypage-screens .mp-view-5 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:300;font-weight:300;line-height:normal;font-size:20px; }
+.ongyeol-mypage-screens .mp-view-5 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:300;font-weight:300;line-height:normal;font-size:20px; }
 .ongyeol-mypage-screens .mp-view-6 { align-content:stretch;display:flex;gap:55px;align-items:flex-start;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-7 { overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:center;line-height:normal;position:relative;flex-shrink:0;color:#000;width:37px; }
-.ongyeol-mypage-screens .mp-view-8 { font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;position:relative;flex-shrink:0;font-size:20px;width:100%; }
-.ongyeol-mypage-screens .mp-view-9 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;position:relative;flex-shrink:0;font-size:16px;text-align:center;width:100%; }
+.ongyeol-mypage-screens .mp-view-8 { font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;position:relative;flex-shrink:0;font-size:20px;width:100%; }
+.ongyeol-mypage-screens .mp-view-9 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;position:relative;flex-shrink:0;font-size:16px;text-align:center;width:100%; }
 .ongyeol-mypage-screens .mp-view-10 { display:flex;height:146px;align-items:center;justify-content:center;position:relative;flex-shrink:0;width:0; }
 .ongyeol-mypage-screens .mp-view-11 { rotate:-90deg;flex:none; }
 .ongyeol-mypage-screens .mp-view-12 { height:0;position:relative;width:146px; }
 .ongyeol-mypage-screens .mp-view-13 { position:absolute;inset:-2px 0 0 0; }
 .ongyeol-mypage-screens .mp-view-14 { display:block;max-width:none; }
 .ongyeol-mypage-screens .mp-view-15 { overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:center;line-height:normal;position:relative;flex-shrink:0;color:#000;width:74px; }
-.ongyeol-mypage-screens .mp-view-16 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;position:relative;flex-shrink:0;font-size:16px;width:100%; }
+.ongyeol-mypage-screens .mp-view-16 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;position:relative;flex-shrink:0;font-size:16px;width:100%; }
 .ongyeol-mypage-screens .mp-view-17 { overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:center;line-height:normal;position:relative;flex-shrink:0;color:#000;width:79px; }
+@media (min-width: 1433px) {
+  .ongyeol-mypage-screens .mp-shopping-orders .mp-view-17 { width: max-content; min-width: max-content; }
+  .ongyeol-mypage-screens .mp-shopping-orders .mp-view-17 > .mp-view-8 { white-space: nowrap; }
+}
 .ongyeol-mypage-screens .mp-view-18 { border-width:1px;border-color:#7c7c7c;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:90px;align-items:center;justify-content:center;padding:10px;position:relative;border-radius:5px;flex-shrink:0;width:1000px; }
 .ongyeol-mypage-screens .mp-view-19 { align-content:stretch;display:flex;gap:10px;height:44px;align-items:center;justify-content:center;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-20 { align-content:stretch;display:flex;gap:30px;align-items:center;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-21 { align-content:stretch;display:flex;height:40px;align-items:center;justify-content:center;padding-inline:5px;padding-block:10px;position:relative;flex-shrink:0; }
-.ongyeol-mypage-screens .mp-view-22 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-22 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-23 { align-content:stretch;display:flex;gap:15px;align-items:center;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-24 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;align-items:center;justify-content:center;padding-inline:20px;padding-block:5px;position:relative;border-radius:8px;flex-shrink:0; }
-.ongyeol-mypage-screens .mp-view-25 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:16px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-25 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:16px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-26 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;align-items:center;justify-content:center;padding-inline:15px;padding-block:5px;position:relative;border-radius:8px;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-27 { align-content:stretch;display:flex;flex-direction:column;align-items:flex-start;padding:5px;position:relative;flex-shrink:0;width:325px; }
 .ongyeol-mypage-screens .mp-view-28 { align-content:stretch;display:flex;gap:8px;align-items:center;position:relative;flex-shrink:0;width:100%; }
@@ -115,12 +138,12 @@
 .ongyeol-mypage-screens .mp-view-30 { position:relative;flex-shrink:0;width:24px;height:24px; }
 .ongyeol-mypage-screens .mp-view-31 { position:absolute;display:block;inset:0;max-width:none; }
 .ongyeol-mypage-screens .mp-view-32 { align-content:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex-shrink:0;width:19px; }
-.ongyeol-mypage-screens .mp-view-33 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:36px;color:#000;width:100%; }
+.ongyeol-mypage-screens .mp-view-33 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:36px;color:#000;width:100%; }
 .ongyeol-mypage-screens .mp-view-34 { align-content:stretch;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-35 { align-content:stretch;display:flex;flex-direction:column;height:287px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-36 { align-content:stretch;display:flex;flex-direction:column;gap:5px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-37 { align-content:stretch;display:flex;align-items:center;justify-content:center;padding-inline:10px;padding-block:5px;position:relative;flex-shrink:0; }
-.ongyeol-mypage-screens .mp-view-38 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-38 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-39 { height:242px;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-40 { position:absolute;align-content:stretch;display:flex;flex-direction:column;align-items:flex-start;left:0;right:0;top:0; }
 .ongyeol-mypage-screens .mp-view-41 { align-content:stretch;display:flex;flex-direction:column;height:45px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
@@ -128,13 +151,13 @@
 .ongyeol-mypage-screens .mp-view-43 { position:absolute;height:0;left:0;top:2px;width:1000px; }
 .ongyeol-mypage-screens .mp-view-44 { position:absolute;inset:-3px 0 0 0; }
 .ongyeol-mypage-screens .mp-view-45 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:73px;padding:10px;top:2px; }
-.ongyeol-mypage-screens .mp-view-46 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:16px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-46 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:16px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-47 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:269px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-48 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:472px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-49 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:682px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-50 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:866px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-51 { position:absolute;align-content:stretch;display:flex;gap:114px;align-items:center;left:39px;top:69px; }
-.ongyeol-mypage-screens .mp-view-52 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:14px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-52 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:14px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-53 { position:absolute;align-content:stretch;display:flex;gap:114px;align-items:center;left:39px;top:130px; }
 .ongyeol-mypage-screens .mp-view-54 { position:absolute;align-content:stretch;display:flex;gap:114px;align-items:center;left:39px;top:191px; }
 .ongyeol-mypage-screens .mp-view-55 { position:absolute;height:0;left:0;right:0;top:231px; }
@@ -163,12 +186,12 @@
 .ongyeol-mypage-screens .mp-view-78 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:484px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-79 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:714px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-80 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:908px;padding:10px;top:2px; }
-.ongyeol-mypage-screens .mp-view-81 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:15px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-81 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:15px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-82 { height:0;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-83 { align-content:stretch;display:flex;flex-direction:column;gap:60px;align-items:flex-start;position:relative;flex-shrink:0;width:1000px; }
 .ongyeol-mypage-screens .mp-view-84 { align-content:stretch;display:flex;align-items:center;justify-content:space-between;position:relative;flex-shrink:0;width:989px; }
 .ongyeol-mypage-screens .mp-view-85 { background-color:#000;align-content:stretch;display:flex;height:35px;align-items:center;justify-content:center;overflow:clip;padding-inline:7px;padding-block:5px;position:relative;border-radius:8px;flex-shrink:0;width:143px; }
-.ongyeol-mypage-screens .mp-view-86 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:15px;color:#fff;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-86 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:15px;color:#fff;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-87 { height:215px;position:relative;flex-shrink:0;width:1000px; }
 .ongyeol-mypage-screens .mp-view-88 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:489px;padding:10px;top:2px; }
 .ongyeol-mypage-screens .mp-view-89 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:675px;padding:10px;top:2px; }
@@ -183,10 +206,10 @@
 .ongyeol-mypage-screens .mp-view-98 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Mypage Inter',sans-serif;font-weight:500;font-weight:500;line-height:normal;left:10px;font-style:normal;font-size:16px;color:#000;top:11px;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-99 { align-content:stretch;display:flex;flex-direction:column;align-items:center;position:relative;flex-shrink:0;width:189px; }
 .ongyeol-mypage-screens .mp-view-100 { height:42px;position:relative;flex-shrink:0;width:188px; }
-.ongyeol-mypage-screens .mp-view-101 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;height:19px;line-height:normal;left:10px;color:#3f3d3d;font-size:16px;top:11px;width:168px; }
+.ongyeol-mypage-screens .mp-view-101 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;height:19px;line-height:normal;left:10px;color:#3f3d3d;font-size:16px;top:11px;width:168px; }
 .ongyeol-mypage-screens .mp-view-102 { align-content:stretch;display:flex;flex-direction:column;gap:60px;align-items:flex-start;position:relative;flex-shrink:0;width:1002px; }
 .ongyeol-mypage-screens .mp-view-103 { align-content:stretch;display:flex;align-items:center;justify-content:space-between;position:relative;flex-shrink:0;width:277px; }
-.ongyeol-mypage-screens .mp-view-104 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;width:203px; }
+.ongyeol-mypage-screens .mp-view-104 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;width:203px; }
 .ongyeol-mypage-screens .mp-view-105 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:520px;padding:10px;top:3px; }
 .ongyeol-mypage-screens .mp-view-106 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:709px;padding:10px;top:3px; }
 .ongyeol-mypage-screens .mp-view-107 { position:absolute;height:40px;left:65px;top:58px;width:888px; }
@@ -203,13 +226,13 @@
 .ongyeol-mypage-screens .mp-view-118 { align-content:stretch;display:flex;flex-direction:column;gap:15px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-119 { height:49px;position:relative;flex-shrink:0;width:261px; }
 .ongyeol-mypage-screens .mp-view-120 { position:absolute;height:49px;left:0;top:0;width:251px; }
-.ongyeol-mypage-screens .mp-view-121 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:calc(50% - 125.5px);font-size:28px;color:#000;top:calc(50% - 24.5px);white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-121 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:calc(50% - 125.5px);font-size:28px;color:#000;top:calc(50% - 24.5px);white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-122 { background-color:#000;height:1px;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-123 { align-content:stretch;display:flex;flex-direction:column;gap:30px;align-items:flex-start;position:relative;flex-shrink:0;width:951px; }
 .ongyeol-mypage-screens .mp-view-124 { align-content:stretch;display:flex;height:30px;align-items:center;position:relative;flex-shrink:0;width:115px; }
-.ongyeol-mypage-screens .mp-view-125 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000;white-space:pre; }
-.ongyeol-mypage-screens .mp-view-126 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;font-size:15px; }
-.ongyeol-mypage-screens .mp-view-127 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;color:#fa0000;font-size:15px; }
+.ongyeol-mypage-screens .mp-view-125 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000;white-space:pre; }
+.ongyeol-mypage-screens .mp-view-126 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;font-size:15px; }
+.ongyeol-mypage-screens .mp-view-127 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;color:#fa0000;font-size:15px; }
 .ongyeol-mypage-screens .mp-view-128 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:30px;align-items:center;padding:10px;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-129 { background-color:#9b9b9b;height:1px;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-130 { align-content:stretch;display:flex;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
@@ -218,7 +241,7 @@
 .ongyeol-mypage-screens .mp-view-133 { border-width:1px;border-color:#9b9b9b;border-style:solid;height:30px;overflow:clip;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-134 { position:absolute;height:19px;left:10px;top:7px;width:0; }
 .ongyeol-mypage-screens .mp-view-135 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:30px;align-items:center;justify-content:center;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:110px; }
-.ongyeol-mypage-screens .mp-view-136 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:13px;color:rgba(0,0,0,0.8);white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-136 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;position:relative;flex-shrink:0;font-size:13px;color:rgba(0,0,0,0.8);white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-137 { align-content:stretch;display:flex;gap:25px;align-items:center;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-138 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:30px;align-items:center;overflow:clip;padding-inline:10px;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-139 { height:19px;position:relative;flex-shrink:0;width:199px; }
@@ -227,24 +250,24 @@
 .ongyeol-mypage-screens .mp-view-142 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:30px;align-items:flex-start;justify-content:center;overflow:clip;padding-inline:11px;padding-block:8px;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-143 { height:19px;position:relative;flex-shrink:0;width:0; }
 .ongyeol-mypage-screens .mp-view-144 { align-content:stretch;display:flex;gap:10px;align-items:center;position:relative;flex-shrink:0; }
-.ongyeol-mypage-screens .mp-view-145 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-145 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-146 { align-content:stretch;display:flex;gap:22px;align-items:center;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-147 { border-width:1px;border-color:#000;border-style:solid;align-content:stretch;display:flex;height:50px;align-items:center;justify-content:center;padding:10px;position:relative;border-radius:50px;flex-shrink:0;width:200px; }
 .ongyeol-mypage-screens .mp-view-148 { background-color:#000;align-content:stretch;display:flex;height:50px;align-items:center;justify-content:center;padding:10px;position:relative;border-radius:50px;flex-shrink:0;width:200px; }
-.ongyeol-mypage-screens .mp-view-149 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#fff;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-149 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:20px;color:#fff;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-150 { align-content:stretch;display:flex;flex-direction:column;gap:30px;align-items:flex-start;position:relative;flex-shrink:0;width:1000px; }
 .ongyeol-mypage-screens .mp-view-151 { align-content:stretch;display:flex;height:35px;align-items:center;position:relative;flex-shrink:0;width:115px; }
-.ongyeol-mypage-screens .mp-view-152 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;font-size:18px; }
-.ongyeol-mypage-screens .mp-view-153 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;color:#fa0000;font-size:18px; }
+.ongyeol-mypage-screens .mp-view-152 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;font-size:18px; }
+.ongyeol-mypage-screens .mp-view-153 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;color:#fa0000;font-size:18px; }
 .ongyeol-mypage-screens .mp-view-154 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;overflow:clip;padding:10px;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-155 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;gap:5px;height:35px;align-items:center;justify-content:center;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:142px; }
 .ongyeol-mypage-screens .mp-view-156 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;gap:5px;height:35px;align-items:center;justify-content:center;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:163px; }
 .ongyeol-mypage-screens .mp-view-157 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;justify-content:space-between;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:135px; }
 .ongyeol-mypage-screens .mp-view-158 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;justify-content:space-between;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:80px; }
-.ongyeol-mypage-screens .mp-view-159 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-159 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-160 { align-content:stretch;display:flex;gap:50px;align-items:center;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-161 { height:22px;position:relative;flex-shrink:0;width:30px; }
-.ongyeol-mypage-screens .mp-view-162 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;font-size:16px;color:#000;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-162 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;font-size:16px;color:#000;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-163 { align-content:stretch;display:flex;gap:15px;align-items:center;position:relative;flex-shrink:0;width:68px; }
 .ongyeol-mypage-screens .mp-view-164 { height:35px;position:relative;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-165 { position:absolute;border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;left:0;overflow:clip;padding:10px;border-radius:5px;top:0;width:250px; }
@@ -252,11 +275,11 @@
 .ongyeol-mypage-screens .mp-view-167 { border-width:1px;border-color:#9b9b9b;border-style:solid;height:35px;position:relative;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-168 { position:absolute;border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;left:-1px;overflow:clip;padding:10px;border-radius:5px;top:-1px;width:250px; }
 .ongyeol-mypage-screens .mp-view-169 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;justify-content:space-between;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:142px; }
-.ongyeol-mypage-screens .mp-view-170 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;color:#666;font-size:16px;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-170 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;color:#666;font-size:16px;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-171 { align-content:stretch;display:flex;gap:12px;align-items:center;position:relative;flex-shrink:0; }
 .ongyeol-mypage-screens .mp-view-172 { background-color:#0c0c0c;position:relative;border-radius:3.5px;flex-shrink:0;width:16.8px;height:16.8px; }
 .ongyeol-mypage-screens .mp-view-173 { position:absolute;left:0;width:16.8px;height:16.8px;top:0; }
-.ongyeol-mypage-screens .mp-view-174 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;color:#666;font-size:14px;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-174 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;position:relative;flex-shrink:0;color:#666;font-size:14px;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-175 { align-content:stretch;display:flex;flex-direction:column;gap:17px;align-items:flex-start;position:relative;flex-shrink:0;width:438px; }
 .ongyeol-mypage-screens .mp-view-176 { border-width:1px;border-color:#9b9b9b;border-style:solid;height:35px;overflow:clip;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-177 { position:absolute;align-content:stretch;display:flex;align-items:center;justify-content:center;left:10px;top:7px; }
@@ -264,11 +287,11 @@
 .ongyeol-mypage-screens .mp-view-179 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;justify-content:center;overflow:clip;padding-inline:10px;padding-block:5px;position:relative;border-radius:5px;flex-shrink:0;width:110px; }
 .ongyeol-mypage-screens .mp-view-180 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;overflow:clip;padding-inline:10px;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-181 { height:19px;overflow:clip;position:relative;flex-shrink:0;width:229px; }
-.ongyeol-mypage-screens .mp-view-182 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;font-size:14px;color:#000;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-182 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;font-size:14px;color:#000;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-183 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;overflow:clip;padding-inline:10px;position:relative;border-radius:8px;flex-shrink:0;width:591px; }
-.ongyeol-mypage-screens .mp-view-184 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:0;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:pre; }
-.ongyeol-mypage-screens .mp-view-185 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal; }
-.ongyeol-mypage-screens .mp-view-186 { font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;color:#fa0000; }
+.ongyeol-mypage-screens .mp-view-184 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:0;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:pre; }
+.ongyeol-mypage-screens .mp-view-185 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal; }
+.ongyeol-mypage-screens .mp-view-186 { font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;color:#fa0000; }
 .ongyeol-mypage-screens .mp-view-187 { border-width:1px;border-color:#9b9b9b;border-style:solid;align-content:stretch;display:flex;height:35px;align-items:center;overflow:clip;padding-inline:10px;position:relative;border-radius:8px;flex-shrink:0;width:561px; }
 .ongyeol-mypage-screens .mp-view-188 { position:absolute;background-color:#fff;border-color:#878787;border-bottom-width:1px;border-left-width:1px;border-right-width:1px;border-style:solid;height:123px;left:392px;overflow:clip;top:611px;width:139px; }
 .ongyeol-mypage-screens .mp-view-189 { position:absolute;border-color:#878787;border-style:solid;border-top-width:1px;align-content:stretch;display:flex;align-items:center;left:-1px;padding-inline:10px;padding-block:2px;top:0;width:139px; }
@@ -281,11 +304,11 @@
 .ongyeol-mypage-screens .mp-view-196 { align-content:stretch;display:flex;flex-direction:column;gap:30px;align-items:flex-start;position:relative;flex-shrink:0;width:350px; }
 .ongyeol-mypage-screens .mp-view-197 { align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-198 { align-content:stretch;display:flex;gap:10px;align-items:center;justify-content:center;position:relative;flex-shrink:0;width:100%; }
-.ongyeol-mypage-screens .mp-view-199 { overflow-wrap:break-word;flex:1 0 0;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;min-width:1px;position:relative;font-size:16px;color:#000; }
+.ongyeol-mypage-screens .mp-view-199 { overflow-wrap:break-word;flex:1 0 0;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;min-width:1px;position:relative;font-size:16px;color:#000; }
 .ongyeol-mypage-screens .mp-view-200 { position:relative;flex-shrink:0;width:13px;height:13px; }
 .ongyeol-mypage-screens .mp-view-201 { position:absolute;inset:-7.69%; }
 .ongyeol-mypage-screens .mp-view-202 { position:absolute;inset:-1px 0 0 0; }
-.ongyeol-mypage-screens .mp-view-203 { overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;gap:15px;align-items:flex-start;position:relative;flex-shrink:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-203 { overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;gap:15px;align-items:flex-start;position:relative;flex-shrink:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-204 { line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000; }
 .ongyeol-mypage-screens .mp-view-205 { line-height:normal;margin-bottom:0;font-size:14px;color:rgba(0,0,0,0.8);white-space:pre; }
 .ongyeol-mypage-screens .mp-view-206 { list-style-type:disc; }
@@ -303,35 +326,35 @@
 .ongyeol-mypage-screens .mp-view-218 { align-content:stretch;display:flex;flex-direction:column;gap:55px;align-items:flex-start;position:relative;flex-shrink:0;width:1000px; }
 .ongyeol-mypage-screens .mp-view-219 { background-color:#d9d9d9;align-content:stretch;display:flex;flex-direction:column;align-items:flex-start;overflow:clip;padding-inline:66px;padding-block:31px;position:relative;border-radius:5px;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-220 { align-content:stretch;display:flex;align-items:center;justify-content:space-between;padding-left:20px;position:relative;flex-shrink:0;width:100%; }
-.ongyeol-mypage-screens .mp-view-221 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:300;font-weight:300;line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-221 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:300;font-weight:300;line-height:0;position:relative;flex-shrink:0;font-size:0px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-222 { margin-bottom:0;white-space:pre; }
-.ongyeol-mypage-screens .mp-view-223 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;font-size:22px; }
+.ongyeol-mypage-screens .mp-view-223 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:500;font-weight:500;line-height:normal;font-size:22px; }
 .ongyeol-mypage-screens .mp-view-224 { font-size:20px;white-space:pre; }
 .ongyeol-mypage-screens .mp-view-225 { line-height:normal; }
-.ongyeol-mypage-screens .mp-view-226 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal; }
+.ongyeol-mypage-screens .mp-view-226 { overflow-wrap:break-word;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal; }
 .ongyeol-mypage-screens .mp-view-227 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;height:40px;align-items:center;justify-content:center;padding-inline:5px;padding-block:10px;position:relative;border-radius:5px;flex-shrink:0;width:120px; }
 .ongyeol-mypage-screens .mp-view-228 { align-content:stretch;display:flex;flex-direction:column;gap:80px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-229 { align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:387px; }
 .ongyeol-mypage-screens .mp-view-230 { height:22px;position:relative;flex-shrink:0;width:132px; }
-.ongyeol-mypage-screens .mp-view-231 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;color:#616161;font-size:16px;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-231 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;color:#616161;font-size:16px;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-232 { height:27px;position:relative;flex-shrink:0;width:161px; }
-.ongyeol-mypage-screens .mp-view-233 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:0;font-size:24px;color:#000;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-233 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:0;font-size:24px;color:#000;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-234 { height:22px;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-235 { align-content:stretch;display:flex;flex-direction:column;gap:65px;align-items:flex-start;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-236 { height:27px;position:relative;flex-shrink:0;width:128px; }
-.ongyeol-mypage-screens .mp-view-237 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:0;font-size:20px;color:#000;top:0;white-space:nowrap; }
-.ongyeol-mypage-screens .mp-view-238 { align-content:stretch;display:flex;height:96px;align-items:flex-start;justify-content:space-between;position:relative;flex-shrink:0;width:100%; }
-.ongyeol-mypage-screens .mp-view-239 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-inline:100px;padding-block:20px;position:relative;border-radius:5px;flex-shrink:0; }
+.ongyeol-mypage-screens .mp-view-237 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:0;font-size:20px;color:#000;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-238 { align-content:stretch;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:51px;align-items:stretch;position:relative;flex-shrink:0;width:100%; }
+.ongyeol-mypage-screens .mp-view-239 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-inline:clamp(12px, 3vw, 40px);padding-block:20px;position:relative;border-radius:5px;min-width:0;min-height:96px; }
 .ongyeol-mypage-screens .mp-view-240 { align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:center;position:relative;flex-shrink:0; }
-.ongyeol-mypage-screens .mp-view-241 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:600;font-weight:600;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;white-space:nowrap; }
-.ongyeol-mypage-screens .mp-view-242 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-inline:100px;padding-block:20px;position:relative;border-radius:5px;flex-shrink:0;width:465px; }
-.ongyeol-mypage-screens .mp-view-243 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:600;font-weight:600;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;text-align:center;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-241 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:600;font-weight:600;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-242 { border-width:1px;border-color:#4a4848;border-style:solid;align-content:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-inline:clamp(12px, 3vw, 40px);padding-block:20px;position:relative;border-radius:5px;min-width:0;min-height:96px;width:100%; }
+.ongyeol-mypage-screens .mp-view-243 { overflow-wrap:break-word;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:600;font-weight:600;line-height:normal;position:relative;flex-shrink:0;font-size:18px;color:#000;text-align:center;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-244 { height:27px;position:relative;flex-shrink:0;width:79px; }
-.ongyeol-mypage-screens .mp-view-245 { align-content:stretch;display:flex;gap:50px;align-items:center;position:relative;flex-shrink:0;width:100%; }
-.ongyeol-mypage-screens .mp-view-246 { background-color:#d9d9d9;align-content:stretch;display:flex;height:90px;align-items:center;justify-content:center;overflow:clip;padding-inline:24px;padding-block:10px;position:relative;border-radius:5px;flex-shrink:0;width:300px; }
+.ongyeol-mypage-screens .mp-view-245 { --ingredient-gap:55px;align-content:stretch;display:flex;flex-wrap:wrap;gap:var(--ingredient-gap);align-items:stretch;position:relative;flex-shrink:0;width:100%; }
+.ongyeol-mypage-screens .mp-view-246 { background-color:#d9d9d9;align-content:stretch;display:flex;height:auto;min-height:90px;align-items:center;justify-content:center;overflow:visible;padding-inline:24px;padding-block:10px;position:relative;border-radius:5px;min-width:0;flex:1 1 calc((100% - 2 * var(--ingredient-gap)) / 3 - 48px); }
 .ongyeol-mypage-screens .mp-view-247 { align-content:stretch;display:flex;flex:1 0 0;flex-direction:column;gap:8px;align-items:center;justify-content:center;min-width:1px;position:relative; }
 .ongyeol-mypage-screens .mp-view-248 { height:25px;position:relative;flex-shrink:0;width:83px; }
-.ongyeol-mypage-screens .mp-view-249 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:600;font-weight:600;line-height:normal;left:0;font-size:18px;color:#000;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-249 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:600;font-weight:600;line-height:normal;left:0;font-size:18px;color:#000;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-250 { height:19px;position:relative;flex-shrink:0;width:82px; }
 .ongyeol-mypage-screens .mp-view-251 { background-color:#d9d9d9;align-content:stretch;display:flex;height:90px;align-items:center;justify-content:center;overflow:clip;padding-inline:9px;padding-block:10px;position:relative;border-radius:5px;flex-shrink:0;width:300px; }
 .ongyeol-mypage-screens .mp-view-252 { align-content:stretch;display:flex;flex:1 0 0;flex-direction:column;gap:8px;height:52px;align-items:center;justify-content:center;min-width:1px;position:relative; }
@@ -341,9 +364,9 @@
 .ongyeol-mypage-screens .mp-view-256 { align-content:stretch;display:flex;flex-direction:column;gap:46px;align-items:flex-start;position:relative;flex-shrink:0;width:961px; }
 .ongyeol-mypage-screens .mp-view-257 { align-content:stretch;display:flex;flex-direction:column;gap:4px;align-items:flex-start;position:relative;flex-shrink:0;width:462px; }
 .ongyeol-mypage-screens .mp-view-258 { height:44px;position:relative;flex-shrink:0;width:194px; }
-.ongyeol-mypage-screens .mp-view-259 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:0;font-size:32px;color:#000;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-259 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Footer Noto Sans','Noto Sans KR',sans-serif;font-weight:700;font-weight:700;line-height:normal;left:0;font-size:32px;color:#000;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-260 { height:25px;position:relative;flex-shrink:0;width:100%; }
-.ongyeol-mypage-screens .mp-view-261 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Ongyeol Footer Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;color:#3d3c3c;font-size:18px;top:0;white-space:nowrap; }
+.ongyeol-mypage-screens .mp-view-261 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Noto Sans','Noto Sans KR',sans-serif;font-weight:400;font-weight:400;line-height:normal;left:0;color:#3d3c3c;font-size:18px;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-262 { border-width:1px;border-color:#000;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:334px;align-items:flex-start;justify-content:center;overflow:clip;padding-inline:15px;padding-block:20px;position:relative;border-radius:5px;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-263 { height:281px;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-264 { position:absolute;align-content:stretch;display:flex;gap:15px;align-items:flex-start;left:0;padding-inline:30px;top:0;width:401px; }
@@ -382,7 +405,6 @@
 .ongyeol-mypage-screens .mp-view-297 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Mypage Pretendard',sans-serif;font-weight:700;line-height:normal;left:calc(50% - 23.5px);font-style:normal;font-size:20px;color:#000;top:0;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-298 { height:34px;position:relative;flex-shrink:0;width:100%; }
 .ongyeol-mypage-screens .mp-view-299 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Mypage Pretendard',sans-serif;font-weight:300;line-height:normal;left:calc(50% - 58.5px);font-style:normal;font-size:14px;color:#000;top:7.5px;white-space:pre; }
-.ongyeol-mypage-screens .mp-view-300 { position:absolute;left:110.5px;width:28px;height:28px;top:1.5px; }
 .ongyeol-mypage-screens .mp-view-301 { position:absolute;background-color:#fffbfb;border-width:1px;border-color:#222;border-style:solid;align-content:stretch;display:flex;height:200px;align-items:center;justify-content:center;left:749.5px;overflow:clip;padding-inline:20px;padding-block:10px;border-radius:5px;top:0;width:150px; }
 .ongyeol-mypage-screens .mp-view-302 { align-content:stretch;display:flex;flex-direction:column;gap:15px;align-items:center;position:relative;flex-shrink:0;width:92px; }
 .ongyeol-mypage-screens .mp-view-303 { --mp-translate-x:-50%;translate:var(--mp-translate-x,0) var(--mp-translate-y,0);position:absolute;left:50%;overflow:clip;width:50px;height:50px;top:5px; }
@@ -403,8 +425,6 @@
 .ongyeol-mypage-screens .mp-view-318 { border-width:1px;border-color:#000;border-style:solid;height:53px;overflow:clip;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-319 { --mp-translate-x:-50%;translate:var(--mp-translate-x,0) var(--mp-translate-y,0);position:absolute;height:24px;left:calc(50% + 0.5px);top:14px;width:85px; }
 .ongyeol-mypage-screens .mp-view-320 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Mypage Pretendard',sans-serif;font-weight:500;line-height:normal;left:calc(50% - 42.5px);font-style:normal;font-size:20px;color:#000;top:0;white-space:nowrap; }
-.ongyeol-mypage-screens .mp-view-321 { position:absolute;left:144.5px;width:24px;height:24px;top:13.5px; }
-.ongyeol-mypage-screens .mp-view-322 { --mp-translate-y:-50%;translate:var(--mp-translate-x,0) var(--mp-translate-y,0);position:absolute;height:20px;left:calc(87.2% + 0.74px);right:calc(4.8% - 0.9px);top:calc(50% - 12.5px); }
 .ongyeol-mypage-screens .mp-view-323 { border-width:1px;border-color:#000;border-style:solid;align-content:stretch;display:flex;height:54px;align-items:center;justify-content:center;overflow:clip;padding-inline:62px;padding-block:14px;position:relative;border-radius:5px;flex-shrink:0;width:250px; }
 .ongyeol-mypage-screens .mp-view-324 { overflow-wrap:break-word;font-family:'Ongyeol Mypage Pretendard',sans-serif;font-weight:500;line-height:normal;font-style:normal;position:relative;flex-shrink:0;font-size:20px;color:#000;white-space:nowrap; }
 .ongyeol-mypage-screens .mp-view-325 { align-content:stretch;display:flex;gap:60px;align-items:flex-start;position:relative;flex-shrink:0; }
@@ -413,3 +433,72 @@
 .ongyeol-mypage-screens .mp-view-328 { position:absolute;align-content:stretch;display:flex;gap:15px;align-items:flex-start;left:0;padding-inline:30px;top:0;width:501px; }
 .ongyeol-mypage-screens .mp-view-329 { position:absolute;background-color:#fff;border-width:1px;border-color:#000;border-style:solid;align-content:stretch;display:flex;flex-direction:column;align-items:flex-start;left:30px;overflow:clip;padding-inline:20px;padding-block:19px;right:0;border-radius:5px;top:75px; }
 .ongyeol-mypage-screens .mp-view-330 { overflow-wrap:break-word;position:absolute;font-family:'Ongyeol Mypage Pretendard',sans-serif;font-weight:300;line-height:normal;left:0;font-style:normal;font-size:16px;color:rgba(54,52,52,0.75);top:0;white-space:nowrap; }
+
+/* Requested tabs and coupon content, including nested form controls.
+   The existing 400/500/700 KR faces are registered once in Footer.css. */
+.ongyeol-mypage-screens .mp-shopping.mp-shopping-orders,
+.ongyeol-mypage-screens .mp-shopping.mp-shopping-orders *,
+.ongyeol-mypage-screens :is(.mp-shopping, .mp-coupons) .mp-noto-kr,
+.ongyeol-mypage-screens :is(.mp-shopping, .mp-coupons) .mp-noto-kr * {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Let translated return-tab labels claim their natural width and wrap tabs first. */
+.ongyeol-mypage-screens .mp-shopping-returns [role='tablist'] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.ongyeol-mypage-screens .mp-shopping-returns [role='tab'] {
+  width: max-content;
+  max-width: 100%;
+  flex: 0 1 auto;
+  min-width: 0;
+  height: auto;
+  gap: 0;
+  justify-content: space-between;
+}
+.ongyeol-mypage-screens .mp-shopping-returns [role='tab'] > :first-child {
+  position: static;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 42px;
+  padding: 10px;
+  flex: 1;
+}
+.ongyeol-mypage-screens .mp-shopping-returns [role='tab'] p {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  flex-shrink: 1;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.ongyeol-mypage-screens .mp-shopping-returns #returns-processing-tab p {
+  white-space: nowrap;
+}
+@media (max-width: 767px) {
+  .ongyeol-mypage-screens .mp-shopping-returns [role='tablist'] { width: 100%; }
+  .ongyeol-mypage-screens .mp-shopping-returns [role='tab'] > :first-child { padding-inline: 4px; }
+}
+@media (max-width: 479px) {
+  /* Only wrap the label when a whole mobile row cannot hold its translation. */
+  .ongyeol-mypage-screens .mp-shopping-returns #returns-processing-tab p {
+    white-space: normal;
+  }
+}
+
+@media (min-width: 768px) {
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-246:nth-child(3n+2) { padding-inline: 9px; }
+}
+.ongyeol-mypage-screens .mp-skin-summary .mp-view-235,
+.ongyeol-mypage-screens .mp-skin-summary .mp-view-235 * { font-family: 'Noto Sans KR', sans-serif; }
+.ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-240, .mp-view-240 .mp-view-34, .mp-view-247) { width: 100%; min-width: 0; }
+.ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-241, .mp-view-243, .mp-view-249, .mp-view-240 .mp-view-52, .mp-view-247 .mp-view-182) { max-width: 100%; min-width: 0; flex-shrink: 1; white-space: normal; overflow-wrap: anywhere; text-align: center; }

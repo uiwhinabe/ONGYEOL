@@ -3,7 +3,7 @@
 @media (max-width: 767px) {
   /* Figma 2275:29229 / 2275:29347. Both leave 118px between the
      last content block and Footer; keep it in normal flow as content grows. */
-  .ongyeol-mypage-screens:is(.mp-page-skin, .mp-page-skin-settings) { padding-top: 10px; padding-bottom: 118px; }
+  .ongyeol-mypage-screens:is(.mp-page-skin, .mp-page-skin-settings) { padding-top: 10px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-skin-summary, .mp-skin-settings) { width: 100%; overflow: visible; gap: 35px; }
 
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-219 { padding: 20px 15px 20px 20px; overflow: visible; }
@@ -22,17 +22,15 @@
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-233 { position: static; white-space: normal; overflow-wrap: anywhere; line-height: 33px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-234 .mp-view-231 { position: static; max-width: 227px; white-space: normal; line-height: 22px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-118 { gap: 15px; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px !important; width: 100%; max-width: 360px; height: auto; }
-  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-239, .mp-view-242) { width: 100%; max-width: 160px; height: auto !important; min-height: 100px; padding: 10px 8px; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 > :nth-child(even) { justify-self: end; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-238 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; width: 100%; height: auto; }
+  .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-239, .mp-view-242) { width: 100%; min-width: 0; height: auto; min-height: 100px; padding: 10px 8px; }
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-240, .mp-view-240 .mp-view-34) { width: 100%; min-width: 0; }
   .ongyeol-mypage-screens .mp-skin-summary :is(.mp-view-241, .mp-view-243) { font-size: 16px; line-height: 22px; white-space: normal; text-align: center; overflow-wrap: anywhere; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-240 .mp-view-52 { width: 100%; min-width: 0; flex-shrink: 1; font-size: 12px; line-height: 16px; white-space: normal; text-align: center; }
-  /* Use two full-width columns for readable mobile copy; stretch cards to each row's content height.
-     Override the shared JSX's inline start alignment only for the mobile summary. */
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-245 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: start; justify-items: stretch; align-items: stretch !important; gap: 15px; width: 100%; margin-inline: 0; }
+  /* Preserve the existing mobile two-column reading order. */
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-245 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: start; justify-items: stretch; align-items: stretch; gap: 15px; width: 100%; margin-inline: 0; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-246 { width: 100%; min-width: 0; height: auto; min-height: 90px; padding-inline: 4px; overflow: visible; }
-  .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 { width: 100%; min-width: 0; gap: 8px !important; }
+  .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 { width: 100%; min-width: 0; gap: 8px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-249 { width: 100%; min-width: 0; max-width: 100%; font-size: 16px; line-height: 22px; white-space: normal; overflow-wrap: anywhere; text-align: center; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-247 .mp-view-182 { width: 100%; min-width: 0; max-width: 100%; font-size: 12px; line-height: 16px !important; overflow-wrap: anywhere; }
 
@@ -57,7 +55,6 @@
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-293 { position: static; translate: none; width: 92px; max-width: 100%; height: auto; min-height: 160px; gap: 10px; padding-block: 3px; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-290, .mp-view-299, .mp-view-304) { display: none; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-skin-type-tablet-copy { display: block; font: 300 14px/17px 'Ongyeol Mypage Pretendard', sans-serif; text-align: center; }
-  .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-300, .mp-view-322) { display: none; }
   .ongyeol-mypage-screens .mp-skin-settings button[aria-pressed='true'] { background-color: #ffe6e6 !important; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-315 { position: static; display: flex; flex-direction: column; gap: 20px; width: 180px; max-width: 100%; margin-inline: auto; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-316, .mp-view-325) { display: contents; }

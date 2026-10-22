@@ -1,0 +1,366 @@
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(../assets/footer/noto-sans-500.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(../assets/footer/noto-sans-600.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(../assets/footer/noto-sans-700.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/footer/noto-sans-kr-400.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../assets/footer/noto-sans-kr-500.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/footer/noto-sans-kr-700.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(../assets/footer/noto-serif-700.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Serif';
+  src: url('../assets/header/noto-serif-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ongyeol Footer Noto Sans';
+  src: url('../assets/header/noto-sans-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.ongyeol-footer {
+  --ongyeol-footer-serif: 'Ongyeol Footer Noto Serif', 'Ongyeol Footer Noto Sans KR', serif;
+  --ongyeol-footer-sans: 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif;
+  flex: none;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  color-scheme: dark;
+  font-family: var(--ongyeol-footer-serif);
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-synthesis: none;
+}
+
+.ongyeol-footer-content {
+  display: grid;
+  grid-template-columns: minmax(0, 712px) 229px 321px;
+  column-gap: clamp(32px, calc((100vw - 1430px) / 2), 245px);
+  width: calc(100% - 148px);
+  max-width: 1772px;
+  min-height: 342px;
+  margin: 0 auto;
+  padding: 46px 0 52px;
+}
+
+.ongyeol-footer-brand { min-width: 0; }
+
+.ongyeol-footer-logo {
+  margin: 0 0 60px 12px;
+  font-family: var(--ongyeol-footer-serif);
+  font-size: 35px;
+  line-height: 48px;
+  letter-spacing: 15.75px;
+  white-space: nowrap;
+}
+
+.ongyeol-footer-company {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.ongyeol-footer-company-row {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  column-gap: 1px;
+}
+
+.ongyeol-footer-company-label {
+  font-weight: 700;
+  letter-spacing: 6.75px;
+  white-space: nowrap;
+}
+
+.ongyeol-footer-company-value {
+  min-width: 0;
+  margin: 0;
+  /* Figma excludes the last character's tracking from the text width. */
+  margin-right: -4.5px;
+  letter-spacing: 4.5px;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.ongyeol-footer-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  min-height: 342px;
+}
+
+.ongyeol-footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.ongyeol-footer-social-title {
+  margin: 0;
+  color: inherit;
+  font-family: var(--ongyeol-footer-sans);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: normal;
+}
+
+/* Figma SMALL_CAPS_FORCED: keep the 20px line box and fixed small-cap glyphs. */
+.ongyeol-footer-social-small-caps { font-size: 17.2px; text-transform: uppercase; }
+
+.ongyeol-footer-social-icons {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.ongyeol-footer-social-button,
+.ongyeol-footer-join-button,
+.ongyeol-footer-business-button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  appearance: none;
+}
+
+.ongyeol-footer-social-button { display: flex; flex: none; }
+.ongyeol-footer-icon { display: block; flex: none; max-width: none; }
+
+.ongyeol-footer-service {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.ongyeol-footer-service-title {
+  margin: 0;
+  color: inherit;
+  font-family: var(--ongyeol-footer-serif);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: normal;
+}
+
+.ongyeol-footer-service-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 1.5px;
+}
+
+.ongyeol-footer-phone,
+.ongyeol-footer-hours,
+.ongyeol-footer-holiday { margin: 0; }
+.ongyeol-footer-hours { display: flex; flex-wrap: wrap; gap: 0 10px; }
+.ongyeol-footer-hours span { margin-right: -1.5px; white-space: nowrap; }
+
+.ongyeol-footer-join {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  min-width: 0;
+  min-height: 341px;
+  font-family: var(--ongyeol-footer-sans);
+}
+
+.ongyeol-footer-join-title {
+  margin: 0;
+  color: inherit;
+  font-family: var(--ongyeol-footer-sans);
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 68px;
+  letter-spacing: normal;
+}
+
+.ongyeol-footer-join-content { display: flex; flex-direction: column; gap: 33px; }
+.ongyeol-footer-join-description,
+.ongyeol-footer-join-button,
+.ongyeol-footer-business-button {
+  font-family: var(--ongyeol-footer-sans);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: 1px;
+}
+
+.ongyeol-footer-join-description { margin: 0; }
+.ongyeol-footer-join-button {
+  width: 100%;
+  min-height: 60px;
+  padding: 15px 20px;
+  border: 1.5px solid #fff;
+  text-align: center;
+}
+
+.ongyeol-footer-business-button { display: none; }
+
+.ongyeol-footer-copyright {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 7px 20px;
+  border-top: 2px solid #fff;
+}
+
+.ongyeol-footer-copyright-text {
+  margin: 0;
+  font-family: var(--ongyeol-footer-sans);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0.8px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.ongyeol-footer-social-button:focus-visible,
+.ongyeol-footer-join-button:focus-visible,
+.ongyeol-footer-business-button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+/* Three columns need room for company details, the service column and signup. */
+@media (max-width: 1359px) {
+  .ongyeol-footer-content {
+    grid-template-columns: 229px minmax(0, 321px);
+    justify-content: space-between;
+    column-gap: 20px;
+    row-gap: 79px;
+    width: calc(100% - 80px);
+    max-width: 620px;
+    padding: 84px 0 80px;
+  }
+  .ongyeol-footer-brand { grid-column: 1 / -1; }
+  .ongyeol-footer-logo { margin-left: 0; }
+  .ongyeol-footer-middle { gap: 48px; }
+  .ongyeol-footer-join { align-self: center; min-height: 0; gap: 35px; }
+  .ongyeol-footer-join-title { font-size: 40px; line-height: 54px; }
+  .ongyeol-footer-join-content { gap: 35px; }
+  .ongyeol-footer-copyright { min-height: 70px; padding-inline: 16px; }
+  .ongyeol-footer-copyright-text { font-size: 15px; line-height: 20px; letter-spacing: 0.75px; }
+}
+
+/* Below this width, the tablet's two lower columns no longer fit comfortably. */
+@media (max-width: 699px) {
+  .ongyeol-footer-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    padding: 0;
+  }
+  .ongyeol-footer-brand { grid-row: 1; padding: 20px 40px; }
+  .ongyeol-footer-logo { margin: 0; font-size: 25px; line-height: 34px; letter-spacing: 11.25px; }
+  .ongyeol-footer-company { display: none; }
+  .ongyeol-footer-middle { display: contents; }
+  .ongyeol-footer-join {
+    grid-row: 2;
+    align-self: stretch;
+    gap: 30px;
+    padding: 20px 40px;
+    border-block: 1px solid #fff;
+  }
+  .ongyeol-footer-join-content { gap: 33px; }
+  .ongyeol-footer-join-button { max-width: 302px; min-height: 50px; padding: 10px 15px; }
+  .ongyeol-footer-social { grid-row: 3; padding: 25px 40px; }
+  .ongyeol-footer-business-button {
+    grid-row: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 70px;
+    height: 70px;
+    padding-left: 40px;
+    border-block: 1px solid #fff;
+    text-align: left;
+  }
+  .ongyeol-footer-business-label { min-width: 0; }
+  .ongyeol-footer-service { grid-row: 5; gap: 25px; padding: 10px 40px; }
+  .ongyeol-footer-service-title { font-size: 17px; line-height: 23px; }
+  .ongyeol-footer-service-details { gap: 10px; font-size: 12px; line-height: 16px; letter-spacing: 1.2px; }
+  .ongyeol-footer-hours span { margin-right: -1.2px; }
+  .ongyeol-footer-copyright { min-height: 26px; padding: 7px 10px; border-top-width: 1px; }
+  .ongyeol-footer-copyright-text { font-size: 8px; line-height: 11px; letter-spacing: 0.4px; }
+}
+
+@media (max-width: 374px) {
+  .ongyeol-footer-brand,
+  .ongyeol-footer-join,
+  .ongyeol-footer-social,
+  .ongyeol-footer-service { padding-inline: 20px; }
+  .ongyeol-footer-business-button { padding-left: 20px; }
+}

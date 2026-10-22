@@ -1,0 +1,29 @@
+/* One responsive benefits layout for shopping and address screens. */
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage .mp-shopping-benefits, .ongyeol-mypage .mp-shopping-benefits * { font-family: 'Noto Sans KR', sans-serif; }
+  .ongyeol-mypage .mp-shopping-benefits {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 15px; width: 100%; height: 152px; background: #dedada; border-radius: 5px;
+  }
+  .ongyeol-mypage .mp-shopping-benefits > p { font-size: 20px; line-height: 27px; }
+  .ongyeol-mypage .mp-shopping-benefits > p > span { font-weight: 300; }
+  .ongyeol-mypage .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; width: 100%; }
+  .ongyeol-mypage .mp-shopping-benefit-item { position: relative; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; width: 100%; min-width: 0; min-height: 80px; }
+  .ongyeol-mypage .mp-shopping-benefit-item h2 { font-size: 18px; line-height: 25px; }
+  .ongyeol-mypage .mp-shopping-benefit-item p { font-weight: 300; }
+  .ongyeol-mypage .mp-shopping-benefit-divider { position: absolute; top: 0; left: 0; width: 0; height: 80px; }
+  .ongyeol-mypage .mp-shopping-benefit-divider img { position: absolute; top: 80px; left: -2px; transform: rotate(-90deg); transform-origin: top left; }
+}
+
+@media (max-width: 767px) {
+  .ongyeol-mypage .mp-shopping-benefits, .ongyeol-mypage .mp-shopping-benefits * { font-family: 'Noto Sans KR', sans-serif; }
+  .ongyeol-mypage .mp-shopping-benefits { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-height: 132px; padding: 10px 0; border-radius: 5px; background: #dedada; }
+  .ongyeol-mypage .mp-shopping-benefits > p { max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; }
+  .ongyeol-mypage .mp-shopping-benefits > p > span { font-weight: 300; }
+  .ongyeol-mypage .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; width: 100%; min-height: 80px; align-items: center; }
+  .ongyeol-mypage .mp-shopping-benefit-item { position: relative; min-width: 0; min-height: 54px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; }
+  .ongyeol-mypage .mp-shopping-benefit-item h2 { font-size: 16px; line-height: 22px; }
+  .ongyeol-mypage .mp-shopping-benefit-item p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; overflow-wrap: anywhere; }
+  .ongyeol-mypage .mp-shopping-benefit-divider { position: absolute; top: -13px; left: 0; width: 0; height: 80px; }
+  .ongyeol-mypage .mp-shopping-benefit-divider img { position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
+}

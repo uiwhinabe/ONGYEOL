@@ -1,22 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useMyPage } from './MyPageContext.js'
 
 // Figma example, updated only in memory; never an authenticated account record.
 let previewEmail = 'ongyeol@gmail.com'
-const listeners = new Set()
 const accountPaths = ['/mypage/account', '/mypage/account/email', '/mypage/account/password', '/mypage/account/password-help']
 
 export function openAccount(path) {
   if (!accountPaths.includes(path) || window.location.pathname === path) return
   window.history.pushState(null, '', path)
   window.dispatchEvent(new PopStateEvent('popstate'))
-}
-
-function navigate(event) {
-  if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
-  const link = event.target.closest('a[href]')
-  if (!link || link.target || link.origin !== window.location.origin || !accountPaths.includes(link.pathname)) return
-  event.preventDefault()
-  openAccount(link.pathname)
 }
 
 export function emailError(value) {
@@ -35,15 +26,7 @@ export function passwordErrors(values) {
 }
 
 export default function useAccountPreview() {
-  const [email, setEmail] = useState(previewEmail)
-  useEffect(() => {
-    listeners.add(setEmail)
-    document.addEventListener('click', navigate)
-    return () => {
-      listeners.delete(setEmail)
-      document.removeEventListener('click', navigate)
-    }
-  }, [])
+  const { email, setEmail } = useMyPage()
 
   function changeEmail(event) {
     const value = event.target.value
@@ -62,7 +45,7 @@ export default function useAccountPreview() {
       input?.setCustomValidity(error)
       if (error) { input?.reportValidity(); return }
       previewEmail = next
-      listeners.forEach(listener => listener(next))
+      setEmail(next)
     }
     openAccount('/mypage/account')
     window.requestAnimationFrame(() => document.querySelector('main input[name="previewEmail"]')?.focus())

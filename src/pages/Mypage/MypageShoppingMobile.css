@@ -11,15 +11,7 @@
   .ongyeol-mypage-screens .mp-shopping :is(.mp-view-59, .mp-view-70) { width: 100%; gap: 35px; }
   .ongyeol-mypage-screens .mp-shopping .mp-view-70 { gap: 5px; }
   .ongyeol-mypage-screens .mp-shopping .mp-view-94 { display: none; }
-  .mp-shopping .mp-shopping-benefits { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-height: 132px; padding: 10px 15px; border-radius: 5px; background: #dedada; }
-  .mp-shopping .mp-shopping-benefits > p { max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; }
-  .mp-shopping .mp-shopping-benefits > p > span { font-weight: 300; }
-  .mp-shopping .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, calc((100vw - 302px) / 2), 50px); width: 100%; max-width: 322px; min-height: 80px; align-items: center; }
-  .mp-shopping .mp-shopping-benefit-item { position: relative; min-width: 0; min-height: 54px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; }
-  .mp-shopping .mp-shopping-benefit-item h2 { font-size: 16px; line-height: 22px; }
-  .mp-shopping .mp-shopping-benefit-item p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; white-space: nowrap; }
-  .mp-shopping .mp-shopping-benefit-divider { position: absolute; top: -13px; left: calc(-1 * clamp(24px, calc((100vw - 302px) / 2), 50px) / 2); width: 0; height: 80px; }
-  .mp-shopping .mp-shopping-benefit-divider img { position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
+
 
   .ongyeol-mypage-screens .mp-shopping .mp-view-18 { width: 100%; height: auto; min-height: 40px; padding: 0 10px; border: 0; }
   .ongyeol-mypage-screens .mp-shopping .mp-view-19 { height: auto; min-height: 40px; justify-content: space-between; gap: 10px; }
@@ -60,16 +52,6 @@
   .mp-shopping .mp-shopping-section-title { display: flex; flex-wrap: wrap; align-items: center; min-height: 37px; }
   .mp-shopping .mp-shopping-section-title h2 { padding: 5px 10px; font-size: 16px; line-height: 22px; font-weight: 700; }
   .mp-shopping .mp-shopping-section-title > p { padding: 5px 10px; font-size: 16px; line-height: 22px; }
-  .mp-shopping .mp-shopping-status-card { display: flex; flex-direction: column; gap: 0; width: 100%; background: transparent; }
-  .mp-shopping .mp-shopping-stages { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; max-width: 353px; min-height: 108px; }
-  .mp-shopping .mp-shopping-stage { position: relative; min-width: 0; padding-top: 5px; }
-  .mp-shopping .mp-shopping-stage > div { width: 100%; min-height: 103px; text-align: center; }
-  .mp-shopping .mp-shopping-stage span { display: grid; place-items: center; width: 32px; height: 40px; margin-inline: auto; border-radius: 30px; background: #d9d9d9; font-size: 20px; line-height: 27px; }
-  .mp-shopping .mp-shopping-stage p { margin-top: 35px; font-size: clamp(12px, 3.5vw, 14px); line-height: 22px; white-space: normal; overflow-wrap: anywhere; }
-  .mp-shopping .mp-shopping-stage > img:not(.mp-shopping-mobile-stage-arrow) { display: none; }
-  .mp-shopping .mp-shopping-stage > .mp-shopping-mobile-stage-arrow { display: block; position: absolute; top: 5px; right: -5px; }
-  .mp-shopping .mp-shopping-status-returns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; border-top: 1px solid rgb(0 0 0 / 50%); }
-  .mp-shopping .mp-shopping-status-returns p { padding: 10px; font-size: 18px; line-height: 25px; font-weight: 500; text-align: center; }
 
   .mp-shopping .mp-shopping-mobile-cards { display: flex; flex-direction: column; gap: 20px; width: 100%; }
   .mp-shopping .mp-shopping-mobile-card { display: flex; flex-direction: column; gap: 5px; width: 100%; min-width: 0; min-height: 165px; }

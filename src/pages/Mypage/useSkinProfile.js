@@ -7,25 +7,12 @@ export const skinConcerns = ['민감 · 진정', '수분·보습', '모공·피�
 let profile = { skinType: '민감성', concerns: ['민감 · 진정', '모공·피지'], memo: '' }
 const listeners = new Set()
 
-export function navigateSkin(event) {
-  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-  const link = event.target.closest('a[href]')
-  if (!link || link.target || link.origin !== window.location.origin || !['/mypage/skin', '/mypage/skin/settings'].includes(link.pathname)) return
-  event.preventDefault()
-  if (window.location.pathname === link.pathname) return
-  window.history.pushState(null, '', link.pathname)
-  window.dispatchEvent(new PopStateEvent('popstate'))
-}
-
 export default function useSkinProfile() {
   const [value, setValue] = useState(profile)
   useEffect(() => {
     listeners.add(setValue)
-    // Intercept only existing skin links while a skin screen is mounted.
-    document.addEventListener('click', navigateSkin)
     return () => {
       listeners.delete(setValue)
-      document.removeEventListener('click', navigateSkin)
     }
   }, [])
 

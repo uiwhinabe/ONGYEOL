@@ -1,7 +1,8 @@
+import { MyPageButton } from './MyPageButton.jsx'
 import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { getIngredients } from './skinProfileData.js'
 import useSkinProfile from './useSkinProfile.js'
-import tabletMore from './tablet-skin-more.svg'
+import SkinSettingsMenu from './SkinSettingsMenu.jsx'
 import './MypageSkinTablet.css'
 import './MypageSkinMobile.css'
 
@@ -41,20 +42,12 @@ export default function MypageSkin() {
                   <span className="mp-view-225">을 확인해보세요.</span>
                 </p>
               </div>
-              <a href="/mypage/skin/settings" className="mp-screen-action mp-view-227" data-node-id="2275:25646">
+              <MyPageButton to="/mypage/skin/settings" className="mp-screen-action mp-view-227" data-node-id="2275:25646">
                 <p className="mp-view-25 mp-button-label" data-node-id="2275:25647" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                   <span className="mp-button-text">다시 설정</span>
                 </p>
-              </a>
-              <button
-                type="button"
-                className="mp-skin-tablet-more"
-                aria-label="피부 정보 다시 설정"
-                onClick={() => {
-                  window.history.pushState(null, '', '/mypage/skin/settings')
-                  window.dispatchEvent(new PopStateEvent('popstate'))
-                }}
-              ><img src={tabletMore} alt="" /></button>
+              </MyPageButton>
+              <SkinSettingsMenu />
             </div>
           </div>
           <div className="mp-view-228" data-node-id="2275:25648">
@@ -84,7 +77,7 @@ export default function MypageSkin() {
                 </div>
                 {hasOriginalConcerns ? (
                 <div className="mp-view-238" data-node-id="2275:25660">
-                  <div className="mp-view-239" style={{ height: 96 }} data-node-id="2275:25661" data-name="피지">
+                  <div className="mp-view-239" data-node-id="2275:25661" data-name="피지">
                     <div className="mp-view-240" data-node-id="2275:25662">
                       <div className="mp-view-34" data-node-id="2275:25663">
                         <p className="mp-view-241" data-node-id="2275:25664" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -98,7 +91,7 @@ export default function MypageSkin() {
                       </div>
                     </div>
                   </div>
-                  <div className="mp-view-242" style={{ height: 96 }} data-node-id="2275:25667" data-name="피지">
+                  <div className="mp-view-242" data-node-id="2275:25667" data-name="피지">
                     <div className="mp-view-240" data-node-id="2275:25668">
                       <div className="mp-view-34" data-node-id="2275:25669">
                         <p className="mp-view-243" data-node-id="2275:25670" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
@@ -114,9 +107,9 @@ export default function MypageSkin() {
                   </div>
                 </div>
                 ) : (
-                <div className="mp-view-238" style={{ height: 'auto', minHeight: 96, flexWrap: 'wrap', gap: 20 }}>
+                <div className="mp-view-238">
                   {profile.concerns.map(concern => (
-                    <div className="mp-view-242" style={{ height: 96 }} key={concern}>
+                    <div className="mp-view-242" key={concern}>
                       <div className="mp-view-240">
                         <div className="mp-view-34"><p className="mp-view-243">{concern}</p></div>
                         <div className="mp-view-34">
@@ -132,10 +125,10 @@ export default function MypageSkin() {
                 <div className="mp-view-244" data-node-id="2275:25674" data-name="추천성분 T">
                   <p className="mp-view-237" data-node-id="2275:25675" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>{`추천 성분 `}</p>
                 </div>
-                <div className="mp-view-245" data-node-id="2275:25676" style={{ flexWrap: 'wrap', alignItems: 'start' }}>
+                <div className="mp-view-245" data-node-id="2275:25676">
                   {ingredients.map(ingredient => (
-                    <div className="mp-view-246" key={ingredient.name} data-ingredient={ingredient.name} style={{ paddingBlock: 5 }}>
-                      <div className="mp-view-247" style={{ gap: 4 }}>
+                    <div className="mp-view-246" key={ingredient.name} data-ingredient={ingredient.name}>
+                      <div className="mp-view-247">
                         <p className="mp-view-249" style={{ position: 'relative', lineHeight: '22px' }}>{ingredient.name}</p>
                         <p className="mp-view-182" style={{ position: 'relative', whiteSpace: 'normal', textAlign: 'center', lineHeight: '18px' }}>{ingredient.description}</p>
                       </div>

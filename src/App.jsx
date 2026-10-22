@@ -4,27 +4,21 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
+import FooterPageLayout from './components/FooterPageLayout.jsx'
 import AIChatWidget from './components/AIChatWidget.jsx'
-import MypageDesktop from './pages/Mypage/MypageDesktop.jsx'
-import MypageScreens from './pages/Mypage/MypageScreens.jsx'
-import { mypageScreens } from './pages/Mypage/mypageRoutes.js'
+import MyPage from './pages/Mypage/Mypage.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
   const [chatOpen, setChatOpen] = useState(false)
 
-  if (window.location.pathname === '/mypage') {
-    return <MypageDesktop />
-  }
-
-  if (Object.hasOwn(mypageScreens, window.location.pathname)) {
-    return <MypageScreens pathname={window.location.pathname} />
+  if (window.location.pathname === '/mypage' || window.location.pathname.startsWith('/mypage/')) {
+    return <MyPage />
   }
 
   return (
     <>
-      <Header chatOpen={chatOpen} accountLinks={{ mypage: '/mypage' }} />
+      <FooterPageLayout header={<Header chatOpen={chatOpen} accountLinks={{ mypage: '/mypage' }} />}>
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
@@ -130,8 +124,7 @@ function App() {
       </section>
 
       <div className="ticks"></div>
-      <section id="spacer"></section>
-      <Footer />
+      </FooterPageLayout>
       <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
     </>
   )

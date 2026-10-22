@@ -1,3 +1,4 @@
+import { MyPageButton } from './MyPageButton.jsx'
 import { DEFAULT_USER_NAME } from './mypageUser.js'
 import './MypageAccountTablet.css'
 import './MypageAccountMobile.css'
@@ -55,22 +56,22 @@ export default function MypageAccount() {
                 </p>
               </div>
               <div className="mp-view-132" data-node-id="2275:24467">
-                <a href="/mypage/account/password" className="mp-screen-action mp-view-155" data-node-id="2275:24468" data-name="비밀번호 설정">
+                <MyPageButton to="/mypage/account/password" className="mp-screen-action mp-view-155" data-node-id="2275:24468" data-name="비밀번호 설정">
                   <p className="mp-view-46 mp-button-label" data-node-id="2275:24469" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     <span className="mp-button-text">비밀번호 설정</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:24470" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
-                </a>
-                <a href="/mypage/account/password-help" className="mp-screen-action mp-view-156" data-node-id="2275:24472" data-name="비밀번호 도움말">
+                </MyPageButton>
+                <MyPageButton to="/mypage/account/password-help" className="mp-screen-action mp-view-156" data-node-id="2275:24472" data-name="비밀번호 도움말">
                   <p className="mp-view-46 mp-button-label" data-node-id="2275:24473" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                     <span className="mp-button-text">비밀번호 도움말</span>
                   </p>
                   <div className="mp-view-30" data-node-id="2275:24474" data-name="akar-icons:chevron-down-small">
                     <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                   </div>
-                </a>
+                </MyPageButton>
               </div>
             </div>
             <div className="mp-view-129" data-node-id="2275:24476" data-name="라인" />
@@ -203,14 +204,14 @@ export default function MypageAccount() {
                       <input name="previewEmail" aria-label="Email" type="email" required value={account.email} onChange={account.changeEmail} onBlur={event => event.target.reportValidity()} onKeyDown={account.keyDown} className="mp-view-25" data-node-id="2275:24530" style={{ width: '100%', minWidth: 0, padding: 0, margin: 0, border: 0, background: 'transparent' }} />
                     </div>
                   </div>
-                  <a href="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:24531" data-name="직접입력">
+                  <MyPageButton to="/mypage/account/email" className="mp-screen-action mp-view-169" data-node-id="2275:24531" data-name="직접입력">
                     <p className="mp-view-170 mp-button-label" data-node-id="2275:24532" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                       <span className="mp-button-text">직접입력</span>
                     </p>
                     <div className="mp-view-30" data-node-id="2275:24533" data-name="akar-icons:chevron-down-small">
                       <img alt="" className="mp-view-31" src={imgAkarIconsChevronDownSmall} />
                     </div>
-                  </a>
+                  </MyPageButton>
                 </div>
                 <div className="mp-view-171" data-node-id="2275:24535" data-name="수신동의 문구">
                   <div className="mp-view-172" data-node-id="2275:24536">
