@@ -33,10 +33,8 @@ const benefits = [
 ]
 const money = value => `${value.toLocaleString('ko-KR')}원`
 
-function SelectAll({ checked, partial, disabled, onChange, label }) {
-  const ref = useRef(null)
-  useEffect(() => { ref.current.indeterminate = partial }, [partial])
-  return <input ref={ref} type="checkbox" checked={checked} disabled={disabled} onChange={onChange} aria-label={label} />
+function SelectAll({ checked, disabled, onChange, label }) {
+  return <input type="checkbox" checked={checked} disabled={disabled} onChange={onChange} aria-label={label} />
 }
 
 export default function Cart() {
@@ -60,8 +58,7 @@ export default function Cart() {
     return () => media.removeEventListener('change', updateMobile)
   }, [])
   const selectedItems = items.filter(item => item.selected)
-  const allSelected = items.length > 0 && selectedItems.length === items.length
-  const partial = selectedItems.length > 0 && !allSelected
+  const allSelected = items.length > 0 && items.every(item => item.selected)
   const selectedItemCount = selectedItems.reduce((sum, item) => sum + item.quantity, 0)
   const selectedProductsPrice = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const shippingFee = calculateShippingFee(selectedProductsPrice, selectedItems.length)
@@ -145,12 +142,12 @@ export default function Cart() {
       <div className="cart-layout">
         <div className="cart-products">
           <div className="cart-toolbar">
-            <label className="cart-select-all"><SelectAll checked={allSelected} partial={partial} disabled={!items.length} onChange={toggleAll} label="전체 선택" /><span>전체 선택</span></label>
+            <label className="cart-select-all"><SelectAll checked={allSelected} disabled={!items.length} onChange={toggleAll} label="전체 선택" /><span>전체 선택</span></label>
             <button type="button" className="cart-delete" disabled={!selectedItems.length} onClick={() => setItems(current => current.filter(item => !item.selected))}><img src={trashIcon} alt="" />선택 삭제</button>
           </div>
           <table className="cart-table">
             <colgroup><col className="cart-col-check" /><col /><col className="cart-col-price" /><col className="cart-col-quantity" /><col className="cart-col-delivery" /><col className="cart-col-shipping" /><col className="cart-col-price" /></colgroup>
-            <thead><tr><th scope="col"><SelectAll checked={allSelected} partial={partial} disabled={!items.length} onChange={toggleAll} label="장바구니 상품 전체 선택" /></th><th scope="col">상품/옵션정보</th><th scope="col">판매가</th><th scope="col">수량</th><th scope="col">배송구분</th><th scope="col">배송비</th><th scope="col">합계</th></tr></thead>
+            <thead><tr><th scope="col"><SelectAll checked={allSelected} disabled={!items.length} onChange={toggleAll} label="장바구니 상품 전체 선택" /></th><th scope="col">상품/옵션정보</th><th scope="col">판매가</th><th scope="col">수량</th><th scope="col">배송구분</th><th scope="col">배송비</th><th scope="col">합계</th></tr></thead>
             <tbody>{items.map(item => <tr key={item.id}>
               <td className="cart-item-check"><input type="checkbox" checked={item.selected} aria-label={`${item.name} 선택`} onChange={() => setItems(current => current.map(product => product.id === item.id ? { ...product, selected: !product.selected } : product))} /></td>
               <td><div className="cart-item-info"><img src={item.image} alt={item.name} /><div><p>{item.name}</p><small>{item.option}</small></div></div></td>

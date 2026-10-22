@@ -1,9 +1,8 @@
 .cart-page {
-  /* 1920px desktop: final content bottom 1655px → footer top 2155px. */
-  --cart-footer-space: 500px;
+  --cart-footer-space: 300px;
   box-sizing: border-box;
-  min-height: 2045px;
-  padding: 100px 64px 120px;
+  min-height: 0;
+  padding: 100px 64px var(--cart-footer-space);
   background: #fff;
   color: #000;
   color-scheme: light;
@@ -229,6 +228,36 @@
 @media (min-width: 1025px) {
   /* Five 245px cards + four 20px gaps, with permanent arrow lanes. */
   .cart-recommendations { max-width: 1392px; }
+  .cart-actions { margin-top: 90px; }
+}
+
+/* Keep the full desktop table when the order summary moves below it. */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .cart-layout { grid-template-columns: minmax(0, 1fr); }
+  .cart-summary { width: 100%; margin-top: 0; }
+  .cart-col-check { width: 60px; }
+  .cart-col-price { width: 100px; }
+  .cart-col-quantity { width: 110px; }
+  .cart-col-delivery { width: 85px; }
+  .cart-col-shipping { width: 72px; }
+  .cart-table th, .cart-table td:nth-child(n + 3) { white-space: nowrap; overflow-wrap: normal; }
+  .cart-item-info > img { width: 92px; }
+  .cart-quantity { grid-template-columns: 24px 32px 24px; }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .cart-page { padding-left: 32px; padding-right: 32px; }
+  .cart-layout { grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; }
+  .cart-col-check { width: 40px; }
+  .cart-col-price { width: 80px; }
+  .cart-col-quantity { width: 94px; }
+  .cart-col-delivery { width: 75px; }
+  .cart-col-shipping { width: 70px; }
+  .cart-table th, .cart-table td:nth-child(n + 3) { white-space: nowrap; overflow-wrap: normal; }
+  .cart-table th:first-child, .cart-table .cart-item-check { padding-left: 10px; }
+  .cart-item-info > img { width: 92px; }
+  .cart-quantity { grid-template-columns: 24px 32px 24px; }
+  .cart-summary-amounts > .cart-total { padding-left: 10px; }
 }
 
 @media (min-width: 541px) and (max-width: 1024px) {
