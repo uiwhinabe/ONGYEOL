@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { calculateShippingFee } from '../utils/orderPricing.js'
 import './Payment.css'
 import './Checkout.css'
@@ -122,6 +122,7 @@ function Amount({ label, amount, large = false }) {
 }
 
 export default function Checkout({ onPayment }) {
+  const navigate = useNavigate()
   const location = useLocation()
   const [products, setProducts] = useState(() => location.state?.cartItems ?? initialProducts)
   const [quantityDrafts, setQuantityDrafts] = useState({})
@@ -318,7 +319,7 @@ export default function Checkout({ onPayment }) {
           <Section title="주문 상품 확인하기" className="checkout-review">{products.map(product => <div className="checkout-review-product" key={product.id}><div className="checkout-product-placeholder" aria-label="상품 이미지 자리" /><div><p>{product.name}</p><p>{formatPrice(product.price)}원 <span className="checkout-review-quantity">{product.quantity}개</span></p></div></div>)}</Section>
           <div className="checkout-actions">
             <button className="checkout-pay-button" type="button" onClick={validatePayment}>결제하기 <svg className="checkout-pay-chevron" width="27" height="27" viewBox="0 0 27 27" fill="none" aria-hidden="true"><path d="M9.89923 21.6001L16.6492 14.8501L9.89923 8.10011" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
-            <button className="checkout-back-button" type="button">이전으로</button>
+            <button className="checkout-back-button" type="button" onClick={() => navigate('/cart')}>이전으로</button>
           </div>
         </aside>
       </div>
