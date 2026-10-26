@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { handleDesktopHeaderNav } from '../headerNavigation.js'
 import './Header.css'
 import ShopDropdown from './ShopDropdown.jsx'
 import SearchDropdown from './SearchDropdown.jsx'
@@ -32,10 +34,28 @@ function ResponsiveIcon({ desktop, tablet, mobile }) {
   )
 }
 
-export default function Header({ onSearch, accountLinks, chatOpen = false }) {
+export default function Header({ onSearch, accountLinks, chatOpen = false, isAuthenticated = false, onLogout, onLogin }) {
+  const location = useLocation()
+  useLayoutEffect(() => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }, [location])
+  const handleLogoClick = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    if (location.pathname === '/') {
+      event.preventDefault()
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }
   const [memberOpen, setMemberOpen] = useState(false)
+  const [memberOpenedAt, setMemberOpenedAt] = useState(null)
+  const memberVisible = memberOpen && memberOpenedAt === location
   const memberTriggerRef = useRef(null)
   const memberCloseTimer = useRef(null)
+  useEffect(() => {
+    window.clearTimeout(memberCloseTimer.current)
+  }, [isAuthenticated, location])
   const cancelMemberClose = () => window.clearTimeout(memberCloseTimer.current)
   const enterMember = (event) => {
     if (event.pointerType !== 'mouse') return
@@ -145,7 +165,8 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
     closeShop()
     setSearchOpen(false)
     hamburger.close()
-    setMemberOpen((previous) => !previous)
+    setMemberOpenedAt(location)
+    setMemberOpen(!memberVisible)
   }
   const hoverMember = (event) => {
     if (event.pointerType !== 'mouse') return
@@ -154,6 +175,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
     closeShop()
     setSearchOpen(false)
     hamburger.close()
+    setMemberOpenedAt(location)
     setMemberOpen(true)
   }
   useEffect(() => {
@@ -228,7 +250,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
                   <button ref={shopRef} id="shop-trigger" className="ongyeol-header-menu-label ongyeol-header-shop-trigger" type="button" aria-expanded={shopOpen} aria-controls="shop-dropdown" onFocus={openShop} onBlur={handleBlur} onClick={openShop}>
                     {label}
                   </button>
-                ) : <span className="ongyeol-header-menu-label">{label}</span>}
+                ) : id === 'skin-guide' ? <Link className="ongyeol-header-menu-label" to="/skin-guide" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/skin-guide')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : id === 'event' ? <Link className="ongyeol-header-menu-label" to="/event?tab=ongoing" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/event')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : id === 'brand' ? <Link className="ongyeol-header-menu-label" to="/brand" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/brand')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : <span className="ongyeol-header-menu-label">{label}</span>}
                 {id === 'shop' && <ShopDropdown ref={dropdownRef} open={shopOpen} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={handleBlur} onClose={closeShop} />}
               </li>
             ))}
@@ -242,10 +264,10 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
           </span>
         </button>
         <div className="ongyeol-header-logo" aria-label="온결">
-          <span className="ongyeol-header-wordmark">ONGYEOL</span>
+          <Link className="ongyeol-header-wordmark" to="/" onClick={handleLogoClick} aria-label="온결 홈으로 이동">ONGYEOL</Link>
         </div>
         <div className="ongyeol-header-actions">
-          <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberOpen} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>
+          <button ref={memberTriggerRef} id="member-trigger" className="ongyeol-header-action ongyeol-header-member-trigger" type="button" aria-label="회원 메뉴" aria-expanded={memberVisible} aria-controls="member-dropdown" onClick={toggleMember} onPointerEnter={hoverMember} onPointerLeave={leaveMember}>
             <ResponsiveIcon desktop={memberDesktop} tablet={memberTablet} mobile={memberMobile} />
           </button>
           <button ref={searchTriggerRef} id="search-trigger" className="ongyeol-header-action" type="button" aria-label="검색" aria-expanded={searchOpen} aria-controls="search-dropdown" onClick={toggleSearch} onPointerEnter={hoverSearch} onPointerLeave={leaveSearch}>
@@ -254,15 +276,15 @@ export default function Header({ onSearch, accountLinks, chatOpen = false }) {
           <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="고객센터">
             <img className="ongyeol-header-static-icon" src={support} width="26.25" height="26.2212" alt="" />
           </button>
-          <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="장바구니">
+          <Link className="ongyeol-header-action ongyeol-header-action-desktop" to="/cart" aria-label="장바구니">
             <img className="ongyeol-header-static-icon" src={cart} width="25" height="25" alt="" />
-          </button>
+          </Link>
         </div>
       </div>
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
       <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={onSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
       <HamburgerDropdown ref={hamburgerPanelRef} open={hamburgerOpen} controller={hamburger} />
-      <MemberDropdown open={memberOpen} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={{ mypage: '/mypage', ...accountLinks }} />
+      <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={{ mypage: '/mypage', ...accountLinks }} isAuthenticated={isAuthenticated} onLogout={onLogout} onLogin={onLogin} />
     </header>
   )
 }

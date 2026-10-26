@@ -1,0 +1,158 @@
+.ongyeol-product-card {
+  box-sizing: border-box;
+  min-width: 0;
+  color: #111;
+  color-scheme: light;
+  font-family: 'Ongyeol Footer Noto Sans KR', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+}
+.ongyeol-product-card * { box-sizing: border-box; }
+.ongyeol-product-card__wish { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.ongyeol-product-card__wish:focus-visible { outline: 2px solid #111; outline-offset: 4px; }
+.ongyeol-product-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: #f5f5f5;
+}
+.ongyeol-product-card__visual { position: relative; }
+.ongyeol-product-card__detail-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ongyeol-product-card__detail-link:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+.ongyeol-product-card__name-link { overflow: hidden; }
+.ongyeol-product-card__name-link span {
+  display: block;
+  transform-origin: left center;
+  transition: transform 0.2s, color 0.2s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ongyeol-product-card__name-link:hover span {
+    transform: scale(1.166667);
+    color: #606060;
+  }
+}
+.ongyeol-product-card__texture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #FFFFFF;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .ongyeol-product-card__visual:hover .ongyeol-product-card__texture {
+    opacity: 1;
+  }
+}
+.ongyeol-product-card[data-product-id='odi-toner'] .ongyeol-product-card__image,
+.ongyeol-product-card[data-product-id='baekmogi-pad'] .ongyeol-product-card__image,
+.ongyeol-product-card[data-product-id='baekmogi-cream'] .ongyeol-product-card__image,
+.ongyeol-product-card[data-product-id='baekmogi-mask'] .ongyeol-product-card__image {
+  background: #fff;
+}
+.ongyeol-product-card[data-product-id='baekmogi-mask'] img.ongyeol-product-card__image {
+  filter: brightness(1.04);
+}
+.ongyeol-product-card__image-stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #fff;
+}
+.ongyeol-product-card__image-crop {
+  position: relative;
+  width: min(76%, calc(106.6667% * var(--product-ratio)));
+  aspect-ratio: var(--product-ratio);
+  overflow: hidden;
+}
+.ongyeol-product-card__image-crop img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+}
+.ongyeol-product-card__badge {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+}
+.ongyeol-product-card__badge--hot { background: #cb6d7b; }
+.ongyeol-product-card__badge--new { background: #a7b89e; }
+.ongyeol-product-card__badge--best { background: #506c5a; }
+.ongyeol-product-card__badge--limited { background: #aa9bb8; font-size: 10px; }
+.ongyeol-product-card__badge--sale {
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 3px 4px;
+  border-radius: 0;
+  color: #111;
+  background: #ffd6d8;
+  font-size: 9px;
+}
+.ongyeol-product-card__original-price { color: #bbb; font-size: 10px; }
+.ongyeol-product-card__discount { color: #ed0000; font-weight: 700; }
+.ongyeol-product-card__empty-stars { color: #bbb; }
+.ongyeol-product-card__name { margin: 8px 0 0; color: #111; font-family: inherit; font-size: 12px; font-weight: 400; line-height: 18px; letter-spacing: normal; overflow-wrap: anywhere; }
+.ongyeol-product-card__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; margin: 6px 0 0; line-height: 18px; }
+.ongyeol-product-card__meta { display: flex; align-items: center; justify-content: space-between; min-height: 24px; margin-top: 4px; }
+.ongyeol-product-card__rating { display: flex; align-items: center; gap: 4px; }
+.ongyeol-product-card__stars { color: #ffc400; font: 20px/1 Arial, sans-serif; letter-spacing: 0; }
+.ongyeol-product-card__reviews { font-size: 10px; }
+.ongyeol-product-card__wish {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-right: -5px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+}
+.ongyeol-product-card__wish[aria-pressed='true'] { color: #ed0000; }
+
+@media (max-width: 599px) {
+  .ongyeol-product-card { font-size: 11px; }
+  .ongyeol-product-card__name { font-size: 11px; line-height: 17px; }
+  .ongyeol-product-card__original-price { font-size: 9px; }
+  .ongyeol-product-card__price { gap: 3px; line-height: 17px; }
+  .ongyeol-product-card__stars { font-size: 16px; }
+  .ongyeol-product-card__reviews { font-size: 9px; }
+  .ongyeol-product-card__meta { flex-wrap: wrap; gap: 4px; }
+  .ongyeol-product-card__wish { flex: none; margin-right: 0; }
+  .ongyeol-product-card__badge { top: 6px; left: 6px; width: 36px; height: 36px; font-size: 10px; }
+  .ongyeol-product-card__badge--limited { font-size: 7px; }
+  .ongyeol-product-card__badge--sale { top: 0; left: 0; width: auto; height: auto; font-size: 8px; }
+}
+@media (max-width: 599px) and (hover: hover) and (pointer: fine) {
+  .ongyeol-product-card__name-link:hover span { transform: scale(1.181818); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-product-card__name-link span { transition: none; }
+}

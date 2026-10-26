@@ -1,133 +1,190 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
-import Header from './components/Header.jsx'
-import FooterPageLayout from './components/FooterPageLayout.jsx'
-import AIChatWidget from './components/AIChatWidget.jsx'
-import MyPage from './pages/Mypage/Mypage.jsx'
+﻿import { useLayoutEffect, useState } from 'react'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 
-function App() {
-  const [count, setCount] = useState(0)
+import Header from './components/Header.jsx'
+import MyPage from './pages/Mypage/Mypage.jsx'
+import Footer from './components/Footer.jsx'
+import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
+
+import Home from './pages/Home.jsx'
+import Products from './pages/Products.jsx'
+import ProductDetail from './pages/ProductDetail.jsx'
+import { readProductRoute, navigateToProducts } from './utils/productNavigation.js'
+import Brand from './pages/Brand.jsx'
+import SkinGuide from './pages/Skinguide.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import SignupComplete from './pages/SignupComplete.jsx'
+import IdentityVerification from './pages/IdentityVerification.jsx'
+
+import Checkout from './pages/Checkout.jsx'
+import Cart from './pages/Cart.jsx'
+import Payment from './pages/Payment.jsx'
+import OrderComplete from './pages/OrderComplete.jsx'
+
+import Event from './pages/Event.jsx'
+import EventDetail from './pages/EventDetail.jsx'
+
+import welcomeBenefitDetail from './assets/images/events/welcome-benefit-detail.png'
+import kakaoDetail from './assets/images/events/kakao-detail.png'
+
+import AuthProvider from './components/AuthProvider.jsx'
+import { useAuth } from './components/authContext.js'
+import './pages/paymentControls.css'
+
+function ProductPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const route = readProductRoute(location)
+  if (route.productId) return <ProductDetail key={route.productId} productId={route.productId} />
+  return <Products classification={route.classification} initialCategory={route.category}
+    onCategoryChange={(classification, category) => navigateToProducts(classification, category, navigate)} />
+}
+
+function Layout() {
+  const { pathname, hash } = useLocation()
+  const navigate = useNavigate()
+
   const [chatOpen, setChatOpen] = useState(false)
 
-  if (window.location.pathname === '/mypage' || window.location.pathname.startsWith('/mypage/')) {
-    return <MyPage />
-  }
+  const { isAuthenticated, enterLogin, logout } = useAuth()
+
+  const isMyPage = pathname === '/mypage' || pathname.startsWith('/mypage/')
+  const isLogin = pathname === '/login' || pathname === '/login/'
+
+  // Keep existing product bookmarks working with the shared BrowserRouter.
+  useLayoutEffect(() => {
+    if (hash.split('?')[0] === '#/products') {
+      navigate(`/products${hash.includes('?') ? `?${hash.split('?')[1]}` : ''}`, { replace: true })
+    }
+  }, [hash, navigate])
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
+  }, [pathname])
 
   return (
-    <>
-      <FooterPageLayout header={<Header chatOpen={chatOpen} accountLinks={{ mypage: '/mypage' }} />}>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div
+      className={`ongyeol-layout${
+        isLogin ? ' ongyeol-layout--login' : ''
+      }${isMyPage ? ' footer-page-layout' : ''}`}
+    >
+      <Header
+        chatOpen={chatOpen}
+        isAuthenticated={isAuthenticated}
+        onLogin={enterLogin}
+        onLogout={logout}
+        accountLinks={{
+          login: '/login',
+          signup: '/signup',
+          mypage: '/mypage',
+        }}
+      />
 
-      <div className="ticks"></div>
+      <Routes>
+        <Route path="/mypage/*" element={<div className="footer-page-body"><MyPage /></div>} />
+        {/* HOME */}
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/skin-guide" element={<SkinGuide />} />
+        <Route path="/brand" element={<Brand />} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* 회원 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup/complete" element={<SignupComplete />} />
+        <Route
+          path="/signup/verify"
+          element={<IdentityVerification />}
+        />
 
-      <div className="ticks"></div>
-      </FooterPageLayout>
-      <AIChatWidget open={chatOpen} onOpenChange={setChatOpen} />
-    </>
+        {/* EVENT */}
+        <Route path="/event" element={<Event />} />
+
+        <Route
+          path="/event/signup-coupon"
+          element={
+            <EventDetail
+              title="신규 가입 회원 쿠폰 이벤트"
+              detailImage={welcomeBenefitDetail}
+              imageAlt="신규 회원 10,000원 쿠폰 혜택, 쿠폰 사용 안내, 쿠폰 받는 방법 및 쿠폰 이용 안내"
+            />
+          }
+        />
+
+        <Route
+          path="/event/kakao-coupon"
+          element={
+            <EventDetail
+              title="카카오톡 플러스 친구 쿠폰 이벤트"
+              detailImage={kakaoDetail}
+              imageAlt="카카오톡 플러스친구 10,000원 쿠폰 이벤트, 참여 방법, 특별 혜택 및 유의사항"
+            />
+          }
+        />
+
+        {/* 주문서 작성 */}
+        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              onPayment={() => navigate('/payment')}
+            />
+          }
+        />
+
+        {/* 결제 */}
+        <Route
+          path="/payment"
+          element={
+            <Payment
+              onComplete={() => navigate('/order-complete')}
+              onBack={() => navigate('/checkout')}
+            />
+          }
+        />
+
+        {/* 주문 완료 */}
+        <Route
+          path="/order-complete"
+          element={
+            <OrderComplete
+              onContinueShopping={() => navigate('/')}
+            />
+          }
+        />
+
+        {/* 없는 주소는 HOME */}
+        <Route path="*" element={<Home />} />
+      </Routes>
+
+      <Footer />
+
+      <AIChatWidget
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+      />
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
+    </BrowserRouter>
+  )
+}

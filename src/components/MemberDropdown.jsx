@@ -1,7 +1,9 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
+import { flushSync } from 'react-dom'
+import { Link } from 'react-router-dom'
 import './MemberDropdown.css'
 
-export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {} }) {
+export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {}, isAuthenticated = false, onLogout, onLogin }) {
   const panelRef = useRef(null)
 
   useLayoutEffect(() => {
@@ -49,15 +51,32 @@ export default function MemberDropdown({ open, onClose, onPointerEnter, onPointe
     }
   }, [open, onClose, anchorRef])
 
-  const item = (name, label) => links[name]
-    ? <a className="ongyeol-member-item" href={links[name]} onClick={onClose}>{label}</a>
-    : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
+  const handleItemClick = (event, name) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    flushSync(onClose)
+    if (name !== 'mypage' && !isAuthenticated && onLogin) {
+      event.preventDefault()
+      onLogin()
+    }
+  }
+  const item = (name, label) => {
+    const href = name === 'mypage' || isAuthenticated ? links[name] : '/login'
+    return href
+      ? <Link className="ongyeol-member-item" to={href} onClick={event => handleItemClick(event, name)}>{label}</Link>
+      : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
+  }
+  const logout = () => {
+    flushSync(onClose)
+    onLogout?.()
+  }
 
   return (
     <nav ref={panelRef} id="member-dropdown" className={`ongyeol-member-dropdown${open ? ' is-open' : ''}`}
       inert={!open} aria-hidden={!open} aria-label="회원 메뉴" onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
       <div className="ongyeol-member-account-row">
-        {item('login', '로그인')}<span aria-hidden="true">/</span>{item('signup', '회원가입')}
+        {isAuthenticated
+          ? <button className="ongyeol-member-item" type="button" disabled={!onLogout} onClick={logout}>로그아웃</button>
+          : <>{item('login', '로그인')}<span aria-hidden="true">/</span>{item('signup', '회원가입')}</>}
       </div>
       {item('mypage', '마이페이지')}
     </nav>

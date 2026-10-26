@@ -1,7 +1,6 @@
-import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useLayoutEffect, useState } from 'react'
-import Header from '../../components/Header.jsx'
-import FooterPageLayout from '../../components/FooterPageLayout.jsx'
+import '../../components/FooterPageLayout.css'
 import MyPageMenu from './MyPageMenu.jsx'
 import { MyPageContext } from './MyPageContext.js'
 import { MyPageButton } from './MyPageButton.jsx'
@@ -20,7 +19,7 @@ import './MypageOrderStatus.css'
 import chatLogo from '../../assets/images/chat/ongyeol-logo.png'
 
 export default function MyPage(props) {
-  return <BrowserRouter><MyPageLayout {...props} /></BrowserRouter>
+  return <MyPageLayout {...props} />
 }
 
 function MyPageLayout() {
@@ -57,7 +56,6 @@ function MyPageLayout() {
   const context = { navigate, email, setEmail, passwords, setPasswords, memoDraft, setMemoDraft, drafts, setDrafts }
   return (
     <MyPageContext.Provider value={context}>
-      <FooterPageLayout header={<Header />}>
       <main className={`ongyeol-mypage ${home ? 'ongyeol-mypage-home' : 'ongyeol-mypage-screens'}${screen?.wide ? ' mp-page-wide' : ''}${screen?.variant ? ` mp-page-${screen.variant}` : ''}`} data-figma-frame={screen?.frame}>
         <div className={`${home ? 'ongyeol-mypage-inner' : 'mp-page-layout'} ongyeol-mypage-layout`} data-has-title={home || Boolean(screen?.title)} inert={isAddresses && addressBook.isOpen}>
           {(home || screen?.title) && <h1 className={home ? undefined : 'mp-page-heading'}><MyPageButton to="/mypage">MY PAGE</MyPageButton></h1>}
@@ -73,7 +71,6 @@ function MyPageLayout() {
         {isAddresses && addressBook.isOpen && <div className="mp-dialog-overlay" onMouseDown={event => { if (event.target === event.currentTarget) addressBook.close() }}><MypageAddressDialog value={addressBook.draft} editing={addressBook.editingId !== null} onChange={addressBook.change} onSave={addressBook.save} onClose={addressBook.close} /></div>}
         {home && <button className="ongyeol-mypage-chat" type="button" aria-label="AI 상담"><span><img src={chatLogo} alt="" /></span></button>}
       </main>
-      </FooterPageLayout>
     </MyPageContext.Provider>
   )
 }

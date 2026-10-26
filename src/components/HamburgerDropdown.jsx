@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { navigateToProducts } from '../utils/productNavigation.js'
 import './HamburgerDropdown.css'
 
 const categories = [
@@ -8,6 +10,7 @@ const categories = [
 ]
 
 export default function HamburgerDropdown({ ref, open: panelOpen, controller }) {
+  const navigate = useNavigate()
   const [expanded, setExpanded] = useState([])
   return (
     <div className={`ongyeol-hd-layer${panelOpen ? ' is-open' : ''}`} inert={!panelOpen} aria-hidden={!panelOpen}
@@ -23,12 +26,21 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
             const open = expanded.includes(index)
             return (
               <div key={title}>
-                <button className="ongyeol-hd-category" type="button" aria-expanded={open} aria-controls={`hd-items-${index}`}
-                  onClick={() => setExpanded((values) => open ? values.filter((value) => value !== index) : [...values, index])}>
-                  <span>{title}</span><span className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} aria-hidden="true" />
-                </button>
+                <div className="ongyeol-hd-category">
+                  <button className="ongyeol-hd-title" type="button" onClick={() => {
+                    controller.close()
+                    navigateToProducts(['type', 'line', 'concern'][index], index === 0 ? '전체' : items[0], navigate)
+                  }}>{title}</button>
+                  <button className={`ongyeol-hd-plus${open ? ' is-expanded' : ''}`} type="button"
+                    aria-label={`${title} 하위 메뉴 ${open ? '접기' : '펼치기'}`}
+                    aria-expanded={open} aria-controls={`hd-items-${index}`}
+                    onClick={() => setExpanded((values) => open ? values.filter((value) => value !== index) : [...values, index])} />
+                </div>
                 <ul className="ongyeol-hd-items" id={`hd-items-${index}`} hidden={!open}>
-                  {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" aria-disabled="true">{label}</button></li>)}
+                  {items.map((label) => <li key={label}><button className="ongyeol-hd-item" type="button" onClick={() => {
+                    controller.close()
+                    navigateToProducts(['type', 'line', 'concern'][index], label, navigate)
+                  }}>{label}</button></li>)}
                 </ul>
               </div>
             )
@@ -36,7 +48,11 @@ export default function HamburgerDropdown({ ref, open: panelOpen, controller }) 
         </div>
         {/* Page files have no connected routes yet. Do not invent destinations. */}
         <button className="ongyeol-hd-link ongyeol-hd-mypage" type="button" aria-disabled="true">마이페이지</button>
-        {['SKIN GUIDE', 'EVENT', 'BRAND'].map((label) => <button className="ongyeol-hd-link" key={label} type="button" aria-disabled="true">{label}</button>)}
+        {['SKIN GUIDE', 'EVENT', 'BRAND'].map((label) => label === 'SKIN GUIDE'
+          ? <Link className="ongyeol-hd-link" key={label} to="/skin-guide" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
+          : label === 'EVENT'
+          ? <Link className="ongyeol-hd-link" key={label} to="/event?tab=ongoing" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>
+          : <Link className="ongyeol-hd-link" key={label} to="/brand" onClick={controller.close} style={{ textDecoration: 'none' }}>{label}</Link>)}
       </nav>
     </div>
   )
