@@ -1,3 +1,17 @@
+import vitaminMaskReview1 from '../../assets/reviews/vitamin-mask-1.png'
+import vitaminMaskReview2 from '../../assets/reviews/vitamin-mask-2.png'
+import vitaminMaskReview3 from '../../assets/reviews/vitamin-mask-3.png'
+import vitaminMaskReview4 from '../../assets/reviews/vitamin-mask-4.png'
+import vitaminMaskReview5 from '../../assets/reviews/vitamin-mask-5.png'
+import vitaminMaskReview6 from '../../assets/reviews/vitamin-mask-6.png'
+const vitaminMaskReviewPhotos = [vitaminMaskReview1, vitaminMaskReview2, vitaminMaskReview3, vitaminMaskReview4, vitaminMaskReview5, vitaminMaskReview6].map((src, index) => ({ id: `vitamin-mask-photo-${index + 1}`, src, alt: `비타민 C 마스크팩 포토 리뷰 ${index + 1}` }))
+import vitaminPadReview1 from '../../assets/reviews/vitamin-pad-1.png'
+import vitaminPadReview2 from '../../assets/reviews/vitamin-pad-2.png'
+import vitaminPadReview3 from '../../assets/reviews/vitamin-pad-3.png'
+import vitaminPadReview4 from '../../assets/reviews/vitamin-pad-4.png'
+import vitaminPadReview5 from '../../assets/reviews/vitamin-pad-5.png'
+import vitaminPadReview6 from '../../assets/reviews/vitamin-pad-6.png'
+const vitaminPadReviewPhotos = [vitaminPadReview1, vitaminPadReview2, vitaminPadReview3, vitaminPadReview4, vitaminPadReview5, vitaminPadReview6].map((src, index) => ({ id: `vitamin-pad-photo-${index + 1}`, src, alt: `비타민 C 토너 패드 포토 리뷰 ${index + 1}` }))
 import photo1 from '../../assets/reviews/odi-mask-1.png'
 import photo2 from '../../assets/reviews/odi-mask-2.png'
 import photo3 from '../../assets/reviews/odi-mask-3.png'
@@ -216,6 +230,104 @@ export const reviewPages = {
     ratingDistribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
     photoReviews: [], reviews: [],
   }])),
+  'vitamin-c-mask': {
+    productId: 'vitamin-c-mask', productName: '비타민 C 마스크팩',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma's supplied totals without recalculation.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: vitaminMaskReviewPhotos,
+    summaryPhotos: [vitaminMaskReviewPhotos[0], vitaminMaskReviewPhotos[1], vitaminMaskReviewPhotos[3], vitaminMaskReviewPhotos[2]],
+    reviews: [
+{
+  "id": "vitamin-mask-1",
+  "nickname": "민트초코칩",
+  "date": "2026-09-17",
+  "rating": 5,
+  "skinType": "건성",
+  "concern": "pore",
+  "concernLabel": "모공•피지",
+  "age": "20대",
+  "title": "팩 한 장으로 촉촉함이 꽉 차는 느낌이에요",
+  "body": "피부가 건조하고 푸석할 때 사용해봤는데 시트에 에센스가 충분히 묻어 있어서 끝까지 촉촉하게 사용할 수 있었어요. 팩을 떼어낸 뒤에도 피부가 금방 마르지 않고 촉촉함이 오래 남는 느낌이라 만족스러웠어요. 특히 볼이나 입가처럼 건조한 부분이 한결 편안해져서 좋아요.",
+  "photo": vitaminMaskReviewPhotos[0]
+},
+{
+  "id": "vitamin-mask-2",
+  "nickname": "서하늘",
+  "date": "2026-09-17",
+  "rating": 5,
+  "skinType": "수부지",
+  "concern": "elasticity",
+  "concernLabel": "주름•탄력",
+  "age": "40대",
+  "title": "사용 후 피부가 맑아 보여요",
+  "body": "피부톤이 칙칙해 보이는 날 저녁에 사용하고 있어요. 팩을 붙이고 있는 동안 답답한 느낌이 적고 떼어낸 뒤에는 피부가 촉촉하면서도 한층 맑아 보이는 느낌이에요. 에센스를 가볍게 두드려 흡수시키면 번들거림도 심하지 않고 다음 날 피부가 생기 있어 보여서 중요한 날 전날 사용하기 좋",
+  "photo": vitaminMaskReviewPhotos[2]
+},
+{
+  "id": "vitamin-mask-3",
+  "nickname": "레몬소다",
+  "date": "2026-09-16",
+  "rating": 5,
+  "skinType": "민감성",
+  "concern": "sensitive",
+  "concernLabel": "수부지",
+  "age": "10대",
+  "title": "거칠어진 피부가 부드럽게 정돈돼요",
+  "body": "피부가 예민해지고 결이 거칠게 느껴질 때 사용해봤어요. 시트가 얼굴에 부드럽게 밀착되고 사용하는 동안 편안했어요. 팩을 떼어낸 뒤 남은 에센스를 가볍게 흡수시켜주니까 들떠 보이던 피부결이 매끈하게 정돈되고 촉촉해졌어요. 피부가 자극받았을 때 진정용으로 사용하기도 괜찮은 것 같아요.",
+  "photo": vitaminMaskReviewPhotos[3]
+},
+    ],
+  },
+  'vitamin-c-pad': {
+    productId: 'vitamin-c-pad', productName: '비타민 C 토너 패드',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma's supplied totals without recalculation.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: vitaminPadReviewPhotos,
+    summaryPhotos: [vitaminPadReviewPhotos[0], vitaminPadReviewPhotos[1], vitaminPadReviewPhotos[2], vitaminPadReviewPhotos[5]],
+    reviews: [
+{
+  "id": "vitamin-pad-1",
+  "nickname": "MellowDay",
+  "date": "2026-09-17",
+  "rating": 5,
+  "skinType": "건성",
+  "concern": "pore",
+  "concernLabel": "모공•피지",
+  "age": "20대",
+  "title": "에센스가 촉촉하게 잘 묻어 있어요",
+  "body": "패드가 얇게 마른 느낌이 아니라 에센스를 충분히 머금고 있어서 한 장만 사용해도 얼굴 전체를 촉촉하게 닦아낼 수 있어요. 세안 후 피부결을 따라 가볍게 닦아주면 피부가 매끈하게 정돈되고 건조한 부분에는 잠깐 올려두면 팩처럼 사용할 수 있어서 편해요. 사용 후에도 당기는 느낌이 적어서 만족하고 있어요.",
+  "photo": vitaminPadReviewPhotos[0]
+},
+{
+  "id": "vitamin-pad-2",
+  "nickname": "루나빛",
+  "date": "2026-09-17",
+  "rating": 5,
+  "skinType": "수부지",
+  "concern": "elasticity",
+  "concernLabel": "주름•탄력",
+  "age": "40대",
+  "title": "내장 집게가 있어서 위생적으로 쓰기 좋아요",
+  "body": "패드 제품은 손으로 꺼낼 때 조금 신경 쓰였는데 뚜껑 안쪽에 집게가 따로 들어 있어서 깔끔하게 사용할 수 있어요. 패드도 한 장씩 잘 집히고 에센스가 넉넉하게 묻어 있어서 아침에 피부결 정돈할 때 간편하게 쓰기 좋았습니다. 닦고 난 뒤에도 번들거리지 않고 산뜻해서 손이 자주 가요.",
+  "photo": vitaminPadReviewPhotos[1]
+},
+{
+  "id": "vitamin-pad-3",
+  "nickname": "하니베리",
+  "date": "2026-09-16",
+  "rating": 5,
+  "skinType": "민감성",
+  "concern": "sensitive",
+  "concernLabel": "수부지",
+  "age": "10대",
+  "title": "한 장으로 피부결 정돈하기 편해요",
+  "body": "세안하고 피부가 거칠게 느껴질 때 한 장씩 사용하고 있어요. 엠보 면으로 피부결을 따라 부드럽게 닦아준 뒤 반대쪽 면으로 한 번 더 정돈해주니까 사용하기 편했어요. 패드가 에센스를 촉촉하게 머금고 있어서 자극적인 느낌도 적고 사용하고 나면 피부가 한층 매끈하고 맑아 보이는 느낌이에요.",
+  "photo": vitaminPadReviewPhotos[2]
+},
+    ],
+  },
   'vitamin-c-cream': {
     productId: 'vitamin-c-cream', productName: '비타민 C 수분크림',
     totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
