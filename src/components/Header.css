@@ -277,6 +277,8 @@
   .ongyeol-header-bar { padding-right: 24px; }
 }
 
+/* Keep the existing desktop support icon clickable. */
+.ongyeol-header-support { cursor: pointer; }
 /* Figma 1104:7378: 30px banner, 80px menu, centered 20px wordmark. */
 @media (max-width: 599px) {
   .ongyeol-header-banner {

@@ -1,4 +1,4 @@
-﻿import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -22,6 +22,7 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
 import IdentityVerification from './pages/IdentityVerification.jsx'
+import Wishlist, { WishlistProductDetail } from './pages/Wishlist.jsx'
 
 import Checkout from './pages/Checkout.jsx'
 import Cart from './pages/Cart.jsx'
@@ -55,8 +56,9 @@ function Layout() {
 
   const { isAuthenticated, enterLogin, logout } = useAuth()
 
-  const isMyPage = pathname === '/mypage' || pathname.startsWith('/mypage/')
+  const isMyPage = pathname === '/contact' || pathname === '/mypage' || pathname.startsWith('/mypage/')
   const isLogin = pathname === '/login' || pathname === '/login/'
+  const isWishlist = /^\/(wishlist\/?|products\/[^/]+\/?$)/.test(pathname)
 
   // Keep existing product bookmarks working with the shared BrowserRouter.
   useLayoutEffect(() => {
@@ -77,7 +79,7 @@ function Layout() {
     <div
       className={`ongyeol-layout${
         isLogin ? ' ongyeol-layout--login' : ''
-      }${isMyPage ? ' footer-page-layout' : ''}`}
+      }${isWishlist ? ' ongyeol-layout--wishlist' : ''}${isMyPage ? ' footer-page-layout' : ''}`}
     >
       <Header
         chatOpen={chatOpen}
@@ -92,6 +94,9 @@ function Layout() {
       />
 
       <Routes>
+        <Route path="/contact" element={<div className="footer-page-body"><MyPage /></div>} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/products/:id" element={<WishlistProductDetail />} />
         <Route path="/mypage/*" element={<div className="footer-page-body"><MyPage /></div>} />
         {/* HOME */}
         <Route path="/" element={<Home />} />

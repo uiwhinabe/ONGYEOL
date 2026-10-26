@@ -273,9 +273,9 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
           <button ref={searchTriggerRef} id="search-trigger" className="ongyeol-header-action" type="button" aria-label="검색" aria-expanded={searchOpen} aria-controls="search-dropdown" onClick={toggleSearch} onPointerEnter={hoverSearch} onPointerLeave={leaveSearch}>
             <ResponsiveIcon desktop={searchDesktop} tablet={searchTablet} mobile={searchMobile} />
           </button>
-          <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="고객센터">
+          <Link className="ongyeol-header-action ongyeol-header-action-desktop ongyeol-header-support" to="/contact" aria-label="고객센터">
             <img className="ongyeol-header-static-icon" src={support} width="26.25" height="26.2212" alt="" />
-          </button>
+          </Link>
           <Link className="ongyeol-header-action ongyeol-header-action-desktop" to="/cart" aria-label="장바구니">
             <img className="ongyeol-header-static-icon" src={cart} width="25" height="25" alt="" />
           </Link>

@@ -1,3 +1,4 @@
+import ContactUs from '../Contact Us.jsx'
 import MypageOrders from './MypageOrders.jsx'
 import MypageReturns from './MypageReturns.jsx'
 import MypageRefunds from './MypageRefunds.jsx'
@@ -13,6 +14,7 @@ import MypageSkinSettings from './MypageSkinSettings.jsx'
 
 // Each Figma state has a stable URL for direct access and refresh.
 export const mypageScreens = {
+  '/contact': { Content: ContactUs, active: '/contact', title: true, variant: 'contact' },
   '/mypage/orders': { Content: MypageOrders, frame: '2275:24028', active: '/mypage/orders', title: true, wide: true },
   '/mypage/returns': { Content: MypageReturns, frame: '2275:23889', active: '/mypage/returns', title: true, wide: true },
   '/mypage/refunds': { Content: MypageRefunds, frame: '2275:23648', active: '/mypage/refunds', title: true },
