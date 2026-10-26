@@ -1,4 +1,4 @@
-.ongyeol-inquiry { position: relative; width: 100%; height: 100%; background: #fff; font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 15px; line-height: 20px; font-variation-settings: 'CTGR' 0, 'wdth' 100; }
+.ongyeol-inquiry { position: relative; width: 100%; height: 100%; background: #fff; font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 15px; line-height: 20px; font-variation-settings: 'CTGR' 0, 'wdth' 100; }
 .ongyeol-inquiry-header { position: absolute; left: 35px; top: 43px; display: flex; align-items: center; gap: 14px; }
 .ongyeol-inquiry .ongyeol-inquiry-back { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; background: transparent; }
 .ongyeol-inquiry-avatar { position: relative; display: block; flex: none; width: 39px; height: 39px; }
@@ -8,7 +8,7 @@
 .ongyeol-inquiry-avatar--small { width: 32px; height: 32px; }
 .ongyeol-inquiry-avatar--small .ongyeol-inquiry-avatar-logo { width: 22.069px; height: 22.069px; }
 .ongyeol-inquiry-heading { width: 130px; }
-.ongyeol-inquiry-heading p:first-child { font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; }
+.ongyeol-inquiry-heading p:first-child { font-family: "Noto Sans KR", "Noto Sans", sans-serif; }
 .ongyeol-inquiry-heading p:last-child { color: #0008; font-size: 10px; line-height: 14px; white-space: nowrap; }
 .ongyeol-inquiry-message { position: absolute; left: 40px; top: 157px; display: flex; align-items: flex-start; gap: 10px; width: 340px; }
 .ongyeol-inquiry-copy { display: flex; flex-direction: column; flex: none; gap: 18px; width: 300px; }
@@ -23,7 +23,7 @@
 .ongyeol-inquiry-topic--delivery { left: 293px; top: 584px; }
 .ongyeol-inquiry .ongyeol-inquiry-topic[aria-pressed='true'] { background: #f0eded; border-color: #111928; }
 .ongyeol-inquiry-composer { position: absolute; box-sizing: border-box; left: 21px; top: 654px; width: 377px; height: 80px; border: 1px solid #6b6b6b; border-radius: 20px; background: #f0eded; }
-.ongyeol-inquiry-composer textarea { position: absolute; box-sizing: border-box; left: 20px; top: 13px; width: 320px; height: 25px; padding: 0; border: 0; resize: none; background: transparent; color: #000; font: 400 14px/19px 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; }
+.ongyeol-inquiry-composer textarea { position: absolute; box-sizing: border-box; left: 20px; top: 13px; width: 320px; height: 25px; padding: 0; border: 0; resize: none; background: transparent; color: #000; font: 400 14px/19px "Noto Sans KR", "Noto Sans", sans-serif; }
 .ongyeol-inquiry-composer textarea::placeholder { color: #0008; opacity: 1; }
 .ongyeol-inquiry-tools { position: absolute; left: 17px; top: 51px; display: flex; align-items: center; gap: 10px; }
 .ongyeol-inquiry .ongyeol-inquiry-tools button { display: grid; place-items: center; width: 13px; height: 15px; padding: 0; background: transparent; }

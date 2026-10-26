@@ -3,7 +3,7 @@
 .ongyeol-chat-skin-guide-intro-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 30px; flex: none; width: 300px; font-size: 15px; line-height: 20px; }
 .ongyeol-chat-skin-guide-intro-duration { width: 266px; }
 .ongyeol-chat-skin-guide-intro-duration p:last-child { white-space: nowrap; }
-.ongyeol-chat-skin-guide-intro .ongyeol-chat-skin-guide-intro-start { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; padding: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; font-size: 15px; line-height: 20px; cursor: pointer; transform: translateY(0); transition: none; }
+.ongyeol-chat-skin-guide-intro .ongyeol-chat-skin-guide-intro-start { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; padding: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 15px; line-height: 20px; cursor: pointer; transform: translateY(0); transition: none; }
 .ongyeol-chat-skin-guide-intro .ongyeol-inquiry-composer { left: 22px; top: 646px; }
 .ongyeol-chat-skin-guide-intro .ongyeol-chat-skin-guide-intro-start:hover:not(:disabled) { background: #f6eaea; animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
 .ongyeol-chat-skin-guide-intro .ongyeol-chat-skin-guide-intro-start:active:not(:disabled) { background: #ecd4d4; }

@@ -21,7 +21,7 @@
   box-shadow: -7px -10px 40px #00000040, 7px 10px 40px #00000040;
   color: black;
   color-scheme: light;
-  font-family: 'Ongyeol Noto Serif', 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", "Noto Sans", sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: normal;
@@ -62,7 +62,7 @@
   .ongyeol-consultation-inquiry:hover:not(:disabled) { animation: none; transform: translateY(0); }
 }
 .ongyeol-consultation-schedule { margin-top: 25px; display: flex; align-items: center; gap: 13px; }
-.ongyeol-consultation-schedule p { font-family: 'Ongyeol Noto Sans', 'Noto Sans KR', sans-serif; font-size: 10px; line-height: 14px; color: #0008; white-space: nowrap; }
+.ongyeol-consultation-schedule p { font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 10px; line-height: 14px; color: #0008; white-space: nowrap; }
 .ongyeol-consultation-navigation { position: absolute; bottom: 27px; left: 0; width: 420px; box-sizing: border-box; padding: 20px 10px; display: flex; align-items: center; justify-content: center; gap: 100px; }
 .ongyeol-consultation-navigation button { padding: 0; background: transparent; width: 28px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .ongyeol-consultation-navigation button:first-child { width: 24px; }

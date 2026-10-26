@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import AIChatButton from './AIChatButton.jsx'
 import AIChat from './AIChat.jsx'
+import './AIChatFonts.css'
 
 export default function AIChatWidget({ open, onOpenChange, onInquiry, onConversation, onSettings }) {
   const buttonRef = useRef(null)

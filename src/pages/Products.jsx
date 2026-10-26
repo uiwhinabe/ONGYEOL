@@ -6,6 +6,8 @@ import './Products.css'
 const concerns = ['민감/진정', '수분/보습', '모공/피지', '피부톤/기미잡티', '주름/탄력']
 const types = ['전체', '토너/패드', '에센스/앰플', '로션/크림', '클렌징', '마스크팩']
 const lines = ['백목이', '뽕나무', '닥열매', '비타민C', '장미']
+// Display names only; retain the catalog keys for routes and filtering.
+const lineLabels = { '뽕나무': '오디', '비타민C': '레몬' }
 const defaultPageSize = 7
 
 function shuffleProducts(products, seed) {
@@ -81,7 +83,7 @@ function ProductList({ products, classification, initialCategory, onCategoryChan
         {categories.map((label) => (
           <button key={label} type="button" className="ongyeol-products__category"
             aria-pressed={category === label} onClick={() => { setCategory(label); setPage(1); onCategoryChange?.(classification, label) }}>
-            {label}
+            {byLine ? lineLabels[label] || label : label}
           </button>
         ))}
         </div>

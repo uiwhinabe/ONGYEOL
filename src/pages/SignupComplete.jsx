@@ -1,6 +1,7 @@
 import { useAuth } from '../components/authContext.js'
 import presentIcon from '../assets/signup-complete/present.svg'
 import './SignupComplete.css'
+import './AuthFonts.css'
 
 export default function SignupComplete() {
   const { completeSignup } = useAuth()
