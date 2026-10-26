@@ -1,132 +1,109 @@
-.contact-page { box-sizing: border-box; width: 100%; min-width: 0; padding: 240px 24px 460px; background: #fff; color: #111; color-scheme: light; font: 400 16px/1.5 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif; letter-spacing: normal; text-align: left; }
-.contact-page * { box-sizing: border-box; }
-.contact-page :where(button, input, textarea) { font: inherit; color: inherit; }
-.contact-page :is(button, input, textarea, a):focus-visible { outline: 2px solid #111; outline-offset: 3px; }
-.contact-layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 50px; width: 1240px; max-width: 100%; margin: 0 auto; align-items: start; }
-.contact-sidebar { border: 1px solid #111; border-radius: 20px; padding: 24px 40px; }
-.contact-sidebar-group { padding: 0 4px 20px; margin-bottom: 20px; border-bottom: 1px solid #ccc; }
-.contact-sidebar-group:last-child { border: 0; margin-bottom: 0; padding-bottom: 0; }
-.contact-sidebar-heading { margin: 0 0 14px; color: #111; font: 500 20px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
-.contact-sidebar-list { list-style: none; margin: 0; padding: 0; }
-.contact-sidebar-item { color: #999; margin: 0 0 6px; font-size: 16px; }
-.contact-sidebar-current { font-weight: 500; }
-.contact-sidebar-link { color: #111; text-decoration: none; }
-.contact-main { min-width: 0; }
-.contact-section-heading { padding: 0 28px 24px; border-bottom: 1px solid #111; }
-.contact-title, .contact-faq-title { margin: 0 0 12px; color: #111; font: 700 20px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
-.contact-title { scroll-margin-top: 130px; }
-.contact-introduction, .contact-faq-introduction { margin: 0; }
-.contact-form { margin: 32px 24px 0; }
-.contact-form-panel { display: grid; gap: 24px; border: 1px solid #111; border-radius: 4px; padding: 32px; }
-.contact-field { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; align-items: start; }
-.contact-label { font-size: 18px; font-weight: 700; padding-top: 4px; }
-.contact-field-type { min-height: 0; }
-.contact-dropdown { position: relative; width: 250px; max-width: 100%; }
-.contact-dropdown-trigger { width: 100%; min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; background: #fff; cursor: pointer; text-align: left; }
-.contact-dropdown-value { color: #999; font-size: 14px; }
-.contact-dropdown-selected .contact-dropdown-value { color: #111; }
-.contact-chevron { display: inline-block; flex: none; width: 11px; height: 11px; margin: -5px 4px 0; border-right: 1px solid #888; border-bottom: 1px solid #888; transform: rotate(45deg); }
-.contact-chevron-open { transform: rotate(225deg); margin-top: 5px; }
-.contact-dropdown-options { width: 100%; margin: 4px 0 0; padding: 0; border: 1px solid #111; background: #fff; list-style: none; }
-.contact-dropdown-option-row + .contact-dropdown-option-row { border-top: 1px solid #ddd; }
-.contact-dropdown-option { display: block; width: 100%; border: 0; padding: 3px 10px; background: #fff; text-align: left; font-size: 14px; cursor: pointer; }
-.contact-dropdown-option:hover, .contact-dropdown-option[aria-selected='true'] { background: #f2f2f2; }
-.contact-field-title { margin-bottom: 0; }
-.contact-input { width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; background: #fff; font-size: 14px; }
-.contact-field-content { margin-bottom: 0; }
-.contact-textarea-wrap { position: relative; min-width: 0; }
-.contact-textarea { display: block; width: 100%; min-height: 145px; padding: 12px 12px 36px; border: 1px solid #111; border-radius: 4px; background: #fff; resize: none; font-size: 14px; line-height: 1.5; }
-.contact-character-count { position: absolute; right: 12px; bottom: 10px; color: #777; font-size: 12px; pointer-events: none; }
-.contact-file-controls { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
-.contact-attachment { min-width: 0; }
-.contact-file-name { flex: 1 1 180px; min-width: 0; max-width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; color: #777; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.contact-file-button { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; min-height: 42px; padding: 8px 16px; border: 1px solid #000000; border-radius: 4px; background: #FFFFFF; color: #000000; font-size: 14px; cursor: pointer; }
-.contact-file-note { color: #999; font-size: 10px; }
-.contact-file-input, .contact-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.contact-file-controls:focus-within .contact-file-button { outline: 2px solid #111; outline-offset: 3px; }
-.contact-file-error { margin: 8px 0 0; font-size: 12px; }
-.contact-file-error:empty { display: none; }
-.contact-submit-area { position: relative; display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 32px; text-align: center; }
-.contact-submit-button { width: 100px; min-height: 34px; padding: 6px 16px; border: 1px solid #000000; border-radius: 4px; background: #FFFFFF; color: #000000; font-size: 14px; font-weight: 500; cursor: pointer; }
-.contact-type-error { margin: 8px 0 0; font-size: 12px; }
-.contact-confirm-popup { position: fixed; inset: 0; width: 650px; max-width: calc(100vw - 24px); height: 350px; max-height: calc(100dvh - 24px); margin: auto; padding: 0; overflow: auto; border: 1px solid #000; border-radius: 33px; background: #fff; color: #000; box-shadow: -15px -15px 20px rgba(0,0,0,.25), 15px 15px 20px rgba(0,0,0,.25); font: 500 14px/1.5 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: center; }
-.contact-confirm-popup::backdrop { background: rgba(0,0,0,.5); }
-.contact-confirm-close { position: absolute; top: 12px; right: 16px; display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; background: transparent; color: #000; cursor: pointer; }
-.contact-confirm-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; min-height: 348px; padding: 32px 75px; }
-.contact-confirm-heading { width: 100%; }
-.contact-confirm-heading h2 { margin: 0; color: #000; font: 700 18px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; }
-.contact-confirm-heading p { margin: 16px 0 0; color: #888; font-size: 18px; font-weight: 400; }
-.contact-confirm-question { display: grid; place-items: center; width: 100%; min-height: 58px; margin: 0; padding: 10px 12px; border: 1px solid #000; border-radius: 5px; font-size: 24px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
-.contact-confirm-actions { display: flex; width: 350px; max-width: 100%; gap: 28px; }
-.contact-confirm-actions button { flex: 1; min-width: 0; min-height: 49px; padding: 10px 8px; border: 1px solid #000; border-radius: 5px; background: #fff; color: #000; font: inherit; font-size: 18px; cursor: pointer; }
-.contact-confirm-actions button:last-child { background: #000; color: #fff; }
-.contact-confirm-test-note { margin: -14px 0 0; color: #888; font-size: 12px; }
-@media (max-width: 599px) {
-  .contact-confirm-popup { height: auto; }
-  .contact-confirm-content { padding: 32px 20px; gap: 24px; }
-  .contact-confirm-question { font-size: 20px; }
-  .contact-confirm-heading p { font-size: 16px; }
-  .contact-confirm-actions { gap: 16px; }
+.ongyeol-mypage .contact-page { box-sizing: border-box; width: 100%; min-width: 0; background: #fff; color: #111; color-scheme: light; font: 400 16px/1.5 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif; letter-spacing: normal; text-align: left; }
+.ongyeol-mypage .contact-page * { box-sizing: border-box; }
+.ongyeol-mypage .contact-page :where(button, input, textarea) { font: inherit; color: inherit; }
+.ongyeol-mypage .contact-page :is(button, input, textarea, a):focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+.ongyeol-mypage .contact-page .contact-main { min-width: 0; }
+.ongyeol-mypage .contact-page .contact-section-heading { padding: 0 28px 24px; border-bottom: 1px solid #111; }
+.ongyeol-mypage .contact-page .contact-title, .ongyeol-mypage .contact-page .contact-faq-title { margin: 0 0 12px; color: #111; font: 700 20px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
+.ongyeol-mypage .contact-page .contact-title { scroll-margin-top: 130px; }
+.ongyeol-mypage .contact-page .contact-introduction, .ongyeol-mypage .contact-page .contact-faq-introduction { margin: 0; }
+.ongyeol-mypage .contact-page .contact-form { margin: 32px 24px 0; }
+.ongyeol-mypage .contact-page .contact-form-panel { display: grid; gap: 24px; border: 1px solid #111; border-radius: 4px; padding: 32px; }
+.ongyeol-mypage .contact-page .contact-field { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; align-items: start; }
+.ongyeol-mypage .contact-page .contact-label { font-size: 18px; font-weight: 700; padding-top: 4px; }
+.ongyeol-mypage .contact-page .contact-field-type { min-height: 0; }
+.ongyeol-mypage .contact-page .contact-dropdown { position: relative; width: 250px; max-width: 100%; }
+.ongyeol-mypage .contact-page .contact-dropdown-trigger { width: 100%; min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; background: #fff; cursor: pointer; text-align: left; }
+.ongyeol-mypage .contact-page .contact-dropdown-value { color: #999; font-size: 14px; }
+.ongyeol-mypage .contact-page .contact-dropdown-selected .contact-dropdown-value { color: #111; }
+.ongyeol-mypage .contact-page .contact-chevron { display: inline-block; flex: none; width: 11px; height: 11px; margin: -5px 4px 0; border-right: 1px solid #888; border-bottom: 1px solid #888; transform: rotate(45deg); }
+.ongyeol-mypage .contact-page .contact-chevron-open { transform: rotate(225deg); margin-top: 5px; }
+.ongyeol-mypage .contact-page .contact-dropdown-options { width: 100%; margin: 4px 0 0; padding: 0; border: 1px solid #111; background: #fff; list-style: none; }
+.ongyeol-mypage .contact-page .contact-dropdown-option-row + .contact-dropdown-option-row { border-top: 1px solid #ddd; }
+.ongyeol-mypage .contact-page .contact-dropdown-option { display: block; width: 100%; border: 0; padding: 3px 10px; background: #fff; text-align: left; font-size: 14px; cursor: pointer; }
+.ongyeol-mypage .contact-page .contact-dropdown-option:hover, .ongyeol-mypage .contact-page .contact-dropdown-option[aria-selected='true'] { background: #f2f2f2; }
+.ongyeol-mypage .contact-page .contact-field-title { margin-bottom: 0; }
+.ongyeol-mypage .contact-page .contact-input { width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; background: #fff; font-size: 14px; }
+.ongyeol-mypage .contact-page .contact-field-content { margin-bottom: 0; }
+.ongyeol-mypage .contact-page .contact-textarea-wrap { position: relative; min-width: 0; }
+.ongyeol-mypage .contact-page .contact-textarea { display: block; width: 100%; min-height: 145px; padding: 12px 12px 36px; border: 1px solid #111; border-radius: 4px; background: #fff; resize: none; font-size: 14px; line-height: 1.5; }
+.ongyeol-mypage .contact-page .contact-character-count { position: absolute; right: 12px; bottom: 10px; color: #777; font-size: 12px; pointer-events: none; }
+.ongyeol-mypage .contact-page .contact-file-controls { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.ongyeol-mypage .contact-page .contact-attachment { min-width: 0; }
+.ongyeol-mypage .contact-page .contact-file-name { flex: 1 1 180px; min-width: 0; max-width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid #111; border-radius: 4px; color: #777; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ongyeol-mypage .contact-page .contact-file-button { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; min-height: 42px; padding: 8px 16px; border: 1px solid #000000; border-radius: 4px; background: #FFFFFF; color: #000000; font-size: 14px; cursor: pointer; }
+.ongyeol-mypage .contact-page .contact-file-note { color: #999; font-size: 10px; }
+.ongyeol-mypage .contact-page .contact-file-input, .ongyeol-mypage .contact-page .contact-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ongyeol-mypage .contact-page .contact-file-controls:focus-within .contact-file-button { outline: 2px solid #111; outline-offset: 3px; }
+.ongyeol-mypage .contact-page .contact-file-error { margin: 8px 0 0; font-size: 12px; }
+.ongyeol-mypage .contact-page .contact-file-error:empty { display: none; }
+.ongyeol-mypage .contact-page .contact-submit-area { position: relative; display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 32px; text-align: center; }
+.ongyeol-mypage .contact-page .contact-submit-button { width: 100px; min-height: 34px; padding: 6px 16px; border: 1px solid #000000; border-radius: 4px; background: #FFFFFF; color: #000000; font-size: 14px; font-weight: 500; cursor: pointer; }
+.ongyeol-mypage .contact-page .contact-type-error { margin: 8px 0 0; font-size: 12px; }
+.ongyeol-mypage .contact-page .contact-confirm-popup { position: fixed; inset: 0; width: 650px; max-width: calc(100vw - 24px); height: 350px; max-height: calc(100dvh - 24px); margin: auto; padding: 0; overflow: auto; border: 1px solid #000; border-radius: 33px; background: #fff; color: #000; box-shadow: -15px -15px 20px rgba(0,0,0,.25), 15px 15px 20px rgba(0,0,0,.25); font: 500 14px/1.5 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: center; }
+.ongyeol-mypage .contact-page .contact-confirm-popup::backdrop { background: rgba(0,0,0,.5); }
+.ongyeol-mypage .contact-page .contact-confirm-close { position: absolute; top: 12px; right: 16px; display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; background: transparent; color: #000; cursor: pointer; }
+.ongyeol-mypage .contact-page .contact-confirm-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; min-height: 348px; padding: 32px 75px; }
+.ongyeol-mypage .contact-page .contact-confirm-heading { width: 100%; }
+.ongyeol-mypage .contact-page .contact-confirm-heading h2 { margin: 0; color: #000; font: 700 18px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; }
+.ongyeol-mypage .contact-page .contact-confirm-heading p { margin: 16px 0 0; color: #888; font-size: 18px; font-weight: 400; }
+.ongyeol-mypage .contact-page .contact-confirm-question { display: grid; place-items: center; width: 100%; min-height: 58px; margin: 0; padding: 10px 12px; border: 1px solid #000; border-radius: 5px; font-size: 24px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
+.ongyeol-mypage .contact-page .contact-confirm-actions { display: flex; width: 350px; max-width: 100%; gap: 28px; }
+.ongyeol-mypage .contact-page .contact-confirm-actions button { flex: 1; min-width: 0; min-height: 49px; padding: 10px 8px; border: 1px solid #000; border-radius: 5px; background: #fff; color: #000; font: inherit; font-size: 18px; cursor: pointer; }
+.ongyeol-mypage .contact-page .contact-confirm-actions button:last-child { background: #000; color: #fff; }
+.ongyeol-mypage .contact-page .contact-confirm-test-note { margin: -14px 0 0; color: #888; font-size: 12px; }
+@media (max-width: 767px) {
+  .ongyeol-mypage .contact-page .contact-confirm-popup { height: auto; }
+  .ongyeol-mypage .contact-page .contact-confirm-content { padding: 32px 20px; gap: 24px; }
+  .ongyeol-mypage .contact-page .contact-confirm-question { font-size: 20px; }
+  .ongyeol-mypage .contact-page .contact-confirm-heading p { font-size: 16px; }
+  .ongyeol-mypage .contact-page .contact-confirm-actions { gap: 16px; }
 }
-.contact-faq { margin-top: 80px; }
-.contact-faq-introduction { font-size: 14px; }
-.contact-faq-note { margin: 16px 0 30px; font-size: 13px; text-align: right; }
-.contact-faq-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; width: 100%; }
-.contact-faq-item { min-width: 0; }
-.contact-faq-question { margin: 0; font: inherit; }
-.contact-faq-trigger { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 36px; padding: 7px 16px; border: 1px solid #111; border-radius: 4px 4px 0 0; background: #fff; text-align: left; font-size: 14px; font-weight: 500; cursor: pointer; }
-.contact-faq-trigger[aria-expanded='false'] { border-radius: 4px; }
-.contact-faq-trigger[aria-expanded='true'] { background: #1C1C1C; color: #fff; }
-.contact-faq-trigger[aria-expanded='true'] .contact-chevron { border-color: #fff; }
-.contact-faq-answer { width: 100%; padding: 12px 16px 16px; border: 1px solid #000000; border-top: 0; border-radius: 0 0 4px 4px; background: #fff; color: #000; }
-.contact-faq-paragraph { margin: 0; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
-.contact-faq-paragraph + .contact-faq-paragraph { margin-top: 14px; }
-.contact-benefits { display: flex; justify-content: space-between; gap: 24px; margin: 80px 48px 0; }
-.contact-benefit { display: flex; align-items: flex-start; gap: 16px; }
-.contact-benefit-icon { flex-shrink: 0; }
-.contact-benefit-title { margin: 0 0 10px; color: #111; font: 700 18px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
-.contact-benefit-description { margin: 0; color: #999; font-size: 13px; line-height: 1.4; }
-@media (max-width: 1199px) {
-  .contact-page { padding-top: 120px; }
-  .contact-layout { grid-template-columns: 210px minmax(0, 1fr); gap: 30px; }
-  .contact-sidebar { padding: 24px; }
-  .contact-field { grid-template-columns: 100px minmax(0, 1fr); gap: 20px; }
-  .contact-form { margin-inline: 0; }
-  .contact-benefits { margin-inline: 0; gap: 16px; }
-  .contact-benefit { gap: 10px; }
+.ongyeol-mypage .contact-page .contact-faq { margin-top: 80px; }
+.ongyeol-mypage .contact-page .contact-faq-introduction { font-size: 14px; }
+.ongyeol-mypage .contact-page .contact-faq-note { margin: 16px 0 30px; font-size: 13px; text-align: right; }
+.ongyeol-mypage .contact-page .contact-faq-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; width: 100%; }
+.ongyeol-mypage .contact-page .contact-faq-item { min-width: 0; }
+.ongyeol-mypage .contact-page .contact-faq-question { margin: 0; font: inherit; }
+.ongyeol-mypage .contact-page .contact-faq-trigger { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 36px; padding: 7px 16px; border: 1px solid #111; border-radius: 4px 4px 0 0; background: #fff; text-align: left; font-size: 14px; font-weight: 500; cursor: pointer; }
+.ongyeol-mypage .contact-page .contact-faq-trigger[aria-expanded='false'] { border-radius: 4px; }
+.ongyeol-mypage .contact-page .contact-faq-trigger[aria-expanded='true'] { background: #1C1C1C; color: #fff; }
+.ongyeol-mypage .contact-page .contact-faq-trigger[aria-expanded='true'] .contact-chevron { border-color: #fff; }
+.ongyeol-mypage .contact-page .contact-faq-answer { width: 100%; padding: 12px 16px 16px; border: 1px solid #000000; border-top: 0; border-radius: 0 0 4px 4px; background: #fff; color: #000; }
+.ongyeol-mypage .contact-page .contact-faq-paragraph { margin: 0; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.ongyeol-mypage .contact-page .contact-faq-paragraph + .contact-faq-paragraph { margin-top: 14px; }
+.ongyeol-mypage .contact-page .contact-benefits { display: flex; justify-content: space-between; gap: 24px; margin: 80px 48px 0; }
+.ongyeol-mypage .contact-page .contact-benefit { display: flex; align-items: flex-start; gap: 16px; }
+.ongyeol-mypage .contact-page .contact-benefit-icon { flex-shrink: 0; }
+.ongyeol-mypage .contact-page .contact-benefit-title { margin: 0 0 10px; color: #111; font: 700 18px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
+.ongyeol-mypage .contact-page .contact-benefit-description { margin: 0; color: #999; font-size: 13px; line-height: 1.4; }
+@media (max-width: 1432px) {
+  .ongyeol-mypage .contact-page .contact-field { grid-template-columns: 100px minmax(0, 1fr); gap: 20px; }
+  .ongyeol-mypage .contact-page .contact-form { margin-inline: 0; }
+  .ongyeol-mypage .contact-page .contact-benefits { margin-inline: 0; gap: 16px; }
+  .ongyeol-mypage .contact-page .contact-benefit { gap: 10px; }
 }
-@media (max-width: 834px) {
-  .contact-page { padding: 80px 20px 400px; }
-  .contact-layout { grid-template-columns: 170px minmax(0, 1fr); gap: 20px; }
-  .contact-sidebar { padding: 20px 14px; }
-  .contact-sidebar-heading { font-size: 17px; }
-  .contact-sidebar-item { font-size: 13px; }
-  .contact-form-panel { padding: 30px 20px; }
-  .contact-field { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .contact-field-type { min-height: 0; }
-  .contact-field-title, .contact-field-content { margin-bottom: 0; }
-  .contact-label { font-size: 16px; }
-  .contact-section-heading { padding-inline: 0; }
-  .contact-benefits { flex-wrap: wrap; gap: 28px; }
+@media (max-width: 1432px) {
+  .ongyeol-mypage .contact-page .contact-form-panel { padding: 30px 20px; }
+  .ongyeol-mypage .contact-page .contact-field { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .ongyeol-mypage .contact-page .contact-field-type { min-height: 0; }
+  .ongyeol-mypage .contact-page .contact-field-title, .ongyeol-mypage .contact-page .contact-field-content { margin-bottom: 0; }
+  .ongyeol-mypage .contact-page .contact-label { font-size: 16px; }
+  .ongyeol-mypage .contact-page .contact-section-heading { padding-inline: 0; }
+  .ongyeol-mypage .contact-page .contact-benefits { flex-wrap: wrap; gap: 28px; }
 }
-@media (max-width: 599px) {
-  .contact-page { padding: 48px 16px 380px; }
-  .contact-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .contact-sidebar { display: none; }
-  .contact-sidebar-group { margin: 0; padding: 0 0 12px; }
-  .contact-sidebar-group:last-child { border-bottom: 1px solid #ccc; }
-  .contact-sidebar-heading { font-size: 16px; }
-  .contact-form-panel { padding: 24px 16px; }
-  .contact-dropdown { width: 100%; }
-  .contact-dropdown-trigger, .contact-dropdown-option, .contact-file-button { min-height: 44px; }
-  .contact-field-type { min-height: 0; }
-  .contact-faq { margin-top: 60px; }
-  .contact-faq-trigger { min-height: 44px; }
-  .contact-faq-note { font-size: 12px; }
-  .contact-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 48px; }
-  .contact-benefit { min-width: 0; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-  .contact-benefit-icon { width: 36px; height: 36px; color: #000; }
-  .contact-benefit-text { width: 100%; min-width: 0; overflow-wrap: anywhere; }
-  .contact-benefit-title { margin-bottom: 6px; color: #000; font-size: 14px; font-weight: 700; }
-  .contact-benefit-description { font-size: 11px; line-height: 1.5; }
+@media (max-width: 767px) {
+  .ongyeol-mypage .contact-page .contact-form-panel { padding: 24px 16px; }
+  .ongyeol-mypage .contact-page .contact-dropdown { width: 100%; }
+  .ongyeol-mypage .contact-page .contact-dropdown-trigger, .ongyeol-mypage .contact-page .contact-dropdown-option, .ongyeol-mypage .contact-page .contact-file-button { min-height: 44px; }
+  .ongyeol-mypage .contact-page .contact-field-type { min-height: 0; }
+  .ongyeol-mypage .contact-page .contact-faq { margin-top: 60px; }
+  .ongyeol-mypage .contact-page .contact-faq-trigger { min-height: 44px; }
+  .ongyeol-mypage .contact-page .contact-faq-note { font-size: 12px; }
+  .ongyeol-mypage .contact-page .contact-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 48px; }
+  .ongyeol-mypage .contact-page .contact-benefit { min-width: 0; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .ongyeol-mypage .contact-page .contact-benefit-icon { width: 36px; height: 36px; color: #000; }
+  .ongyeol-mypage .contact-page .contact-benefit-text { width: 100%; min-width: 0; overflow-wrap: anywhere; }
+  .ongyeol-mypage .contact-page .contact-benefit-title { margin-bottom: 6px; color: #000; font-size: 14px; font-weight: 700; }
+  .ongyeol-mypage .contact-page .contact-benefit-description { font-size: 11px; line-height: 1.5; }
 }

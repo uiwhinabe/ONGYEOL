@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './IdentityVerification.css'
+import './AuthFonts.css'
 
 export default function IdentityVerification() {
   const [open, setOpen] = useState(false)

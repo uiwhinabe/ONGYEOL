@@ -1,0 +1,90 @@
+/* Shared geometry for the two existing order-status presentations. */
+.ongyeol-mypage .mp-shopping-section-title + .mp-shopping-status-card {
+  margin-block-start: 8px;
+}
+.ongyeol-mypage :is(.mp-shopping-order-status, .mp-home-order-status) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.ongyeol-mypage :is(.mp-shopping-order-status, .mp-home-order-status) > :first-child {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  white-space: nowrap;
+}
+.ongyeol-mypage :is(.mp-shopping-status-card, .ongyeol-mypage-status) {
+  container-type: inline-size;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: clamp(12px, 2vw, 28px);
+  border-radius: 5px;
+  background: #efeaea;
+}
+.ongyeol-mypage :is(.mp-shopping-stages, .ongyeol-mypage-stages) {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 2cqi, 24px);
+  width: 100%;
+  min-width: 0;
+}
+.ongyeol-mypage :is(.mp-shopping-stage, .ongyeol-mypage-stage) {
+  --status-number-size: 60px;
+  position: relative;
+  min-width: 0;
+  text-align: center;
+}
+.ongyeol-mypage :is(.mp-shopping-stage > div, .ongyeol-mypage-stage-value) {
+  width: 100%;
+  min-width: 0;
+}
+.ongyeol-mypage :is(.mp-shopping-stage span, .ongyeol-mypage-stage-value > span) {
+  display: grid;
+  place-items: center;
+  width: var(--status-number-size);
+  height: var(--status-number-size);
+  margin-inline: auto;
+  border-radius: 30px;
+  background: #d9d9d9;
+  font-size: 24px;
+  line-height: 33px;
+}
+.ongyeol-mypage :is(.mp-shopping-stage p, .ongyeol-mypage-stage-value p) {
+  margin-top: 21px;
+  white-space: nowrap;
+  text-align: center;
+}
+.ongyeol-mypage :is(.mp-shopping-stage, .ongyeol-mypage-stage) > img {
+  position: absolute;
+  right: -17px;
+  /* The shared SVG's visible chevron is centered 34px below its canvas top. */
+  top: calc(var(--status-number-size) / 2 - 34px);
+  pointer-events: none;
+}
+.ongyeol-mypage .mp-shopping-stage > .mp-shopping-mobile-stage-arrow { display: none; }
+.ongyeol-mypage :is(.mp-shopping-status-returns, .ongyeol-mypage-returns) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 1cqi, 12px);
+  margin-top: 16px;
+  border-top: 1px solid rgb(0 0 0 / 50%);
+  font: 500 18px/25px 'Noto Sans KR', sans-serif;
+}
+.ongyeol-mypage :is(.mp-shopping-status-returns, .ongyeol-mypage-returns) p {
+  min-width: 0;
+  padding: 10px 0;
+  text-align: center;
+  white-space: nowrap;
+}
+@media (max-width: 767px) {
+  .ongyeol-mypage :is(.mp-shopping-status-card, .ongyeol-mypage-status) { background: transparent; padding-inline: clamp(0px, calc((100vw - 375px) * .05), 12px); }
+  .ongyeol-mypage :is(.mp-shopping-stages, .ongyeol-mypage-stages) { gap: clamp(0px, calc((100vw - 375px) * .08), 8px); }
+  .ongyeol-mypage :is(.mp-shopping-stage, .ongyeol-mypage-stage) { --status-number-size: 40px; }
+  .ongyeol-mypage :is(.mp-shopping-stage span, .ongyeol-mypage-stage-value > span) { width: 32px; font-size: 20px; line-height: 27px; }
+  .ongyeol-mypage :is(.mp-shopping-stage p, .ongyeol-mypage-stage-value p) { font-size: 14px; line-height: 22px; }
+}

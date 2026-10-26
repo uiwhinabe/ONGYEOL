@@ -1,0 +1,33 @@
+{
+  "origin": "http://127.0.0.1:5186",
+  "checks": [
+    "Initial list is empty; no seeded personal data",
+    "Add opens original modal and relative /new URL",
+    "First field receives focus",
+    "Required fields block empty save",
+    "Postcode/mobile/optional telephone formats validated",
+    "Whitespace-only required value rejected",
+    "Save adds user input and trims outer whitespace",
+    "First address retains checked default state",
+    "Edit pre-fills all stored fields",
+    "Cancel edit preserves saved value",
+    "Edit updates row without adding a duplicate",
+    "Additional address starts unchecked",
+    "Choosing new default clears previous default",
+    "Unchecking default is saved",
+    "Delete removes selected row and promotes remaining default",
+    "Escape closes without adding a row",
+    "Backdrop closes modal without saving",
+    "Multiple addresses appear with correct total",
+    "Rows stay below table heading without overlaps",
+    "Deleting all rows restores empty state",
+    "Refresh clears React-only address state",
+    "Direct /new access opens an empty draft",
+    "Other account screen still renders",
+    "Main screen still renders",
+    "Home page still renders"
+  ],
+  "errors": [],
+  "persistence": "React memory only; reload resets data",
+  "fixtures": "Test-only labels and values, removed by reload"
+}

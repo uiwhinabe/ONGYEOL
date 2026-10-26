@@ -1,0 +1,46 @@
+.ongyeol-consultation,
+.ongyeol-ai-chat-button {
+  --ongyeol-chat-right: max(71px, env(safe-area-inset-right, 0px));
+  --ongyeol-chat-bottom: calc(39px + env(safe-area-inset-bottom, 0px));
+  --ongyeol-chat-gap: 30px;
+}
+.ongyeol-consultation {
+  position: fixed;
+  right: var(--ongyeol-chat-right);
+  bottom: calc(var(--ongyeol-chat-bottom) + 60px + var(--ongyeol-chat-gap));
+  z-index: 40;
+  width: 420px;
+  height: 760px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 40px;
+  background: white;
+  box-shadow: -7px -10px 40px #00000040, 7px 10px 40px #00000040;
+  color: black;
+  color-scheme: light;
+  font-family: "Noto Sans KR", "Noto Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+.ongyeol-consultation[hidden] { display: none; }
+.ongyeol-consultation.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.ongyeol-consultation p { margin: 0; }
+.ongyeol-consultation button { border: 0; margin: 0; font-family: inherit; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0; cursor: pointer; color: black; }
+.ongyeol-consultation button:disabled { cursor: default; opacity: 1; }
+.ongyeol-consultation button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+@media (width < 520px) {
+  .ongyeol-consultation { right: calc((100% - 420px) / 2); }
+  .ongyeol-ai-chat-button { right: max(16px, calc((100% - 420px) / 2), env(safe-area-inset-right, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-consultation { transition: none; transform: none; }
+}

@@ -33,7 +33,6 @@ export default function AuthProvider({ children }) {
   const logout = () => {
     writeAuthenticated(false)
     setAuthenticated(false)
-    window.location.reload()
   }
   return <AuthContext.Provider value={{ isAuthenticated, enterLogin, completeLogin, completeSignup, logout }}>{children}</AuthContext.Provider>
 }
