@@ -11,11 +11,11 @@
 .ongyeol-delivery .ongyeol-delivery-choice { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 150px; height: 42px; padding: 0 20px; line-height: 20px; white-space: nowrap; }
 .ongyeol-delivery-choices--menu { display: grid; grid-template-columns: repeat(2, 150px); gap: 10px; align-self: center; }
 .ongyeol-delivery-choices--menu .ongyeol-delivery-return { grid-column: 1 / -1; justify-self: center; }
-.ongyeol-delivery .ongyeol-delivery-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 340px; height: 48px; padding: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; line-height: 20px; }
+.ongyeol-delivery .ongyeol-delivery-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 340px; height: 48px; padding: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: "Noto Sans KR", "Noto Sans", sans-serif; line-height: 20px; }
 .ongyeol-delivery-action-group { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .ongyeol-delivery .ongyeol-delivery-action { transform: translateY(0); transition: none; }
 .ongyeol-delivery .ongyeol-delivery-action:hover:not(:disabled) { animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
-.ongyeol-delivery-login-note { display: flex; align-items: center; gap: 5px; color: #000c; font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Sans KR', serif; font-size: 12px; line-height: 16px; }
+.ongyeol-delivery-login-note { display: flex; align-items: center; gap: 5px; color: #000c; font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 12px; line-height: 16px; }
 .ongyeol-delivery-login-note img { display: block; flex: none; }
 .ongyeol-delivery .ongyeol-inquiry-composer { top: 612px; }
 .ongyeol-delivery--menu .ongyeol-delivery-content { left: 36px; top: 147px; width: 349px; gap: 26px; }
