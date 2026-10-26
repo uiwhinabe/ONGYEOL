@@ -276,9 +276,9 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
           <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="고객센터">
             <img className="ongyeol-header-static-icon" src={support} width="26.25" height="26.2212" alt="" />
           </button>
-          <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="장바구니">
+          <Link className="ongyeol-header-action ongyeol-header-action-desktop" to="/cart" aria-label="장바구니">
             <img className="ongyeol-header-static-icon" src={cart} width="25" height="25" alt="" />
-          </button>
+          </Link>
         </div>
       </div>
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
