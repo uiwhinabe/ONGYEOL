@@ -1,0 +1,64 @@
+.ongyeol-cart-dropdown {
+  position: fixed;
+  top: var(--cart-dropdown-top, 110px);
+  margin-top: 0;
+  left: var(--cart-dropdown-left, 0px);
+  z-index: 33;
+  box-sizing: border-box;
+  width: min(160px, calc(100vw - 16px));
+  height: 80px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 0;
+  box-shadow: none;
+  background: #fff;
+  color: #000;
+  font: 400 15px/18px 'Ongyeol Noto Sans', sans-serif;
+  letter-spacing: normal;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 250ms ease, transform 250ms ease, visibility 0s linear 250ms;
+}
+.ongyeol-cart-dropdown.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+/* Keep the pointer inside the panel while crossing the gap below the icon. */
+.ongyeol-cart-dropdown::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: var(--cart-dropdown-bridge-height, 0px);
+}
+.ongyeol-cart-dropdown .ongyeol-cart-dropdown-item {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform .2s ease-out, color .2s ease-out;
+}
+.ongyeol-cart-dropdown .ongyeol-cart-dropdown-item:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.ongyeol-cart-dropdown .ongyeol-cart-dropdown-item:hover { color: #666; transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-cart-dropdown,
+  .ongyeol-cart-dropdown .ongyeol-cart-dropdown-item { transition: none; }
+}
