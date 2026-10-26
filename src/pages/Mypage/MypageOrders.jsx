@@ -1,4 +1,5 @@
-import { ShoppingBenefits, ShoppingOrderStatus } from './MypageShoppingTablet.jsx'
+import MyPageSummary from './MyPageSummary.jsx'
+import { ShoppingOrderStatus } from './MypageShoppingTablet.jsx'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/6d799.svg'
 import MypageShoppingMobileCards from './MypageShoppingMobileCards.jsx'
@@ -11,7 +12,7 @@ export default function MypageOrders({ testRecords = [] }) {
   const records = testRecords.filter(record => record.isTest === true)
   return (
     <div className="mp-view-102 mp-shopping mp-shopping-orders" data-node-id="2275:24086" data-name="주문목록">
-<ShoppingBenefits />
+<MyPageSummary />
 <ShoppingOrderStatus />
               <div className="mp-view-70" data-node-id="2275:24101" data-name="최근주문정보 전체">
                 <div className="mp-view-103" data-node-id="2275:24102">

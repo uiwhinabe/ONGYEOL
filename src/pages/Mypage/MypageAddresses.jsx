@@ -1,5 +1,5 @@
+import MyPageSummary from './MyPageSummary.jsx'
 import { MyPageButton } from './MyPageButton.jsx'
-import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
 import './MypageAddressesTablet.css'
 import './MypageAddressesMobile.css'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
@@ -11,7 +11,7 @@ export default function MypageAddresses({ onAdd }) {
     <div className="mp-view-83 mp-address-empty" data-node-id="2275:23845">
               <div className="mp-view-76" data-node-id="2275:23846" data-name="취소">
                 <div className="mp-view-76" data-node-id="2275:23847">
-<ShoppingBenefits />
+<MyPageSummary />
                 </div>
               </div>
               <div className="mp-view-36" data-node-id="2275:23862" data-name="최근주문정보 전체">

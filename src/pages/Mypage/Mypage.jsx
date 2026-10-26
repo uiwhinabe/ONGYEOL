@@ -1,5 +1,5 @@
 import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import Header from '../../components/Header.jsx'
 import FooterPageLayout from '../../components/FooterPageLayout.jsx'
 import MyPageMenu from './MyPageMenu.jsx'
@@ -37,6 +37,13 @@ function MyPageLayout() {
     if (location.pathname !== path) routerNavigate(path, { replace })
   }
   const addressBook = useMypageAddressBook(activeMenu, navigate)
+  useLayoutEffect(() => {
+    // The document scrolls; reset after the route DOM commits, before paint.
+    if (window.matchMedia('(max-width: 1432px)').matches) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }, [location.pathname])
+
   useEffect(() => {
     const nextPath = location.pathname
     if (nextPath.startsWith('/mypage/') && !Object.hasOwn(mypageScreens, nextPath)) routerNavigate('/mypage', { replace: true })

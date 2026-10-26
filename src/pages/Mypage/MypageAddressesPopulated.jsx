@@ -1,5 +1,5 @@
+import MyPageSummary from './MyPageSummary.jsx'
 import { MyPageButton } from './MyPageButton.jsx'
-import { ShoppingBenefits } from './MypageShoppingTablet.jsx'
 import './MypageAddressDetailsTablet.css'
 import './MypageAddressesMobile.css'
 import mobileRadio from './mobile-address-radio.svg'
@@ -13,7 +13,7 @@ export default function MypageAddressesPopulated({ addresses = [], onAdd, onEdit
     <div className="mp-view-83 mp-address-populated" data-node-id="2275:24183">
               <div className="mp-view-76" data-node-id="2275:24184" data-name="취소">
                 <div className="mp-view-76" data-node-id="2275:24185">
-<ShoppingBenefits />
+<MyPageSummary />
                 </div>
               </div>
               <div className="mp-view-36" data-node-id="2275:24200" data-name="최근주문정보 전체">

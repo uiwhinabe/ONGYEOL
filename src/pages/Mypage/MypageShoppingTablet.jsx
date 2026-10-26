@@ -1,29 +1,8 @@
-import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { useId, useRef, useState } from 'react'
-import MypageBenefits from './MypageBenefits.jsx'
-import summaryLine from './tablet-summary-line.svg'
 import chevron from './tablet-period-chevron.svg'
 import arrow from '../../assets/mypage/arrow.svg'
 import mobileArrow from './mobile-shopping-stage-arrow.svg'
 import './MypageShoppingTablet.css'
-import './ShoppingBenefits.css'
-
-// Only the three shopping screens use this tablet presentation.
-export function ShoppingBenefits() {
-  return <>
-    <MypageBenefits />
-    <section className="mp-shopping-benefits" aria-label="회원등급 및 혜택">
-      <p>{DEFAULT_USER_NAME}님은 Welcome등급 <span>입니다.</span></p>
-      <div className="mp-shopping-benefit-items">
-        {[['쿠폰', '1장'], ['주문현황', '배송중 0건'], ['찜한 제품', '0개']].map(([label, value], index) =>
-          <div className="mp-shopping-benefit-item" key={label}>
-            {index > 0 && <span className="mp-shopping-benefit-divider"><img src={summaryLine} alt="" /></span>}
-            <h2>{label}</h2><p>{value}</p>
-          </div>)}
-      </div>
-    </section>
-  </>
-}
 
 const periods = ['오늘', '1개월', '3개월', '1년']
 export function ShoppingPeriod({ value, onChange }) {

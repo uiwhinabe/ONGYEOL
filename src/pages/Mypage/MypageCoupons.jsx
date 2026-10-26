@@ -1,10 +1,8 @@
+import MyPageSummary from './MyPageSummary.jsx'
 import useMyPageDraft from './useMyPageDraft.js'
-import { DEFAULT_USER_NAME } from './mypageUser.js'
 import { useRef, useState } from 'react'
-import imgLine9 from '../../assets/mypage/screens/31115.svg'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
-import tabletSummaryLine from './tablet-summary-line.svg'
 import { ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import './MypageCouponsTablet.css'
 import './MypageCouponsMobile.css'
@@ -99,7 +97,7 @@ export default function MypageCoupons() {
   }
   return (
     <div className="mp-view-1 mp-coupons" data-node-id="2275:23547" data-applied-start={appliedRange.start} data-applied-end={appliedRange.end}>
-<CouponBenefits count={results.length} />
+<MyPageSummary />
             <form ref={formRef} noValidate onSubmit={query} className="mp-view-18" data-node-id="2275:23562" data-name="기간조회 수정탭">
               <div className="mp-view-19" data-node-id="2275:23563">
                 <div className="mp-view-20" data-node-id="2275:23564">
@@ -240,68 +238,4 @@ export function MobileCouponCard({ coupon }) {
       <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
     <p>적용 상품: {coupon.applicableProducts} · {coupon.condition}</p>
   </article>
-}
-
-// Coupon-only summary: the shared summary and other pages remain unchanged.
-function CouponBenefits({ count }) {
-  return (
-    <div className="mp-view-94" data-node-id="2275:24087" data-name="1.등급">
-                <p className="mp-coupon-tablet-greeting">{DEFAULT_USER_NAME}님은 Welcome등급 <span>입니다.</span></p>
-                <p className="mp-view-3" data-node-id="2275:24088" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                  <span className="mp-view-4">{`${DEFAULT_USER_NAME}님의 `}</span>
-                  <span className="mp-view-5" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                    회원등급은
-                  </span>
-                  <span className="mp-view-4">{` Welcome등급 `}</span>
-                  <span className="mp-view-5" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                    입니다
-                  </span>
-                  <span className="mp-view-4">.</span>
-                </p>
-                <div className="mp-view-6" data-node-id="2275:24089" data-name="1.등급">
-                  <div className="mp-view-7" data-node-id="2275:24090">
-                    <p className="mp-view-8" data-node-id="2275:24091" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      쿠폰
-                    </p>
-                    <p className="mp-view-9" data-node-id="2275:24092" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      {count}장
-                    </p>
-                  </div>
-                  <div className="mp-view-10" data-node-id="2275:24093">
-                    <div className="mp-view-11">
-                      <div className="mp-view-12">
-                        <div className="mp-view-13">
-                          <picture><source media="(max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mp-view-15" data-node-id="2275:24094">
-                    <p className="mp-view-8" data-node-id="2275:24095" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      주문현황
-                    </p>
-                    <p className="mp-view-16" data-node-id="2275:24096" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      배송중 0건
-                    </p>
-                  </div>
-                  <div className="mp-view-10" data-node-id="2275:24097">
-                    <div className="mp-view-11">
-                      <div className="mp-view-12">
-                        <div className="mp-view-13">
-                          <picture><source media="(max-width: 1432px)" srcSet={tabletSummaryLine} /><img alt="" className="mp-view-14" src={imgLine9} /></picture>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mp-view-17" data-node-id="2275:24098">
-                    <p className="mp-view-8" data-node-id="2275:24099" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      찜한 제품
-                    </p>
-                    <p className="mp-view-9" data-node-id="2275:24100" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
-                      0개
-                    </p>
-                  </div>
-                </div>
-              </div>
-  )
 }

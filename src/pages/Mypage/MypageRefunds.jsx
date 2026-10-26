@@ -1,6 +1,7 @@
+import MyPageSummary from './MyPageSummary.jsx'
 import useMyPageDraft from './useMyPageDraft.js'
 import { useRef, useState } from 'react'
-import { ShoppingBenefits, ShoppingPeriod } from './MypageShoppingTablet.jsx'
+import { ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
 import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import imgLine3 from '../../assets/mypage/screens/911d5.svg'
@@ -90,7 +91,7 @@ export default function MypageRefunds({ testRecords = [] }) {
   return (
     <div className="mp-view-58 mp-shopping mp-shopping-refunds" data-node-id="2275:23705" data-applied-start={appliedRange.start} data-applied-end={appliedRange.end} data-name="취소">
             <div className="mp-view-59" data-node-id="2275:23706">
-<ShoppingBenefits />
+<MyPageSummary />
             <form ref={formRef} noValidate onSubmit={query} className="mp-view-18" data-node-id="2275:23721" data-name="기간조회 수정탭">
               <div className="mp-view-19" data-node-id="2275:23722">
                 <div className="mp-view-20" data-node-id="2275:23723">

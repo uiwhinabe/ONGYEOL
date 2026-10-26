@@ -1,0 +1,76 @@
+
+.ongyeol-mypage-screens :where(.mp-summary).mp-view-94 { background-color:#dedada;align-content:stretch;display:flex;gap:55px;height:177px;align-items:flex-start;overflow:clip;padding-inline:60px;padding-block:20px;position:relative;border-radius:5px;flex-shrink:0;width:100%; }
+.mp-summary .mp-coupon-tablet-greeting, .mp-summary-compact { display: none; }
+.ongyeol-mypage .mp-coupons .mp-summary-compact.mp-shopping-benefits { display: none; }
+/* One responsive benefits layout for shopping and address screens. */
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits, .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits * { font-family: 'Noto Sans KR', sans-serif; }
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 15px; width: 100%; height: 152px; background: #dedada; border-radius: 5px;
+  }
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits > p { font-size: 20px; line-height: 27px; }
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits > p > span { font-weight: 300; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; width: 100%; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item { position: relative; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; width: 100%; min-width: 0; min-height: 80px; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item h2 { font-size: 18px; line-height: 25px; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item p { font-weight: 300; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-divider { position: absolute; top: 0; left: 0; width: 0; height: 80px; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-divider img { position: absolute; top: 80px; left: -2px; transform: rotate(-90deg); transform-origin: top left; }
+}
+
+@media (max-width: 767px) {
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits, .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits * { font-family: 'Noto Sans KR', sans-serif; }
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-height: 132px; padding: 10px 0; border-radius: 5px; background: #dedada; }
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits > p { max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; }
+  .ongyeol-mypage .mp-summary-compact.mp-shopping-benefits > p > span { font-weight: 300; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; width: 100%; min-height: 80px; align-items: center; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item { position: relative; min-width: 0; min-height: 54px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item h2 { font-size: 16px; line-height: 22px; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item p { margin-top: 10px; font-size: 15px; line-height: 22px; font-weight: 300; overflow-wrap: anywhere; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-divider { position: absolute; top: -13px; left: 0; width: 0; height: 80px; }
+  .ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-divider img { position: absolute; left: -2px; top: 80px; transform: rotate(-90deg); transform-origin: top left; }
+}
+
+.mp-summary .mp-coupon-tablet-greeting { display: none; }
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage-screens .mp-coupons .mp-summary.mp-view-94, .ongyeol-mypage-screens .mp-coupons .mp-summary.mp-view-94 * { font-family: 'Noto Sans KR', sans-serif; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary.mp-view-94 { width: 100%; height: 152px; padding: 15px 0; flex-direction: column; align-items: center; gap: 15px; }
+  .mp-coupons .mp-summary.mp-view-94 > .mp-view-3 { display: none; }
+  .mp-coupons .mp-summary .mp-coupon-tablet-greeting { display: block; font-size: 20px; line-height: 27px; text-align: center; }
+  .mp-summary .mp-coupon-tablet-greeting span { font-weight: 300; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-6 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; width: 100%; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary :is(.mp-view-7, .mp-view-15, .mp-view-17) { width: 100%; min-width: 0; min-height: 80px; justify-content: center; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-8 { font-size: 18px; line-height: 25px; text-align: center; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary :is(.mp-view-9, .mp-view-16) { font-weight: 300; line-height: 22px; text-align: center; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-10 { position: absolute; left: calc(100% / 3); top: 0; height: 80px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-10 ~ .mp-view-10 { left: calc(200% / 3); }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-12 { width: 80px; }
+}
+
+@media (max-width: 767px) {
+  .ongyeol-mypage-screens .mp-coupons .mp-summary.mp-view-94, .ongyeol-mypage-screens .mp-coupons .mp-summary.mp-view-94 * { font-family: 'Noto Sans KR', sans-serif; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary.mp-view-94 { height: auto; min-height: 132px; padding: 10px 0; flex-direction: column; align-items: center; gap: 10px; overflow: visible; }
+  .mp-coupons .mp-summary.mp-view-94 > .mp-view-3 { display: none; }
+  .mp-coupons .mp-summary .mp-coupon-tablet-greeting { display: block; max-width: 100%; font-size: 16px; line-height: 22px; text-align: center; overflow-wrap: anywhere; }
+  .mp-coupons .mp-summary .mp-coupon-tablet-greeting span { font-weight: 300; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-6 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; width: 100%; min-height: 80px; align-items: center; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-10 { display: flex; position: absolute; top: 0; left: calc(100% / 3); height: 80px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-10 ~ .mp-view-10 { left: calc(200% / 3); }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-12 { width: 80px; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary :is(.mp-view-7, .mp-view-15, .mp-view-17) { width: 100%; min-width: 0; min-height: 54px; justify-content: space-between; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-8 { font-size: 16px; line-height: 22px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary :is(.mp-view-9, .mp-view-16) { font-size: 15px; font-weight: 300; line-height: 22px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* Desktop only; retain the original tablet and mobile spacing above. */
+@media (min-width: 1433px) {
+  .ongyeol-mypage-screens .mp-summary :is(.mp-view-7, .mp-view-15, .mp-view-17) {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+  }
+  .ongyeol-mypage-screens .mp-summary :is(.mp-view-7, .mp-view-15, .mp-view-17) > p {
+    margin: 0;
+  }
+}

@@ -8,7 +8,6 @@
     --mypage-content-width: 100%;
     --mypage-heading-space: 0px;
     min-width: 0;
-    min-height: 0;
     padding: 15px 0 0;
   }
   .ongyeol-mypage-layout { width: var(--mypage-container-width); margin-inline: auto; }
