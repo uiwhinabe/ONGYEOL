@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 
 import Header from './components/Header.jsx'
+import MyPage from './pages/Mypage/Mypage.jsx'
 import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 
@@ -54,6 +55,7 @@ function Layout() {
 
   const { isAuthenticated, enterLogin, logout } = useAuth()
 
+  const isMyPage = pathname === '/mypage' || pathname.startsWith('/mypage/')
   const isLogin = pathname === '/login' || pathname === '/login/'
 
   // Keep existing product bookmarks working with the shared BrowserRouter.
@@ -75,7 +77,7 @@ function Layout() {
     <div
       className={`ongyeol-layout${
         isLogin ? ' ongyeol-layout--login' : ''
-      }`}
+      }${isMyPage ? ' footer-page-layout' : ''}`}
     >
       <Header
         chatOpen={chatOpen}
@@ -85,10 +87,12 @@ function Layout() {
         accountLinks={{
           login: '/login',
           signup: '/signup',
+          mypage: '/mypage',
         }}
       />
 
       <Routes>
+        <Route path="/mypage/*" element={<div className="footer-page-body"><MyPage /></div>} />
         {/* HOME */}
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />

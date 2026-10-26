@@ -1,0 +1,57 @@
+.mp-address-period { display: none; }
+
+@media (min-width: 768px) and (max-width: 1432px) {
+
+  .ongyeol-mypage-screens:has(.mp-address-populated) .mp-page-heading { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-address-populated { width: 100%; overflow: visible; gap: 60px; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-94 { display: none; }
+
+  .mp-address-populated .mp-address-period { display: flex; align-items: center; gap: 35px; width: 100%; height: 70px; padding: 13px 20px; border: 1px solid #7c7c7c; border-radius: 5px; }
+  .mp-address-period-label { flex: none; width: 77px; padding-left: 5px; font-size: 18px; font-weight: 500; }
+  .mp-address-period button { flex: none; margin: 0; background: transparent; color: black; opacity: 1; font: inherit; }
+  .mp-address-period .mp-address-period-select { display: flex; align-items: center; justify-content: space-between; width: 129px; height: 34px; padding: 0 10px; border: 1px solid #878787; border-radius: 5px; font-family: 'Ongyeol Mypage Inter', sans-serif; }
+  .mp-address-dates { display: flex; align-items: center; gap: 8px; width: 325px; padding: 5px; flex: none; }
+  .mp-address-dates > div { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border: 1px solid #4a4848; border-radius: 5px; }
+  .mp-address-dates input { width: 84px; flex: none; min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; color: black; opacity: 1; -webkit-text-fill-color: black; font: inherit; }
+  .mp-address-dates img { flex: none; }
+  .mp-address-dates > span { width: 19px; font-size: 36px; line-height: 49px; flex: none; }
+  .mp-address-period .mp-address-query { padding: 5px 20px; border: 1px solid #4a4848; border-radius: 5px; }
+
+  .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-84, .mp-view-87) { width: 100%; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-87 { height: 216px; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-38 { line-height: 27px; }
+  .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-41, .mp-view-42) { height: 44px; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-42 { border-top: 1px solid black; }
+  .mp-address-populated :is(.mp-view-43, .mp-view-92) { display: none; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-46 { line-height: 22px; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-77 { left: 45px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-47 { left: 190px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-88 { left: 372px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-89 { left: 541px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-90 { left: 654px; top: 0; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-91 { left: 50%; top: 107px; transform: translateX(-50%); }
+}
+
+@media (min-width: 768px) and (max-width: 1432px) {
+  .mp-address-populated { --mp-address-columns: 120px 100px minmax(0, 300px) 150px 100px; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-42 { display: grid; grid-template-columns: var(--mp-address-columns); }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-42 > :not(.mp-view-43) { position: static; padding: 10px 5px; justify-content: center; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-107 { left: 0; width: 100%; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-107 > div { width: auto !important; min-width: 0; padding: 8px 5px; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-107 p { text-align: center; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-address-populated .mp-view-112 { text-align: left; }
+
+  .ongyeol-mypage-screens .mp-dialog-overlay:has(.mp-address-dialog) { display: flex; align-items: center; justify-content: center; padding: 32px; overflow: hidden; min-width: 0; width: 100%; }
+  .ongyeol-mypage-screens .mp-view-115.mp-address-dialog { width: 100%; max-width: 770px; min-width: 0; height: auto; max-height: calc(100dvh - 64px); padding: 24px; overflow-y: auto; align-items: stretch; justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-116, .mp-view-123) { width: 100%; min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-116 { align-items: stretch; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-62, .mp-view-130, .mp-view-141) { width: 100%; gap: 16px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-128, .mp-view-142) { flex: 1; width: 0; min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-131 { width: calc(100% - 131px); min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-132 { width: 100%; gap: 16px; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-133 { flex: 1; width: 0; min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-137 { flex-direction: column; align-items: stretch; gap: 12px; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-138, .mp-view-140) { width: 100%; min-width: 0; }
+  .ongyeol-mypage-screens .mp-address-dialog .mp-view-146 { justify-content: center; }
+  .ongyeol-mypage-screens .mp-address-dialog :is(.mp-view-147, .mp-view-148) { width: 200px; max-width: calc((100% - 22px) / 2); }
+}

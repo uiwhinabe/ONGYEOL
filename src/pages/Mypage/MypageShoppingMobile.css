@@ -1,0 +1,72 @@
+.mp-shopping-mobile-cards, .mp-shopping-mobile-heading, .mp-shopping-mobile-stage-arrow { display: none; }
+.ongyeol-mypage-screens .mp-shopping-mobile-stage-arrow { display: none; }
+
+@media (max-width: 767px) {
+  /* Figma 2277:42340 / 2277:41887 / 2277:42060. Device UI is excluded.
+     Scope every shared presentation rule to these three shopping screens. */
+  .ongyeol-mypage-screens:has(.mp-shopping) .mp-page-heading { height: auto; min-height: 43px; margin-bottom: 26px; padding: 5px 10px; font-size: 24px; line-height: 33px; }
+  .ongyeol-mypage-screens:has(.mp-shopping-returns) { padding-top: 13px; }
+  .ongyeol-mypage-screens:has(.mp-shopping-refunds) { padding-top: 10px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-shopping { width: 100%; overflow: visible; gap: 35px; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-59, .mp-view-70) { width: 100%; gap: 35px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-70 { gap: 5px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-94 { display: none; }
+
+
+  .ongyeol-mypage-screens .mp-shopping .mp-view-18 { width: 100%; height: auto; min-height: 40px; padding: 0 10px; border: 0; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-19 { height: auto; min-height: 40px; justify-content: space-between; gap: 10px; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-20 { display: contents; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-21 { width: auto; min-width: 0; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-22 { font-size: 16px; line-height: 22px; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-23, .mp-view-27),
+  .ongyeol-mypage-screens .mp-shopping .mp-view-19 > button[type='submit'] { display: none; }
+  .mp-shopping .mp-shopping-period { display: block; position: relative; flex: none; width: 129px; height: 34px; }
+  .mp-shopping .mp-shopping-period > button { display: flex; align-items: center; justify-content: space-between; width: 129px; height: 34px; margin: 0; padding: 0 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; font: 16px/22px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
+  .mp-shopping .mp-shopping-period > [role='listbox'] { position: absolute; z-index: 5; top: 33px; right: 0; width: 129px; border: 1px solid #878787; background: white; }
+  .mp-shopping .mp-shopping-period [role='option'] { display: block; width: 100%; min-height: 25px; margin: 0; padding: 0 8px; border: 0; border-bottom: 1px solid #878787; background: white; color: black; text-align: left; font: 14px/24px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
+  .mp-shopping .mp-shopping-period [role='option']:last-child { border-bottom: 0; }
+  .mp-shopping .mp-shopping-period [role='option']:is(:hover, :focus-visible) { background: #efeaea; }
+
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-61, .mp-view-95, .mp-view-62) { width: 100%; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-62 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-63, .mp-view-96, .mp-view-99) { width: 100%; min-width: 0; height: auto; justify-content: space-between; gap: 0; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-64, .mp-view-97, .mp-view-100) { position: static; display: flex; align-items: center; justify-content: center; width: 100%; height: auto; min-height: 42px; padding: 10px 4px; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-65, .mp-view-67, .mp-view-98, .mp-view-101) { position: static; width: auto; height: auto; min-width: 0; font-size: 14px; line-height: 20px; white-space: normal; overflow-wrap: anywhere; text-align: center; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-69 { height: 2px; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-71, .mp-view-103) { width: 100%; flex-wrap: wrap; gap: 0; justify-content: flex-start; }
+  .ongyeol-mypage-screens .mp-shopping :is(.mp-view-71, .mp-view-103) > .mp-view-37 { padding: 5px 0; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-38 { font-size: 20px; line-height: 27px; white-space: normal; }
+  .mp-shopping .mp-shopping-desktop-heading, .mp-shopping .mp-shopping-desktop-title { display: none; }
+  .mp-shopping .mp-shopping-mobile-heading { display: block; font-size: 20px; line-height: 27px; font-weight: 700; }
+  .mp-shopping .mp-shopping-tablet-title { display: block; font-size: 20px; line-height: 27px; font-weight: 700; }
+  .mp-shopping .mp-shopping-tablet-caption { display: block; padding: 5px; font-size: 14px; line-height: 19px; }
+  /* The shared mobile count margin supplies the gap; retain title-side padding. */
+  .mp-shopping .mp-shopping-tablet-caption:has(+ .mp-view-72) { padding-inline-end: 0; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-72 { padding-inline: 0; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-75 { width: 100%; align-items: stretch; gap: 0; }
+  .mp-shopping .mp-view-75 > .mp-view-76, .mp-shopping .mp-view-82, .mp-shopping .mp-shopping-desktop-records, .mp-shopping .mp-shopping-fixture-empty { display: none; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-75 > .mp-view-37 { min-height: 120px; padding: 20px 0; }
+  .ongyeol-mypage-screens .mp-shopping .mp-view-81 { max-width: 100%; white-space: normal; text-align: center; }
+
+  .mp-shopping .mp-shopping-order-status { display: block; width: 100%; }
+  .mp-shopping .mp-shopping-section-title { display: flex; flex-wrap: wrap; align-items: center; min-height: 37px; }
+  .mp-shopping .mp-shopping-section-title h2 { padding: 5px 10px; font-size: 16px; line-height: 22px; font-weight: 700; }
+  .mp-shopping .mp-shopping-section-title > p { padding: 5px 10px; font-size: 16px; line-height: 22px; }
+
+  .mp-shopping .mp-shopping-mobile-cards { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+  .mp-shopping .mp-shopping-mobile-card { display: flex; flex-direction: column; gap: 5px; width: 100%; min-width: 0; min-height: 165px; }
+  .mp-shopping-refunds .mp-shopping-mobile-card { min-height: 192px; }
+  .mp-shopping .mp-shopping-mobile-order-number { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; min-height: 20px; color: rgb(0 0 0 / 50%); font-size: 14px; line-height: 19px; }
+  .mp-shopping .mp-shopping-mobile-order-number > div { display: flex; flex-wrap: wrap; gap: 4px 30px; min-width: 0; overflow-wrap: anywhere; }
+  .mp-shopping .mp-shopping-mobile-order-number img { flex: none; }
+  .mp-shopping .mp-shopping-mobile-product { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .mp-shopping .mp-shopping-mobile-placeholder { flex: none; width: 90px; height: 90px; background: #d9d9d9; }
+  .mp-shopping .mp-shopping-mobile-product-copy { display: flex; flex-direction: column; gap: 10px; width: 155px; max-width: calc(100% - 102px); min-width: 0; font: 15px/18px 'Ongyeol Mypage Inter', sans-serif; overflow-wrap: anywhere; }
+  .mp-shopping .mp-shopping-mobile-product-copy > div:first-child { display: flex; flex-direction: column; gap: 5px; }
+  .mp-shopping .mp-shopping-mobile-product-copy .mp-shopping-mobile-option { color: #878787; font-size: 12px; line-height: 15px; }
+  .mp-shopping .mp-shopping-mobile-price { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  .mp-shopping .mp-shopping-mobile-status { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px; line-height: 20px; }
+  .mp-shopping .mp-shopping-mobile-status > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .mp-shopping .mp-shopping-mobile-status .mp-shopping-mobile-note { color: rgb(0 0 0 / 50%); font-size: 12px; line-height: 16px; white-space: pre-line; }
+  .mp-shopping .mp-shopping-mobile-status button { flex: none; min-height: 35px; padding: 5px; border: 1px solid black; border-radius: 5px; color: black; background: white; font: 15px/20px 'Ongyeol Noto Sans', sans-serif; opacity: 1; }
+}
