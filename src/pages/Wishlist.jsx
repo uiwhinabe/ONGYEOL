@@ -201,7 +201,7 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
             const checked = event.target.checked
             setSelection(checked ? wishlist.map((p) => p.id) : [])
           }} />전체 선택</label>
-        <button className="wishlist-hover-cart" type="button" disabled={!selected.length} onClick={() => perform(() => onAddCart(selected), '선택한 상품을 장바구니에 담았습니다.', 'cart')}><span>선택 상품 장바구니 담기</span></button>
+        <button className="wishlist-hover-cart" type="button" disabled={!selected.length} onClick={() => perform(() => onAddCart(selected), '선택한 상품을 장바구니에 담았습니다.', 'cart')}><span><span className="wishlist-cart-label-prefix" aria-hidden="true" style={{ visibility: 'hidden' }}>선택 상품 </span>장바구니 담기</span></button>
         <button className="wishlist-hover-delete" type="button" disabled={!selected.length} onClick={() => remove(selected, true)}><span className="wishlist-delete-label">선택 삭제</span></button>
       </div>
     </div>
