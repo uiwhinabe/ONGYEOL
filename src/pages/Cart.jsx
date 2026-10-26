@@ -62,6 +62,7 @@ export default function Cart() {
   const selectedItemCount = selectedItems.reduce((sum, item) => sum + item.quantity, 0)
   const selectedProductsPrice = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const shippingFee = calculateShippingFee(selectedProductsPrice, selectedItems.length)
+  const mobileRowShippingFee = calculateShippingFee(selectedProductsPrice, 1)
   const totalPrice = selectedProductsPrice + shippingFee
   const visibleCount = viewportVisibleCount
   const lastRecommendationIndex = hasRecommendationOverflow ? Math.max(0, recommendedProducts.length - visibleCount) : 0
@@ -152,7 +153,7 @@ export default function Cart() {
               <td className="cart-item-check"><input type="checkbox" checked={item.selected} aria-label={`${item.name} 선택`} onChange={() => setItems(current => current.map(product => product.id === item.id ? { ...product, selected: !product.selected } : product))} /></td>
               <td><div className="cart-item-info"><img src={item.image} alt={item.name} /><div><p>{item.name}</p><small>{item.option}</small></div></div></td>
               <td>{money(item.price)}</td>
-              <td><div className="cart-bottom-info"><div className="cart-quantity"><button type="button" aria-label={`${item.name} 수량 감소`} disabled={item.quantity === 1} onClick={() => changeQuantity(item.id, -1)}>−</button><output aria-label={`${item.name} 수량`}>{item.quantity}</output><button type="button" aria-label={`${item.name} 수량 증가`} onClick={() => changeQuantity(item.id, 1)}>+</button></div><span className="cart-mobile-amount">{shippingFee ? money(shippingFee) : '무료'}</span><span className="cart-mobile-amount">{money(item.price * item.quantity)}</span></div></td>
+              <td><div className="cart-bottom-info"><div className="cart-quantity"><button type="button" aria-label={`${item.name} 수량 감소`} disabled={item.quantity === 1} onClick={() => changeQuantity(item.id, -1)}>−</button><output aria-label={`${item.name} 수량`}>{item.quantity}</output><button type="button" aria-label={`${item.name} 수량 증가`} onClick={() => changeQuantity(item.id, 1)}>+</button></div><span className="cart-mobile-amount cart-mobile-shipping">{mobileRowShippingFee ? money(mobileRowShippingFee) : '무료'}</span><span className="cart-mobile-amount cart-mobile-total">{money(item.price * item.quantity)}</span></div></td>
               <td>기본배송</td><td>{shippingFee ? money(shippingFee) : '무료'}</td><td>{money(item.price * item.quantity)}</td>
             </tr>)}{!items.length && <tr><td colSpan={7} className="cart-empty">장바구니가 비어 있습니다.</td></tr>}</tbody>
           </table>

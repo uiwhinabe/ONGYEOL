@@ -104,9 +104,12 @@
   .cart-table td:nth-child(3), .cart-table td:nth-child(5) { display: none; }
   .cart-table td:nth-child(6), .cart-table td:nth-child(7) { display: none; }
   .cart-table td:nth-child(4) { grid-column: 1 / -1; grid-row: 2; }
-  .cart-bottom-info { display: flex; justify-content: flex-end; align-items: center; gap: 40px; width: 100%; }
+  .cart-bottom-info { display: grid; grid-template-columns: 82px 60px 96px; justify-content: end; align-items: center; gap: clamp(8px, 4vw, 40px); width: 100%; }
   .cart-bottom-info > * { flex-shrink: 0; white-space: nowrap; }
   .cart-mobile-amount { display: inline; }
+  .cart-mobile-shipping { width: 60px; min-width: 60px; text-align: center; }
+  /* Align the price to its column start so its spare width does not enlarge the visible gap. */
+  .cart-mobile-total { width: 96px; min-width: 96px; text-align: left; }
   .cart-quantity { grid-template-columns: 24px 32px 24px; }
   .cart-table .cart-empty { grid-column: 1 / -1; grid-row: 1 / 3; display: grid; place-items: center; height: 188px; }
   .cart-summary { width: 100%; min-height: 321px; margin-top: 0; padding: 14px 10px 16px; }
@@ -227,7 +230,11 @@
 
 @media (min-width: 1025px) {
   /* Five 245px cards + four 20px gaps, with permanent arrow lanes. */
-  .cart-recommendations { max-width: 1392px; }
+  .cart-recommendations,
+  .cart-content { width: 100%; max-width: 1392px; margin-left: auto; margin-right: auto; }
+  /* Align table checkboxes with the toolbar without changing table column geometry. */
+  .cart-table th:first-child input,
+  .cart-item-check input { position: relative; left: -2px; }
   .cart-actions { margin-top: 90px; }
 }
 
@@ -246,7 +253,9 @@
 }
 
 @media (min-width: 1200px) and (max-width: 1439px) {
-  .cart-page { padding-left: 32px; padding-right: 32px; }
+  /* Recommendations and cart content share .cart-page's desktop 64px inset. */
+  .cart-table th:first-child input,
+  .cart-item-check input { left: 8px; }
   .cart-layout { grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; }
   .cart-col-check { width: 40px; }
   .cart-col-price { width: 80px; }
