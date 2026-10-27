@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ProductReviewSummary from '../components/review/ProductReviewSummary.jsx'
 import { products } from '../data/products.js'
 import { navigateToProducts } from '../utils/productNavigation.js'
 import './ProductDetail.css'
@@ -563,9 +564,7 @@ export default function ProductDetail({ productId }) {
     </section>
     <section id="product-reviews" className="ongyeol-detail__section">
       <DetailTabs active="reviews" />
-      <h2>고객 리뷰 ({product.reviewCount})</h2>
-      <div className="ongyeol-detail__review-summary"><strong>{Number(product.rating).toFixed(1)}</strong><span aria-label={`별점 ${product.rating}점`}>{'★'.repeat(Math.round(product.rating))}</span><p>등록된 상품의 평점과 리뷰 수입니다.</p></div>
-      <p className="ongyeol-detail__notice">개별 리뷰 내용은 아직 연결되지 않았습니다.</p>
+      <ProductReviewSummary productId={sourceProduct.id} />
     </section>
     <section id="product-detail" className="ongyeol-detail__section">
       <DetailTabs active="detail" />
