@@ -8,6 +8,7 @@ import SearchDropdown from './SearchDropdown.jsx'
 import HamburgerDropdown from './HamburgerDropdown.jsx'
 import useHamburgerDropdown from './useHamburgerDropdown.js'
 import MemberDropdown from './MemberDropdown.jsx'
+import CartDropdown, { useCartDropdown } from './CartDropdown.jsx'
 import memberDesktop from '../assets/header/member-desktop.svg'
 import memberTablet from '../assets/header/member-tablet.svg'
 import memberMobile from '../assets/header/member-mobile.svg'
@@ -104,6 +105,20 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
     setSearchOpen(false)
     setMemberOpen(false)
   })
+  const { open: cartOpen, close: closeCart, anchorRef: cartTriggerRef, panelRef: cartPanelRef,
+    triggerProps: cartTriggerProps, panelProps: cartPanelProps } = useCartDropdown(() => {
+    cancelClose()
+    cancelSearchClose()
+    cancelMemberClose()
+    searchHovered.current = false
+    setShopOpen(false)
+    setSearchOpen(false)
+    setMemberOpen(false)
+    hamburger.close()
+  })
+  useEffect(() => {
+    if (shopOpen || searchOpen || memberVisible || hamburgerOpen || chatOpen) closeCart()
+  }, [shopOpen, searchOpen, memberVisible, hamburgerOpen, chatOpen, closeCart])
   const openShop = () => {
     cancelClose()
     if (window.matchMedia('(min-width: 1480px)').matches) {
@@ -276,14 +291,15 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
           <Link className="ongyeol-header-action ongyeol-header-action-desktop ongyeol-header-support" to="/contact" aria-label="고객센터">
             <img className="ongyeol-header-static-icon" src={support} width="26.25" height="26.2212" alt="" />
           </Link>
-          <Link className="ongyeol-header-action ongyeol-header-action-desktop" to="/cart" aria-label="장바구니">
+          <button ref={cartTriggerRef} {...cartTriggerProps} className="ongyeol-header-action ongyeol-header-action-desktop" type="button">
             <img className="ongyeol-header-static-icon" src={cart} width="25" height="25" alt="" />
-          </Link>
+          </button>
         </div>
       </div>
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
       <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={onSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
       <HamburgerDropdown ref={hamburgerPanelRef} open={hamburgerOpen} controller={hamburger} />
+      <CartDropdown open={cartOpen} onClose={closeCart} anchorRef={cartTriggerRef} panelRef={cartPanelRef} headerRef={headerRef} {...cartPanelProps} />
       <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={{ mypage: '/mypage', ...accountLinks }} isAuthenticated={isAuthenticated} onLogout={onLogout} onLogin={onLogin} />
     </header>
   )
