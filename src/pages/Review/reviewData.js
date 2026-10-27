@@ -1,3 +1,46 @@
+import { withReviewSamples } from './reviewSamples.js'
+import dakyeolmaeMistPhoto1 from '../../assets/reviews/dakyeolmae-mist-1.png'
+import dakyeolmaeMistPhoto2 from '../../assets/reviews/dakyeolmae-mist-2.png'
+import dakyeolmaeMistPhoto3 from '../../assets/reviews/dakyeolmae-mist-3.png'
+import dakyeolmaeMistPhoto4 from '../../assets/reviews/dakyeolmae-mist-4.png'
+import dakyeolmaeMistPhoto5 from '../../assets/reviews/dakyeolmae-mist-5.png'
+import dakyeolmaeMistPhoto6 from '../../assets/reviews/dakyeolmae-mist-6.png'
+import dakyeolmaeScrubPhoto1 from '../../assets/reviews/dakyeolmae-body-scrub-1.png'
+import dakyeolmaeScrubPhoto2 from '../../assets/reviews/dakyeolmae-body-scrub-2.png'
+import dakyeolmaeScrubPhoto3 from '../../assets/reviews/dakyeolmae-body-scrub-3.png'
+import dakyeolmaeScrubPhoto4 from '../../assets/reviews/dakyeolmae-body-scrub-4.png'
+import dakyeolmaeScrubPhoto5 from '../../assets/reviews/dakyeolmae-body-scrub-5.png'
+import dakyeolmaeScrubPhoto6 from '../../assets/reviews/dakyeolmae-body-scrub-6.png'
+import dakyeolmaePadPhoto1 from '../../assets/reviews/dakyeolmae-pad-1.png'
+import dakyeolmaePadPhoto2 from '../../assets/reviews/dakyeolmae-pad-2.png'
+import dakyeolmaePadPhoto3 from '../../assets/reviews/dakyeolmae-pad-3.png'
+import dakyeolmaePadPhoto4 from '../../assets/reviews/dakyeolmae-pad-4.png'
+import dakyeolmaePadPhoto5 from '../../assets/reviews/dakyeolmae-pad-5.png'
+import dakyeolmaePadPhoto6 from '../../assets/reviews/dakyeolmae-pad-6.png'
+import dakyeolmaeAmpoulePhoto1 from '../../assets/reviews/dakyeolmae-ampoule-1.png'
+import dakyeolmaeAmpoulePhoto2 from '../../assets/reviews/dakyeolmae-ampoule-2.png'
+import dakyeolmaeAmpoulePhoto3 from '../../assets/reviews/dakyeolmae-ampoule-3.png'
+import dakyeolmaeAmpoulePhoto4 from '../../assets/reviews/dakyeolmae-ampoule-4.png'
+import dakyeolmaeAmpoulePhoto5 from '../../assets/reviews/dakyeolmae-ampoule-5.png'
+import dakyeolmaeAmpoulePhoto6 from '../../assets/reviews/dakyeolmae-ampoule-6.png'
+import dakyeolmaeCreamPhoto1 from '../../assets/reviews/dakyeolmae-cream-1.png'
+import dakyeolmaeCreamPhoto2 from '../../assets/reviews/dakyeolmae-cream-2.png'
+import dakyeolmaeCreamPhoto3 from '../../assets/reviews/dakyeolmae-cream-3.png'
+import dakyeolmaeCreamPhoto4 from '../../assets/reviews/dakyeolmae-cream-4.png'
+import dakyeolmaeCreamPhoto5 from '../../assets/reviews/dakyeolmae-cream-5.png'
+import dakyeolmaeCreamPhoto6 from '../../assets/reviews/dakyeolmae-cream-6.png'
+import dakyeolmaeMaskPhoto1 from '../../assets/reviews/dakyeolmae-mask-1.png'
+import dakyeolmaeMaskPhoto2 from '../../assets/reviews/dakyeolmae-mask-2.png'
+import dakyeolmaeMaskPhoto3 from '../../assets/reviews/dakyeolmae-mask-3.png'
+import dakyeolmaeMaskPhoto4 from '../../assets/reviews/dakyeolmae-mask-4.png'
+import dakyeolmaeMaskPhoto5 from '../../assets/reviews/dakyeolmae-mask-5.png'
+import dakyeolmaeMaskPhoto6 from '../../assets/reviews/dakyeolmae-mask-6.png'
+import dakyeolmaeTonerPhoto1 from '../../assets/reviews/dakyeolmae-toner-1.png'
+import dakyeolmaeTonerPhoto2 from '../../assets/reviews/dakyeolmae-toner-2.png'
+import dakyeolmaeTonerPhoto3 from '../../assets/reviews/dakyeolmae-toner-3.png'
+import dakyeolmaeTonerPhoto4 from '../../assets/reviews/dakyeolmae-toner-4.png'
+import dakyeolmaeTonerPhoto5 from '../../assets/reviews/dakyeolmae-toner-5.png'
+import dakyeolmaeTonerPhoto6 from '../../assets/reviews/dakyeolmae-toner-6.png'
 import vitaminMaskReview1 from '../../assets/reviews/vitamin-mask-1.png'
 import vitaminMaskReview2 from '../../assets/reviews/vitamin-mask-2.png'
 import vitaminMaskReview3 from '../../assets/reviews/vitamin-mask-3.png'
@@ -221,6 +264,34 @@ const additionalFixtures = [
   photo: index % 2 === 0 ? photos[(index + 3) % photos.length] : null,
 }))
 
+const dakyeolmaeTonerPhotos = [dakyeolmaeTonerPhoto1, dakyeolmaeTonerPhoto2, dakyeolmaeTonerPhoto3, dakyeolmaeTonerPhoto4, dakyeolmaeTonerPhoto5, dakyeolmaeTonerPhoto6].map((src, index) => ({
+  id: `dakyeolmae-toner-photo-${index + 1}`, src, alt: `닥열매 워터 토너 포토 리뷰 ${index + 1}`,
+}))
+
+const dakyeolmaeMaskPhotos = [dakyeolmaeMaskPhoto1, dakyeolmaeMaskPhoto2, dakyeolmaeMaskPhoto3, dakyeolmaeMaskPhoto4, dakyeolmaeMaskPhoto5, dakyeolmaeMaskPhoto6].map((src, index) => ({
+  id: `dakyeolmae-mask-photo-${index + 1}`, src, alt: `닥열매 콜라겐 마스크팩 포토 리뷰 ${index + 1}`,
+}))
+
+const dakyeolmaeCreamPhotos = [dakyeolmaeCreamPhoto1, dakyeolmaeCreamPhoto2, dakyeolmaeCreamPhoto3, dakyeolmaeCreamPhoto4, dakyeolmaeCreamPhoto5, dakyeolmaeCreamPhoto6].map((src, index) => ({
+  id: `dakyeolmae-cream-photo-${index + 1}`, src, alt: `닥열매 크림 포토 리뷰 ${index + 1}`,
+}))
+
+const dakyeolmaeAmpoulePhotos = [dakyeolmaeAmpoulePhoto1, dakyeolmaeAmpoulePhoto2, dakyeolmaeAmpoulePhoto3, dakyeolmaeAmpoulePhoto4, dakyeolmaeAmpoulePhoto5, dakyeolmaeAmpoulePhoto6].map((src, index) => ({
+  id: `dakyeolmae-ampoule-photo-${index + 1}`, src, alt: `닥열매 리페어 앰플 포토 리뷰 ${index + 1}`,
+}))
+
+const dakyeolmaePadPhotos = [dakyeolmaePadPhoto1, dakyeolmaePadPhoto2, dakyeolmaePadPhoto3, dakyeolmaePadPhoto4, dakyeolmaePadPhoto5, dakyeolmaePadPhoto6].map((src, index) => ({
+  id: `dakyeolmae-pad-photo-${index + 1}`, src, alt: `닥열매 사각 패드 포토 리뷰 ${index + 1}`,
+}))
+
+const dakyeolmaeScrubPhotos = [dakyeolmaeScrubPhoto1, dakyeolmaeScrubPhoto2, dakyeolmaeScrubPhoto3, dakyeolmaeScrubPhoto4, dakyeolmaeScrubPhoto5, dakyeolmaeScrubPhoto6].map((src, index) => ({
+  id: `dakyeolmae-body-scrub-photo-${index + 1}`, src, alt: `닥열매 바디 스크럽 포토 리뷰 ${index + 1}`,
+}))
+
+const dakyeolmaeMistPhotos = [dakyeolmaeMistPhoto1, dakyeolmaeMistPhoto2, dakyeolmaeMistPhoto3, dakyeolmaeMistPhoto4, dakyeolmaeMistPhoto5, dakyeolmaeMistPhoto6].map((src, index) => ({
+  id: `dakyeolmae-mist-photo-${index + 1}`, src, alt: `닥열매 세럼 미스트 포토 리뷰 ${index + 1}`,
+}))
+
 export const reviewPages = {
   // Products without supplied review records get their own empty dataset.
   // Never reuse the mask's reviews for another product.
@@ -230,6 +301,224 @@ export const reviewPages = {
     ratingDistribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
     photoReviews: [], reviews: [],
   }])),
+  'dakyeolmae-mist': {
+    productId: 'dakyeolmae-mist', productName: '닥열매 콜라겐 세럼 미스트',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma 1848:14284 values, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaeMistPhotos,
+    summaryPhotos: [dakyeolmaeMistPhotos[0], dakyeolmaeMistPhotos[1], dakyeolmaeMistPhotos[3], dakyeolmaeMistPhotos[4]],
+    reviews: [
+      {
+        id: 'dakyeolmae-mist-1', nickname: '소원을말해봐임공주', date: '2026-09-17', rating: 5,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '여름에도 부담 없어요',
+        body: '분사력이 생각보다 엄청 고르게 나와서 좋았어요. 세안하고 피부가 당길 때 가볍게 뿌려주면 금방 촉촉해져요. 끈적이거나 무거운 느낌이 없어서 여름에도 잘 쓰고 있고, 크기도 부담스럽지 않아서 손이 자주 가는 제품이에요.',
+        photo: dakyeolmaeMistPhotos[1],
+      },
+      {
+        id: 'dakyeolmae-mist-2', nickname: '여행가고싶어유', date: '2026-09-17', rating: 5,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '구성이 알차서 만족해요',
+        body: '패키지부터 예뻐서 받자마자 기분 좋았어요! 본품이랑 작은 사이즈가 같이 들어 있어서 활용하기도 좋고요. 큰 건 집에서 쓰고 작은 건 파우치에 넣어 다니면서 건조하다고 느껴질 때마다 수시로 뿌려주고 있어요.',
+        photo: dakyeolmaeMistPhotos[5],
+      },
+      {
+        id: 'dakyeolmae-mist-3', nickname: '마운자로', date: '2026-09-16', rating: 5,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '촉촉함이 오래가요',
+        body: '세안 후에 피부가 건조할 때마다 뿌려주고 있어요. 미스트가 고르게 퍼지고 금방 흡수돼서 사용감이 편해요. 처음 뿌렸을 때만 촉촉한 게 아니라 수분감이 꽤 오래 유지되는 느낌이고, 끈적임도 거의 없어서 데일리로 사용하기 좋아요.',
+        photo: dakyeolmaeMistPhotos[3],
+      },
+    ],
+  },
+  'dakyeolmae-body-scrub': {
+    productId: 'dakyeolmae-body-scrub', productName: '닥열매 바디 스크럽',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma 1949:4922 values, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaeScrubPhotos,
+    summaryPhotos: [dakyeolmaeScrubPhotos[0], dakyeolmaeScrubPhotos[2], dakyeolmaeScrubPhotos[3], dakyeolmaeScrubPhotos[4]],
+    reviews: [
+      {
+        id: 'dakyeolmae-body-scrub-1', nickname: '채형원', date: '2026-09-17', rating: 4,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '향이 은은해서 마음에 들어요',
+        body: '향이 너무 강한 바디 제품은 잘 안 쓰는데 이건 은은해서 좋았어요. 샤워할 때 사용하면 기분 좋은 향이 은근하게 퍼지고, 스크럽 알갱이도 너무 거칠지 않아서 부담 없이 문지르기 괜찮았어요. 용량도 넉넉해서 생각보다 오래 사용할 것 같아요.',
+        photo: dakyeolmaeScrubPhotos[1],
+      },
+      {
+        id: 'dakyeolmae-body-scrub-2', nickname: '동성로안망함', date: '2026-09-17', rating: 3,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '씻고 나면 피부가 매끈해져요',
+        body: '팔꿈치랑 무릎 쪽이 거칠어서 집중적으로 사용해봤어요. 알갱이가 피부에 너무 세게 느껴지지 않고 부드럽게 롤링돼서 좋았고, 물로 씻어내고 나면 피부 표면이 한결 매끈해진 느낌이에요. 사용 후에도 피부가 당기지 않아서 꾸준히 각질 관리할 때 쓰려고요.',
+        photo: dakyeolmaeScrubPhotos[3],
+      },
+      {
+        id: 'dakyeolmae-body-scrub-3', nickname: 'LA갈비조슈아', date: '2026-09-16', rating: 5,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '제형이 부드러워서 좋아요',
+        body: '처음 열어봤을 때 생각보다 부드럽고 크리미한 제형이라 마음에 들었어요. 알갱이가 들어있지만 피부에 문지를 때 까슬거리거나 자극적인 느낌이 적었고, 마사지하듯 가볍게 롤링한 뒤 씻어내면 피부가 보들보들해져요. 사용감이 부담스럽지 않아서 꾸준히 관리하기 좋을 것 같아요.',
+        photo: dakyeolmaeScrubPhotos[2],
+      },
+    ],
+  },
+  'dakyeolmae-pad': {
+    productId: 'dakyeolmae-pad', productName: '닥열매 사각 패드',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma 1949:5374 values, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaePadPhotos,
+    summaryPhotos: [dakyeolmaePadPhotos[1], dakyeolmaePadPhotos[2], dakyeolmaePadPhotos[3], dakyeolmaePadPhotos[5]],
+    reviews: [
+      {
+        id: 'dakyeolmae-pad-1', nickname: '일병임창균', date: '2026-09-17', rating: 5,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '부분팩으로 쓰기 좋아요',
+        body: '볼 쪽이 쉽게 건조해져서 세안 후에 패드를 붙여두고 있어요. 패드에 에센스가 넉넉하게 묻어 있어서 금방 마르지 않고, 잠깐 붙였다가 떼어내면 피부가 한결 촉촉하고 편안해지는 느낌이에요. 크기도 적당해서 볼이나 이마에 부분팩처럼 활용하기 좋았어요.',
+        photo: dakyeolmaePadPhotos[3],
+      },
+      {
+        id: 'dakyeolmae-pad-2', nickname: '동그란감자김민규', date: '2026-09-17', rating: 4,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '집게가 들어있어서 편해요',
+        body: '패드를 손으로 직접 꺼내지 않아도 돼서 사용하기 편했어요. 뚜껑 안쪽에 투명 집게를 따로 보관할 수 있는 것도 마음에 들고요. 패드도 너무 얇지 않고 촉촉하게 적셔져 있어서 한 장씩 꺼내 쓰기 좋아요. 아침저녁으로 간단하게 피부 정돈할 때 손이 자주 가네요.',
+        photo: dakyeolmaePadPhotos[0],
+      },
+      {
+        id: 'dakyeolmae-pad-3', nickname: '대나무헬리콥터', date: '2026-09-16', rating: 5,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '데일리로 쓰기 딱 좋아요',
+        body: '한 통 다 사용하고 괜찮아서 계속 쟁여두고 쓰는 제품이에요. 세안하고 피부결 정돈할 때 가볍게 닦아주기 좋고, 건조한 날에는 필요한 부위에 잠깐 올려두기도 해요. 매일 부담 없이 사용할 수 있어서 어느새 화장대 필수템이 됐어요.',
+        photo: dakyeolmaePadPhotos[4],
+      },
+    ],
+  },
+  'dakyeolmae-ampoule': {
+    productId: 'dakyeolmae-ampoule', productName: '닥열매 리페어 앰플',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Node 1986:3985 is mislabeled as cream; its content belongs to this catalog ampoule.
+    // Preserve the supplied statistics, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaeAmpoulePhotos,
+    summaryPhotos: [dakyeolmaeAmpoulePhotos[0], dakyeolmaeAmpoulePhotos[1], dakyeolmaeAmpoulePhotos[3], dakyeolmaeAmpoulePhotos[4]],
+    reviews: [
+      {
+        id: 'dakyeolmae-ampoule-1', nickname: '지겨워지겨워', date: '2026-09-17', rating: 5,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '촉촉하고 편하게 쓰기 좋아요',
+        body: '요즘 기초 케어할 때 꾸준히 사용하고 있는 앰플이에요. 피부가 건조하게 느껴질 때 발라주면 촉촉하게 정돈되는 느낌이 좋았어요. 제형도 부담스럽게 무겁지 않아서 다른 기초 제품과 같이 사용하기 편하고, 아침저녁으로 데일리 케어하기 괜찮아서 만족하면서 쓰고 있어요.',
+        photo: dakyeolmaeAmpoulePhotos[0],
+      },
+      {
+        id: 'dakyeolmae-ampoule-2', nickname: '주허니허니', date: '2026-09-17', rating: 4,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '흡수가 빨라요',
+        body: '처음에는 촉촉한 제형이라 끈적일까 걱정했는데 생각보다 산뜻하게 흡수돼요. 피부에 부드럽게 펴 발리고 겉도는 느낌이 적어서 사용감이 마음에 들었어요. 스포이드 타입이라 원하는 만큼 덜어서 사용하기도 편하고, 스킨케어 단계에서 부담 없이 추가하기 좋은 앰플이에요.',
+        photo: dakyeolmaeAmpoulePhotos[3],
+      },
+      {
+        id: 'dakyeolmae-ampoule-3', nickname: '날좀냅둬유', date: '2026-09-16', rating: 4,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '제형이 촉촉하고 부드러워요',
+        body: '손등에 덜어보면 살짝 흐르는 촉촉한 제형이에요. 몇 번 펴 발라주면 피부에 부드럽게 스며들면서 은은하게 윤기가 돌아요. 끈적하게 남기보다는 촉촉하게 마무리되는 편이라 좋았고, 건조해서 피부가 푸석하게 느껴지는 날 특히 손이 가는 제품이에요.',
+        photo: dakyeolmaeAmpoulePhotos[5],
+      },
+    ],
+  },
+  'dakyeolmae-cream': {
+    productId: 'dakyeolmae-cream', productName: '닥열매 크림',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma 1950:6800 values, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaeCreamPhotos,
+    summaryPhotos: dakyeolmaeCreamPhotos.slice(0, 4),
+    reviews: [
+      {
+        id: 'dakyeolmae-cream-1', nickname: '쿠로미', date: '2026-09-17', rating: 4,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '촉촉하고 끈적임이 적어요',
+        body: '손등에 먼저 발라봤는데 부드럽게 펴 발리고 흡수도 잘 되는 편이에요. 촉촉한 크림인데도 겉에 무겁게 남는 느낌이 적어서 마음에 들었어요. 바르고 나면 피부가 매끈하고 편안하게 정돈되는 느낌이고, 건조할 때 덧발라도 부담스럽지 않아서 자주 사용하고 있어요.',
+        photo: dakyeolmaeCreamPhotos[1],
+      },
+      {
+        id: 'dakyeolmae-cream-2', nickname: '포차코차코', date: '2026-09-17', rating: 5,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '부담 없이 사용하기 좋아요',
+        body: '제형이 너무 무겁거나 답답하지 않아서 편하게 사용하고 있어요. 부드럽게 발리면서 피부에 촉촉하게 스며드는 느낌이라 좋았고, 아침저녁으로 발라도 부담스럽지 않아서 데일리 크림으로 잘 쓰고 있어요. 건조함이 신경 쓰일 때 가볍게 챙겨 바르기 좋은 제품이에요.',
+        photo: dakyeolmaeCreamPhotos[0],
+      },
+      {
+        id: 'dakyeolmae-cream-3', nickname: '집보내줘유', date: '2026-09-16', rating: 5,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '피부가 윤기 있어 보여요',
+        body: '크림을 바르고 나면 건조해 보이던 피부가 한층 촉촉해 보여요. 특히 볼이나 턱처럼 쉽게 푸석해지는 부분도 매끈하게 정돈되는 느낌이에요. 번들거리는 광이 아니라 자연스럽게 윤기가 도는 느낌이라 마음에 들고, 메이크업 전에 사용해도 피부 표현이 깔끔하게 되는 편이에요.',
+        photo: dakyeolmaeCreamPhotos[3],
+      },
+    ],
+  },
+  'dakyeolmae-mask': {
+    productId: 'dakyeolmae-mask', productName: '닥열매 콜라겐 마스크팩',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma 1950:6318 values, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaeMaskPhotos,
+    summaryPhotos: [dakyeolmaeMaskPhotos[0], dakyeolmaeMaskPhotos[1], dakyeolmaeMaskPhotos[2], dakyeolmaeMaskPhotos[5]],
+    reviews: [
+      {
+        id: 'dakyeolmae-mask-1', nickname: '새싸깅', date: '2026-09-17', rating: 4,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '얼굴에 착 밀착돼서 좋아요',
+        body: '시트가 들뜨지 않고 얼굴 굴곡에 맞게 착 붙어서 사용하기 편했어요. 팩 하는 동안 움직여도 쉽게 밀리거나 떨어지지 않았고, 시트 자체도 부드러워서 피부에 닿는 느낌이 편안하더라고요. 잠깐 붙이고 있어도 피부가 촉촉해지는 느낌이라 만족스러웠어요.',
+        photo: dakyeolmaeMaskPhotos[1],
+      },
+      {
+        id: 'dakyeolmae-mask-2', nickname: '하이록스후기좀', date: '2026-09-17', rating: 4,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '꾸준히 관리하기 좋은 구성이에요',
+        body: '한 박스에 여러 장 들어 있어서 피부 관리가 필요한 날마다 하나씩 꺼내 쓰고 있어요. 개별 포장이라 남은 제품을 깔끔하게 보관할 수 있는 점도 마음에 들었고, 특별한 날뿐만 아니라 평소에도 부담 없이 사용하기 좋은 구성이에요. 꾸준히 홈케어하고 싶은 분들에게 잘 맞을 것 같아요.',
+        photo: dakyeolmaeMaskPhotos[2],
+      },
+      {
+        id: 'dakyeolmae-mask-3', nickname: '운동왜해야해', date: '2026-09-16', rating: 5,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '촉촉하고 부드러워요',
+        body: '꺼내자마자 시트에 에센스가 충분히 머금어져 있는 게 느껴졌어요. 촉촉하면서도 흐물흐물하게 찢어지는 느낌이 아니라 다루기 편했고, 피부에 올렸을 때도 부드럽게 밀착돼서 자극적인 느낌이 거의 없었어요. 사용하고 난 뒤까지 촉촉함이 남아 있어서 만족하고 있어요.',
+        photo: dakyeolmaeMaskPhotos[3],
+      },
+    ],
+  },
+  'dakyeolmae-toner': {
+    productId: 'dakyeolmae-toner', productName: '닥열매 워터 토너',
+    totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
+    // Preserve Figma 1950:5866 values, including the distribution's different total.
+    ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
+    photoReviews: dakyeolmaeTonerPhotos,
+    summaryPhotos: [dakyeolmaeTonerPhotos[1], dakyeolmaeTonerPhotos[2], dakyeolmaeTonerPhotos[4], dakyeolmaeTonerPhotos[5]],
+    reviews: [
+      {
+        id: 'dakyeolmae-toner-1', nickname: '오라이', date: '2026-09-17', rating: 5,
+        skinType: '건성', concern: 'pore', concernLabel: '모공•피지', age: '20대',
+        title: '산뜻하게 흡수돼서 좋아요',
+        body: '물처럼 가벼운 제형이라 세안하고 첫 단계에 사용하기 좋았어요. 여러 번 덧발라도 피부가 답답하거나 끈적이는 느낌이 거의 없고, 흡수되고 나면 피부가 촉촉하면서도 산뜻하게 마무리돼요. 아침 스킨케어에도 부담 없이 사용할 수 있어서 만족하고 있어요.',
+        photo: dakyeolmaeTonerPhotos[1],
+      },
+      {
+        id: 'dakyeolmae-toner-2', nickname: '한화화이팅', date: '2026-09-17', rating: 4,
+        skinType: '수부지', concern: 'elasticity', concernLabel: '주름•탄력', age: '40대',
+        title: '가볍고 촉촉한 제형이에요',
+        body: '처음에는 정말 물처럼 흘러서 보습감이 약할 줄 알았는데 생각보다 촉촉해요. 손등에 발라보면 부드럽게 퍼지고 금방 스며드는 편이고, 흡수된 뒤에도 겉도는 느낌 없이 수분감이 은근하게 남아 있어요. 무거운 토너를 좋아하지 않는 저한테 잘 맞았어요.',
+        photo: dakyeolmaeTonerPhotos[2],
+      },
+      {
+        id: 'dakyeolmae-toner-3', nickname: '꾸꾸까까', date: '2026-09-16', rating: 5,
+        skinType: '민감성', concern: 'sensitive', concernLabel: '수부지', age: '10대',
+        title: '피부결 정돈하기 좋아요',
+        body: '화장솜에 충분히 적셔서 세안 후 얼굴을 가볍게 닦아주고 있어요. 피부에 남아 있는 잔여감을 정리해 주는 느낌이라 사용하고 나면 개운하고, 특히 볼이나 코 주변을 닦아주면 피부결이 한결 매끈하게 느껴져요. 자극적인 사용감도 없어서 매일 아침저녁으로 사용하기 편해요',
+        photo: dakyeolmaeTonerPhotos[5],
+      },
+    ],
+  },
   'vitamin-c-mask': {
     productId: 'vitamin-c-mask', productName: '비타민 C 마스크팩',
     totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
@@ -922,6 +1211,10 @@ export const reviewPages = {
     ],
   },
 }
+
+products.forEach((product, index) => {
+  reviewPages[product.id] = withReviewSamples(reviewPages[product.id], index)
+})
 
 // The brief's example ID and the existing catalog ID resolve to the same data.
 reviewPages['mulberry-mask'] = reviewPages['odi-mask']

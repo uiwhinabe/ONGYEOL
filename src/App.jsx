@@ -15,6 +15,7 @@ import Home from './pages/Home.jsx'
 import Products from './pages/Products.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
 import Review from './pages/Review/Review.jsx'
+import PhotoReviews from './pages/Review/PhotoReviews.jsx'
 import { readProductRoute, navigateToProducts } from './utils/productNavigation.js'
 import Brand from './pages/Brand.jsx'
 import SkinGuide from './pages/Skinguide.jsx'
@@ -93,6 +94,7 @@ function Layout() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/review/:productId" element={<Review />} />
+        <Route path="/review/:productId/photos" element={<PhotoReviews />} />
         <Route path="/skin-guide" element={<SkinGuide />} />
         <Route path="/brand" element={<Brand />} />
 

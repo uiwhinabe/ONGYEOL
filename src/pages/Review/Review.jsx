@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { skinConcerns } from '../skinGuideConcernData.js'
 import { reviewPages } from './reviewData.js'
@@ -13,6 +13,9 @@ import mobileRatingStar from '../../assets/reviews/mobile-rating-star.svg'
 import mobileReviewStar from '../../assets/reviews/mobile-review-star.svg'
 import mobileHelpfulIcon from '../../assets/reviews/mobile-helpful.svg'
 import './Review.css'
+import ReviewComposer from './ReviewComposer.jsx'
+import PhotoReviewDialog from './PhotoReviewDialog.jsx'
+import { getPhotoReviews } from './reviewPhotos.js'
 
 const PAGE_SIZE = 3
 const concernLabel = id => skinConcerns.find(item => item.id === id)?.label.replaceAll(' / ', '•') ?? id
@@ -24,19 +27,29 @@ function Stars({ rating = 5 }) {
   </span>
 }
 
-function Dropdown({ label, mobileLabel, value, options, onChange }) {
+function Dropdown({ label, mobileLabel, kind, value, options, onChange }) {
   const detailsRef = useRef(null)
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (!open) return
+    const closeOutside = event => {
+      if (!detailsRef.current?.contains(event.target)) setOpen(false)
+    }
+    document.addEventListener('pointerdown', closeOutside, true)
+    return () => document.removeEventListener('pointerdown', closeOutside, true)
+  }, [open])
   const selected = options.find(option => option.value === value)
-  return <details className="review-dropdown" ref={detailsRef} onBlur={event => {
-    if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false
+  return <details className={`review-dropdown review-dropdown--${kind}`} ref={detailsRef} open={open} onBlur={event => {
+    // A touch can blur the summary without focusing the option. Let its click complete.
+    if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) setOpen(false)
   }} onKeyDown={event => {
-    if (event.key === 'Escape') { event.currentTarget.open = false; event.currentTarget.querySelector('summary').focus() }
+    if (event.key === 'Escape') { setOpen(false); event.currentTarget.querySelector('summary').focus() }
   }}>
-    <summary aria-label={`${label}: ${selected?.label ?? label}`}><span className={mobileLabel ? 'review-filter-desktop-label' : undefined}>{value ? selected?.label : label}</span>{mobileLabel && <span className="review-mobile-only">{value ? selected?.label : mobileLabel}</span>}<img src={downIcon} alt="" /></summary>
+    <summary aria-expanded={open} aria-label={`${label}: ${selected?.label ?? label}`} onClick={event => { event.preventDefault(); setOpen(current => !current) }}><span className={mobileLabel ? 'review-filter-desktop-label' : undefined}>{value ? selected?.label : label}</span>{mobileLabel && <span className="review-mobile-only">{value ? selected?.label : mobileLabel}</span>}<img src={downIcon} alt="" /></summary>
     <div className="review-dropdown-options" aria-label={label}>
       {options.map(option => <button key={option.value} type="button" aria-pressed={value === option.value} onClick={() => {
         onChange(option.value)
-        detailsRef.current.open = false
+        setOpen(false)
         detailsRef.current.querySelector('summary').focus()
       }}>{option.label}</button>)}
     </div>
@@ -48,9 +61,9 @@ function ReviewSummary({ data, onPhoto }) {
   return <section className="review-summary" aria-label="리뷰 요약">
     <p className="review-mobile-only review-mobile-total">총 {data.totalReviews}개 리뷰</p>
     <div className="review-summary-inner">
-      <div className="review-score"><strong>{data.reviewCount ? data.rating.toFixed(1) : '—'}</strong><Stars rating={Math.round(data.rating)} /></div>
+      <div className="review-score"><strong>{data.totalReviews ? data.rating.toFixed(1) : '—'}</strong><Stars rating={Math.round(data.rating)} /></div>
       <dl className="review-statistics">
-        {[["리뷰등록", data.reviewCount], ["포토리뷰", data.photoReviewCount], ["상품조회수", data.viewCount]].map(([label, count]) => <div key={label}><dt>{label}</dt><dd>{count}건</dd></div>)}
+        {[["리뷰등록", data.totalReviews], ["포토리뷰", data.photoReviewCount], ["상품조회수", data.viewCount]].map(([label, count]) => <div key={label}><dt>{label}</dt><dd>{count}건</dd></div>)}
       </dl>
       <div className="review-summary-divider" />
       <div className="review-breakdown"><h2>세부평가</h2><div className="review-rating-rows">
@@ -70,7 +83,7 @@ function ReviewSummary({ data, onPhoto }) {
 }
 
 function ReviewItem({ review, helpful, onHelpful, onPhoto }) {
-  return <article className="review-item">
+  return <article className={`review-item${review.photo ? '' : ' review-item--text-only'}`}>
     <div className="review-item-content">
       <div className="review-item-text">
         <div className="review-item-meta">
@@ -86,23 +99,10 @@ function ReviewItem({ review, helpful, onHelpful, onPhoto }) {
   </article>
 }
 
-function ReviewDialog({ dialogRef, photo, productName, onSubmit }) {
-  return <dialog className="review-dialog" ref={dialogRef} aria-label={photo ? '포토 리뷰 크게 보기' : '리뷰 작성'}>
-    <form method="dialog" className="review-dialog-close"><button aria-label="닫기">×</button></form>
-    {photo ? <img className="review-dialog-photo" src={photo.src} alt={photo.alt} /> : <form onSubmit={event => {
-      event.preventDefault()
-      const fields = new FormData(event.currentTarget)
-      onSubmit(fields)
-      event.currentTarget.reset()
-      dialogRef.current.close()
-    }}>
-      <h2>리뷰 작성</h2><p>{productName}</p><p className="review-draft-notice">작성한 리뷰는 현재 페이지에서만 표시됩니다.</p>
-      <label>닉네임<input name="nickname" required maxLength={20} /></label>
-      <label>별점<select name="rating" defaultValue="5">{[5, 4, 3, 2, 1].map(rating => <option key={rating} value={rating}>{rating}점</option>)}</select></label>
-      <label>제목<input name="title" required maxLength={80} /></label>
-      <label>내용<textarea name="body" required maxLength={2000} rows={5} /></label>
-      <button className="review-outline-button" type="submit">리뷰 등록</button>
-    </form>}
+function ReviewDialog({ dialogRef, productId, onSubmit }) {
+  return <dialog className="review-dialog review-dialog--compose" ref={dialogRef} aria-label="리뷰 작성">
+      <header className="review-composer-header"><h2>리뷰 작성</h2><button type="button" aria-label="리뷰 작성 닫기" onClick={() => dialogRef.current.close()}>×</button></header>
+      <ReviewComposer productId={productId} onSubmit={review => { onSubmit(review); dialogRef.current.close() }} />
   </dialog>
 }
 
@@ -115,17 +115,25 @@ export function Review({ data }) {
   const [photo, setPhoto] = useState(null)
   const listRef = useRef(null)
   const dialogRef = useRef(null)
+  const photoDialogRef = useRef(null)
+  const photoReviews = getPhotoReviews([...localReviews, ...data.reviews])
+  const selectedPhotoReview = photo && photoReviews.find(entry => entry.photos.some(image => image.src === photo.src))
+  const selectedReview = selectedPhotoReview && [...localReviews, ...data.reviews].find(review => review.id === selectedPhotoReview.reviewId)
+  const previewPhotos = data.photoReviews.flatMap(image => {
+    const entry = photoReviews.find(review => review.photos.some(photo => photo.src === image.src))
+    return entry ? [{ ...entry, ...image }] : []
+  })
   const filteredReviews = useMemo(() => [...localReviews, ...data.reviews].filter(review =>
     (tab !== 'photo' || review.photo) && (!filters.age || review.age === filters.age) &&
     (!filters.skinType || review.skinType === filters.skinType) && (!filters.concern || review.concern === filters.concern)
   ).sort((a, b) => (filters.sort === 'high' ? b.rating - a.rating : filters.sort === 'low' ? a.rating - b.rating : 0) || b.date.localeCompare(a.date)), [localReviews, data.reviews, tab, filters])
   const pageCount = Math.ceil(filteredReviews.length / PAGE_SIZE)
   const currentPage = Math.min(page, Math.max(1, pageCount))
-  const submitReview = fields => {
-    setLocalReviews(current => [{ id: crypto.randomUUID(), nickname: fields.get('nickname').trim(), title: fields.get('title').trim(), body: fields.get('body').trim(), rating: Number(fields.get('rating')), date: new Date().toLocaleDateString('sv-SE'), skinType: '미입력', concernLabel: '미입력', age: '미입력' }, ...current])
+  const submitReview = ({ rating, body, photos }) => {
+    setLocalReviews(current => [{ id: crypto.randomUUID(), productId: data.productId, nickname: '온결회원', title: body.split('\n')[0].slice(0, 40), body, rating, photos, photo: photos[0], date: new Date().toLocaleDateString('sv-SE'), skinType: '미입력', concernLabel: '미입력', age: '미입력' }, ...current])
     setTab('all'); setFilters({ age: '', skinType: '', concern: '', sort: 'latest' }); setPage(1)
   }
-  const openPhoto = nextPhoto => { setPhoto(nextPhoto); requestAnimationFrame(() => dialogRef.current.showModal()) }
+  const openPhoto = nextPhoto => { setPhoto(nextPhoto); requestAnimationFrame(() => photoDialogRef.current?.showModal()) }
   const updateFilter = (key, value) => { setFilters(current => ({ ...current, [key]: value })); setPage(1) }
   const selectTab = next => { setTab(next); setPage(1) }
   const turnPage = next => { setPage(next); listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
@@ -134,20 +142,24 @@ export function Review({ data }) {
 
   return <main className="review-page" aria-label={`${data.productName} 리뷰`}>
     <div className="review-container">
-      <div className="review-section-heading"><h1><span className="review-heading-desktop-label">고객 리뷰</span><span className="review-mobile-only">리뷰</span><span>({data.totalReviews + localReviews.length})</span></h1><span className="review-mobile-only review-mobile-rating" aria-label={`평점 ${data.rating}점`}><img src={mobileRatingStar} alt="" />{data.reviewCount ? data.rating.toFixed(1) : '—'}</span><button className="review-outline-button" type="button" onClick={() => { setPhoto(null); requestAnimationFrame(() => dialogRef.current.showModal()) }}>리뷰 작성</button></div>
+      <div className="review-section-heading"><h1><span className="review-heading-desktop-label">고객 리뷰</span><span className="review-mobile-only">리뷰</span><span>({data.totalReviews})</span></h1><span className="review-mobile-only review-mobile-rating" aria-label={`평점 ${data.rating}점`}><img src={mobileRatingStar} alt="" />{data.totalReviews ? data.rating.toFixed(1) : '—'}</span><button className="review-outline-button" type="button" onClick={() => { setPhoto(null); requestAnimationFrame(() => dialogRef.current.showModal()) }}>리뷰 작성</button></div>
       <ReviewSummary data={data} onPhoto={openPhoto} />
       <div className="review-body">
         <section className="review-photo-section" aria-labelledby="review-photo-heading">
-          <div className="review-section-heading"><h2 id="review-photo-heading">포토 리뷰 <span>({data.totalReviews})</span></h2><button className="review-view-all" type="button" onClick={() => { selectTab('photo'); listRef.current.scrollIntoView({ behavior: 'smooth' }) }}>전체보기<img src={rightIcon} alt="" /></button></div>
-          <div className="review-photo-strip">{data.photoReviews.slice(0, 6).map(item => <button key={item.id} type="button" onClick={() => openPhoto(item)}><img src={item.src} alt={item.alt} /></button>)}</div>
+          <div className="review-section-heading"><h2 id="review-photo-heading">포토 리뷰 <span>({data.photoReviewCount})</span></h2><Link className="review-view-all" to="photos" style={{ textDecoration: 'none', color: 'inherit' }}>전체보기<img src={rightIcon} alt="" /></Link></div>
+          <div className="review-photo-strip">{previewPhotos.slice(0, 6).map(item => <button key={item.id} type="button" onClick={() => openPhoto(item)}><img src={item.src} alt={item.alt} /></button>)}</div>
         </section>
         <div className="review-tabs" aria-label="리뷰 종류">{[['all', '전체리뷰'], ['photo', '포토리뷰']].map(([value, label]) => <button key={value} type="button" aria-pressed={tab === value} onClick={() => selectTab(value)}>{label}</button>)}</div>
-        <button className="review-mobile-only review-mobile-photo-filter" type="button" aria-pressed={tab === 'photo'} onClick={() => selectTab(tab === 'photo' ? 'all' : 'photo')}>포토리뷰</button>
         <div className="review-filters">
-          <Dropdown label="연령대" value={filters.age} options={options(['10대', '20대', '30대', '40대', '50대 이상'])} onChange={value => updateFilter('age', value)} />
-          <Dropdown label="피부타입별" mobileLabel="피부타입" value={filters.skinType} options={options(['건성', '지성', '수부지', '복합성', '민감성'])} onChange={value => updateFilter('skinType', value)} />
-          <Dropdown label="피부고민별" mobileLabel="피부고민" value={filters.concern} options={[{ label: '전체', value: '' }, ...skinConcerns.map(item => ({ value: item.id, label: concernLabel(item.id) }))]} onChange={value => updateFilter('concern', value)} />
-          <Dropdown label="정렬" value={filters.sort} options={[{ value: 'latest', label: '최신순' }, { value: 'high', label: '별점 높은순' }, { value: 'low', label: '별점 낮은순' }]} onChange={value => updateFilter('sort', value)} />
+          <Dropdown kind="age" label="연령대" value={filters.age} options={options(['10대', '20대', '30대', '40대', '50대 이상'])} onChange={value => updateFilter('age', value)} />
+          <div className="review-filter-row review-filter-row--secondary">
+            <Dropdown kind="skin" label="피부타입별" mobileLabel="피부타입" value={filters.skinType} options={options(['건성', '지성', '수부지', '복합성', '민감성'])} onChange={value => updateFilter('skinType', value)} />
+            <Dropdown kind="concern" label="피부고민별" mobileLabel="피부고민" value={filters.concern} options={[{ label: '전체', value: '' }, ...skinConcerns.map(item => ({ value: item.id, label: concernLabel(item.id) }))]} onChange={value => updateFilter('concern', value)} />
+          </div>
+          <div className="review-filter-row review-filter-row--primary">
+            <Dropdown kind="sort" label="정렬" value={filters.sort} options={[{ value: 'latest', label: '최신순' }, { value: 'high', label: '별점 높은순' }, { value: 'low', label: '별점 낮은순' }]} onChange={value => updateFilter('sort', value)} />
+            <button className="review-mobile-only review-mobile-photo-filter" type="button" aria-pressed={tab === 'photo'} onClick={() => selectTab(tab === 'photo' ? 'all' : 'photo')}>포토리뷰</button>
+          </div>
         </div>
         <section className="review-list" ref={listRef} aria-label="고객 리뷰 목록" aria-live="polite">
           {filteredReviews.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE).map(review => <ReviewItem key={review.id} review={review} helpful={helpfulIds.has(review.id)} onHelpful={() => setHelpfulIds(current => { const next = new Set(current); if (next.has(review.id)) next.delete(review.id); else next.add(review.id); return next })} onPhoto={openPhoto} />)}
@@ -160,7 +172,8 @@ export function Review({ data }) {
         <button type="button" disabled={currentPage === pageCount} aria-label="다음 페이지" onClick={() => turnPage(currentPage + 1)}><img src={paginationIcon} alt="" /></button>
       </nav>}
     </div>
-    <ReviewDialog dialogRef={dialogRef} photo={photo} productName={data.productName} onSubmit={submitReview} />
+    <ReviewDialog dialogRef={dialogRef} productId={data.productId} onSubmit={submitReview} />
+    <PhotoReviewDialog key={`${selectedPhotoReview?.reviewId}:${photo?.src}`} dialogRef={photoDialogRef} selectedPhoto={selectedPhotoReview && { ...selectedPhotoReview, src: photo.src }} selectedReview={selectedReview} />
   </main>
 }
 

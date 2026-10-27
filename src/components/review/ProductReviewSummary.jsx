@@ -17,11 +17,11 @@ export default function ProductReviewSummary({ productId }) {
     </div>
     <div className="product-review-summary__content">
       <div className="product-review-summary__score">
-        <strong>{data.reviewCount ? data.rating.toFixed(1) : '—'}</strong>
-        {data.reviewCount > 0 && <img src={starsIcon} alt={`평점 ${data.rating}점`} />}
+        <strong>{data.totalReviews ? data.rating.toFixed(1) : '—'}</strong>
+        {data.totalReviews > 0 && <img src={starsIcon} alt={`평점 ${data.rating}점`} />}
       </div>
       <dl className="product-review-summary__stats">
-        {[["리뷰등록", data.reviewCount], ["포토리뷰", data.photoReviewCount], ["상품조회수", data.viewCount]].map(([label, count]) => <div key={label}><dt>{label}</dt><dd>{count}건</dd></div>)}
+        {[["리뷰등록", data.totalReviews], ["포토리뷰", data.photoReviewCount], ["상품조회수", data.viewCount]].map(([label, count]) => <div key={label}><dt>{label}</dt><dd>{count}건</dd></div>)}
       </dl>
       <div className="product-review-summary__ratings">
         <h3>세부평가</h3>
