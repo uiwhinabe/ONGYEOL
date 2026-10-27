@@ -1,0 +1,234 @@
+.ongyeol-detail { box-sizing: border-box; width: 100%; max-width: 1120px; padding: 100px 40px 160px; margin: 0 auto; color: #111; background: #fff; color-scheme: light; font: 14px/1.6 'Ongyeol Footer Noto Sans KR', sans-serif; text-align: left; letter-spacing: normal; }
+.ongyeol-detail * { box-sizing: border-box; }
+.ongyeol-detail button, .ongyeol-detail input, .ongyeol-detail select { font: inherit; }
+.ongyeol-detail button { cursor: pointer; }
+.ongyeol-detail button:disabled { cursor: not-allowed; }
+.ongyeol-detail :focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+.ongyeol-detail__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; }
+.ongyeol-detail__hero { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; }
+.ongyeol-detail__thumbnails { display: flex; justify-content: center; gap: 16px; margin-top: 20px; }
+.ongyeol-detail__thumbnails button { width: 80px; height: 80px; padding: 0; border: 1px solid transparent; background: #fff; }
+.ongyeol-detail__thumbnails button[aria-pressed='true'] { border-color: #111; }
+.ongyeol-detail__thumbnails img { width: 100%; height: 100%; object-fit: contain; }
+.ongyeol-detail__summary h1 { margin: 0 0 30px; font: 700 24px/1.4 'Ongyeol Footer Noto Sans KR', sans-serif; color: #111; letter-spacing: normal; }
+.ongyeol-detail__english { font-size: 12px; }
+.ongyeol-detail__prices { display: grid; grid-template-columns: max-content 1fr; column-gap: 30px; row-gap: 12px; margin: 0 0 30px; }
+.ongyeol-detail__prices dt { color: #666; }
+.ongyeol-detail__prices dd { margin: 0; }
+.ongyeol-detail__prices del { color: #aaa; }
+.ongyeol-detail__discount { margin-left: 12px; color: #ed0000; }
+.ongyeol-detail__quantity { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 16px; background: #eee; }
+.ongyeol-detail__quantity div { display: flex; }
+.ongyeol-detail__quantity button { border: 1px solid #ddd; background: #fff; width: 28px; padding: 0; }
+.ongyeol-detail__quantity input { width: 42px; min-width: 0; border: 1px solid #ddd; text-align: center; }
+.ongyeol-detail__total { display: flex; justify-content: space-between; padding: 20px 0; }
+.ongyeol-detail__purchase { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ongyeol-detail__purchase button { border: 1px solid #ddd; background: #eee; color: #111; padding: 10px 4px; }
+.ongyeol-detail__purchase button:first-child { background: #03c75a; border-radius: 24px; }
+.ongyeol-detail__purchase button:last-child { background: #111; color: white; }
+.ongyeol-detail__notice { margin-top: 12px; color: #777; font-size: 12px; }
+.ongyeol-detail__facts { border-top: 1px solid #ddd; margin-top: 24px; }
+.ongyeol-detail__section { margin-top: 100px; scroll-margin-top: 130px; }
+.ongyeol-detail__tabs { display: flex; justify-content: center; gap: 70px; border-bottom: 1px solid #ddd; margin-bottom: 30px; }
+.ongyeol-detail__tabs a { padding: 12px 8px; color: #777; text-decoration: none; border-bottom: 1px solid transparent; }
+.ongyeol-detail__tabs a[aria-current] { color: #111; border-bottom-color: #111; }
+.ongyeol-detail__section h2 { font: 700 14px/1.6 'Ongyeol Footer Noto Sans KR', sans-serif; color: #111; letter-spacing: normal; }
+.ongyeol-detail__review-summary { display: grid; justify-items: center; padding: 28px; }
+.ongyeol-detail__review-summary strong { font-size: 32px; }
+.ongyeol-detail__review-summary span { color: #ffc400; font-size: 20px; }
+.ongyeol-detail__review-summary p { font-size: 12px; color: #777; }
+.ongyeol-detail__pending { padding: 60px 20px; background: #f6f6f6; text-align: center; color: #777; }
+.ongyeol-detail__content { max-width: 740px; margin: auto; }
+.ongyeol-detail__content img { display: block; width: 100%; height: auto; }
+@media (max-width: 834px) { .ongyeol-detail { padding: 48px 20px 100px; } .ongyeol-detail__top { gap: 28px; } }
+@media (max-width: 599px) { .ongyeol-detail__top { grid-template-columns: minmax(0, 1fr); } .ongyeol-detail__tabs { gap: 28px; } .ongyeol-detail__section { margin-top: 60px; } }
+
+/* Original product-detail upper layout. */
+.ongyeol-detail__top { align-items: start; }
+.ongyeol-detail__hero { object-fit: cover; }
+.ongyeol-detail--odi-toner .ongyeol-detail__hero,
+.ongyeol-detail--odi-toner .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--odi-cream .ongyeol-detail__hero,
+.ongyeol-detail--odi-cream .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--odi-balm .ongyeol-detail__hero,
+.ongyeol-detail--odi-balm .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--odi-mask .ongyeol-detail__hero,
+.ongyeol-detail--odi-mask .ongyeol-detail__thumbnails img { object-fit: contain; }
+.ongyeol-detail--vitamin-toner .ongyeol-detail__hero,
+.ongyeol-detail--vitamin-toner .ongyeol-detail__thumbnails img { object-fit: cover; }
+.ongyeol-detail__thumbnails { align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; }
+.ongyeol-detail__thumbnails .ongyeol-detail__thumbnail { position: relative; width: 24%; height: auto; aspect-ratio: 1; border: 0; cursor: pointer; }
+.ongyeol-detail__thumbnail::after { content: ''; position: absolute; inset: 0; border: 1px solid transparent; pointer-events: none; }
+.ongyeol-detail__thumbnail:hover::after,
+.ongyeol-detail__thumbnail[aria-pressed='true']::after { border-color: #333333; }
+.ongyeol-detail__thumbnails img { display: block; object-fit: cover; }
+.ongyeol-detail__thumbnails .ongyeol-detail__arrow { flex: 0 0 12px; width: 12px; height: auto; border: 0; color: #111; font-size: 18px; }
+.ongyeol-detail__summary h1 { margin: 0; }
+.ongyeol-detail__description { margin: 4px 0 30px; font-size: 14px; color: #111; }
+.ongyeol-detail__english { margin: 0; font-size: 14px; }
+.ongyeol-detail__shipping { display: flex; gap: 30px; margin: 34px 0 12px; color: #666; font-size: 13px; }
+.ongyeol-detail__coupon { background: #ffe1e3; text-align: center; padding: 5px 8px; border-radius: 3px; margin-bottom: 38px; font-size: 13px; }
+.ongyeol-detail__coupon span { color: #ed8c93; }
+.ongyeol-detail__quantity { background: #d9d9d9; border-radius: 3px; min-height: 82px; }
+.ongyeol-detail__quantity button, .ongyeol-detail__quantity input { flex: 0 0 24px; width: 24px; height: 24px; margin: 0; padding: 0; border: 1px solid #ddd; border-radius: 0; background: #fff; color: #111; font-size: 12px; line-height: 22px; text-align: center; }
+.ongyeol-detail__quantity input { width: 24px; appearance: textfield; }
+.ongyeol-detail__quantity input::-webkit-inner-spin-button, .ongyeol-detail__quantity input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.ongyeol-detail__total { padding: 0; margin: 24px 0 38px; }
+.ongyeol-detail__purchase { display: flex; justify-content: center; align-items: center; gap: 20px; }
+.ongyeol-detail__purchase button { padding: 12px 4px; width: 28%; border-radius: 3px; font-size: 13px; background: #d9d9d9; }
+.ongyeol-detail__purchase button:first-child { background: transparent; border: 0; border-radius: 24px; width: 20%; padding: 0; }
+.ongyeol-detail__purchase button:first-child img { display: block; width: 100%; height: auto; }
+.ongyeol-detail__purchase button:last-child { background: #000; }
+.ongyeol-detail--tablet .ongyeol-detail__purchase button:not(:first-child),
+.ongyeol-detail--mobile .ongyeol-detail__purchase button:not(:first-child) {
+  width: 138px;
+  flex: 0 1 138px;
+}
+.ongyeol-detail--tablet .ongyeol-detail__purchase button:first-child,
+.ongyeol-detail--mobile .ongyeol-detail__purchase button:first-child {
+  width: 98px;
+  flex: 0 1 98px;
+}
+.ongyeol-detail__fact { display: grid; grid-template-columns: 80px minmax(0, 1fr) 12px; align-items: center; padding: 10px 0; font-size: 13px; }
+.ongyeol-detail__fact > span:first-child, .ongyeol-detail__fact > span:last-child { color: #999; }
+#product-questions { width: 100%; max-width: 1000px; margin-inline: auto; }
+.ongyeol-detail__section .ongyeol-detail__tabs { position: static; width: 100%; max-width: 1000px; gap: 0; margin: 0 auto 68px; }
+#product-reviews > h2 { width: 100%; max-width: 1000px; margin-inline: auto; text-align: left; }
+.ongyeol-detail__section .ongyeol-detail__tabs a { width: 23.5%; padding: 10px 8px; text-align: center; font-size: 18px; cursor: pointer; }
+.ongyeol-detail__qa-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.ongyeol-detail__qa-heading h2 { margin: 0; font-size: 18px; }
+.ongyeol-detail__qa-heading > div { display: flex; gap: 5px; }
+.ongyeol-detail__qa-heading button { padding: 6px 8px; border: 1px solid #aaa; border-radius: 3px; background: #fff; color: #111; font-size: 12px; }
+.ongyeol-detail__qa-empty { display: flex; align-items: center; justify-content: center; min-height: 125px; border-radius: 8px; background: #dedede; color: #111; font-size: 14px; }
+.ongyeol-detail__mobile-pager { display: none; }
+
+/* Detail body only: keep the existing desktop and phone layouts intact. */
+/* Applied from visible browser width, including zoomed desktop windows. */
+.ongyeol-detail--tablet {
+    padding: 48px 32px 100px;
+  }
+  .ongyeol-detail--tablet .ongyeol-detail__top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+  .ongyeol-detail--tablet .ongyeol-detail__gallery,
+  .ongyeol-detail--tablet .ongyeol-detail__summary {
+    width: 100%;
+    max-width: 640px;
+    min-width: 0;
+    margin-inline: auto;
+  }
+  .ongyeol-detail--tablet .ongyeol-detail__summary h1,
+  .ongyeol-detail--tablet .ongyeol-detail__english,
+  .ongyeol-detail--tablet .ongyeol-detail__description {
+    overflow-wrap: anywhere;
+  }
+
+
+  .ongyeol-detail--tablet .ongyeol-detail__prices dd { min-width: 0; }
+
+  .ongyeol-detail--tablet .ongyeol-detail__shipping > span { flex-shrink: 0; }
+
+  .ongyeol-detail--tablet .ongyeol-detail__quantity > div { flex-shrink: 0; }
+  .ongyeol-detail--tablet .ongyeol-detail__quantity > strong,
+  .ongyeol-detail--tablet .ongyeol-detail__total > strong { white-space: nowrap; }
+
+
+  .ongyeol-detail--tablet .ongyeol-detail__fact > span:nth-child(2) { overflow-wrap: anywhere; }
+  .ongyeol-detail--tablet .ongyeol-detail__section { margin-top: 80px; }
+  .ongyeol-detail--tablet .ongyeol-detail__section .ongyeol-detail__tabs { margin-bottom: 40px; }
+  .ongyeol-detail--tablet .ongyeol-detail__section .ongyeol-detail__tabs a {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    font-size: 16px;
+  }
+  .ongyeol-detail--tablet .ongyeol-detail__review-summary { min-width: 0; padding: 24px 16px; }
+  .ongyeol-detail--tablet .ongyeol-detail__review-summary p { text-align: center; overflow-wrap: anywhere; }
+  .ongyeol-detail--tablet .ongyeol-detail__content { width: 100%; max-width: 740px; }
+  .ongyeol-detail--tablet .ongyeol-detail__content img { max-width: 100%; }
+  .ongyeol-detail--tablet .ongyeol-detail__qa-heading { gap: 16px; }
+  .ongyeol-detail--tablet .ongyeol-detail__qa-heading > div { flex-shrink: 0; }
+
+/* Mobile detail body. Product data and the long description media are unchanged. */
+.ongyeol-detail--mobile { padding: 48px 24px 100px; }
+.ongyeol-detail--mobile .ongyeol-detail__top {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+}
+.ongyeol-detail--mobile .ongyeol-detail__gallery {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  touch-action: pan-y pinch-zoom;
+}
+.ongyeol-detail--mobile .ongyeol-detail__thumbnails { display: none; }
+.ongyeol-detail--mobile .ongyeol-detail__mobile-pager {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 92px;
+  height: 28px;
+  padding: 0 4px;
+  border-radius: 16px;
+  background: #ffe1e3;
+  color: #555;
+  transform: translateX(-50%);
+  font-size: 11px;
+}
+.ongyeol-detail__mobile-pager button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+}
+.ongyeol-detail--mobile .ongyeol-detail__summary { width: 100%; min-width: 0; }
+.ongyeol-detail--mobile .ongyeol-detail__english { font-size: 12px; overflow-wrap: anywhere; }
+.ongyeol-detail--mobile .ongyeol-detail__summary h1 { font-size: 20px; overflow-wrap: anywhere; }
+.ongyeol-detail--mobile .ongyeol-detail__description {
+  margin: 4px 0 30px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.ongyeol-detail--mobile .ongyeol-detail__prices { gap: 12px 30px; margin-bottom: 30px; font-size: 13px; }
+.ongyeol-detail--mobile .ongyeol-detail__prices dd { min-width: 0; }
+.ongyeol-detail--mobile .ongyeol-detail__shipping { gap: 30px; margin: 34px 0 12px; font-size: 11px; }
+.ongyeol-detail--mobile .ongyeol-detail__shipping > span { flex-shrink: 0; }
+.ongyeol-detail--mobile .ongyeol-detail__coupon { margin-bottom: 38px; padding: 5px 8px; font-size: 11px; }
+.ongyeol-detail--mobile .ongyeol-detail__quantity { min-height: 58px; padding: 20px 16px; font-size: 13px; }
+.ongyeol-detail--mobile .ongyeol-detail__quantity > div { flex-shrink: 0; }
+.ongyeol-detail--mobile .ongyeol-detail__quantity > strong,
+.ongyeol-detail--mobile .ongyeol-detail__total > strong { white-space: nowrap; }
+.ongyeol-detail--mobile .ongyeol-detail__total { margin: 24px 0 38px; font-size: 13px; }
+
+
+.ongyeol-detail--mobile .ongyeol-detail__fact { grid-template-columns: 64px minmax(0, 1fr) 10px; font-size: 11px; }
+.ongyeol-detail--mobile .ongyeol-detail__fact > span:nth-child(2) { overflow-wrap: anywhere; }
+.ongyeol-detail--mobile .ongyeol-detail__section { margin-top: 80px; }
+.ongyeol-detail--mobile .ongyeol-detail__section .ongyeol-detail__tabs { gap: 0; margin-bottom: 32px; }
+.ongyeol-detail--mobile .ongyeol-detail__section .ongyeol-detail__tabs a {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  padding: 10px 4px;
+  font-size: 13px;
+}
+.ongyeol-detail--mobile #product-reviews > h2 { font-size: 18px; }
+.ongyeol-detail--mobile .ongyeol-detail__review-summary { min-width: 0; padding: 20px 8px; }
+.ongyeol-detail--mobile .ongyeol-detail__review-summary p { text-align: center; overflow-wrap: anywhere; }
+.ongyeol-detail--mobile .ongyeol-detail__qa-heading { gap: 12px; }
+.ongyeol-detail--mobile .ongyeol-detail__qa-heading h2 { font-size: 16px; }
+.ongyeol-detail--mobile .ongyeol-detail__qa-heading > div { flex-shrink: 0; }
+.ongyeol-detail--mobile .ongyeol-detail__qa-heading button { padding: 5px 6px; font-size: 10px; }
+.ongyeol-detail--mobile .ongyeol-detail__qa-empty { min-height: 160px; font-size: 12px; }

@@ -51,18 +51,18 @@ export default function MemberDropdown({ open, onClose, onPointerEnter, onPointe
     }
   }, [open, onClose, anchorRef])
 
-  const handleItemClick = (event) => {
+  const handleItemClick = (event, name) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     flushSync(onClose)
-    if (!isAuthenticated && onLogin) {
+    if (name !== 'mypage' && !isAuthenticated && onLogin) {
       event.preventDefault()
       onLogin()
     }
   }
   const item = (name, label) => {
-    const href = isAuthenticated ? links[name] : '/login'
+    const href = name === 'mypage' || isAuthenticated ? links[name] : '/login'
     return href
-      ? <Link className="ongyeol-member-item" to={href} onClick={handleItemClick}>{label}</Link>
+      ? <Link className="ongyeol-member-item" to={href} onClick={event => handleItemClick(event, name)}>{label}</Link>
       : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
   }
   const logout = () => {

@@ -1,0 +1,28 @@
+/* Reset native button decoration below the existing per-control styles. */
+:where(.ongyeol-mypage button.mp-screen-action) {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  text-align: inherit;
+}
+/* Buttons inherit the typography and geometry of the previous links. */
+.ongyeol-mypage-menu button,
+.ongyeol-mypage h1 > button {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+.ongyeol-mypage-menu button:focus-visible,
+.ongyeol-mypage h1 > button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
+}

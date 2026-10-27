@@ -1,6 +1,7 @@
 import { useLayoutEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './Signup.css'
+import './AuthFonts.css'
 
 const agreements = [
   '(필수) 이용약관에 동의합니다.',

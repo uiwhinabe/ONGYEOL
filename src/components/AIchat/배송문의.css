@@ -1,0 +1,36 @@
+/* Shared inquiry button appearance; existing ChatStart sizes and positions stay in place. */
+.ongyeol-inquiry .ongyeol-inquiry-choice.ongyeol-inquiry-choice { border: 1px solid #919191; border-radius: 20px; background: #fff; color: #000; animation: none; transform: translateY(0); transition: none; }
+.ongyeol-inquiry .ongyeol-inquiry-choice.ongyeol-inquiry-choice:hover:not(:disabled) { border-color: #919191; background: #f0f0f0; color: #515151; box-shadow: -2px -2px 7.5px rgba(196, 196, 196, 0.25), 2px 2px 7.5px rgba(196, 196, 196, 0.25); animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+.ongyeol-inquiry .ongyeol-inquiry-choice.ongyeol-inquiry-choice:active:not(:disabled) { background: #dadada; color: #383838; }
+.ongyeol-delivery-content { position: absolute; left: 40px; top: 144px; display: flex; flex-direction: column; align-items: flex-end; gap: 32px; width: 340px; }
+.ongyeol-delivery-request { padding: 8px 10px; border-radius: 15px; background: rgba(155, 155, 155, 0.2); white-space: nowrap; }
+.ongyeol-delivery-answer { display: flex; flex-direction: column; gap: 50px; width: 100%; }
+.ongyeol-delivery-message { display: flex; align-items: flex-start; gap: 10px; width: 100%; }
+.ongyeol-delivery-copy { display: flex; flex: none; flex-direction: column; gap: 6px; width: 300px; }
+.ongyeol-delivery-copy p { white-space: pre-line; }
+.ongyeol-delivery .ongyeol-delivery-choice { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 150px; height: 42px; padding: 0 20px; line-height: 20px; white-space: nowrap; }
+.ongyeol-delivery-choices--menu { display: grid; grid-template-columns: repeat(2, 150px); gap: 10px; align-self: center; }
+.ongyeol-delivery-choices--menu .ongyeol-delivery-return { grid-column: 1 / -1; justify-self: center; }
+.ongyeol-delivery .ongyeol-delivery-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 340px; height: 48px; padding: 0; border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: "Noto Sans KR", "Noto Sans", sans-serif; line-height: 20px; }
+.ongyeol-delivery-action-group { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ongyeol-delivery .ongyeol-delivery-action { transform: translateY(0); transition: none; }
+.ongyeol-delivery .ongyeol-delivery-action:hover:not(:disabled) { animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+.ongyeol-delivery-login-note { display: flex; align-items: center; gap: 5px; color: #000c; font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 12px; line-height: 16px; }
+.ongyeol-delivery-login-note img { display: block; flex: none; }
+.ongyeol-delivery .ongyeol-inquiry-composer { top: 612px; }
+.ongyeol-delivery--menu .ongyeol-delivery-content { left: 36px; top: 147px; width: 349px; gap: 26px; }
+.ongyeol-delivery--menu .ongyeol-delivery-request { margin-bottom: 10px; }
+.ongyeol-delivery--menu .ongyeol-delivery-message { align-items: center; gap: 7px; }
+.ongyeol-delivery--menu .ongyeol-delivery-copy { width: 310px; }
+.ongyeol-delivery--tracking .ongyeol-delivery-request,
+.ongyeol-delivery--duration .ongyeol-delivery-request { padding: 10px; }
+.ongyeol-delivery--duration .ongyeol-delivery-content { left: 37px; width: 347px; }
+.ongyeol-delivery--duration .ongyeol-delivery-message { gap: 13px; }
+.ongyeol-delivery--fee .ongyeol-delivery-content { gap: 34px; }
+.ongyeol-delivery--fee .ongyeol-delivery-request { background: rgba(0, 0, 0, 0.2); }
+.ongyeol-delivery--fee .ongyeol-delivery-copy { gap: 0; }
+.ongyeol-delivery--address .ongyeol-delivery-content { gap: 30px; }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-delivery .ongyeol-delivery-action:hover:not(:disabled) { animation: none; transform: translateY(0); }
+  .ongyeol-inquiry .ongyeol-inquiry-choice.ongyeol-inquiry-choice:hover:not(:disabled) { animation: none; transform: translateY(0); }
+}

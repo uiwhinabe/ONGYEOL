@@ -1,0 +1,11 @@
+.ongyeol-chat-skin-guide-type-detail-content { position: absolute; left: 40px; top: 132px; display: flex; flex-direction: column; align-items: flex-start; gap: 50px; width: 340px; }
+.ongyeol-chat-skin-guide-type-detail-message { display: flex; align-items: flex-start; gap: 10px; width: 100%; }
+.ongyeol-chat-skin-guide-type-detail-copy { display: flex; flex-direction: column; gap: 24px; flex: none; width: 300px; font-size: 15px; line-height: 20px; }
+.ongyeol-chat-skin-guide-type-detail .ongyeol-chat-skin-guide-type-detail-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 340px; height: 48px; padding: 0;  border-radius: 15px; background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); color: #000c; font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 15px; line-height: 20px; transform: translateY(0); transition: none; }
+.ongyeol-chat-skin-guide-type-detail .ongyeol-chat-skin-guide-type-detail-action:not(:disabled) { cursor: pointer; }
+.ongyeol-chat-skin-guide-type-detail .ongyeol-chat-skin-guide-type-detail-action:hover:not(:disabled) { background: #f6eaea; animation: ongyeol-inquiry-button-pop 0.4s ease-in-out 1; }
+.ongyeol-chat-skin-guide-type-detail .ongyeol-chat-skin-guide-type-detail-action:active:not(:disabled) { background: #ecd4d4; }
+.ongyeol-chat-skin-guide-type-detail .ongyeol-inquiry-composer { left: 22px; top: 646px; }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-chat-skin-guide-type-detail .ongyeol-chat-skin-guide-type-detail-action:hover:not(:disabled) { animation: none; transform: translateY(0); }
+}

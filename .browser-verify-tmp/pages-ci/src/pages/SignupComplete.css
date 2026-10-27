@@ -1,0 +1,99 @@
+.ongyeol-signup-complete {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  /* Header stays 30px + 80px at every breakpoint; preserve the desktop Figma spacing. */
+  min-height: max(879px, calc(100vh - 110px));
+  min-height: max(879px, calc(100dvh - 110px));
+  padding: 120px 20px 462px;
+  background: #fff;
+  color: #000;
+  color-scheme: light;
+  font: 500 14px/17px 'Inter', Arial, 'Ongyeol Footer Noto Sans KR', sans-serif;
+  letter-spacing: normal;
+  text-align: center;
+}
+.ongyeol-signup-complete-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.ongyeol-signup-complete-title {
+  width: 100%;
+  margin: 0;
+  color: inherit;
+  font: 700 30px/36px 'Inter', Arial, 'Ongyeol Footer Noto Sans KR', sans-serif;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+.ongyeol-signup-complete-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+}
+.ongyeol-signup-complete-description {
+  width: 100%;
+  max-width: 380px;
+  margin: 0;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.ongyeol-signup-complete-coupon {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 70px;
+  padding: 12px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+.ongyeol-signup-complete-present { display: block; flex: none; width: 32px; height: 32px; }
+.ongyeol-signup-complete-coupon p { margin: 0; font-size: 20px; line-height: 24px; word-break: keep-all; }
+.ongyeol-signup-complete-actions { display: flex; gap: 24px; width: 100%; max-width: 380px; }
+.ongyeol-signup-complete-button {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 45px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 5px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 18px;
+  text-decoration: none;
+}
+.ongyeol-signup-complete-home { background: #1d1d1d; color: #fff; cursor: pointer; }
+.ongyeol-signup-complete-home:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.ongyeol-signup-complete-coupon-button { border: 1px solid #000; }
+.ongyeol-signup-complete-coupon-button:disabled { background: #fff; color: #000; opacity: 1; cursor: not-allowed; }
+@media (min-width: 600px) and (max-width: 1359px) {
+  .ongyeol-signup-complete {
+    min-height: max(517px, calc(100vh - 110px));
+    min-height: max(517px, calc(100dvh - 110px));
+    padding-bottom: clamp(100px, calc(100vw - 898px), 462px);
+  }
+}
+@media (max-width: 599px) {
+  .ongyeol-signup-complete {
+    min-height: calc(100vh - 110px);
+    min-height: calc(100dvh - 110px);
+    padding: 100px 20px 63px;
+  }
+  .ongyeol-signup-complete-title { font-size: 26px; line-height: 34px; }
+  .ongyeol-signup-complete-coupon p { font-size: 15px; line-height: 22px; }
+  .ongyeol-signup-complete-actions { max-width: 280px; gap: 12px; }
+  .ongyeol-signup-complete-button { font-size: 13px; }
+}

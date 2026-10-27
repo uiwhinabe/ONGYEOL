@@ -1,0 +1,27 @@
+.ongyeol-mypage-screens .mp-account-help .mp-view-123 > .mp-view-62:has(> [data-name='이름']),
+.ongyeol-mypage-screens .mp-account-help .mp-view-123 > .mp-view-62:has(> [data-name='이름']) ~ :not(.mp-view-195) {
+  /* Hide name through address, including their separators, only in help.
+     Keep the mounted fields and layout so values and popup geometry survive. */
+  visibility: hidden;
+}
+
+@media (min-width: 768px) and (max-width: 1432px) {
+  .ongyeol-mypage-screens:has(.mp-account-tablet) { padding-top: 15px; }
+
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-account-tablet { width: 100%; overflow: visible; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-123 { width: 100%; }
+  .ongyeol-mypage-screens :is(.mp-account-basic, .mp-account-email) .mp-view-123 { gap: 20px; }
+  .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-account-password, .mp-account-help) { gap: 20px; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-131 { width: calc(100% - 115px); min-width: 0; }
+  .ongyeol-mypage-screens .mp-account-tablet :is(.mp-view-183, .mp-view-187) { width: 130px; }
+  .ongyeol-mypage-screens .mp-account-password .mp-view-183 { width: 110px; }
+  .ongyeol-mypage-screens .mp-account-help .mp-view-187 { width: 109px; }
+  /* Keep the Figma address column width while allowing the whole address to wrap. */
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-131 > .mp-view-137 { align-items: flex-start; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-180 { height: auto; min-height: 35px; padding-block: 7px; overflow: visible; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-181 { height: auto; min-height: 19px; width: 100%; overflow: visible; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-182 { position: static; white-space: normal; overflow-wrap: anywhere; line-height: 20px; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-213 { width: 100%; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-188 { left: 393px; top: 486px; z-index: 2; }
+  .ongyeol-mypage-screens .mp-account-tablet .mp-view-195 { left: 268px; top: 142px; z-index: 2; }
+}

@@ -2,14 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import './Contact Us.css'
 
 const inquiryTypes = ['주문/결제', '배송', '교환/반품', '상품', '기타 문의']
-const sidebarGroups = [
-  ['쇼핑정보', ['주문목록/배송조회', '취소/반품/교환 내역', '환불/입금 내역', '배송지 관리']],
-  ['나의 피부 정보', ['나의 피부 정보']],
-  ['혜택관리', ['쿠폰함']],
-  ['나의 게시글', ['나의 상품문의', '나의 상품후기']],
-  ['고객센터', ['1:1 문의']],
-  ['회원정보', ['회원정보 변경']],
-]
 const questions = [
   {
     question: '주문/배송은 얼마나 걸리나요?',
@@ -119,20 +111,9 @@ export default function ContactUs() {
     setFiles(next)
   }
 
-  return <main className="contact-page" aria-labelledby="contact-title">
-    <div className="contact-layout">
-      <aside className="contact-sidebar" aria-label="마이페이지 메뉴">
-        {sidebarGroups.map(([heading, entries]) => <section className="contact-sidebar-group" key={heading}>
-          <h2 className="contact-sidebar-heading">{heading}</h2>
-          <ul className="contact-sidebar-list">{entries.map((entry) => <li className={entry === '1:1 문의' ? 'contact-sidebar-current' : 'contact-sidebar-item'} key={entry}>
-            {entry === '1:1 문의' ? <a className="contact-sidebar-link" href="#contact-title" aria-current="page">· {entry}</a> : <span>· {entry}</span>}
-          </li>)}</ul>
-        </section>)}
-      </aside>
-
-      <div className="contact-main">
+  return <div className="contact-page contact-main" aria-labelledby="contact-title">
         <header className="contact-section-heading">
-          <h1 className="contact-title" id="contact-title">고객센터</h1>
+          <h2 className="contact-title" id="contact-title">고객센터</h2>
           <p className="contact-introduction">궁금한 점을 남겨주시면 빠르고 친절하게 답변드리겠습니다.</p>
         </header>
 
@@ -249,7 +230,5 @@ export default function ContactUs() {
           <div className="contact-benefit"><ContactIcon type="headset" /><div className="contact-benefit-text"><h2 className="contact-benefit-title">빠른 답변</h2><p className="contact-benefit-description">평일 24시간 내<br />답변을 드려요.</p></div></div>
           <div className="contact-benefit"><ContactIcon type="heart" /><div className="contact-benefit-text"><h2 className="contact-benefit-title">더 좋은 온결</h2><p className="contact-benefit-description">고객님의 의견으로<br />더 나아갑니다.</p></div></div>
         </div>
-      </div>
-    </div>
-  </main>
+  </div>
 }

@@ -1,0 +1,26 @@
+.footer-page-layout {
+  --page-footer-space: 120px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100svh;
+}
+.footer-page-layout > :not(.footer-page-body) { flex-shrink: 0; }
+.footer-page-body {
+  display: flow-root;
+  box-sizing: border-box;
+  flex: 1 0 auto;
+  min-width: 0;
+  padding-bottom: var(--page-footer-space);
+  /* Paint only the padding strip, retaining every content section's background. */
+  background-image: linear-gradient(#fff, #fff);
+  background-position: bottom;
+  background-size: 100% var(--page-footer-space);
+  background-repeat: no-repeat;
+}
+@media (min-width: 768px) and (max-width: 1432px) {
+  .footer-page-layout { --page-footer-space: 96px; }
+}
+@media (max-width: 767px) {
+  .footer-page-layout { --page-footer-space: 64px; }
+}

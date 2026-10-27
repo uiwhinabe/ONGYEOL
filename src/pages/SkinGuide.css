@@ -1,0 +1,374 @@
+.skin-guide-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  color: #000;
+  background: #fff;
+  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Footer Noto Sans', sans-serif;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-align: center;
+  color-scheme: light;
+}
+.skin-guide-page *, .skin-guide-page *::before, .skin-guide-page *::after { box-sizing: border-box; }
+.skin-guide-page [data-step-locked='true'] { display: none !important; }
+.skin-guide-steps li[aria-disabled='true'] { cursor: default; pointer-events: none; }
+.skin-guide-why { position: relative; }
+.skin-guide-step-end { position: absolute; bottom: 0; left: 0; width: 1px; height: 1px; pointer-events: none; }
+.skin-guide-page h1, .skin-guide-page h2, .skin-guide-page h3, .skin-guide-page h4, .skin-guide-page p { margin: 0; font-family: inherit; color: inherit; line-height: inherit; letter-spacing: 0; }
+.skin-guide-page ul, .skin-guide-page ol { margin: 0; padding: 0; list-style: none; }
+.skin-guide-page img { display: block; }
+.skin-guide-page button { font-family: inherit; color: inherit; line-height: inherit; letter-spacing: 0; cursor: pointer; }
+.skin-guide-page button:focus-visible { outline: 2px solid #a44646; outline-offset: 6px; }
+.skin-guide-surface { background: radial-gradient(ellipse at center, #fff 0%, #fbf8f6 50%, #f6f1ed 100%); }
+.skin-guide-hero { position: relative; width: 100%; aspect-ratio: 1920 / 840; overflow: hidden; background: #e9ceb7; display: grid; place-items: center; }
+.skin-guide-hero-image { position: absolute; width: 100%; height: auto; top: -44.22%; left: 0; }
+.skin-guide-hero-copy { position: relative; width: 460px; max-width: calc(100% - 40px); }
+.skin-guide-page .skin-guide-hero h1 { font-size: 26px; font-weight: 600; }
+.skin-guide-hero-copy > p { margin-top: 32px; font-size: 23px; font-weight: 500; }
+.skin-guide-hero-copy > p[lang='en'] { margin-top: 28px; font-size: 20px; font-weight: 400; }
+.skin-guide-how { min-height: 840px; padding: 64px 24px 20px; }
+.skin-guide-page .skin-guide-how h2 { font-size: 24px; font-weight: 700; }
+.skin-guide-how-intro { margin-top: 28px !important; font-size: 24px; font-weight: 700; }
+.skin-guide-page .skin-guide-how-list { display: flex; flex-direction: column; gap: 55px; align-items: center; margin-top: 48px; }
+.skin-guide-how-list li { display: flex; flex-direction: column; align-items: center; gap: 19px; }
+.skin-guide-how-list img { width: 60px; height: 60px; object-fit: cover; }
+.skin-guide-how-list h3 { font-size: 20px; font-weight: 700; }
+.skin-guide-how-list p { font-size: 20px; }
+.skin-guide-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skin-guide-page .skin-guide-steps { width: min(1003px, calc(100% - 48px)); display: flex; justify-content: space-between; align-items: center; margin-inline: auto; font-size: 24px; font-weight: 500; }
+.skin-guide-steps li { display: flex; flex: 1; align-items: center; gap: clamp(24px, 6.3vw, 121px); white-space: nowrap; }
+.skin-guide-steps li:last-child { flex: 0 0 auto; }
+.skin-guide-steps li:not(:last-child)::after { content: ''; width: 40px; height: 1px; background: #000; flex: 0 0 40px; margin-right: auto; }
+.skin-guide-steps li[aria-current='step'] > span { font-weight: 700; }
+.skin-guide-types { min-height: 840px; padding: 98px 24px; display: grid; align-items: center; }
+.skin-guide-types-content { width: min(1130px, 100%); margin-inline: auto; }
+.skin-guide-types .skin-guide-steps { margin-left: auto; margin-right: 0; }
+.skin-guide-type-heading { margin-top: 180px; }
+.skin-guide-page .skin-guide-type-heading h2 { font-size: 24px; font-weight: 600; }
+.skin-guide-type-heading > p { margin-top: 20px; font-size: 22px; font-weight: 500; }
+.skin-guide-type-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 43px; margin-top: 100px; }
+.skin-guide-type-button { display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: transparent; font-size: 20px; transition: transform 0.25s ease; }
+.skin-guide-type-icon { display: block; position: relative; width: 100px; height: 100px; flex: 0 0 100px; border-radius: 50%; }
+.skin-guide-type-icon img { max-width: none; }
+.skin-guide-page .skin-guide-type-icon.skin-guide-concern-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; transform: none; }
+.skin-guide-type-icon--dry img { position: absolute; top: -40px; left: -40px; }
+.skin-guide-type-button .skin-guide-type-icon { transition: box-shadow 0.25s ease; }
+.skin-guide-type-button.is-active .skin-guide-type-icon { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
+@media (hover: hover) and (pointer: fine) {
+  .skin-guide-type-button:hover { transform: translateY(-6px); }
+  .skin-guide-type-button:hover .skin-guide-concern-image { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
+}
+.skin-guide-type-name { margin-top: 10px; }
+.skin-guide-type-description { margin-top: 25px; font-size: 18px; white-space: pre-line; }
+.skin-guide-why { min-height: 840px; padding: 100px 50px; display: grid; align-items: center; }
+.skin-guide-why-content { width: min(1382px, 100%); margin-inline: auto; }
+.skin-guide-why-columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 745px); gap: clamp(40px, 14.5vw, 279px); align-items: center; margin-top: 72px; }
+.skin-guide-summary { display: flex; flex-direction: column; align-items: center; }
+.skin-guide-page .skin-guide-summary h2 { font-size: 24px; font-weight: 600; white-space: nowrap; }
+.skin-guide-moisture-label { margin-top: 9px !important; font-size: 24px; font-weight: 400; white-space: nowrap; }
+.skin-guide-summary-type { display: flex; flex-direction: column; align-items: center; gap: 15px; font-size: 20px; }
+.skin-guide-summary > .skin-guide-summary-type { margin-top: 58px; }
+.skin-guide-summary-copy { margin-top: 41px !important; font-size: 20px; font-weight: 500; }
+.skin-guide-why-label { font-size: 36px; font-weight: 700; }
+.skin-guide-page .skin-guide-causes h2 { margin-top: 10px; font-size: 36px; font-weight: 600; }
+.skin-guide-why-description { margin-top: 10px !important; font-size: 20px; }
+.skin-guide-page .skin-guide-cause-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 20px; }
+.skin-guide-cause-list li { border: 1px solid #000; border-radius: 15px; padding: 20px 10px; display: flex; flex-direction: column; align-items: center; }
+.skin-guide-cause-icon { display: grid; place-items: center; width: 125px; height: 125px; border-radius: 50%; background: #fff9e8; }
+.skin-guide-cause-list h3 { padding-block: 10px; font-size: 24px; font-weight: 400; white-space: nowrap; }
+.skin-guide-cause-list p { font-size: 15px; text-align: left; white-space: pre-line; }
+.skin-guide-solution { min-height: 840px; padding: 28px 0 0; }
+.skin-guide-solution-content { display: contents; }
+.skin-guide-mobile-routine-product { display: none; }
+.skin-guide-solution-heading { margin-top: 44px; }
+.skin-guide-solution-heading p { font-size: 16px; }
+.skin-guide-page .skin-guide-solution-heading h2 { font-size: 35px; font-weight: 700; }
+.skin-guide-solution-details { width: min(1553px, calc(100% - 100px)); margin: 43px auto 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 620px); gap: clamp(40px, 10.3vw, 198px); text-align: left; }
+.skin-guide-detail-label { display: flex; gap: 10px; align-items: center; font-size: 16px; }
+.skin-guide-detail-label img { transform: rotate(90deg); }
+.skin-guide-my-skin-content { display: flex; gap: 50px; align-items: center; padding-inline: 50px; margin-top: 20px; }
+.skin-guide-my-skin-content > p { font-size: 18px; white-space: pre-line; }
+.skin-guide-page .skin-guide-ingredients ul { display: flex; justify-content: space-between; gap: 30px; padding-inline: 50px; margin-top: 20px; }
+.skin-guide-ingredients li { text-align: center; font-size: 16px; }
+.skin-guide-ingredients li > img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; }
+.skin-guide-ingredients li > p:first-of-type { margin-top: 8px; }
+.skin-guide-ingredients li > p:last-child { margin-top: 14px; white-space: nowrap; }
+.skin-guide-routine { margin-top: 33px; }
+.skin-guide-routine-heading { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-inline: 50px; text-align: left; }
+.skin-guide-routine-heading h3, .skin-guide-routine-heading p { font-size: 16px; font-weight: 400; white-space: nowrap; }
+.skin-guide-routine-line { flex: 1; min-width: 0; overflow: hidden; }
+.skin-guide-routine-line img { max-width: none; }
+.skin-guide-page .skin-guide-routine-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; width: min(1820px, calc(100% - 60px)); margin-inline: auto; padding-block: 45px; }
+.skin-guide-routine-list > li { display: flex; position: relative; align-items: center; text-align: left; padding-right: 40px; min-width: 0; }
+.skin-guide-routine-list > li:last-child { padding-right: 0; }
+.skin-guide-routine-image { position: relative; width: clamp(140px, 12.55vw, 241px); height: clamp(140px, 12.55vw, 241px); flex: 0 0 clamp(140px, 12.55vw, 241px); overflow: hidden; }
+.skin-guide-routine-image img { width: 100%; height: 100%; object-fit: contain; }
+.skin-guide-routine-image--pad img { position: absolute; width: 133.23%; height: 133.23%; left: -16.36%; top: -17.53%; }
+.skin-guide-routine-image--eyecream img { width: 75.1%; margin-inline: auto; object-fit: contain; }
+.skin-guide-routine-copy { min-width: 0; }
+.skin-guide-product-step { display: inline-block; padding: 5px 10px; border: 1px solid #a44646; border-radius: 30px; color: #a44646; font-size: 16px; }
+.skin-guide-page .skin-guide-routine-copy h4 { margin-top: 10px; font-size: clamp(18px, 1.3vw, 25px); font-weight: 500; }
+.skin-guide-product-english { margin-top: 5px !important; font-size: 16px; white-space: pre-line; }
+.skin-guide-product-description { margin-top: 15px !important; font-size: 15px; display: flex; flex-direction: column; justify-content: flex-start; min-height: var(--routine-description-height, 2lh); }
+.skin-guide-product-description span { display: block; overflow-wrap: break-word; }
+.skin-guide-product-step, .skin-guide-detail-label, .skin-guide-step-label, .skin-guide-why-label { white-space: nowrap; }
+.skin-guide-summary, .skin-guide-causes, .skin-guide-my-skin, .skin-guide-ingredients, .skin-guide-routine-copy { min-width: 0; }
+.skin-guide-routine-copy button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 40px; border: 1px solid #a44646; border-radius: 10px; color: #a44646; background: transparent; font-size: 16px; margin-top: 15px; transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+.skin-guide-routine-copy button:hover { background: #f8eeeb; color: #823737; border-color: #823737; }
+.skin-guide-routine-copy button img { transform: rotate(-90deg); }
+.skin-guide-routine-chevron { position: absolute; right: -20px; transform: rotate(-90deg); pointer-events: none; }
+.skin-guide-ending { height: 373px; background-position: center; background-size: cover; padding-top: 53px; display: flex; flex-direction: column; align-items: center; }
+.skin-guide-page .skin-guide-ending h2 { font-size: 24px; font-weight: 700; }
+.skin-guide-ending-logo { position: relative; width: 115px; height: 141px; overflow: hidden; margin-top: 27px; }
+.skin-guide-ending-logo img { position: absolute; width: 150.24%; height: 124.93%; left: -29.66%; top: -5.32%; max-width: none; }
+.skin-guide-ending > p { margin-top: 29px; font-size: 24px; font-weight: 500; }
+
+@media (min-width: 1025px) {
+  .skin-guide-how, .skin-guide-types, .skin-guide-why { min-height: max(840px, calc(100vh - var(--skin-guide-header-height, 110px))); }
+  .skin-guide-routine { min-height: calc(100vh - var(--skin-guide-header-height, 110px)); }
+  .skin-guide-hero, .skin-guide-how, .skin-guide-types, .skin-guide-why, .skin-guide-solution, .skin-guide-routine { scroll-margin-top: var(--skin-guide-header-height, 110px); }
+}
+
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .skin-guide-types[data-entry-reveal] #skin-guide-types-title { --entry-offset: 15px; --entry-duration: .7s; --entry-delay: 0s; }
+  .skin-guide-types[data-entry-reveal] .skin-guide-type-heading > p { --entry-offset: 10px; --entry-duration: .6s; --entry-delay: .2s; }
+  .skin-guide-types[data-entry-reveal] .skin-guide-type-button { --entry-offset: 20px; --entry-duration: .55s; --entry-delay: .6s; }
+  .skin-guide-types[data-entry-reveal] .skin-guide-type-button:nth-child(2) { --entry-delay: .72s; }
+  .skin-guide-types[data-entry-reveal] .skin-guide-type-button:nth-child(3) { --entry-delay: .84s; }
+  .skin-guide-types[data-entry-reveal] .skin-guide-type-button:nth-child(4) { --entry-delay: .96s; }
+  .skin-guide-types[data-entry-reveal] .skin-guide-type-button:nth-child(5) { --entry-delay: 1.08s; }
+  .skin-guide-types[data-entry-reveal='pending'] :is(#skin-guide-types-title, .skin-guide-type-heading > p, .skin-guide-type-button) {
+    opacity: 0;
+    translate: 0 var(--entry-offset);
+  }
+  .skin-guide-types[data-entry-reveal='visible'] :is(#skin-guide-types-title, .skin-guide-type-heading > p, .skin-guide-type-button) {
+    animation: skin-guide-entry-fade-up var(--entry-duration) ease-out var(--entry-delay) both;
+  }
+  @keyframes skin-guide-entry-fade-up {
+    from { opacity: 0; translate: 0 var(--entry-offset); }
+    to { opacity: 1; translate: 0 0; }
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .skin-guide-why-columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 40px; }
+  .skin-guide-page .skin-guide-summary h2, .skin-guide-moisture-label, .skin-guide-cause-list h3 { white-space: normal; }
+  .skin-guide-solution-details { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+  .skin-guide-my-skin-content { padding-inline: 0; gap: 24px; }
+  .skin-guide-page .skin-guide-ingredients ul { padding-inline: 0; gap: 16px; }
+  .skin-guide-ingredients li { min-width: 0; flex: 1; }
+  .skin-guide-ingredients li > img { width: min(120px, 100%); height: auto; aspect-ratio: 1; }
+  .skin-guide-ingredients li > p:last-child { white-space: normal; }
+  .skin-guide-routine-heading > p { white-space: normal; }
+}
+
+@media (min-width: 541px) and (max-width: 1024px) {
+  .skin-guide-hero { aspect-ratio: 834 / 1084; }
+  .skin-guide-hero-image { width: 100%; height: 178%; top: -44%; left: 0; object-fit: cover; object-position: center; }
+  .skin-guide-hero-copy { width: 440px; }
+  .skin-guide-hero-copy > p:not([lang]) br { display: none; }
+
+  .skin-guide-how { min-height: 1084px; padding: 174px 24px 120px; }
+  .skin-guide-page .skin-guide-how-list { margin-top: 50px; }
+
+  .skin-guide-page .skin-guide-steps { width: min(660px, calc(100% - 24px)); margin-inline: auto; font-size: clamp(18px, 2.88vw, 24px); gap: 0; }
+  .skin-guide-steps li, .skin-guide-steps li:last-child { position: relative; flex: 1; justify-content: center; gap: 0; min-width: 0; }
+  .skin-guide-steps li:not(:last-child)::after { position: absolute; left: calc(100% - 6px); width: 12px; flex-basis: 12px; margin: 0; background: #777; }
+
+  .skin-guide-types { min-height: 1084px; padding: 104px 24px 70px; display: block; }
+  .skin-guide-types-content { max-width: 660px; }
+  .skin-guide-type-heading { margin-top: 207px; }
+  .skin-guide-page .skin-guide-type-heading h2 { font-size: clamp(20px, 2.88vw, 24px); }
+  .skin-guide-type-heading > p { font-size: clamp(18px, 2.64vw, 22px); }
+  .skin-guide-type-list { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 45px 0; margin-top: 114px; }
+  .skin-guide-type-button { grid-column: span 2; min-width: 0; padding-inline: 8px; }
+  .skin-guide-type-button:nth-child(4) { grid-column: 2 / span 2; }
+  .skin-guide-type-button:nth-child(5) { grid-column: 4 / span 2; }
+  .skin-guide-type-description { font-size: clamp(15px, 2.16vw, 18px); }
+
+  .skin-guide-why { min-height: 1608px; padding: 112px 24px 80px; display: block; }
+  .skin-guide-why-content { max-width: 671px; }
+  .skin-guide-why-columns { grid-template-columns: minmax(0, 1fr); gap: 200px; margin-top: 260px; }
+  .skin-guide-page .skin-guide-summary h2 { font-size: clamp(20px, 2.88vw, 24px); white-space: normal; }
+  .skin-guide-moisture-label { font-size: clamp(20px, 2.88vw, 24px); white-space: normal; }
+  .skin-guide-causes { padding-inline: 12px; }
+  .skin-guide-why-label { font-size: 28px; }
+  .skin-guide-page .skin-guide-causes h2 { margin-top: 24px; font-size: clamp(22px, 3vw, 28px); line-height: 1.45; }
+  .skin-guide-why-description--desktop { display: none; }
+  .skin-guide-why-description--tablet[hidden] { display: block; max-width: 600px; margin-inline: auto; margin-top: 24px !important; font-size: clamp(16px, 2.2vw, 18px); text-align: left; line-height: 1.65; word-break: keep-all; overflow-wrap: break-word; }
+  .skin-guide-page .skin-guide-cause-list { gap: clamp(12px, 2.4vw, 24px); margin-top: 44px; }
+  .skin-guide-cause-list li { border: 0; border-radius: 25px; background: #ffe0e0; padding: 10px 8px; justify-content: center; }
+  .skin-guide-cause-list .skin-guide-cause-icon, .skin-guide-cause-list li > p { display: none; }
+  .skin-guide-cause-list h3 { padding: 0; font-size: clamp(14px, 1.8vw, 16px); white-space: nowrap; }
+
+  .skin-guide-solution { min-height: 2625px; padding: 152px clamp(32px, 4.7vw, 48px) 85px; }
+  .skin-guide-how, .skin-guide-types, .skin-guide-why, .skin-guide-solution, .skin-guide-routine { scroll-margin-top: calc(var(--skin-guide-header-height, 110px) + 24px); }
+  .skin-guide-solution-heading { margin-top: 90px; }
+  .skin-guide-page .skin-guide-solution-heading h2 { margin-top: 12px; font-size: clamp(28px, 4.2vw, 35px); }
+  .skin-guide-solution-heading .skin-guide-solution-intro[hidden] { display: block; margin-top: 25px; font-size: 18px; font-weight: 500; }
+  .skin-guide-solution-details { width: 100%; max-width: 100%; grid-template-columns: minmax(0, 1fr); gap: 90px; margin-top: 100px; text-align: center; }
+  .skin-guide-my-skin, .skin-guide-ingredients { width: 100%; }
+  .skin-guide-detail-label { justify-content: center; }
+  .skin-guide-my-skin-content { flex-direction: column; gap: 28px; padding-inline: 0; margin-top: 30px; }
+  .skin-guide-my-skin-content > p { width: 100%; max-width: 420px; min-width: 0; font-size: 18px; white-space: normal; word-break: keep-all; overflow-wrap: break-word; }
+  .skin-guide-page .skin-guide-ingredients ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(660px, 100%); margin-inline: auto; padding-inline: 0; gap: 24px; margin-top: 30px; }
+  .skin-guide-ingredients li { min-width: 0; display: flex; flex-direction: column; align-items: center; }
+  .skin-guide-ingredients li > p:last-child { white-space: normal; }
+  .skin-guide-ingredients li > img { width: 100px; height: 100px; }
+
+  .skin-guide-routine { margin-top: 155px; }
+  .skin-guide-routine-heading { padding: 0; gap: 17px; text-align: center; }
+  .skin-guide-routine-heading::before, .skin-guide-routine-heading::after { content: ''; height: 2px; flex: 1; background: #bab4b4; }
+  .skin-guide-routine-heading h3 { font-size: clamp(13px, 1.92vw, 16px); }
+  .skin-guide-routine-heading > p, .skin-guide-routine-line { display: none; }
+  .skin-guide-page .skin-guide-routine-list { width: min(420px, 100%); grid-template-columns: minmax(0, 1fr); gap: 100px; padding: 70px 0 0; }
+  .skin-guide-routine-list > li, .skin-guide-routine-list > li:last-child { flex-direction: column; align-items: center; text-align: center; padding: 0; gap: 20px; }
+  .skin-guide-routine-copy { display: contents; }
+  .skin-guide-routine-copy > .skin-guide-product-step { order: 0; }
+  .skin-guide-routine-image { order: 1; width: 240px; height: 240px; flex: 0 0 240px; }
+  .skin-guide-routine-copy > h4 { order: 2; width: 100%; word-break: keep-all; overflow-wrap: break-word; }
+  .skin-guide-routine-copy > .skin-guide-product-english { order: 3; width: 100%; word-break: keep-all; overflow-wrap: break-word; }
+  .skin-guide-routine-copy > .skin-guide-product-description { order: 4; width: 100%; }
+  .skin-guide-routine-copy > button { order: 5; }
+  .skin-guide-routine-image img { object-fit: contain; }
+  .skin-guide-routine-image--pad img { position: static; width: 100%; height: 100%; }
+  .skin-guide-routine-image--eyecream img { width: 75.1%; }
+  .skin-guide-page .skin-guide-routine-copy h4 { font-size: clamp(20px, 3vw, 25px); }
+  .skin-guide-routine-copy button { padding: 10px 20px; white-space: nowrap; }
+  .skin-guide-routine-chevron { top: calc(100% + 10px); left: calc(50% - 40px); right: auto; transform: none; }
+}
+
+@media (max-width: 540px) {
+  .skin-guide-page { font-size: 16px; }
+  .skin-guide-how, .skin-guide-types, .skin-guide-why, .skin-guide-solution, .skin-guide-routine { width: 100%; max-width: 100%; min-width: 0; height: auto; min-height: 0; scroll-margin-top: calc(var(--skin-guide-header-height, 110px) + 16px); }
+  .skin-guide-hero { aspect-ratio: 402 / 704; height: auto; min-height: 0; }
+  .skin-guide-hero-image { width: 100%; height: 178%; top: -44%; left: 0; object-fit: cover; object-position: center; }
+  .skin-guide-hero-copy { width: 360px; max-width: calc(100% - 40px); }
+  .skin-guide-page .skin-guide-hero h1 { font-size: clamp(17px, 4.97vw, 20px); }
+  .skin-guide-hero-copy > p { font-size: clamp(15px, 4.48vw, 18px); margin-top: 20px; }
+  .skin-guide-hero-copy > p:not([lang]) br { display: none; }
+  .skin-guide-hero-copy > p[lang='en'] { font-size: 14px; margin-top: 24px; }
+
+  .skin-guide-how {
+    min-height: calc(100vh - var(--skin-guide-header-height, 110px));
+    min-height: calc(100dvh - var(--skin-guide-header-height, 110px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 21px;
+    text-align: center;
+    scroll-margin-top: var(--skin-guide-header-height, 110px);
+  }
+  .skin-guide-page .skin-guide-how .skin-guide-steps { display: none; }
+  .skin-guide-page .skin-guide-how h2 { font-size: 18px; font-weight: 600; }
+  .skin-guide-how-intro { margin-top: 20px !important; font-size: 18px; font-weight: 600; }
+  .skin-guide-page .skin-guide-how-list { margin-top: 32px; gap: 24px; }
+  .skin-guide-how-list li { width: 100%; gap: 12px; }
+  .skin-guide-how-list img { width: 48px; height: 48px; }
+  .skin-guide-how-list h3 { font-size: 18px; font-weight: 600; }
+  .skin-guide-how-list p { font-size: 16px; }
+
+  .skin-guide-page .skin-guide-steps { width: min(338px, calc(100% - 8px)); margin-inline: auto; gap: 0; font-size: 13px; }
+  .skin-guide-steps li, .skin-guide-steps li:last-child { position: relative; flex: 1; justify-content: center; min-width: 0; gap: 0; color: #777; }
+  .skin-guide-steps li > span { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .skin-guide-step-number { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #777; border-radius: 50%; font-size: 0; font-weight: 600; }
+  .skin-guide-step-number::before { content: attr(data-mobile-number); font-size: 18px; }
+  .skin-guide-steps li[aria-current='step'] { color: #000; }
+  .skin-guide-steps li[aria-current='step'] .skin-guide-step-number { background: #000; border-color: #000; color: #fff; }
+  .skin-guide-steps li[aria-current='step'] > span { font-weight: 500; }
+  .skin-guide-steps li:not(:last-child)::after { position: absolute; top: 15px; left: calc(50% + 23px); width: calc(100% - 46px); height: 1px; margin: 0; background: #aaa; }
+
+  .skin-guide-types { min-height: 809px; display: block; padding: 30px 32px 60px; }
+  .skin-guide-types-content { width: 100%; max-width: 338px; }
+  .skin-guide-type-heading { margin-top: 50px; }
+  .skin-guide-type-heading > #skin-guide-types-title, .skin-guide-type-heading > p { display: none; }
+  .skin-guide-page .skin-guide-mobile-type-title[hidden] { display: block; font-size: 22px; font-weight: 600; }
+  .skin-guide-page .skin-guide-type-list { width: min(327px, 100%); margin: 34px auto 0; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .skin-guide-type-button { display: grid; grid-template-columns: 18px 50px minmax(0, 1fr); grid-column: auto; width: 100%; min-width: 0; column-gap: 12px; row-gap: 6px; min-height: 80px; padding: 12px 10px; border: 1px solid transparent; border-radius: 20px; text-align: left; align-items: center; }
+  .skin-guide-type-button::before { content: ''; display: grid; place-items: center; grid-column: 1; grid-row: 1 / span 2; width: 14px; height: 14px; border: 1px solid #777; border-radius: 3px; font-size: 12px; line-height: 1; }
+  .skin-guide-type-button[aria-pressed='true'] { border-color: #a58948; }
+  .skin-guide-type-button[aria-pressed='true']::before { content: '✓'; color: #a58948; border-color: #a58948; }
+  .skin-guide-type-button[aria-pressed='true'] .skin-guide-type-name { font-weight: 700; }
+  .skin-guide-type-icon { width: 50px; height: 50px; flex-basis: 50px; }
+  .skin-guide-type-button .skin-guide-type-icon { grid-column: 2; grid-row: 1 / span 2; width: 50px; height: 50px; }
+  .skin-guide-type-name { grid-column: 3; grid-row: 1; align-self: end; margin: 0; font-size: 15px; }
+  .skin-guide-type-description { grid-column: 3; grid-row: 2; align-self: start; margin: 0; font-size: 13px; color: #515151; white-space: normal; }
+  .skin-guide-mobile-next[hidden] { display: block; margin-top: 20px; }
+  .skin-guide-mobile-next button { padding: 16px 30px; border: 1px solid #a58948; border-radius: 999px; background: transparent; font-size: clamp(20px, 5.2vw, 24px); box-shadow: none; transition: background-color .25s ease, box-shadow .25s ease, border-color .25s ease, transform .2s ease; }
+  @media (hover: hover) and (pointer: fine) {
+    .skin-guide-mobile-next button:not(:disabled):hover { background: #fff7e6; border-color: transparent; box-shadow: 0 8px 20px rgba(0, 0, 0, .12); transform: translateY(-2px); }
+  }
+  .skin-guide-mobile-next button:not(:disabled):active { background: #fff7e6; border-color: transparent; box-shadow: 0 5px 14px rgba(0, 0, 0, .12); transform: translateY(0); }
+  .skin-guide-mobile-next button:disabled { background: transparent; border-color: #a58948; box-shadow: none; transform: none; opacity: .5; cursor: default; }
+
+  .skin-guide-why { min-height: 0; display: block; padding: 0; scroll-margin-top: calc(var(--skin-guide-header-height, 110px) + 16px); }
+  .skin-guide-why-content { width: 100%; max-width: 100%; }
+  .skin-guide-why-content > .skin-guide-steps { display: none; }
+  .skin-guide-why-columns { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 0; }
+  .skin-guide-page .skin-guide-summary h2 { font-size: 18px; white-space: normal; }
+  .skin-guide-moisture-label { font-size: 16px; white-space: normal; }
+  .skin-guide-summary { position: relative; min-height: 704px; justify-content: center; padding: 110px 21px 64px; }
+  .skin-guide-mobile-summary-steps[hidden] { display: block; position: absolute; top: 30px; left: 21px; right: 21px; }
+  .skin-guide-causes { width: 100%; max-width: 402px; margin-inline: auto; padding: 64px 21px; }
+  .skin-guide-summary > .skin-guide-summary-type { margin-top: 40px; }
+  .skin-guide-summary-type { font-size: 14px; gap: 10px; }
+  .skin-guide-summary-copy { margin-top: 30px !important; font-size: 15px; }
+  .skin-guide-why-label { font-size: 24px; }
+  .skin-guide-page .skin-guide-causes h2 { font-size: 22px; margin-top: 20px; }
+  .skin-guide-page .skin-guide-why-description { max-width: 340px; margin-inline: auto; font-size: 15px; margin-top: 24px !important; line-height: 1.6; white-space: normal; word-break: keep-all; overflow-wrap: break-word; }
+  .skin-guide-page .skin-guide-cause-list { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 40px; }
+  .skin-guide-cause-list li { border: 1px solid #111; border-radius: 15px; background: transparent; padding: 16px; display: grid; grid-template-columns: 70px minmax(0, 1fr); column-gap: 14px; text-align: left; }
+  .skin-guide-cause-list .skin-guide-cause-icon { display: grid; width: 70px; height: 70px; grid-row: 1 / span 2; }
+  .skin-guide-cause-icon svg { width: 44px; height: 44px; }
+  .skin-guide-cause-icon img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .skin-guide-cause-list li > p { display: block; font-size: 14px; text-align: left; white-space: normal; }
+  .skin-guide-cause-list h3 { font-size: 16px; padding: 0 0 8px; white-space: normal; }
+
+  .skin-guide-solution { min-height: 0; padding: 0; }
+  .skin-guide-solution-content { display: flex; flex-direction: column; align-items: center; min-height: 932px; padding: 30px 21px 64px; }
+  .skin-guide-solution-heading { margin-top: 35px; }
+  .skin-guide-solution-heading > p { font-size: 16px; }
+  .skin-guide-page .skin-guide-solution-heading h2 { margin-top: 12px; font-size: 18px; }
+  .skin-guide-solution-heading .skin-guide-solution-intro[hidden] { display: block; margin-top: 25px; font-size: 15px; }
+  .skin-guide-solution-details { width: min(360px, 100%); max-width: 100%; grid-template-columns: minmax(0, 1fr); gap: 35px; margin-top: 35px; text-align: center; }
+  .skin-guide-detail-label { justify-content: center; font-size: 16px; }
+  .skin-guide-detail-label img { display: none; }
+  .skin-guide-my-skin-content { display: flex; flex-direction: column; width: 100%; max-width: 100%; min-width: 0; gap: 16px; padding: 0; margin-top: 20px; }
+  .skin-guide-my-skin-content > p { width: min(280px, 100%); font-size: 14px; white-space: normal; word-break: keep-all; overflow-wrap: break-word; }
+  .skin-guide-page .skin-guide-ingredients ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 0; margin-top: 20px; }
+  .skin-guide-ingredients li { display: flex; flex-direction: column; align-items: center; font-size: 14px; }
+  .skin-guide-ingredients li > img { width: 80px; height: 80px; }
+  .skin-guide-ingredients li > p:last-child { white-space: normal; }
+  .skin-guide-mobile-scroll[hidden] { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 80px; color: #5d5d5d; font-size: 12px; }
+  .skin-guide-mobile-scroll button { display: grid; place-items: center; width: 50px; height: 50px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .62); box-shadow: 0 0 15px rgba(103, 103, 103, .25); }
+  .skin-guide-mobile-scroll button:active { background: #fff; }
+  .skin-guide-routine { min-height: 704px; margin-top: 0; padding: 30px 21px 60px; scroll-margin-top: calc(var(--skin-guide-header-height, 110px) + 16px); }
+  .skin-guide-mobile-routine-steps[hidden] { display: block; margin-bottom: 35px; }
+  .skin-guide-routine-heading { padding: 0; justify-content: center; text-align: center; }
+  .skin-guide-routine-heading h3 { font-size: clamp(12px, 3.7vw, 16px); white-space: normal; }
+  .skin-guide-routine-heading > p, .skin-guide-routine-line { display: none; }
+  .skin-guide-page .skin-guide-routine-list { display: none; }
+  .skin-guide-mobile-routine-product { display: block; width: min(258px, 100%); margin: 30px auto 0; }
+  .skin-guide-mobile-routine-product article { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+  .skin-guide-routine-image { width: 165px; height: 165px; flex: 0 0 165px; }
+  .skin-guide-routine-copy { display: block; width: 100%; }
+  .skin-guide-routine-image img { object-fit: contain; }
+  .skin-guide-routine-image--pad img { position: static; width: 100%; height: 100%; }
+  .skin-guide-page .skin-guide-routine-copy h4 { font-size: 23px; }
+  .skin-guide-product-english { font-size: 16px; }
+  .skin-guide-product-description { font-size: 15px; }
+  .skin-guide-routine-copy button { width: 100%; padding: 10px 24px; font-size: 16px; }
+  .skin-guide-mobile-routine-controls { display: flex; justify-content: center; align-items: center; gap: 28px; width: 100%; margin-top: 24px; }
+  .skin-guide-mobile-routine-controls > button { display: grid; place-items: center; width: 40px; height: 40px; min-width: 40px; min-height: 40px; padding: 0; margin: 0; border: 1px solid #aaa; border-radius: 50%; background: transparent; font-size: 26px; line-height: 1; }
+  .skin-guide-mobile-routine-controls > button > svg { display: block; width: 14px; height: 14px; margin: 0; padding: 0; position: static; transform: none; }
+  .skin-guide-mobile-routine-controls > div { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .skin-guide-mobile-routine-controls > div button { width: 10px; height: 10px; padding: 0; border: 1px solid #777; border-radius: 50%; background: transparent; }
+  .skin-guide-mobile-routine-controls > div button[aria-pressed='true'] { background: #111; border-color: #111; }
+  .skin-guide-ending { display: none; }
+}

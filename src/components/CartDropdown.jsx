@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './CartDropdown.css'
 
 // Header can use this controller without duplicating hover and touch handling.
-// Keep the controller here because this feature is restricted to two new files.
 // oxlint-disable-next-line react/only-export-components
 export function useCartDropdown(onOpen) {
   const location = useLocation()
@@ -77,6 +76,11 @@ export function useCartDropdown(onOpen) {
 export default function CartDropdown({ open, onClose, anchorRef, headerRef, panelRef: externalPanelRef,
   onPointerEnter, onPointerLeave, onBlur }) {
   const localPanelRef = useRef(null)
+  const navigate = useNavigate()
+  const visit = (path) => {
+    onClose()
+    navigate(path)
+  }
   const panelRef = externalPanelRef || localPanelRef
 
   useLayoutEffect(() => {
@@ -129,9 +133,8 @@ export default function CartDropdown({ open, onClose, anchorRef, headerRef, pane
     <nav ref={panelRef} id="cart-dropdown" className={`ongyeol-cart-dropdown${open ? ' is-open' : ''}`}
       inert={!open} aria-hidden={!open} aria-label="장바구니 및 찜 메뉴"
       onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave} onBlur={onBlur}>
-      {/* UI only: page navigation will be connected separately. */}
-      <button className="ongyeol-cart-dropdown-item" type="button">장바구니</button>
-      <button className="ongyeol-cart-dropdown-item" type="button">찜</button>
+      <button className="ongyeol-cart-dropdown-item" type="button" onClick={() => visit('/cart')}>장바구니</button>
+      <button className="ongyeol-cart-dropdown-item" type="button" onClick={() => visit('/wishlist')}>찜</button>
     </nav>
   )
 }

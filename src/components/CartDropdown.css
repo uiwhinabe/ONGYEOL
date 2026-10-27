@@ -1,3 +1,7 @@
+.ongyeol-header-action[aria-controls='cart-dropdown'] {
+  cursor: pointer;
+}
+
 .ongyeol-cart-dropdown {
   position: fixed;
   top: var(--cart-dropdown-top, 110px);

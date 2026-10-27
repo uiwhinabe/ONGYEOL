@@ -1,0 +1,183 @@
+.ongyeol-inquiry-mobile-send { display: none; }
+
+/* Restore the pre-mobile frame explicitly, including all fullscreen inset sides.
+   Values come from AIChat.css / AIConsultation.css at commit 8810781. */
+@media (min-width: 520px) {
+  #ai-consultation.ongyeol-consultation {
+    position: fixed;
+    inset: auto var(--ongyeol-chat-right) calc(var(--ongyeol-chat-bottom) + 60px) auto;
+    width: 420px; height: 760px;
+    min-width: 0; max-width: none; min-height: 0; max-height: none;
+    padding: 0; overflow: hidden; border-radius: 40px; z-index: 40;
+    box-shadow: -7px -10px 40px #00000040, 7px 10px 40px #00000040;
+    transform: translateY(12px); transition: opacity 250ms ease-out, transform 250ms ease-out;
+  }
+  #ai-consultation.ongyeol-consultation.is-visible { transform: translateY(0); }
+}
+@media (min-width: 520px) and (prefers-reduced-motion: reduce) {
+  #ai-consultation.ongyeol-consultation { transition: none; transform: none; }
+}
+
+/* Mobile-only overrides: desktop/tablet geometry stays in the original files. */
+@media (width < 520px) {
+  #ai-consultation.ongyeol-consultation {
+    inset: var(--ongyeol-mobile-top, 0px) 0 auto;
+    width: 100%; height: 100vh; height: var(--ongyeol-mobile-height, 100dvh);
+    border-radius: 0; box-shadow: none; z-index: 1000;
+    overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+    scrollbar-gutter: auto; -webkit-overflow-scrolling: touch;
+    transform: none; transition: opacity 250ms ease-out;
+  }
+  .ongyeol-ai-chat-button.ongyeol-ai-chat-button.is-open {
+    top: calc(var(--ongyeol-mobile-top, 0px) + env(safe-area-inset-top, 0px) + 15px);
+    right: max(18px, env(safe-area-inset-right, 0px)); bottom: auto;
+    width: 44px; height: 44px; border-radius: 0; z-index: 1001;
+  }
+  .ongyeol-ai-chat-button.is-open .ongyeol-ai-chat-visual { width: 44px; height: 44px; border-radius: 0; background: transparent; box-shadow: none; }
+  .ongyeol-ai-chat-button.is-open .ongyeol-ai-chat-logo { display: none; }
+  .ongyeol-ai-chat-button.is-open .ongyeol-ai-chat-hover-icon { left: 14px; top: 14px; width: 16px; height: 16px; opacity: 0.5; }
+
+  #ai-consultation .ongyeol-inquiry:not([hidden]) {
+    display: flex; flex-direction: column; box-sizing: border-box;
+    height: auto; min-height: var(--ongyeol-mobile-height, 100dvh);
+    padding: env(safe-area-inset-top, 0px) max(13px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(13px, env(safe-area-inset-left, 0px));
+  }
+  #ai-consultation .ongyeol-inquiry-header {
+    position: sticky; top: env(safe-area-inset-top, 0px); left: auto; z-index: 5; flex: none;
+    box-sizing: border-box; min-width: 0;
+    width: calc(100% + max(13px, env(safe-area-inset-left, 0px)) + max(13px, env(safe-area-inset-right, 0px)));
+    height: 80px; margin: 0 calc(-1 * max(13px, env(safe-area-inset-right, 0px))) 0 calc(-1 * max(13px, env(safe-area-inset-left, 0px)));
+    padding: 10px calc(max(18px, env(safe-area-inset-right, 0px)) + 44px + 8px) 10px max(26px, env(safe-area-inset-left, 0px));
+    gap: 10px; background: #fff;
+  }
+  #ai-consultation .ongyeol-inquiry-back { margin-right: clamp(6px, 4vw, 18px); flex: none; }
+  #ai-consultation .ongyeol-inquiry-header > .ongyeol-inquiry-avatar { flex: 0 0 39px; }
+  #ai-consultation .ongyeol-inquiry-heading { flex: 1 1 0%; width: auto; min-width: 0; }
+  #ai-consultation .ongyeol-inquiry-heading p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #ai-consultation .ongyeol-inquiry-heading p:first-child { font-weight: 500; }
+  #ai-consultation .ongyeol-inquiry-heading p:last-child { margin-top: 5px; color: #9b9b9b; }
+
+  #ai-consultation .ongyeol-inquiry-composer {
+    position: sticky; top: auto; bottom: env(safe-area-inset-bottom, 0px); left: auto; transform: none;
+    flex: none; align-self: stretch; z-index: 6; width: 100%; height: 50px;
+    margin-top: auto; border: 0.5px solid #9b9b9b; border-radius: 50px;
+  }
+  #ai-consultation .ongyeol-inquiry-composer textarea { left: 52px; top: 13px; width: calc(100% - 120px); height: 24px; font-size: 16px; line-height: 24px; }
+  #ai-consultation .ongyeol-inquiry-tools { left: auto; right: 24px; top: 17px; }
+  #ai-consultation .ongyeol-inquiry .ongyeol-inquiry-send { left: 15px; top: 12px; width: 24px; height: 24px; }
+  #ai-consultation .ongyeol-inquiry-send > img:first-child { display: none; }
+  #ai-consultation .ongyeol-inquiry-mobile-send { display: block; transform: rotate(-90deg); }
+
+  #ai-consultation .ongyeol-inquiry-message,
+  #ai-consultation .ongyeol-chat-skin-guide-intro-content,
+  #ai-consultation .ongyeol-chat-skin-guide-step-one-content,
+  #ai-consultation .ongyeol-chat-skin-guide-type-detail-content,
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-content,
+  #ai-consultation .ongyeol-counselor-content,
+  #ai-consultation .ongyeol-delivery-content {
+    position: relative; top: auto; left: auto; transform: none;
+    width: min(340px, 100%); flex: none; align-self: center;
+    margin: 50px auto 32px;
+  }
+  #ai-consultation .ongyeol-inquiry-message > .ongyeol-inquiry-avatar,
+  #ai-consultation .ongyeol-chat-skin-guide-intro-message > .ongyeol-inquiry-avatar,
+  #ai-consultation .ongyeol-chat-skin-guide-step-one-message > .ongyeol-inquiry-avatar,
+  #ai-consultation .ongyeol-chat-skin-guide-type-detail-message > .ongyeol-inquiry-avatar,
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-message > .ongyeol-inquiry-avatar,
+  #ai-consultation .ongyeol-counselor-message > .ongyeol-inquiry-avatar,
+  #ai-consultation .ongyeol-delivery-message > .ongyeol-inquiry-avatar { display: none; }
+  #ai-consultation .ongyeol-inquiry-copy,
+  #ai-consultation .ongyeol-chat-skin-guide-intro-copy,
+  #ai-consultation .ongyeol-chat-skin-guide-step-one-copy,
+  #ai-consultation .ongyeol-chat-skin-guide-type-detail-copy,
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-copy,
+  #ai-consultation .ongyeol-counselor-copy,
+  #ai-consultation .ongyeol-delivery-copy { flex: 0 1 300px; width: min(300px, 100%); min-width: 0; margin-inline: auto; overflow-wrap: anywhere; }
+  #ai-consultation .ongyeol-chat-start > .ongyeol-inquiry-message { width: min(300px, 100%); margin-bottom: 0; }
+  #ai-consultation .ongyeol-inquiry-account { position: static; flex: none; width: min(300px, 100%); margin: 30px auto 0; }
+  #ai-consultation .ongyeol-chat-start > .ongyeol-inquiry-topics {
+    position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-self: flex-end; gap: 15px 9px; flex: none;
+    width: min(300.5px, 100%); height: auto; margin: auto max(6px, calc((100% - 363px) / 2)) 22px auto;
+    padding-top: 70px;
+  }
+  #ai-consultation .ongyeol-chat-start .ongyeol-inquiry-topic { position: static; width: 100%; height: 42px; min-width: 0; padding-inline: 12px; margin: 0; }
+  #ai-consultation .ongyeol-chat-start .ongyeol-inquiry-topic--skin { grid-column: 2; }
+  #ai-consultation .ongyeol-chat-start .ongyeol-inquiry-topic--agent { grid-column: 1; }
+  #ai-consultation .ongyeol-chat-start > .ongyeol-inquiry-composer { margin-top: 0; }
+
+  #ai-consultation .ongyeol-chat-skin-guide-intro-content { gap: 50px; }
+  #ai-consultation .ongyeol-chat-skin-guide-intro-duration { width: 100%; }
+  #ai-consultation .ongyeol-chat-skin-guide-intro-duration p:last-child { white-space: normal; }
+  #ai-consultation .ongyeol-chat-skin-guide-step-one-options { width: min(310px, 100%); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #ai-consultation .ongyeol-chat-skin-guide-step-one-option { width: 100%; padding-inline: 12px; }
+  #ai-consultation .ongyeol-chat-skin-guide-type-detail-action,
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-action,
+  #ai-consultation .ongyeol-delivery-action { width: 100%; }
+  /* Both carousels reserve 20px arrow columns and 12px inner gaps.
+     The shared outer gutter grows with the viewport and respects safe areas. */
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation,
+  #ai-consultation .ongyeol-chat-products {
+    --carousel-inset-left: max(clamp(20px, 5vw, 24px), env(safe-area-inset-left, 0px));
+    --carousel-inset-right: max(clamp(20px, 5vw, 24px), env(safe-area-inset-right, 0px));
+    --carousel-width: min(404px, 100%, calc(100vw - var(--carousel-inset-left) - var(--carousel-inset-right)));
+  }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-content {
+    display: grid; grid-template-columns: 20px minmax(0, 1fr) 20px;
+    column-gap: 12px; row-gap: 40px; width: var(--carousel-width);
+  }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-message,
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-action { grid-column: 1 / -1; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-ingredients { grid-column: 2; grid-row: 2; justify-self: center; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-action { margin-top: 10px; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation { display: contents; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button { grid-row: 2; align-self: center; justify-self: center; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button:first-child { grid-column: 1; }
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button:last-child { grid-column: 3; }
+  #ai-consultation .ongyeol-counselor-hours { box-sizing: border-box; max-width: 100%; }
+  #ai-consultation .ongyeol-delivery-action-group { width: 100%; }
+  #ai-consultation .ongyeol-delivery-choices--menu { width: min(310px, 100%); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #ai-consultation .ongyeol-delivery-choice { width: 100%; padding-inline: 10px; }
+  #ai-consultation .ongyeol-delivery-return { width: 150px; }
+
+  #ai-consultation .ongyeol-chat-products-avatar { display: none; }
+  #ai-consultation .ongyeol-chat-products-carousel { display: block; position: relative; flex: none; align-self: center; width: var(--carousel-width); margin: 50px auto 24px; }
+  #ai-consultation .ongyeol-chat-products-content { position: relative; top: auto !important; left: auto; transform: none; width: calc(100% - 64px) !important; min-width: 0; max-width: 340px; margin: 0 auto; }
+  #ai-consultation .ongyeol-chat-products-names { width: 100%; }
+  #ai-consultation .ongyeol-chat-products-names h2 { max-width: 100%; font-size: 22px; white-space: normal; text-align: center; overflow-wrap: anywhere; }
+  #ai-consultation .ongyeol-chat-products-english { width: 100%; white-space: normal !important; overflow-wrap: anywhere; }
+  #ai-consultation .ongyeol-chat-products-description { max-width: 100%; }
+  #ai-consultation .ongyeol-chat-products-actions { position: static; transform: none; flex: none; align-self: center; width: min(296px, 100%); margin: 8px auto 32px; }
+  #ai-consultation .ongyeol-chat-products-action { padding-inline: 20px; white-space: normal; }
+  #ai-consultation .ongyeol-chat-products-navigation { left: 0; top: calc(var(--product-image-height) / 2); transform: translateY(-50%); width: 100%; pointer-events: none; }
+  #ai-consultation .ongyeol-chat-products-navigation button { flex: none; pointer-events: auto; }
+
+  #ai-consultation:has(.ongyeol-consultation-card) { box-sizing: border-box; padding: calc(env(safe-area-inset-top, 0px) + 80px) 20px max(20px, env(safe-area-inset-bottom, 0px)); }
+  #ai-consultation .ongyeol-consultation-background { position: fixed; width: 100%; height: 100%; }
+  #ai-consultation .ongyeol-consultation-gradient { position: fixed; border-radius: 0; }
+  #ai-consultation .ongyeol-consultation-wordmark { position: relative; top: auto; left: auto; margin: 14px 10px 24px; }
+  #ai-consultation .ongyeol-consultation-card { position: relative; top: auto; left: auto; box-sizing: border-box; width: min(360px, 100%); height: auto; min-height: 482px; margin: auto; padding-bottom: 26px; }
+  #ai-consultation .ongyeol-consultation-content { position: relative; left: auto; top: auto; width: auto; margin: 122px 24px 0; }
+  #ai-consultation .ongyeol-consultation-copy { width: 100%; }
+  #ai-consultation .ongyeol-consultation-inquiry { width: 100%; }
+  #ai-consultation .ongyeol-consultation-navigation { position: relative; bottom: auto; left: auto; width: 100%; gap: 0; justify-content: space-around; margin-top: 24px; }
+  #ai-consultation button, #ai-consultation a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+}
+
+/* Touch-only overrides prevent hover-only motion/styles from sticking after taps. */
+@media (width < 520px) and (hover: none) {
+  #ai-consultation button:hover, #ai-consultation a:hover { animation: none; }
+  #ai-consultation .ongyeol-inquiry-choice.ongyeol-inquiry-choice:hover:not(:active) { background: #fff; color: #000; box-shadow: none; }
+  #ai-consultation .ongyeol-inquiry-account a:hover:not(:active) { background: #fff; color: #000; border-color: #919191; box-shadow: none; }
+  #ai-consultation .ongyeol-counselor-return:hover:not(:active) { background: #fff; color: #515151; box-shadow: none; }
+  #ai-consultation .ongyeol-chat-skin-guide-intro-start:hover:not(:active),
+  #ai-consultation .ongyeol-chat-skin-guide-type-detail-action:hover:not(:active),
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-action:hover:not(:active) { background: linear-gradient(to right, #ffe9e0 26.818%, #efdbd3); }
+  #ai-consultation .ongyeol-chat-skin-guide-step-one-option:hover:not(:active) { background: #fff; }
+  #ai-consultation .ongyeol-chat-products-action:hover:not(:active) { background: #fff; box-shadow: none; }
+  #ai-consultation .ongyeol-chat-products-navigation button:hover:not(:active),
+  #ai-consultation .ongyeol-chat-skin-guide-recommendation-navigation button:hover:not(:active) { transform: scale(1); }
+}
+@media (width < 520px) and (prefers-reduced-motion: reduce) {
+  #ai-consultation.ongyeol-consultation { transition: none; }
+}
