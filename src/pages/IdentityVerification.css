@@ -1,16 +1,16 @@
 /* The sticky header stays in flow: 30px banner + 80px navigation.
    Figma places the 297px panel 292px below the header at a 991px viewport.
    Keep that spacing on tall screens, reducing it when height is limited. */
-.ongyeol-identity { box-sizing: border-box; flex: 1 0 auto; min-width: 0; min-height: calc(100vh - 110px); min-height: calc(100dvh - 110px); padding: clamp(100px, calc((100vh - 407px) / 2), 292px) 20px 100px; padding-top: clamp(100px, calc((100dvh - 407px) / 2), 292px); background: #FFFFFF; color: #000; color-scheme: light; font: 500 14px/17px 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: left; }
+.ongyeol-identity { box-sizing: border-box; flex: 1 0 auto; min-width: 0; min-height: calc(100vh - 110px); min-height: calc(100dvh - 110px); padding: clamp(100px, calc((100vh - 407px) / 2), 292px) 20px 100px; padding-top: clamp(100px, calc((100dvh - 407px) / 2), 292px); background: #FFFFFF; color: #000; color-scheme: light; font: 500 14px/17px "Noto Sans KR", "Noto Sans", sans-serif; letter-spacing: normal; text-align: left; }
 /* Relative positioning preserves the main height and Footer position. */
 .ongyeol-identity-panel { position: relative; top: -40px; width: 380px; max-width: 100%; margin: 0 auto; }
 /* Keep the underlying form covered even when a short viewport constrains the dialog. */
 .ongyeol-identity-panel--covered { visibility: hidden; }
-.ongyeol-identity h1 { margin: 0 0 55px; color: inherit; font: 700 15px/18px 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
+.ongyeol-identity h1 { margin: 0 0 55px; color: inherit; font: 700 15px/18px "Noto Sans KR", "Noto Sans", sans-serif; letter-spacing: normal; }
 .ongyeol-identity-description { overflow-wrap: anywhere; }
 .ongyeol-identity-description p + p { margin-top: 17px; }
 .ongyeol-identity-trigger { box-sizing: border-box; width: 100%; height: 45px; margin-top: 43px; padding: 0 12px; border: 0; border-radius: 5px; background: #1d1d1d; color: #fff; font: inherit; font-size: 15px; cursor: pointer; }
-.ongyeol-identity-dialog { box-sizing: border-box; position: fixed; inset: auto; top: var(--identity-dialog-top, 122px); left: var(--identity-dialog-left, 50%); transform: translateX(-50%); width: 650px; max-width: calc(100vw - 24px); height: var(--identity-dialog-height, 350px); max-height: none; margin: 0; padding: 0; overflow: auto; border: 0; border-radius: 33px; background: #fff; color: #000; color-scheme: light; box-shadow: -15px -15px 20px rgba(0,0,0,.25), 15px 15px 20px rgba(0,0,0,.25); font: 500 14px/17px 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: center; }
+.ongyeol-identity-dialog { box-sizing: border-box; position: fixed; inset: auto; top: var(--identity-dialog-top, 122px); left: var(--identity-dialog-left, 50%); transform: translateX(-50%); width: 650px; max-width: calc(100vw - 24px); height: var(--identity-dialog-height, 350px); max-height: none; margin: 0; padding: 0; overflow: auto; border: 0; border-radius: 33px; background: #fff; color: #000; color-scheme: light; box-shadow: -15px -15px 20px rgba(0,0,0,.25), 15px 15px 20px rgba(0,0,0,.25); font: 500 14px/17px "Noto Sans KR", "Noto Sans", sans-serif; letter-spacing: normal; text-align: center; }
 .ongyeol-identity-dialog::backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); }
 .ongyeol-identity-dialog-content { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 26px; min-height: 350px; padding: 40px 75px; }
 .ongyeol-identity-dialog-heading { width: 100%; }

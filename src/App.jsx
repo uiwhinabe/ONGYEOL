@@ -1,4 +1,4 @@
-﻿import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 
 import Header from './components/Header.jsx'
+import MyPage from './pages/Mypage/Mypage.jsx'
 import Footer from './components/Footer.jsx'
 import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 
@@ -23,8 +24,10 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
 import IdentityVerification from './pages/IdentityVerification.jsx'
+import Wishlist, { WishlistProductDetail } from './pages/Wishlist.jsx'
 
 import Checkout from './pages/Checkout.jsx'
+import Cart from './pages/Cart.jsx'
 import Payment from './pages/Payment.jsx'
 import OrderComplete from './pages/OrderComplete.jsx'
 
@@ -55,7 +58,9 @@ function Layout() {
 
   const { isAuthenticated, enterLogin, logout } = useAuth()
 
+  const isMyPage = pathname === '/contact' || pathname === '/mypage' || pathname.startsWith('/mypage/')
   const isLogin = pathname === '/login' || pathname === '/login/'
+  const isWishlist = /^\/(wishlist\/?|products\/[^/]+\/?$)/.test(pathname)
 
   // Keep existing product bookmarks working with the shared BrowserRouter.
   useLayoutEffect(() => {
@@ -76,7 +81,7 @@ function Layout() {
     <div
       className={`ongyeol-layout${
         isLogin ? ' ongyeol-layout--login' : ''
-      }`}
+      }${isWishlist ? ' ongyeol-layout--wishlist' : ''}${isMyPage ? ' footer-page-layout' : ''}`}
     >
       <Header
         chatOpen={chatOpen}
@@ -86,10 +91,15 @@ function Layout() {
         accountLinks={{
           login: '/login',
           signup: '/signup',
+          mypage: '/mypage',
         }}
       />
 
       <Routes>
+        <Route path="/contact" element={<div className="footer-page-body"><MyPage /></div>} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/products/:id" element={<WishlistProductDetail />} />
+        <Route path="/mypage/*" element={<div className="footer-page-body"><MyPage /></div>} />
         {/* HOME */}
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />
@@ -133,6 +143,7 @@ function Layout() {
         />
 
         {/* 주문서 작성 */}
+        <Route path="/cart" element={<Cart />} />
         <Route
           path="/checkout"
           element={

@@ -1,0 +1,94 @@
+.ongyeol-hd-layer {
+  position: fixed;
+  inset: var(--shop-header-bottom, 110px) 0 0;
+  z-index: 32;
+  --hd-width: min(406px, 100%);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, visibility 0s linear 160ms;
+}
+.ongyeol-hd-layer.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.ongyeol-hd-overlay {
+  position: absolute;
+  inset: 0 0 0 var(--hd-width);
+  background: rgb(0 0 0 / 40%);
+}
+.ongyeol-hd-panel {
+  position: absolute;
+  inset: 0 auto 0 0;
+  box-sizing: border-box;
+  width: var(--hd-width);
+  padding: 30px 25px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  color: #000;
+  font-family: 'Ongyeol Noto Sans', sans-serif;
+  font-synthesis: weight;
+  text-align: left;
+  letter-spacing: normal;
+  transform: translateY(-6px);
+  transition: transform 160ms ease;
+}
+.ongyeol-hd-layer.is-open .ongyeol-hd-panel { transform: translateY(0); }
+.ongyeol-hd-heading, .ongyeol-hd-link {
+  margin: 0;
+  font: 500 25px/30px 'Ongyeol Noto Sans', sans-serif;
+}
+.ongyeol-hd-categories { display: flex; flex-direction: column; gap: 40px; }
+.ongyeol-hd-category, .ongyeol-hd-link, .ongyeol-hd-item {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  letter-spacing: normal;
+}
+.ongyeol-hd-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 400 20px/24px 'Ongyeol Noto Sans', sans-serif;
+  cursor: pointer;
+}
+.ongyeol-hd-plus { position: relative; flex: none; width: 24px; height: 24px; }
+.ongyeol-hd-plus::before, .ongyeol-hd-plus::after {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 14px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+  background: #111928;
+}
+.ongyeol-hd-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+.ongyeol-hd-plus.is-expanded::after { display: none; }
+.ongyeol-hd-items { margin: 20px 0 0; padding: 0 0 0 20px; list-style: none; }
+.ongyeol-hd-items li + li { margin-top: 16px; }
+.ongyeol-hd-item { color: #878787; font: 400 18px/24px 'Ongyeol Noto Sans', sans-serif; }
+.ongyeol-hd-panel button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+@media (max-width: 402px) {
+  .ongyeol-hd-layer { --hd-width: 100%; }
+  .ongyeol-hd-panel { padding-right: 29px; }
+  .ongyeol-hd-heading, .ongyeol-hd-link { font-size: 20px; line-height: 24px; }
+  .ongyeol-hd-categories { gap: 35px; }
+  .ongyeol-hd-category { font-size: 18px; line-height: 22px; }
+  .ongyeol-hd-plus { width: 20px; height: 20px; }
+  .ongyeol-hd-plus::before, .ongyeol-hd-plus::after { width: 12px; }
+  .ongyeol-hd-mypage { order: 1; }
+}
+@media (min-width: 1480px) { .ongyeol-hd-layer { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ongyeol-hd-layer, .ongyeol-hd-panel { transition: none; }
+}

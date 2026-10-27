@@ -1,15 +1,15 @@
 .ongyeol-chat-products-avatar { position: absolute; left: 40px; top: 138px; }
-.ongyeol-chat-products-content { position: absolute; left: 50%; top: 170px; margin-top: -24px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 24px; font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; line-height: normal; }
+.ongyeol-chat-products-content { position: absolute; left: 50%; top: 170px; margin-top: -24px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 24px; font-family: "Noto Sans KR", "Noto Sans", sans-serif; line-height: normal; }
 .ongyeol-chat-products-image { position: relative; flex: none; }
 .ongyeol-chat-products-motion { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; }
-.ongyeol-chat-products-actions { position: absolute; left: 50%; bottom: calc(114px + 31.094px); transform: translateX(-50%); display: flex; flex-direction: column; gap: 15px; width: 296px; font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; }
+.ongyeol-chat-products-actions { position: absolute; left: 50%; bottom: calc(114px + 31.094px); transform: translateX(-50%); display: flex; flex-direction: column; gap: 15px; width: 296px; font-family: "Noto Sans KR", "Noto Sans", sans-serif; }
 .ongyeol-chat-products .ongyeol-chat-products-actions .ongyeol-chat-products-action { margin-top: 0; flex-shrink: 0; }
 .ongyeol-chat-products-image-crop { position: absolute; overflow: hidden; }
 .ongyeol-chat-products-image img { position: absolute; display: block; max-width: none; object-fit: cover; }
 .ongyeol-chat-products-details { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .ongyeol-chat-products-step { padding: 5px 10px; border: 1px solid #a44646; border-radius: 30px; color: #a44646; font-size: 16px; white-space: pre; }
 .ongyeol-chat-products-names { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 10px; width: 100%; }
-.ongyeol-chat-products-names h2 { margin: 0; font-family: 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 25px; font-weight: 500; white-space: nowrap; }
+.ongyeol-chat-products-names h2 { margin: 0; font-family: "Noto Sans KR", "Noto Sans", sans-serif; font-size: 25px; font-weight: 500; white-space: nowrap; }
 .ongyeol-chat-products-english { font-size: 16px; text-align: center; }
 .ongyeol-chat-products-content[data-presentation='wrinkle-ampoule'] .ongyeol-chat-products-english { white-space: nowrap; font-size: 16px; letter-spacing: 0; }
 .ongyeol-chat-products-description { padding-top: 15px; font-size: 15px; text-align: center; }

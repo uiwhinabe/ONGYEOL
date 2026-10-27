@@ -273,18 +273,18 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
           <button ref={searchTriggerRef} id="search-trigger" className="ongyeol-header-action" type="button" aria-label="검색" aria-expanded={searchOpen} aria-controls="search-dropdown" onClick={toggleSearch} onPointerEnter={hoverSearch} onPointerLeave={leaveSearch}>
             <ResponsiveIcon desktop={searchDesktop} tablet={searchTablet} mobile={searchMobile} />
           </button>
-          <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="고객센터">
+          <Link className="ongyeol-header-action ongyeol-header-action-desktop ongyeol-header-support" to="/contact" aria-label="고객센터">
             <img className="ongyeol-header-static-icon" src={support} width="26.25" height="26.2212" alt="" />
-          </button>
-          <button className="ongyeol-header-action ongyeol-header-action-desktop" type="button" aria-label="장바구니">
+          </Link>
+          <Link className="ongyeol-header-action ongyeol-header-action-desktop" to="/cart" aria-label="장바구니">
             <img className="ongyeol-header-static-icon" src={cart} width="25" height="25" alt="" />
-          </button>
+          </Link>
         </div>
       </div>
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
       <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={onSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
       <HamburgerDropdown ref={hamburgerPanelRef} open={hamburgerOpen} controller={hamburger} />
-      <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={accountLinks} isAuthenticated={isAuthenticated} onLogout={onLogout} onLogin={onLogin} />
+      <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={{ mypage: '/mypage', ...accountLinks }} isAuthenticated={isAuthenticated} onLogout={onLogout} onLogin={onLogin} />
     </header>
   )
 }

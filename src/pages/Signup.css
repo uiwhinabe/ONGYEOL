@@ -1,4 +1,4 @@
-.ongyeol-signup { box-sizing: border-box; flex: 1; min-width: 0; padding: 120px 20px 316px; background: #fff; color: #000; color-scheme: light; font: 500 14px/17px 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: left; }
+.ongyeol-signup { box-sizing: border-box; flex: 1; min-width: 0; padding: 120px 20px 316px; background: #fff; color: #000; color-scheme: light; font: 500 14px/17px "Noto Sans KR", "Noto Sans", sans-serif; letter-spacing: normal; text-align: left; }
 .ongyeol-signup-form { width: 589px; margin: 0 auto; }
 .ongyeol-signup-tabs { display: flex; justify-content: center; width: 458px; margin: 0 auto; border-bottom: 2px solid #9b9b9b; }
 .ongyeol-signup-tabs a { box-sizing: border-box; flex: 0 1 200px; padding: 10px; border-bottom: 2px solid transparent; color: inherit; font-size: 15px; line-height: 18px; text-align: center; text-decoration: none; }

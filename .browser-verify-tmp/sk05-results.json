@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "checks": "flow, order, navigation boundaries, back, reentry, close/reopen, other concerns, geometry, images, Escape",
+  "measurements": [
+    {
+      "panel": {
+        "x": 931,
+        "y": 182,
+        "width": 420,
+        "height": 760,
+        "bottom": 942
+      },
+      "gap": 30,
+      "composer": {
+        "x": 953,
+        "y": 828,
+        "width": 377,
+        "height": 80,
+        "bottom": 908
+      },
+      "images": [
+        {
+          "width": 136,
+          "height": 182,
+          "left": 0,
+          "top": 0
+        },
+        {
+          "width": 103,
+          "height": 137,
+          "left": 17,
+          "top": 23
+        }
+      ],
+      "name": "백목이 수분 농축 앰플, 50ml"
+    },
+    {
+      "panel": {
+        "x": 931,
+        "y": 182,
+        "width": 420,
+        "height": 760,
+        "bottom": 942
+      },
+      "gap": 30,
+      "composer": {
+        "x": 953,
+        "y": 828,
+        "width": 377,
+        "height": 80,
+        "bottom": 908
+      },
+      "images": [
+        {
+          "width": 161,
+          "height": 161,
+          "left": 0,
+          "top": 0
+        },
+        {
+          "width": 153,
+          "height": 166,
+          "left": 8,
+          "top": 0
+        }
+      ],
+      "name": "PDRN 로즈 밸런싱 크림"
+    },
+    {
+      "panel": {
+        "x": 931,
+        "y": 182,
+        "width": 420,
+        "height": 760,
+        "bottom": 942
+      },
+      "gap": 30,
+      "composer": {
+        "x": 953,
+        "y": 828,
+        "width": 377,
+        "height": 80,
+        "bottom": 908
+      },
+      "images": [
+        {
+          "width": 123,
+          "height": 165,
+          "left": 0,
+          "top": 0
+        },
+        {
+          "width": 124,
+          "height": 165,
+          "left": 4,
+          "top": 3
+        }
+      ],
+      "name": "PDRN 리페어 로즈 아이크림"
+    }
+  ],
+  "errors": []
+}

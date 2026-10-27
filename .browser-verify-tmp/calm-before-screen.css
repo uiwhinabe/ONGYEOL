@@ -1,0 +1,19 @@
+.ongyeol-chat-products-avatar { position: absolute; left: 40px; top: 138px; }
+.ongyeol-chat-products-content { position: absolute; left: 50%; top: 170px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 24px; font-family: 'Ongyeol Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; line-height: normal; }
+.ongyeol-chat-products-image { position: relative; flex: none; }
+.ongyeol-chat-products-image img { position: absolute; display: block; max-width: none; object-fit: cover; }
+.ongyeol-chat-products-details { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.ongyeol-chat-products-step { padding: 5px 10px; border: 1px solid #a44646; border-radius: 30px; color: #a44646; font-size: 16px; white-space: pre; }
+.ongyeol-chat-products-names { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 10px; width: 100%; }
+.ongyeol-chat-products-names h2 { margin: 0; font-family: 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; font-size: 25px; font-weight: 500; white-space: nowrap; }
+.ongyeol-chat-products-english { font-size: 16px; text-align: center; }
+.ongyeol-chat-products-description { padding-top: 15px; font-size: 15px; text-align: center; }
+.ongyeol-chat-products-description span { display: block; }
+.ongyeol-chat-products .ongyeol-chat-products-action { box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 15px; padding: 10px 40px; border: 1px solid #a44646; border-radius: 10px; background: white; color: #a44646; font: inherit; font-size: 16px; line-height: normal; text-decoration: none; white-space: nowrap; }
+.ongyeol-chat-products-action img { display: block; transform: rotate(-90deg); }
+.ongyeol-chat-products-navigation { position: absolute; left: calc(50% + 0.21px); top: 342px; transform: translateX(-50%); display: flex; justify-content: space-between; width: 344.417px; }
+.ongyeol-chat-products-navigation button { display: grid; place-items: center; width: 20px; height: 21px; padding: 0; border-radius: 100px; background: #d9d9d9; }
+.ongyeol-chat-products-navigation button:disabled { visibility: hidden; }
+.ongyeol-chat-products-navigation img { display: block; width: 15px; height: 15px; }
+.ongyeol-chat-products-navigation button:last-child img { transform: scaleX(-1); }
+.ongyeol-chat-products .ongyeol-inquiry-composer { left: 22px; top: 646px; }

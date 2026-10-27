@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { authenticateLogin } from '../services/login.js'
 import { useAuth } from '../components/authContext.js'
 import './Login.css'
+import './AuthFonts.css'
 function FieldError({ id, message }) {
   return <div id={id} className="ongyeol-login-error" aria-live="polite" aria-atomic="true">{message && <><svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><circle cx="5.5" cy="5.5" r="5" stroke="currentColor" /><path d="M5.5 2.5v3.5" stroke="currentColor" /><circle cx="5.5" cy="8" r=".6" fill="currentColor" /></svg><span>{message}</span></>}</div>
 }

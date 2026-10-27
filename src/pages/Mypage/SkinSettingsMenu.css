@@ -1,0 +1,31 @@
+.mp-skin-settings-dropdown {
+  position: fixed;
+  z-index: 10000;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 4px;
+  border: 1px solid #767676;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 12%);
+  color: #000;
+  font: 500 15px/22px 'Noto Sans KR', sans-serif;
+}
+.mp-skin-settings-dropdown > button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 7px 16px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.mp-skin-settings-dropdown > button:hover { background: #f8f8f8; }
+.mp-skin-settings-dropdown > button:focus-visible { outline: 2px solid #767676; outline-offset: -2px; }
