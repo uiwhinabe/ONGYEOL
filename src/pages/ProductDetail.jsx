@@ -1,3 +1,7 @@
+import ProductBadge from '../components/ProductBadge.jsx'
+import { useAuth } from '../components/authContext.js'
+import { useShopping, addWishlistProduct, removeWishlistProducts, addCartProducts } from '../services/wishlistStore.js'
+import { saveOrder } from '../services/orderStore.js'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProductReviewSummary from '../components/review/ProductReviewSummary.jsx'
@@ -418,6 +422,14 @@ function usesMobileDetailLayout() {
 
 export default function ProductDetail({ productId }) {
   const navigate = useNavigate()
+  const { isAuthenticated, enterLogin } = useAuth()
+  const { wishlist } = useShopping()
+  function purchase(product, quantity, buy = false) {
+    if (!isAuthenticated) return enterLogin()
+    const items = [{ ...product, quantity }]
+    if (buy) { saveOrder(items); navigate('/checkout') }
+    else { addCartProducts(items); navigate('/cart') }
+  }
   const [tabletLayout, setTabletLayout] = useState(usesTabletDetailLayout)
   const [mobileLayout, setMobileLayout] = useState(usesMobileDetailLayout)
   useEffect(() => {
@@ -456,7 +468,8 @@ export default function ProductDetail({ productId }) {
   const isAmpoule = productId === 'dakyeolmae-ampoule'
   const isCream = productId === 'dakyeolmae-cream'
   const isPad = productId === 'dakyeolmae-pad'
-  const product = sourceProduct && (isPad ? { ...sourceProduct, name: '닥열매 브라이트닝 토너 패드, 70매', englishName: 'PAPER MULBERRY BRIGHTENING TONER PAD', price: 32400 } : isCream ? { ...sourceProduct, name: '닥열매 브라이트닝 크림, 50ml', englishName: 'PAPER MULBERRY BRIGHTENING CREAM', originalPrice: 36000, price: 28800, discountPercent: 20 } : isAmpoule ? { ...sourceProduct, englishName: 'PAPER MULBERRY REPAIR AMPOULE' } : isMist ? { ...sourceProduct, englishName: 'Paper Mulberry Collagen Serum Mist' } : isToner ? { ...sourceProduct, name: '닥열매 브라이트닝 워터 토너, 200ml', englishName: 'DAKYEOLMAE BRIGHTENING WATER TONER' } : isMask ? { ...sourceProduct, englishName: 'DAKYEOLMAE COLLAGEN MASK SET' } : isOdiToner ? { ...sourceProduct, englishName: 'Leaf Reset Hydrating Toner' } : isOdiAmpoule ? { ...sourceProduct, name: '오디 톤업 앰플, 50ml', englishName: 'Radiance TONE-UP Ampoule' } : isOdiCream ? { ...sourceProduct, englishName: 'Deep Moisture Cream' } : isOdiBalm ? { ...sourceProduct, englishName: 'Melting Clean Cleansing Balm' } : isOdiMask ? { ...sourceProduct, englishName: 'Calming Hydration Mask' } : isVitaminToner ? { ...sourceProduct, name: '비타민 C 토너, 250 mL', englishName: 'Vitamin C Brightening Toner' } : isVitaminCleanser ? { ...sourceProduct, name: '비타민 C 클렌징폼, 150 mL', englishName: 'Vitamin C Brightening Cleansing Foam' } : isVitaminLotion ? { ...sourceProduct, englishName: vitaminLotionInfo.englishName } : isVitaminAmpoule ? { ...sourceProduct, ...vitaminAmpouleInfo } : isVitaminEssence ? { ...sourceProduct, ...vitaminEssenceInfo } : isVitaminCream ? { ...sourceProduct, ...vitaminCreamInfo } : isVitaminPad ? { ...sourceProduct, ...vitaminPadInfo } : isVitaminMask ? { ...sourceProduct, ...vitaminMaskInfo } : isRoseCream ? { ...sourceProduct, ...roseCreamInfo } : isRoseEyecream ? { ...sourceProduct, ...roseEyecreamInfo } : isBaekmogiAmpoule ? { ...sourceProduct, ...baekmogiAmpouleInfo } : isBaekmogiPad ? { ...sourceProduct, ...baekmogiPadInfo } : isBaekmogiCream ? { ...sourceProduct, ...baekmogiCreamInfo } : isBaekmogiToner ? { ...sourceProduct, ...baekmogiTonerInfo } : isBaekmogiLotion ? { ...sourceProduct, ...baekmogiLotionInfo } : isBaekmogiMask ? { ...sourceProduct, ...baekmogiMaskInfo } : sourceProduct)
+  const product = sourceProduct
+
   const [imageIndex, setImageIndex] = useState(0)
   const [thumbnailStart, setThumbnailStart] = useState(1)
   const [quantity, setQuantity] = useState(1)
@@ -545,18 +558,19 @@ export default function ProductDetail({ productId }) {
         {(product.englishName || isScrub) && <p className="ongyeol-detail__english">{product.englishName || 'PAPER MULBERRY PERFUME BODY SCRUB'}</p>}
         <h1 id="product-detail-title">{product.name}</h1>
         {(isScrub || isPad || isCream || isAmpoule || isMist || isToner || isMask || isOdiToner || isOdiAmpoule || isOdiCream || isOdiBalm || isOdiMask || isVitaminToner || isVitaminCleanser || isVitaminLotion || isVitaminAmpoule || isVitaminEssence || isVitaminCream || isVitaminPad || isVitaminMask || isRoseCream || isRoseEyecream || isBaekmogiAmpoule || isBaekmogiPad || isBaekmogiCream || isBaekmogiToner || isBaekmogiLotion || isBaekmogiMask) && <p className="ongyeol-detail__description">{isBaekmogiMask ? baekmogiMaskInfo.description : isBaekmogiLotion ? baekmogiLotionInfo.description : isBaekmogiToner ? baekmogiTonerInfo.description : isBaekmogiCream ? baekmogiCreamInfo.description : isBaekmogiPad ? baekmogiPadInfo.description : isBaekmogiAmpoule ? baekmogiAmpouleInfo.description : isRoseEyecream ? roseEyecreamInfo.description : isRoseCream ? roseCreamInfo.description : isVitaminMask ? vitaminMaskInfo.description : isVitaminPad ? vitaminPadInfo.description : isVitaminCream ? vitaminCreamInfo.description : isVitaminEssence ? vitaminEssenceInfo.description : isVitaminAmpoule ? vitaminAmpouleInfo.description : isVitaminLotion ? vitaminLotionInfo.description : isVitaminCleanser ? '부드러운 거품으로 노폐물을 씻어내 맑고 산뜻한 피부로 가꿔주는 클렌징 폼' : isVitaminToner ? '맑고 생기 있는 피부를 위한 비타민 C 브라이트닝 토너' : isOdiMask ? '촉촉한 수분으로 자극 받은 민감한 피부 진정' : isOdiBalm ? '부드럽게 녹이고 촉촉하게 마무리하는 클렌징' : isOdiCream ? '자극받은 피부를 촉촉하게 감싸 깊은 보습 장벽 형성' : isOdiAmpoule ? '맑고 환한 톤으로 생기있게 빛나는 피부' : isOdiToner ? '가볍고 맑은 수분으로 피부결을 촉촉하게 정돈' : isMask ? '촉촉하고 탄탄한 피부로 가꿔주는 집중 탄력 마스크' : isToner ? '맑은 수분을 채워 피부결을 촉촉하고 투명하게 정돈하는 워터 토너' : isMist ? '미세한 수분 세럼 입자가 피부에 촉촉한 윤기와 탄력을 더해주는 콜라겐 미스트' : isAmpoule ? '촉촉한 수분과 영양을 채워 편안하고 건강한 피부 컨디션 케어' : isCream ? '맑은 윤기와 촉촉한 보습으로 매끄러운 피부결 케어' : isPad ? '맑은 피부결, 촉촉한 수분과 부드러운 결 케어' : <>향기롭게, 더 맑은 하루를 위한 바디 케어</>}</p>}
-        <dl className="ongyeol-detail__prices">
-          {(isCream || isAmpoule || isToner || isOdiAmpoule || isOdiCream || isOdiBalm || (isVitaminToner && product.originalPrice > product.price) || (isVitaminCleanser && product.originalPrice > product.price) || isVitaminLotion || (isVitaminAmpoule && product.originalPrice > product.price) || (isVitaminEssence && product.originalPrice > product.price) || (isVitaminCream && product.originalPrice > product.price) || (isVitaminPad && product.originalPrice > product.price) || (isVitaminMask && product.originalPrice > product.price) || (isRoseCream && product.originalPrice > product.price) || (isRoseEyecream && product.originalPrice > product.price) || (isBaekmogiAmpoule && product.originalPrice > product.price) || (isBaekmogiPad && product.originalPrice > product.price) || (isBaekmogiCream && product.originalPrice > product.price) || (isBaekmogiToner && product.originalPrice > product.price) || (isBaekmogiLotion && product.originalPrice > product.price) || (isBaekmogiMask && product.originalPrice > product.price)) && <><dt>정상가</dt><dd><del>{money(product.originalPrice)}</del></dd></>}
+        <ProductBadge product={product} /><dl className="ongyeol-detail__prices">
+          {product.discountPercent > 0 && <><dt>정상가</dt><dd><del>{money(product.originalPrice)}</del></dd></>}
+
           <dt>판매가</dt><dd><strong>{money(product.price)}</strong>{product.discountPercent > 0 && <span className="ongyeol-detail__discount">{product.discountPercent}%</span>}</dd>
         </dl>
-        <p className="ongyeol-detail__shipping"><span>배송비</span>3,000원(40,000원 이상 구매 시 무료)</p>
+        <p className="ongyeol-detail__shipping"><span>배송비</span>3,000원(50,000원 이상 구매 시 무료)</p>
         <div className="ongyeol-detail__coupon">신규 가입하고 <span>1만원 할인 쿠폰</span>받기</div>
         <div className="ongyeol-detail__quantity">
           <div><button type="button" aria-label="수량 줄이기" disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>−</button><input type="number" aria-label="상품 수량" min="1" max="99" value={quantity} onChange={(event) => setQuantity(Math.min(99, Math.max(1, Math.trunc(Number(event.target.value) || 1))))} /><button type="button" aria-label="수량 늘리기" disabled={quantity === 99} onClick={() => setQuantity(quantity + 1)}>+</button></div>
           <strong>{money(product.price * quantity)}</strong>
         </div>
         <p className="ongyeol-detail__total"><span>구매수량 {quantity}개</span><strong>총 {money(product.price * quantity)}</strong></p>
-        <div className="ongyeol-detail__purchase"><button type="button" disabled aria-label="N pay"><img src={naverPay} alt="N pay" /></button><button type="button" disabled>장바구니</button><button type="button" disabled>구매하기</button></div>
+        <div className="ongyeol-detail__purchase"><button type="button" disabled aria-label="N pay"><img src={naverPay} alt="N pay" /></button><button type="button" onClick={() => purchase(product, quantity)}>장바구니</button><button type="button" onClick={() => purchase(product, quantity, true)}>구매하기</button><button type="button" aria-pressed={wishlist.some(p => p.id === product.id)} onClick={() => { if (!isAuthenticated) return enterLogin(); if (wishlist.some(p => p.id === product.id)) removeWishlistProducts([product.id]); else addWishlistProduct(product) }}>찜 {wishlist.some(p => p.id === product.id) ? '♥' : '♡'}</button></div>
         <div className="ongyeol-detail__facts">
           {[['배송안내', '평균 2~3일 이내 도착 예정'], ['교환·반품', '상품 수령 후 7일 이내 신청 가능'], ['결제 안내', '카드·간편결제 이용 가능'], ['고객 안내', '상품 및 배송 관련 문의']].map(([label, text]) => <div className="ongyeol-detail__fact" key={label}><span>{label}</span><span>{text}</span><span aria-hidden="true">›</span></div>)}
         </div>

@@ -1,3 +1,7 @@
+import { Link } from 'react-router-dom'
+import { readOrder, clearOrder, recordCompletedOrder } from '../services/orderStore.js'
+import { completeCartOrder } from '../services/wishlistStore.js'
+import { calculateShippingFee, calculateOrderTotals } from '../utils/orderPricing.js'
 import { Fragment, useRef, useState } from 'react'
 import './Payment.css'
 import cardIcon from '../assets/payment/card.svg'
@@ -16,10 +20,6 @@ const paymentMethods = [
   { id: 'escrow', label: '에스크로(가상계좌)', icon: escrowIcon },
   { id: 'kakao', label: '카카오페이(간편결제)', icon: kakaoIcon },
   { id: 'naver', label: '네이버페이', icon: naverIcon },
-]
-const exampleProducts = [
-  { id: 'pad', name: '[반값특가] 히알루론산 카테킨 패드', option: '(옵션: 1개)', price: 12000, quantity: 1 },
-  { id: 'pdrn-set', name: '[SET] PDRN 주름 관리 세트', option: '(옵션: PDRN 세럼 1개 + PDRN 크림 1개)', price: 38900, quantity: 1 },
 ]
 const exampleDelivery = { name: '김ㅇㅇ', phone: '010-0000-0000', address: '서울특별시 ㅇㅇ구 ㅇㅇ로 00, 000동 000호' }
 // Mock member coupons; replace this array when member coupon data is connected.
@@ -48,7 +48,8 @@ function Field({ label, id, invalid, children }) {
   return <div className="payment-field"><label className="payment-field-label" htmlFor={id}>{label}<span className="payment-required">*</span></label><div className="payment-field-content">{children}{invalid && <p className="payment-error" id={`${id}-error`} role="status">필수 입력 항목입니다.</p>}</div></div>
 }
 
-export default function Payment({ products = exampleProducts, delivery = exampleDelivery, onComplete, onBack }) {
+export default function Payment({ delivery = exampleDelivery, onComplete, onBack }) {
+  const [products] = useState(readOrder)
   const [selectedPayment, setSelectedPayment] = useState('card')
   const [values, setValues] = useState({ card: '', cardNumber: ['', '', '', ''], month: '', year: '', installment: '일시불', password: '', name: '', mobilePrefix: '010', mobileMiddle: '', mobileLast: '', email: '', emailDomain: '직접입력' })
   const [selectedCouponId, setSelectedCouponId] = useState('')
@@ -61,9 +62,9 @@ export default function Payment({ products = exampleProducts, delivery = example
   const formRef = useRef(null)
   const [currentYear] = useState(() => new Date().getFullYear())
   const totalProductPrice = products.reduce((sum, product) => sum + product.price * product.quantity, 0)
-  const shippingFee = !products.length || totalProductPrice >= 50000 ? 0 : 3000
+  const shippingFee = calculateShippingFee(totalProductPrice, products.length)
   const couponDiscount = coupons.find(coupon => coupon.id === selectedCouponId)?.discount ?? 0
-  const totalPaymentPrice = Math.max(0, totalProductPrice + shippingFee - couponDiscount)
+  const totalPaymentPrice = calculateOrderTotals(products, couponDiscount).total
   const allAgreed = agreements.every(Boolean)
 
   function update(key, value) {
@@ -127,9 +128,13 @@ export default function Payment({ products = exampleProducts, delivery = example
       requestAnimationFrame(() => formRef.current?.querySelector('[aria-invalid="true"]')?.focus())
       return
     }
+    recordCompletedOrder({ products, shippingFee, couponDiscount, paymentMethod: selectedPayment })
+    completeCartOrder(products)
+    clearOrder()
     onComplete?.()
   }
 
+  if (!products.length) return <main><Link to="/cart">{'\uc8fc\ubb38 \uc0c1\ud488\uc774 \uc5c6\uc2b5\ub2c8\ub2e4. \uc7a5\ubc14\uad6c\ub2c8\ub85c \uc774\ub3d9'}</Link></main>
   return <main className="payment-page"><div className="payment-main">
     <div className="payment-heading"><h1>결제하기</h1><p>선택하신 결제 수단으로 안전하게 결제할 수 있습니다.</p></div>
     <form className="payment-layout" ref={formRef} onSubmit={submit} noValidate>
@@ -189,7 +194,7 @@ export default function Payment({ products = exampleProducts, delivery = example
       </div>
       <aside className="payment-sidebar" aria-label="주문 및 배송 요약">
         <Section title="주문 상품 정보" change className="payment-order-summary">
-          {products.map(product => <div className="payment-product" key={product.id}><div className="payment-product-placeholder" aria-label="상품 이미지 자리" /><div><p>{product.name}</p><small>{product.option}</small><p className="payment-product-price">{formatPrice(product.price)}원 <span>{product.quantity}개</span></p></div></div>)}
+          {products.map(product => <div className="payment-product" key={product.id}><img className="payment-product-placeholder" src={product.image} alt={product.name} /><div><p>{product.name}</p><small>{product.option}</small><p className="payment-product-price">{formatPrice(product.price)}원 <span>{product.quantity}개</span></p></div></div>)}
           <div className="payment-amounts"><div className="payment-amount"><span>총 상품금액</span><span>{formatPrice(totalProductPrice)}원</span></div><div className="payment-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="payment-total"><span>총 결제금액</span><span><strong>{formatPrice(totalPaymentPrice)}</strong>원</span></div></div>
         </Section>
         <Section title="배송지 정보" change className="payment-delivery">

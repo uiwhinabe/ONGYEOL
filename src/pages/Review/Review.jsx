@@ -1,3 +1,4 @@
+import Pagination from '../../components/Pagination.jsx'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { skinConcerns } from '../skinGuideConcernData.js'
@@ -8,7 +9,6 @@ import profileIcon from '../../assets/reviews/profile.svg'
 import helpfulIcon from '../../assets/reviews/helpful.svg'
 import downIcon from '../../assets/reviews/chevron-down.svg'
 import rightIcon from '../../assets/reviews/chevron-right.svg'
-import paginationIcon from '../../assets/reviews/pagination.svg'
 import mobileRatingStar from '../../assets/reviews/mobile-rating-star.svg'
 import mobileReviewStar from '../../assets/reviews/mobile-review-star.svg'
 import mobileHelpfulIcon from '../../assets/reviews/mobile-helpful.svg'
@@ -138,7 +138,6 @@ export function Review({ data }) {
   const selectTab = next => { setTab(next); setPage(1) }
   const turnPage = next => { setPage(next); listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
   const options = values => [{ label: '전체', value: '' }, ...values.map(value => ({ label: value, value }))]
-  const pageStart = Math.floor((currentPage - 1) / 5) * 5 + 1
 
   return <main className="review-page" aria-label={`${data.productName} 리뷰`}>
     <div className="review-container">
@@ -166,11 +165,7 @@ export function Review({ data }) {
           {!filteredReviews.length && <p className="review-empty">{data.reviews.length || localReviews.length ? '선택한 조건에 맞는 리뷰가 없습니다.' : `${data.productName}의 리뷰가 아직 등록되지 않았습니다.`}</p>}
         </section>
       </div>
-      {pageCount > 0 && <nav className="review-pagination" aria-label="리뷰 페이지">
-        <button type="button" disabled={currentPage === 1} aria-label="이전 페이지" onClick={() => turnPage(currentPage - 1)}><img src={paginationIcon} alt="" /></button>
-        {Array.from({ length: Math.min(5, pageCount - pageStart + 1) }, (_, index) => pageStart + index).map(number => <button key={number} type="button" aria-current={currentPage === number ? 'page' : undefined} onClick={() => turnPage(number)}>{number}</button>)}
-        <button type="button" disabled={currentPage === pageCount} aria-label="다음 페이지" onClick={() => turnPage(currentPage + 1)}><img src={paginationIcon} alt="" /></button>
-      </nav>}
+      {pageCount > 0 && <div className="reviews-page-navigation"><Pagination currentPage={currentPage} totalPages={pageCount} onPageChange={turnPage} label="리뷰 페이지" /></div>}
     </div>
     <ReviewDialog dialogRef={dialogRef} productId={data.productId} onSubmit={submitReview} />
     <PhotoReviewDialog key={`${selectedPhotoReview?.reviewId}:${photo?.src}`} dialogRef={photoDialogRef} selectedPhoto={selectedPhotoReview && { ...selectedPhotoReview, src: photo.src }} selectedReview={selectedReview} />

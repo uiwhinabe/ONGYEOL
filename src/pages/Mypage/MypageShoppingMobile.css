@@ -21,9 +21,9 @@
   .ongyeol-mypage-screens .mp-shopping :is(.mp-view-23, .mp-view-27),
   .ongyeol-mypage-screens .mp-shopping .mp-view-19 > button[type='submit'] { display: none; }
   .mp-shopping .mp-shopping-period { display: block; position: relative; flex: none; width: 129px; height: 34px; }
-  .mp-shopping .mp-shopping-period > button { display: flex; align-items: center; justify-content: space-between; width: 129px; height: 34px; margin: 0; padding: 0 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; font: 16px/22px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
+  .mp-shopping .mp-shopping-period > button { display: flex; align-items: center; justify-content: space-between; width: 129px; height: 34px; margin: 0; padding: 0 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; font: 16px/22px 'Noto Sans KR', 'Noto Sans', sans-serif; cursor: pointer; }
   .mp-shopping .mp-shopping-period > [role='listbox'] { position: absolute; z-index: 5; top: 33px; right: 0; width: 129px; border: 1px solid #878787; background: white; }
-  .mp-shopping .mp-shopping-period [role='option'] { display: block; width: 100%; min-height: 25px; margin: 0; padding: 0 8px; border: 0; border-bottom: 1px solid #878787; background: white; color: black; text-align: left; font: 14px/24px 'Ongyeol Mypage Inter', sans-serif; cursor: pointer; }
+  .mp-shopping .mp-shopping-period [role='option'] { display: block; width: 100%; min-height: 25px; margin: 0; padding: 0 8px; border: 0; border-bottom: 1px solid #878787; background: white; color: black; text-align: left; font: 14px/24px 'Noto Sans KR', 'Noto Sans', sans-serif; cursor: pointer; }
   .mp-shopping .mp-shopping-period [role='option']:last-child { border-bottom: 0; }
   .mp-shopping .mp-shopping-period [role='option']:is(:hover, :focus-visible) { background: #efeaea; }
 
@@ -61,12 +61,12 @@
   .mp-shopping .mp-shopping-mobile-order-number img { flex: none; }
   .mp-shopping .mp-shopping-mobile-product { display: flex; align-items: center; gap: 12px; min-width: 0; }
   .mp-shopping .mp-shopping-mobile-placeholder { flex: none; width: 90px; height: 90px; background: #d9d9d9; }
-  .mp-shopping .mp-shopping-mobile-product-copy { display: flex; flex-direction: column; gap: 10px; width: 155px; max-width: calc(100% - 102px); min-width: 0; font: 15px/18px 'Ongyeol Mypage Inter', sans-serif; overflow-wrap: anywhere; }
+  .mp-shopping .mp-shopping-mobile-product-copy { display: flex; flex-direction: column; gap: 10px; width: 155px; max-width: calc(100% - 102px); min-width: 0; font: 15px/18px 'Noto Sans KR', 'Noto Sans', sans-serif; overflow-wrap: anywhere; }
   .mp-shopping .mp-shopping-mobile-product-copy > div:first-child { display: flex; flex-direction: column; gap: 5px; }
   .mp-shopping .mp-shopping-mobile-product-copy .mp-shopping-mobile-option { color: #878787; font-size: 12px; line-height: 15px; }
   .mp-shopping .mp-shopping-mobile-price { display: flex; flex-wrap: wrap; gap: 4px 16px; }
   .mp-shopping .mp-shopping-mobile-status { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px; line-height: 20px; }
   .mp-shopping .mp-shopping-mobile-status > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .mp-shopping .mp-shopping-mobile-status .mp-shopping-mobile-note { color: rgb(0 0 0 / 50%); font-size: 12px; line-height: 16px; white-space: pre-line; }
-  .mp-shopping .mp-shopping-mobile-status button { flex: none; min-height: 35px; padding: 5px; border: 1px solid black; border-radius: 5px; color: black; background: white; font: 15px/20px 'Ongyeol Noto Sans', sans-serif; opacity: 1; }
+  .mp-shopping .mp-shopping-mobile-status button { flex: none; min-height: 35px; padding: 5px; border: 1px solid black; border-radius: 5px; color: black; background: white; font: 15px/20px 'Noto Sans KR', 'Noto Sans', sans-serif; opacity: 1; }
 }

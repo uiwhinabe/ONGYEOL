@@ -1,3 +1,6 @@
+import { trackShoppingRoute } from './services/cartRecommendations.js'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
 import {
   BrowserRouter,
@@ -24,7 +27,7 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import SignupComplete from './pages/SignupComplete.jsx'
 import IdentityVerification from './pages/IdentityVerification.jsx'
-import Wishlist, { WishlistProductDetail } from './pages/Wishlist.jsx'
+import Wishlist from './pages/Wishlist.jsx'
 
 import Checkout from './pages/Checkout.jsx'
 import Cart from './pages/Cart.jsx'
@@ -50,8 +53,17 @@ function ProductPage() {
     onCategoryChange={(classification, category) => navigateToProducts(classification, category, navigate)} />
 }
 
+function RequireShoppingLogin({ children }) {
+  const { isAuthenticated, enterLogin } = useAuth()
+  useEffect(() => { if (!isAuthenticated) enterLogin() }, [isAuthenticated, enterLogin])
+  return isAuthenticated ? children : null
+}
+function LegacyProductDetail() { const { id } = useParams(); return <ProductDetail key={id} productId={id} /> }
+
 function Layout() {
-  const { pathname, hash } = useLocation()
+  const location = useLocation()
+  const { pathname, hash } = location
+  trackShoppingRoute(location)
   const navigate = useNavigate()
 
   const [chatOpen, setChatOpen] = useState(false)
@@ -97,8 +109,8 @@ function Layout() {
 
       <Routes>
         <Route path="/contact" element={<div className="footer-page-body"><MyPage /></div>} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/products/:id" element={<WishlistProductDetail />} />
+        <Route path="/wishlist" element={<RequireShoppingLogin><Wishlist /></RequireShoppingLogin>} />
+        <Route path="/products/:id" element={<LegacyProductDetail />} />
         <Route path="/mypage/*" element={<div className="footer-page-body"><MyPage /></div>} />
         {/* HOME */}
         <Route path="/" element={<Home />} />
@@ -143,13 +155,13 @@ function Layout() {
         />
 
         {/* 주문서 작성 */}
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<RequireShoppingLogin><Cart /></RequireShoppingLogin>} />
         <Route
           path="/checkout"
           element={
-            <Checkout
+            <RequireShoppingLogin><Checkout
               onPayment={() => navigate('/payment')}
-            />
+            /></RequireShoppingLogin>
           }
         />
 
@@ -157,10 +169,10 @@ function Layout() {
         <Route
           path="/payment"
           element={
-            <Payment
+            <RequireShoppingLogin><Payment
               onComplete={() => navigate('/order-complete')}
               onBack={() => navigate('/checkout')}
-            />
+            /></RequireShoppingLogin>
           }
         />
 

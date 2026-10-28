@@ -1,8 +1,11 @@
+import { useShopping, updateCart, cartKey } from '../services/wishlistStore.js'
+import { saveOrder } from '../services/orderStore.js'
+import { selectRecommendations } from '../services/cartRecommendations.js'
+import ProductPrice from '../components/ProductPrice.jsx'
 import { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
-import { products } from '../data/products.js'
-import { calculateShippingFee } from '../utils/orderPricing.js'
+import { calculateShippingFee, calculateOrderTotals } from '../utils/orderPricing.js'
 import trashIcon from '../assets/cart/trash.svg'
 import truckIcon from '../assets/cart/truck.svg'
 import cardIcon from '../assets/cart/card.svg'
@@ -11,21 +14,8 @@ import nextIcon from '../assets/cart/next.svg'
 import buyIcon from '../assets/cart/buy.svg'
 import './Cart.css'
 
-const findProduct = id => products.find(product => product.id === id)
-// Cart reference prices are local to this screen; the catalog remains unchanged.
 const RECOMMENDATIONS_PER_PAGE = 5
 const MOBILE_QUERY = '(max-width: 540px)'
-const recommendedProducts = [
-  { ...findProduct('baekmogi-ampoule'), name: '백목이 수분 농축 앰플 50ml', originalPrice: 26000, price: 20800, discountPercent: 20 },
-  { ...findProduct('dakyeolmae-ampoule'), name: '닥열매 리페어 앰플 30ml' },
-  { ...findProduct('vitamin-c-lotion'), name: '비타민 C 로션 50ml' },
-  { ...findProduct('odi-cream'), name: '오디 보습 크림' },
-  { ...findProduct('baekmogi-pad'), name: '백목이 커스텀 핏 패드 100매', originalPrice: 26000, price: 20800, discountPercent: 20 },
-].filter(product => product.id)
-const initialCartItems = [
-  { ...findProduct('odi-ampoule'), name: '오디 톤업 앰플 50ml', option: '(옵션: 1개)', price: 25600, quantity: 1, selected: true },
-  { ...findProduct('baekmogi-cream'), name: '백목이 수분 크림', option: '(옵션: 1개)', price: 20800, quantity: 1, selected: true },
-]
 const benefits = [
   { text: <>50,000원 이상<br />무료배송</>, icon: truckIcon },
   { text: <>다양한<br />결제수단</>, icon: cardIcon },
@@ -39,10 +29,13 @@ function SelectAll({ checked, disabled, onChange, label }) {
 
 export default function Cart() {
   const navigate = useNavigate()
-  const [items, setItems] = useState(initialCartItems)
+  const { cart: items } = useShopping()
+  const setItems = updateCart
+  const recommendedProducts = selectRecommendations(items)
   const [recommendationIndex, setRecommendationIndex] = useState(0)
   const recommendationViewportRef = useRef(null)
   const recommendationTrackRef = useRef(null)
+  const touchStart = useRef(null)
   const slideLockRef = useRef(false)
   const slideTimerRef = useRef(null)
   const [slideStep, setSlideStep] = useState(0)
@@ -63,7 +56,8 @@ export default function Cart() {
   const selectedProductsPrice = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const shippingFee = calculateShippingFee(selectedProductsPrice, selectedItems.length)
   const mobileRowShippingFee = calculateShippingFee(selectedProductsPrice, 1)
-  const totalPrice = selectedProductsPrice + shippingFee
+  const totals = calculateOrderTotals(selectedItems)
+  const totalPrice = totals.total
   const visibleCount = viewportVisibleCount
   const lastRecommendationIndex = hasRecommendationOverflow ? Math.max(0, recommendedProducts.length - visibleCount) : 0
   const startIndex = Math.min(recommendationIndex, lastRecommendationIndex)
@@ -73,6 +67,7 @@ export default function Cart() {
   useLayoutEffect(() => {
     const viewport = recommendationViewportRef.current
     const track = recommendationTrackRef.current
+    if (!viewport || !track) return
     const measureStep = () => {
       const hasOverflow = track.scrollWidth > viewport.clientWidth
       setHasRecommendationOverflow(hasOverflow)
@@ -89,7 +84,7 @@ export default function Cart() {
     const observer = new ResizeObserver(measureStep)
     observer.observe(viewport)
     return () => observer.disconnect()
-  }, [isMobile])
+  }, [isMobile, recommendedProducts.length])
 
   useEffect(() => () => window.clearTimeout(slideTimerRef.current), [])
 
@@ -113,20 +108,23 @@ export default function Cart() {
     setItems(current => current.map(item => ({ ...item, selected: !allSelected })))
   }
   function changeQuantity(id, delta) {
-    setItems(current => current.map(item => item.id === id
+    setItems(current => current.map(item => cartKey(item) === id
       ? { ...item, quantity: Math.max(1, Math.min(Number.MAX_SAFE_INTEGER, item.quantity + delta)) }
       : item))
   }
   function checkout() {
     if (!selectedItems.length) return
-    navigate('/checkout', { state: { cartItems: selectedItems.map(({ id, name, option, price, quantity, image }) => ({ id, name, option, price, quantity, image })) } })
+    saveOrder(selectedItems)
+    navigate('/checkout')
   }
 
   return <main className="cart-page">
-    <section className="cart-recommendations" aria-labelledby="cart-recommendation-title">
+    <section hidden={!recommendedProducts.length} className="cart-recommendations" aria-labelledby="cart-recommendation-title">
       <div className="cart-heading"><h2 id="cart-recommendation-title">이런 상품은 어떠신가요?</h2><p>장바구니에 담은 물건과 함께 사용하면 좋은 제품</p></div>
       <div className="cart-recommendation-carousel">
-        <div className="cart-recommend-viewport" ref={recommendationViewportRef}>
+        <div className="cart-recommend-viewport" ref={recommendationViewportRef}
+          onTouchStart={event => { touchStart.current = event.touches[0]?.clientX }}
+          onTouchEnd={event => { const start = touchStart.current; touchStart.current = null; const end = event.changedTouches[0]?.clientX; if (start != null && end != null && Math.abs(end - start) > 35) moveRecommendation(end < start ? 1 : -1) }}>
           <div className="cart-recommendation-list cart-recommend-track" ref={recommendationTrackRef}
             style={{ transform: `translateX(-${startIndex * slideStep}px)` }}
             onTransitionEnd={event => { if (event.target === event.currentTarget && event.propertyName === 'transform') finishSlide() }}>
@@ -147,13 +145,13 @@ export default function Cart() {
             <button type="button" className="cart-delete" disabled={!selectedItems.length} onClick={() => setItems(current => current.filter(item => !item.selected))}><img src={trashIcon} alt="" />선택 삭제</button>
           </div>
           <table className="cart-table">
-            <colgroup><col className="cart-col-check" /><col /><col className="cart-col-price" /><col className="cart-col-quantity" /><col className="cart-col-delivery" /><col className="cart-col-shipping" /><col className="cart-col-price" /></colgroup>
+            <colgroup><col className="cart-col-check" /><col /><col className="cart-col-price cart-col-unit-price" /><col className="cart-col-quantity" /><col className="cart-col-delivery" /><col className="cart-col-shipping" /><col className="cart-col-price" /></colgroup>
             <thead><tr><th scope="col"><SelectAll checked={allSelected} disabled={!items.length} onChange={toggleAll} label="장바구니 상품 전체 선택" /></th><th scope="col">상품/옵션정보</th><th scope="col">판매가</th><th scope="col">수량</th><th scope="col">배송구분</th><th scope="col">배송비</th><th scope="col">합계</th></tr></thead>
-            <tbody>{items.map(item => <tr key={item.id}>
-              <td className="cart-item-check"><input type="checkbox" checked={item.selected} aria-label={`${item.name} 선택`} onChange={() => setItems(current => current.map(product => product.id === item.id ? { ...product, selected: !product.selected } : product))} /></td>
-              <td><div className="cart-item-info"><img src={item.image} alt={item.name} /><div><p>{item.name}</p><small>{item.option}</small></div></div></td>
-              <td>{money(item.price)}</td>
-              <td><div className="cart-bottom-info"><div className="cart-quantity"><button type="button" aria-label={`${item.name} 수량 감소`} disabled={item.quantity === 1} onClick={() => changeQuantity(item.id, -1)}>−</button><output aria-label={`${item.name} 수량`}>{item.quantity}</output><button type="button" aria-label={`${item.name} 수량 증가`} onClick={() => changeQuantity(item.id, 1)}>+</button></div><span className="cart-mobile-amount cart-mobile-shipping">{mobileRowShippingFee ? money(mobileRowShippingFee) : '무료'}</span><span className="cart-mobile-amount cart-mobile-total">{money(item.price * item.quantity)}</span></div></td>
+            <tbody>{items.map(item => <tr key={cartKey(item)}>
+              <td className="cart-item-check"><input type="checkbox" checked={item.selected} aria-label={`${item.name} 선택`} onChange={() => setItems(current => current.map(product => cartKey(product) === cartKey(item) ? { ...product, selected: !product.selected } : product))} /></td>
+              <td><div className="cart-item-info"><img src={item.image} alt={item.name} /><div><p className="cart-item-name">{item.name}</p><small>{item.option}</small><span className="cart-mobile-unit-price"><ProductPrice product={item} cart /></span></div></div></td>
+              <td><ProductPrice product={item} cart /></td>
+              <td><div className="cart-bottom-info"><div className="cart-quantity"><button type="button" aria-label={`${item.name} 수량 감소`} disabled={item.quantity === 1} onClick={() => changeQuantity(cartKey(item), -1)}>−</button><output aria-label={`${item.name} 수량`}>{item.quantity}</output><button type="button" aria-label={`${item.name} 수량 증가`} onClick={() => changeQuantity(cartKey(item), 1)}>+</button></div><span className="cart-mobile-amount cart-mobile-shipping">{mobileRowShippingFee ? money(mobileRowShippingFee) : '무료'}</span><span className="cart-mobile-amount cart-mobile-total">{money(item.price * item.quantity)}</span></div></td>
               <td>기본배송</td><td>{shippingFee ? money(shippingFee) : '무료'}</td><td>{money(item.price * item.quantity)}</td>
             </tr>)}{!items.length && <tr><td colSpan={7} className="cart-empty">장바구니가 비어 있습니다.</td></tr>}</tbody>
           </table>
@@ -162,6 +160,7 @@ export default function Cart() {
           <h2 id="cart-summary-title">주문 요약</h2>
           <div className="cart-summary-amounts" aria-live="polite" aria-atomic="true">
             <div><span>선택상품 ({selectedItemCount}개)</span><span>{money(selectedProductsPrice)}</span></div>
+            <div><span>{'\uc0c1\ud488 \ud560\uc778\uae08\uc561'}</span><span>{money(totals.discountTotal)}</span></div>
             <div><span>배송비</span><span>{money(shippingFee)}</span></div>
             <div className="cart-total"><span>총 결제금액</span><strong>{money(totalPrice)}</strong></div>
           </div>

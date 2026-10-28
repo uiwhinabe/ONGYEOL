@@ -10,7 +10,7 @@
   /* Address lists need no date filter on mobile; remove its entire layout box. */
   :is(.mp-address-empty, .mp-address-populated) .mp-address-period { display: none; }
   :is(.mp-address-empty, .mp-address-populated) .mp-address-period-label { font-size: 16px; line-height: 22px; font-weight: 500; }
-  :is(.mp-address-empty, .mp-address-populated) .mp-address-period-select { display: flex; align-items: center; justify-content: space-between; flex: none; width: 129px; height: 34px; margin: 0; padding: 5px 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; opacity: 1; font: 14px/22px 'Ongyeol Mypage Inter', sans-serif; }
+  :is(.mp-address-empty, .mp-address-populated) .mp-address-period-select { display: flex; align-items: center; justify-content: space-between; flex: none; width: 129px; height: 34px; margin: 0; padding: 5px 8px; border: 1px solid #4a4848; border-radius: 5px; background: white; color: black; opacity: 1; font: 14px/22px 'Noto Sans KR', 'Noto Sans', sans-serif; }
   :is(.mp-address-empty, .mp-address-populated) :is(.mp-address-dates, .mp-address-query) { display: none; }
   .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) :is(.mp-view-84, .mp-view-87) { width: 100%; }
   .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-84 { min-height: 37px; gap: 5px; }
@@ -40,7 +40,7 @@
   .mp-address-populated .mp-view-113 { grid-column: 3; grid-row: 3; }
   .mp-address-populated .mp-view-111 { grid-column: 3; grid-row: 4; }
   .mp-address-populated .mp-view-114 { grid-column: 3; grid-row: 5; }
-  .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-109, .mp-view-112) { font-family: 'Ongyeol Noto Sans', sans-serif; font-size: 15px; line-height: 20px; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-109, .mp-view-112) { font-family: 'Noto Sans KR', 'Noto Sans', sans-serif; font-size: 15px; line-height: 20px; overflow-wrap: anywhere; }
   .ongyeol-mypage-screens .mp-address-populated .mp-view-110 p { font-weight: 500; line-height: 18px; }
   .ongyeol-mypage-screens .mp-address-populated :is(.mp-view-111, .mp-view-113) p { color: rgb(0 0 0 / 70%); }
   .ongyeol-mypage-screens .mp-address-populated .mp-view-114 p { font-size: 13px; line-height: 18px; white-space: normal; }

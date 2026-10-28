@@ -1,91 +1,83 @@
 import { useSyncExternalStore } from 'react'
-
-// Temporary catalog from the design. Replace with the product API when available.
-export const wishlistCatalog = [
-  ['odi-cream', '오디 보습 크림', 30000, 24000],
-  ['refit-pad', '리프 리셋 카밍 패드 70매', 26000, 20800],
-  ['vitamin-cleansing', '비타민 e 클렌징폼 150ml', 18000, 14400],
-  ['odi-mask', '오디 진정 마스크팩 5+1,25ml', 22000, 22000],
-  ['wood-ampoule', '백목이 수분 농축 앰플 50ml', 26000, 20800],
-  ['odi-ampoule', '오디 톤업 앰플 50ml', 32000, 25600],
-  ['wood-pad', '백목이 커스텀 핏 패드 100매', 26000, 20800],
-  ['vitamin-cream', '비타민 c 수분크림 50ml', 30000, 24000],
-  ['vitamin-lotion', '비타민 c 로션 50ml', 28000, 22400],
-].map(([id, name, originalPrice, price]) => ({ id, name, originalPrice, price, image: '' }))
-
+import { products } from '../data/products.js'
+import { readAuthenticated } from './demoSession.js'
+export const wishlistCatalog = products
 export const SHOPPING_STORAGE_KEY = 'ongyeol.shopping.v1'
 const empty = { wishlist: [], cart: [] }
 let snapshot = empty
-let loaded = false
+let owner
 const listeners = new Set()
-const validProduct = (p) => p && typeof p.id === 'string' && typeof p.name === 'string'
-  && p.name.length > 0 && Number.isFinite(p.price) && p.price >= 0
-
+export function shoppingUser() {
+  if (!readAuthenticated()) return null
+  try { return sessionStorage.getItem('ongyeol.userId') || 'ongyeol@gmail.com' } catch { return 'ongyeol@gmail.com' }
+}
+const aliases = { 'vitamin-cleansing': 'vitamin-c-cleanser', 'wood-ampoule': 'baekmogi-ampoule', 'wood-pad': 'baekmogi-pad', 'vitamin-cream': 'vitamin-c-cream', 'vitamin-lotion': 'vitamin-c-lotion' }
+export const cartKey = p => `${p.id}:${p.optionId || ''}`
+export function resolveItems(items) {
+  if (!Array.isArray(items)) return []
+  return items.flatMap(item => {
+    const product = products.find(p => p.id === (aliases[item?.id] || item?.id))
+    if (!product || (item.optionId != null && item.optionId !== '')) return []
+    const quantity = item.quantity ?? 1
+    if (!Number.isSafeInteger(quantity) || quantity < 1 || quantity > 9999) return []
+    return [{ ...product, quantity, optionId: '', option: '', selected: item.selected !== false }]
+  }).reduce((all, item) => {
+    const found = all.find(p => cartKey(p) === cartKey(item))
+    if (found) found.quantity = Math.min(9999, found.quantity + item.quantity)
+    else all.push(item)
+    return all
+  }, [])
+}
+function key() { return `${SHOPPING_STORAGE_KEY}:${shoppingUser()}` }
 function read() {
+  if (!shoppingUser()) return empty
   try {
-    const data = JSON.parse(window.localStorage.getItem(SHOPPING_STORAGE_KEY))
-    if (!Array.isArray(data?.wishlist) || !Array.isArray(data?.cart)) return empty
-    return {
-      wishlist: data.wishlist.filter((p, i, all) => validProduct(p) && all.findIndex((item) => item?.id === p.id) === i),
-      cart: data.cart.filter((p) => validProduct(p) && Number.isInteger(p.quantity) && p.quantity > 0),
+    let raw = localStorage.getItem(key())
+    // The old demo store belongs only to the original demo account.
+    if (raw === null && shoppingUser() === 'ongyeol@gmail.com') {
+      const old = JSON.parse(localStorage.getItem(SHOPPING_STORAGE_KEY)) || { wishlist: [], cart: [] }
+      if (!Array.isArray(old.wishlist)) old.wishlist = []
+      for (const p of products) if (localStorage.getItem(`ongyeol:wishlist:${p.id}`) === 'true') old.wishlist.push({ id: p.id })
+      raw = JSON.stringify(old)
+      localStorage.setItem(key(), raw)
     }
+    const data = JSON.parse(raw)
+    return { wishlist: resolveItems(data?.wishlist).map(p => products.find(item => item.id === p.id)), cart: resolveItems(data?.cart) }
   } catch { return empty }
 }
-
+export function refreshShopping() {
+  owner = shoppingUser(); snapshot = read(); listeners.forEach(fn => fn())
+}
 export function getShoppingSnapshot() {
-  if (!loaded && typeof window !== 'undefined') { snapshot = read(); loaded = true }
+  if (owner !== shoppingUser()) { owner = shoppingUser(); snapshot = read() }
   return snapshot
 }
-
-function subscribe(listener) {
-  listeners.add(listener)
-  const onStorage = (event) => {
-    if (event.key === SHOPPING_STORAGE_KEY || event.key === null) {
-      snapshot = read()
-      listeners.forEach((notify) => notify())
-    }
-  }
-  window.addEventListener('storage', onStorage)
-  return () => { listeners.delete(listener); window.removeEventListener('storage', onStorage) }
+function subscribe(fn) {
+  listeners.add(fn)
+  window.addEventListener('storage', refreshShopping)
+  return () => { listeners.delete(fn); window.removeEventListener('storage', refreshShopping) }
 }
-
-export function useShopping() {
-  return useSyncExternalStore(subscribe, getShoppingSnapshot, () => empty)
-}
-
+export function useShopping() { return useSyncExternalStore(subscribe, getShoppingSnapshot, () => empty) }
 function save(update) {
-  // Read at mutation time to retain changes made by another tab.
-  const next = update(read())
-  window.localStorage.setItem(SHOPPING_STORAGE_KEY, JSON.stringify(next))
-  snapshot = next
-  loaded = true
-  listeners.forEach((notify) => notify())
+  if (!shoppingUser()) return
+  const next = update(getShoppingSnapshot())
+  try { localStorage.setItem(key(), JSON.stringify({ wishlist: next.wishlist.map(p => ({ id: p.id })), cart: next.cart.map(({ id, quantity, optionId, selected }) => ({ id, quantity, optionId, selected })) })) } catch { /* Keep this session usable. */ }
+  snapshot = next; owner = shoppingUser(); listeners.forEach(fn => fn())
 }
-
 export function addWishlistProduct(product) {
-  if (!validProduct(product)) throw new Error('Invalid product')
-  save((data) => ({ ...data, wishlist: data.wishlist.some((p) => p.id === product.id)
-    ? data.wishlist : [...data.wishlist, product] }))
+  if (!products.some(p => p.id === product?.id)) return
+  save(data => ({ ...data, wishlist: data.wishlist.some(p => p.id === product.id) ? data.wishlist : [...data.wishlist, products.find(p => p.id === product.id)] }))
 }
-
-export function removeWishlistProducts(ids) {
-  const removed = new Set(ids)
-  save((data) => ({ ...data, wishlist: data.wishlist.filter((p) => !removed.has(p.id)) }))
+export function removeWishlistProducts(ids) { save(data => ({ ...data, wishlist: data.wishlist.filter(p => !ids.includes(p.id)) })) }
+export function addCartProducts(items) { save(data => ({ ...data, cart: resolveItems([...data.cart, ...items]) })) }
+export function updateCart(update) { save(data => ({ ...data, cart: resolveItems(update(data.cart)) })) }
+export function completeCartOrder(items) {
+  updateCart(cart => cart.flatMap(p => {
+    const purchased = items.find(item => cartKey(item) === cartKey(p))
+    const quantity = p.quantity - (purchased?.quantity || 0)
+    return quantity > 0 ? [{ ...p, quantity }] : []
+  }))
 }
-
-export function addCartProducts(products) {
-  if (!products.every(validProduct)) throw new Error('Invalid product')
-  save((data) => {
-    const cart = data.cart.map((p) => ({ ...p }))
-    for (const product of products) {
-      const existing = cart.find((p) => p.id === product.id)
-      if (existing) existing.quantity += 1
-      else cart.push({ ...product, quantity: 1 })
-    }
-    return { ...data, cart }
-  })
-}
-
 export function paginateWishlist(products, requestedPage, pageSize = 6) {
   const pageCount = Math.max(1, Math.ceil(products.length / pageSize))
   const page = Math.max(1, Math.min(requestedPage, pageCount))

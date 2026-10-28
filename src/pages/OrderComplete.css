@@ -1,4 +1,4 @@
-.order-complete-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; font-family: "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
+.order-complete-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; font-family: 'Noto Sans KR', 'Noto Sans', sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
 .order-complete-page *, .order-complete-page *::before, .order-complete-page *::after { box-sizing: border-box; }
 .order-complete-page h1, .order-complete-page h2, .order-complete-page h3,
 .order-complete-page button, .order-complete-page input, .order-complete-page select, .order-complete-page textarea { font-family: inherit; }

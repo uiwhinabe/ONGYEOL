@@ -1,5 +1,5 @@
 .event-detail-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; color-scheme: light; }
-.event-detail-inner { width: calc(100% - 48px); max-width: 980px; margin: 110px auto 0; padding-bottom: 100px; background: #fff; color: #111; font-family: Arial, "Noto Sans KR", sans-serif; font-size: 14px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
+.event-detail-inner { width: calc(100% - 48px); max-width: 980px; margin: 110px auto 0; padding-bottom: 100px; background: #fff; color: #111; font-family: 'Noto Sans KR', 'Noto Sans', sans-serif; font-size: 14px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
 .event-detail-page *, .event-detail-page *::before, .event-detail-page *::after { box-sizing: border-box; }
 .event-detail-page .event-detail-page-title { margin: 0 0 32px; color: #111; font-family: inherit; font-size: 24px; font-weight: 700; line-height: 1.35; letter-spacing: 0; }
 .event-detail-tabs { display: flex; align-items: center; gap: 24px; padding-bottom: 16px; border-bottom: 2px solid #222; margin-bottom: 42px; color: #bbb; font-size: 18px; }

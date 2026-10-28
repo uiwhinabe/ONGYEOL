@@ -6,14 +6,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Ongyeol Noto Sans';
-  src: url('../assets/header/noto-sans-regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 .ongyeol-header {
   position: sticky;
   top: 0;
@@ -63,7 +55,7 @@
 
 .ongyeol-header-tagline {
   margin: 0;
-  font-family: 'Ongyeol Footer Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: 15px;
   line-height: normal;
   white-space: nowrap;
@@ -89,7 +81,7 @@
 }
 
 .ongyeol-header-menu-label {
-  font-family: 'Ongyeol Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: normal;

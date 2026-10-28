@@ -1106,7 +1106,7 @@ export const reviewPages = {
     ],
   },
   'odi-ampoule': {
-    productId: 'odi-ampoule', productName: '오디 토탈 앰플',
+    productId: 'odi-ampoule', productName: products.find(product => product.id === 'odi-ampoule')?.name,
     totalReviews: 415, rating: 4.9, reviewCount: 415, photoReviewCount: 11, viewCount: 42218,
     ratingDistribution: { 5: 398, 4: 24, 3: 16, 2: 5, 1: 2 },
     photoReviews: ampoulePhotos,
