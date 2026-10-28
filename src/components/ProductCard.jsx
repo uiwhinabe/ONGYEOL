@@ -1,5 +1,7 @@
 
-import { useState } from 'react'
+import { useAuth } from './authContext.js'
+import { useShopping, addWishlistProduct, removeWishlistProducts } from '../services/wishlistStore.js'
+import ProductPrice from './ProductPrice.jsx'
 import { Link } from 'react-router-dom'
 import './ProductCard.css'
 import { productImageFrames } from '../data/productImageFrames.js'
@@ -12,15 +14,9 @@ const catalogTextures = import.meta.glob('../assets/products/catalog-textures/*-
 
 // A stable, unique product.id preserves each product's wish across page changes.
 export default function ProductCard({ product }) {
-  const storageKey = `ongyeol:wishlist:${product.id}`
-  const [wished, setWished] = useState(() => {
-    try {
-      const stored = window.localStorage.getItem(storageKey)
-      return stored === null ? Boolean(product.defaultWished) : stored === 'true'
-    } catch {
-      return Boolean(product.defaultWished)
-    }
-  })
+  const { isAuthenticated, enterLogin } = useAuth()
+  const { wishlist } = useShopping()
+  const wished = wishlist.some(p => p.id === product.id)
   const rating = Math.min(5, Math.max(0, Number(product.rating) || 0))
   const stars = Math.round(rating)
   const frame = productImageFrames[product.id]
@@ -28,13 +24,9 @@ export default function ProductCard({ product }) {
   const textureImage = ['닥열매', '장미', '백목이', '뽕나무', '비타민C'].includes(product.line) ? (catalogTextures[`../assets/products/catalog-textures/${product.id}-texture.png`] || product.textureImage) : null
 
   function toggleWish() {
-    const next = !wished
-    setWished(next)
-    try {
-      window.localStorage.setItem(storageKey, String(next))
-    } catch {
-      // Keep the button usable when browser storage is unavailable.
-    }
+    if (!isAuthenticated) return enterLogin()
+    if (wished) removeWishlistProducts([product.id])
+    else addWishlistProduct(product)
   }
 
   return (
@@ -69,11 +61,7 @@ export default function ProductCard({ product }) {
           <span>{product.name}</span>
         </Link>
       </h2>
-      <p className="ongyeol-product-card__price">
-        {product.originalPrice > product.price && <del className="ongyeol-product-card__original-price">{product.originalPrice.toLocaleString('ko-KR')}원</del>}
-        <span>{product.price.toLocaleString('ko-KR')}원</span>
-        {product.discountPercent > 0 && <span className="ongyeol-product-card__discount">{product.discountPercent}%</span>}
-      </p>
+      <ProductPrice product={product} className="ongyeol-product-card__price" />
       <div className="ongyeol-product-card__meta">
         <span className="ongyeol-product-card__rating" aria-label={`평점 ${rating}점, 리뷰 ${product.reviewCount}개`}>
           <span className="ongyeol-product-card__stars" aria-hidden="true">{'★'.repeat(stars)}<span className="ongyeol-product-card__empty-stars">{'★'.repeat(5 - stars)}</span></span>

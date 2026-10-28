@@ -48,7 +48,7 @@ export default function Login() {
     try {
       const result = await authenticateLogin({ email: email.trim(), password })
       if (submittedRevision !== revision.current) return
-      if (result.status === 'success') completeLogin()
+      if (result.status === 'success') completeLogin(email.trim())
       else if (result.status === 'id-mismatch') {
         setErrors({ email: '아이디를 다시 확인해주세요.' })
         emailRef.current?.focus()

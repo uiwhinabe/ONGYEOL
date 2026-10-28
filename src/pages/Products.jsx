@@ -1,3 +1,4 @@
+import Pagination from '../components/Pagination.jsx'
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import ProductCard from '../components/ProductCard.jsx'
 import { products as catalogProducts } from '../data/products.js'
@@ -99,20 +100,9 @@ function ProductList({ products, classification, initialCategory, onCategoryChan
           </ul>
         ) : <p className="ongyeol-products__empty">{category}에 등록된 상품이 없습니다.</p>}
       </div>
-      {pageCount > 0 && (
-        <nav className="ongyeol-products__pagination" aria-label="상품 목록 페이지">
-          <button type="button" aria-label="이전 페이지" disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)}>
-            <svg width="6" height="10" viewBox="0 0 6 10" aria-hidden="true"><path d="M5 1 1 5l4 4Z" fill="currentColor" /></svg>
-          </button>
-          {Array.from({ length: pageCount }, (_, index) => index + 1).map((number) => (
-            <button key={number} type="button" aria-label={`${number}페이지`} aria-current={currentPage === number ? 'page' : undefined}
-              onClick={() => setPage(number)}>{number}</button>
-          ))}
-          <button type="button" aria-label="다음 페이지" disabled={currentPage === pageCount} onClick={() => setPage(currentPage + 1)}>
-            <svg width="6" height="10" viewBox="0 0 6 10" aria-hidden="true"><path d="m1 1 4 4-4 4Z" fill="currentColor" /></svg>
-          </button>
-        </nav>
-      )}
+      {pageCount > 0 && <div className="products-page-navigation">
+        <Pagination currentPage={currentPage} totalPages={pageCount} onPageChange={setPage} maxVisiblePages={pageCount} label="상품 목록 페이지" />
+      </div>}
     </section>
   )
 }

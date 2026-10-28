@@ -32,7 +32,7 @@
   overscroll-behavior: contain;
   background: #fff;
   color: #000;
-  font-family: 'Ongyeol Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-synthesis: weight;
   text-align: left;
   letter-spacing: normal;
@@ -42,7 +42,7 @@
 .ongyeol-hd-layer.is-open .ongyeol-hd-panel { transform: translateY(0); }
 .ongyeol-hd-heading, .ongyeol-hd-link {
   margin: 0;
-  font: 500 25px/30px 'Ongyeol Noto Sans', sans-serif;
+  font: 500 25px/30px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 .ongyeol-hd-categories { display: flex; flex-direction: column; gap: 40px; }
 .ongyeol-hd-category, .ongyeol-hd-link, .ongyeol-hd-item {
@@ -59,7 +59,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font: 400 20px/24px 'Ongyeol Noto Sans', sans-serif;
+  font: 400 20px/24px 'Noto Sans KR', 'Noto Sans', sans-serif;
   cursor: pointer;
 }
 .ongyeol-hd-title, button.ongyeol-hd-plus {
@@ -88,7 +88,7 @@
 .ongyeol-hd-plus.is-expanded::after { display: none; }
 .ongyeol-hd-items { margin: 20px 0 0; padding: 0 0 0 20px; list-style: none; }
 .ongyeol-hd-items li + li { margin-top: 16px; }
-.ongyeol-hd-item { color: #878787; font: 400 18px/24px 'Ongyeol Noto Sans', sans-serif; cursor: pointer; transition: color 120ms ease; }
+.ongyeol-hd-item { color: #878787; font: 400 18px/24px 'Noto Sans KR', 'Noto Sans', sans-serif; cursor: pointer; transition: color 120ms ease; }
 .ongyeol-hd-item:hover,
 .ongyeol-hd-item:focus-visible { color: #000000; }
 .ongyeol-hd-panel button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }

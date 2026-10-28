@@ -1,3 +1,4 @@
+import { readCompletedOrder } from '../services/orderStore.js'
 import './OrderComplete.css'
 
 // Original Figma assets are embedded to keep this page contained in two files.
@@ -25,7 +26,7 @@ function DeliveryNotice({ thankYou = false }) {
   return <div className={`order-complete-delivery-notice${thankYou ? ' order-complete-thank-you' : ''}`}><img className="order-complete-truck" src={assets.truck} alt="" aria-hidden="true" /><div><p>{thankYou ? '주문해주셔서 감사합니다.' : '배송이 시작되면 문자로 안내드려요.'}</p><small>{thankYou ? '더 좋은 제품과 서비스로 보답하겠습니다.' : '배송 조회는 마이페이지 > 주문/배송 조회에서 확인하실 수 있습니다.'}</small></div></div>
 }
 
-export default function OrderComplete({ orderData = mockOrderData, onContinueShopping }) {
+export default function OrderComplete({ orderData = { ...mockOrderData, ...readCompletedOrder() }, onContinueShopping }) {
   const totalProductPrice = orderData.products.reduce((sum, product) => sum + product.price * product.quantity, 0)
   return <main className="order-complete-page"><div className="order-complete-main">
     <section className="order-complete-hero" aria-labelledby="order-complete-title">

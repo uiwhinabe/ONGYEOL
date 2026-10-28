@@ -4,7 +4,7 @@
   background: #fff;
   color: #000;
   color-scheme: light;
-  font: 18px/1.4 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', Arial, sans-serif;
+  font: 18px/1.4 'Noto Sans KR', 'Noto Sans', sans-serif;
   letter-spacing: normal;
   text-align: left;
 }
@@ -89,10 +89,6 @@
 .review-helpful[aria-pressed='true'] img { filter: invert(35%) sepia(20%) saturate(1000%) hue-rotate(230deg); }
 .review-item-photo { width: 183.221px; height: 208px; }
 .review-empty { margin: auto !important; color: #878787 !important; text-align: center; }
-.review-pagination { display: flex; justify-content: center; align-items: center; gap: 21px; height: 27px; margin-top: 185px; }
-.review-pagination button { display: grid; place-items: center; min-width: 24px; height: 27px; padding: 0; border: 0; background: transparent; color: #515151; font-size: 20px; line-height: 27px; }
-.review-pagination button[aria-current='page'] { color: #000; font-weight: 600; }
-.review-pagination button:first-child img { transform: rotate(180deg); }
 .review-dialog { width: min(640px, calc(100vw - 40px)); max-height: 85vh; padding: 32px; border: 1px solid #9b9b9b; border-radius: 5px; color: #000; background: #fff; font: inherit; }
 .review-dialog::backdrop { background: #0007; }
 .review-dialog-close { display: flex; justify-content: end; margin-bottom: 12px; }
@@ -169,7 +165,6 @@
   .review-item p { grid-column: 1; grid-row: 5; margin-top: 0; }
   .review-item-photo { grid-column: 2; grid-row: 3 / 6; width: 183px; height: 208px; }
   .review-page .review-helpful { position: absolute; top: 18px; right: 0; gap: 0; width: 24px; height: 25px; font-size: 0; }
-  .review-pagination { margin-top: 33px; }
 }
 
 /* Switch to the tablet composition before the desktop's fixed summary stops fitting. */
@@ -271,8 +266,6 @@
   .review-helpful > span { width: 20px; height: 20px; }
   .review-helpful > span > img:first-child { display: none; }
   .review-helpful > span > .review-mobile-only { display: block; }
-  .review-pagination { gap: 5px; margin-top: 50px; }
-  .review-pagination button { font-size: 20px; }
 }
 
 @media (max-width: 540px) {
@@ -292,3 +285,6 @@
   .review-page .review-filters .review-dropdown summary > img { position: absolute; right: 12px; top: 50%; width: 12px; height: 12px; transform: translateY(-50%); }
   .review-page .review-filters > .review-dropdown:nth-child(n) { grid-row: 1; width: 100%; margin: 0; }
 }
+.reviews-page-navigation { margin-top: 185px; }
+@media (min-width: 541px) and (max-width: 1199px) { .reviews-page-navigation { margin-top: 33px; } }
+@media (max-width: 540px) { .reviews-page-navigation { margin-top: 50px; } }

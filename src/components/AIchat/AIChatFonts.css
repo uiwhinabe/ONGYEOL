@@ -1,33 +1,4 @@
-/* Noto Sans KR is loaded by the shared Footer.css font faces. */
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../../assets/header/noto-sans-regular.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../../assets/footer/noto-sans-500.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../../assets/footer/noto-sans-600.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../../assets/footer/noto-sans-700.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
+/* Font files are declared once in src/fonts.css. */
 /* Include native controls and generated text without changing font metrics. */
 .ongyeol-consultation,
 .ongyeol-consultation *,
@@ -36,5 +7,5 @@
 .ongyeol-consultation ::placeholder,
 .ongyeol-ai-chat-button,
 .ongyeol-ai-chat-button * {
-  font-family: "Noto Sans KR", "Noto Sans", sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
 }

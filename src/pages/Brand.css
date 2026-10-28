@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  font-family: 'Ongyeol Noto Serif', 'Batang', '바탕', serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-weight: 400;
   color: #000;
 }
@@ -115,7 +115,7 @@
 
 .brand-page .brand-story-title {
   margin: 0;
-  font-family: 'Ongyeol Noto Serif', 'Ongyeol Footer Noto Serif', serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: 80px;
   font-weight: 400;
   line-height: normal;
@@ -125,7 +125,7 @@
 }
 
 .brand-story-description {
-  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: 30px;
   font-weight: 400;
   line-height: 1.5;
@@ -192,7 +192,7 @@
   align-items: center;
   gap: min(25px, 1.3021vw);
   color: #000;
-  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   line-height: 1.4;
   letter-spacing: 0;
   opacity: 0;
@@ -217,7 +217,7 @@
   border-radius: 20px;
   background: #ffd4d4;
   color: #000;
-  font-family: 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: min(20px, 1.0417vw);
   font-weight: 500;
   line-height: 1.4;

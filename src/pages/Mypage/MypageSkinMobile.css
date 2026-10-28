@@ -54,7 +54,7 @@
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-275, .mp-view-283, .mp-view-302) { width: 92px; max-width: 100%; height: auto; min-height: 148px; gap: 10px; justify-content: flex-start; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-293 { position: static; translate: none; width: 92px; max-width: 100%; height: auto; min-height: 160px; gap: 10px; padding-block: 3px; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-290, .mp-view-299, .mp-view-304) { display: none; }
-  .ongyeol-mypage-screens .mp-skin-settings .mp-skin-type-tablet-copy { display: block; font: 300 14px/17px 'Ongyeol Mypage Pretendard', sans-serif; text-align: center; }
+  .ongyeol-mypage-screens .mp-skin-settings .mp-skin-type-tablet-copy { display: block; font: 300 14px/17px 'Noto Sans KR', 'Noto Sans', sans-serif; text-align: center; }
   .ongyeol-mypage-screens .mp-skin-settings button[aria-pressed='true'] { background-color: #ffe6e6 !important; }
   .ongyeol-mypage-screens .mp-skin-settings .mp-view-315 { position: static; display: flex; flex-direction: column; gap: 20px; width: 180px; max-width: 100%; margin-inline: auto; }
   .ongyeol-mypage-screens .mp-skin-settings :is(.mp-view-316, .mp-view-325) { display: contents; }

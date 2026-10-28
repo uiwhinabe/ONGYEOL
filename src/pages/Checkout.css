@@ -1,6 +1,6 @@
 .checkout-page {
   width: 100%; min-height: 100vh; background: #fff; color: #222;
-  font-family: "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; font-size: 13px;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif; font-size: 13px;
   line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light;
 }
 .checkout-page *, .checkout-page *::before, .checkout-page *::after { box-sizing: border-box; }
@@ -342,12 +342,12 @@ body:has(.ongyeol-ai-chat-button) .checkout-floating-button { display: none; }
 .checkout-page .checkout-error-message { margin: 2px 0 0; color: #ff4d4f; font-size: 9px; line-height: 1.2; }
 .checkout-page .checkout-address-error-message { margin: -6px 0 0 65px; }
 
-.checkout-address-modal { box-sizing: border-box; width: min(760px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 36px 26px 18px; border: 0; border-radius: 4px; background: #fff; color: #222; font: 13px/1.5 "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; text-align: left; overflow: auto; }
+.checkout-address-modal { box-sizing: border-box; width: min(760px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 36px 26px 18px; border: 0; border-radius: 4px; background: #fff; color: #222; font: 13px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; text-align: left; overflow: auto; }
 .checkout-address-modal *, .checkout-address-modal *::before, .checkout-address-modal *::after { box-sizing: border-box; }
 .checkout-address-modal::backdrop { background: rgb(0 0 0 / 20%); }
 .checkout-address-modal button, .checkout-address-modal input { font: inherit; color: inherit; }
 .checkout-address-modal button { cursor: pointer; }
-.checkout-address-modal h2 { margin: 0 0 8px; font: 700 22px/1.4 "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; letter-spacing: 0; color: #111; }
+.checkout-address-modal h2 { margin: 0 0 8px; font: 700 22px/1.4 'Noto Sans KR', 'Noto Sans', sans-serif; letter-spacing: 0; color: #111; }
 .checkout-address-modal p { margin: 0; }
 .checkout-address-modal h3 { margin: 32px 0 10px; font-size: 16px; }
 .checkout-modal-close { position: absolute; right: 16px; top: 12px; padding: 0; border: 0; background: transparent; font-size: 25px !important; line-height: 1; }

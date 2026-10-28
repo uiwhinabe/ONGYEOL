@@ -10,7 +10,7 @@
   background: #fff;
   box-shadow: 0 3px 10px rgb(0 0 0 / 12%);
   color: #000;
-  font: 500 15px/22px 'Noto Sans KR', sans-serif;
+  font: 500 15px/22px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 .mp-skin-settings-dropdown > button {
   display: block;

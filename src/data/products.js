@@ -1,3 +1,4 @@
+import { productPricing } from '../utils/productPricing.js'
 import vitaminCleanserTexture from '../assets/products/vitamin-c-cleanser-texture.png'
 import vitaminTonerTexture from '../assets/products/vitamin-c-toner-texture.png'
 import vitaminPadTexture from '../assets/products/vitamin-c-pad-texture.png'
@@ -57,7 +58,7 @@ import roseBalancingCream from '../assets/products/rose-balancing-cream.png'
 
 // Display values follow the supplied design. Concerns are provisional UI tags,
 // pending the team's category mapping; they are not verified efficacy claims.
-export const products = [
+const catalog = [
   { id: 'dakyeolmae-body-scrub', name: '닥열매 퍼퓸 바디 스크럽, 300g', image: bodyScrub, textureImage: bodyScrubTexture,
     price: 32000, badge: 'HOT', rating: 5, reviewCount: 5, defaultWished: true,
     line: '닥열매', type: '클렌징', concerns: ['모공/피지'] },
@@ -117,7 +118,7 @@ export const products = [
   { id: 'odi-mask', name: '오디 진정 마스크팩 5+1, 25ml', image: odiMask, textureImage: odiMaskTexture,
     price: 22000, badge: 'HOT', rating: 5, reviewCount: 5, defaultWished: false,
     line: '뽕나무', type: '마스크팩', concerns: ['민감/진정', '수분/보습'] },
-  { id: 'odi-ampoule', name: '오디 토탈 앰플, 50ml', image: odiAmpoule, textureImage: odiAmpouleTexture,
+  { id: 'odi-ampoule', name: '오디 톤업 앰플, 50ml', image: odiAmpoule, textureImage: odiAmpouleTexture,
     originalPrice: 32000, price: 25600, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 5, defaultWished: false,
     line: '뽕나무', type: '에센스/앰플', concerns: ['수분/보습', '피부톤/기미잡티'] },
   { id: 'odi-cleansing-balm', name: '오디 클렌징밤, 100g', image: odiBalm, textureImage: odiBalmTexture,
@@ -154,3 +155,5 @@ export const products = [
     rating: 5, reviewCount: 5, defaultWished: false,
     line: '장미', type: '로션/크림', concerns: ['수분/보습', '민감/진정', '주름/탄력'] },
 ]
+
+export const products = catalog.map(({ defaultWished: _defaultWished, ...product }) => ({ ...product, ...productPricing(product) }))

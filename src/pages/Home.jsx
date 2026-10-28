@@ -1,3 +1,7 @@
+import ProductBadge from '../components/ProductBadge.jsx'
+import { products } from '../data/products.js'
+import ProductPrice from '../components/ProductPrice.jsx'
+import { getProductDetailHref } from '../utils/productNavigation.js'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import heroImage from '../assets/images/home/image 228.png'
@@ -15,24 +19,10 @@ import creamIcon from '../assets/images/home/category-cream.png'
 import maskIcon from '../assets/images/home/category-mask.png'
 import openingBanner from '../assets/images/home/grand-opening.png'
 import featuredImage from '../assets/images/home/백목이전체.png'
-import padImage from '../assets/images/home/백목이1.png'
-import creamImage from '../assets/images/home/백목이3.png'
-import ampouleImage from '../assets/images/home/백목이2.png'
 import lemonLineImage from '../assets/images/home/비타민전체.png'
-import lemonProduct1 from '../assets/images/home/비타민1.png'
-import lemonProduct2 from '../assets/images/home/비타민2.png'
-import lemonProduct3 from '../assets/images/home/비타민3.png'
 import roseLineImage from '../assets/images/home/장미전체.png'
-import roseProduct1 from '../assets/images/home/장미1.png'
-import roseProduct2 from '../assets/images/home/장미2.png'
 import mulberryLineImage from '../assets/images/home/오디 전체.png'
-import mulberryProduct1 from '../assets/images/home/오디1.png'
-import mulberryProduct2 from '../assets/images/home/오디2.png'
-import mulberryProduct3 from '../assets/images/home/오디3.png'
 import paperMulberryLineImage from '../assets/images/home/닥열매 전체.png'
-import paperMulberryProduct1 from '../assets/images/home/닥열매1.png'
-import paperMulberryProduct2 from '../assets/images/home/닥열매2.png'
-import paperMulberryProduct3 from '../assets/images/home/닥열매3.png'
 import featuredArrowLeft from '../assets/images/home/featured-arrow-left.svg'
 import featuredArrowRight from '../assets/images/home/featured-arrow-right.svg'
 import './Home.css'
@@ -59,23 +49,15 @@ const productCategories = [
   { id: 'lotion-cream', label: '로션 / 크림', image: creamIcon },
   { id: 'mask', label: '마스크팩', image: maskIcon },
 ]
-// HOME display data, independent of the future product catalog.
-const featuredProducts = [
-  { id: 'tremella-pad', name: '백목이 커스텀 수분 패드,100매', originalPrice: 35000, salePrice: 28000, discount: 20, image: padImage },
-  { id: 'tremella-cream', name: '백목이 수분 진정 크림 50ml', originalPrice: 26000, salePrice: 20800, discount: 20, image: creamImage },
-  { id: 'tremella-ampoule', name: '백목이 수분 농축 앰플,50ml', originalPrice: 28000, salePrice: 22400, discount: 20, image: ampouleImage },
-]
-// Null fields are intentionally awaiting catalog data; do not invent names/prices.
-const pendingProduct = (id, image = null, name = null) => ({ id, image, name, originalPrice: null, salePrice: null, discount: null })
+const byIds = ids => ids.map(id => products.find(p => p.id === id)).filter(Boolean)
 const lineSlides = [
-  { id: 'tremella', label: '백목이', name: '백목이 라인', icon: '💧', image: featuredImage, products: featuredProducts },
-  { id: 'lemon', label: '레몬', name: '레몬 라인', icon: '🍋', image: lemonLineImage, products: [pendingProduct('lemon-1', lemonProduct1), pendingProduct('lemon-2', lemonProduct2), pendingProduct('lemon-3', lemonProduct3, '비타민 클렌징 폼')] },
-  { id: 'rose', label: '로즈 PDRN', name: '장미 라인', icon: '🌹', image: roseLineImage, products: [pendingProduct('rose-1', roseProduct1), pendingProduct('rose-2', roseProduct2, '로즈 PDRN 아이크림'), pendingProduct('rose-3')] },
-  { id: 'mulberry', label: '오디', name: '오디 라인', icon: '🍇', image: mulberryLineImage, products: [pendingProduct('mulberry-1', mulberryProduct1), pendingProduct('mulberry-2', mulberryProduct2), pendingProduct('mulberry-3', mulberryProduct3, '오디 보습 크림')] },
-  { id: 'paper-mulberry', label: '닥열매', name: '닥열매 라인', icon: '🌿', image: paperMulberryLineImage, products: [pendingProduct('paper-mulberry-1', paperMulberryProduct1), pendingProduct('paper-mulberry-2', paperMulberryProduct2), pendingProduct('paper-mulberry-3', paperMulberryProduct3, '닥열매 퍼퓸 바디 스크럽')] },
+  { id: 'tremella', label: '백목이', name: '백목이 라인', icon: '💧', image: featuredImage, products: byIds(['baekmogi-pad', 'baekmogi-cream', 'baekmogi-ampoule']) },
+  { id: 'lemon', label: '레몬', name: '레몬 라인', icon: '🍋', image: lemonLineImage, products: byIds(['vitamin-c-toner', 'vitamin-c-ampoule', 'vitamin-c-cleanser']) },
+  { id: 'rose', label: '로즈 PDRN', name: '장미 라인', icon: '🌹', image: roseLineImage, products: byIds(['rose-pdrn-balancing-cream', 'rose-pdrn-eyecream']) },
+  { id: 'mulberry', label: '오디', name: '오디 라인', icon: '🍇', image: mulberryLineImage, products: byIds(['odi-toner', 'odi-ampoule', 'odi-cream']) },
+  { id: 'paper-mulberry', label: '닥열매', name: '닥열매 라인', icon: '🌿', image: paperMulberryLineImage, products: byIds(['dakyeolmae-pad', 'dakyeolmae-ampoule', 'dakyeolmae-body-scrub']) },
 ]
 const lineTrackSlides = [...lineSlides, { ...lineSlides[0], id: 'tremella-loop' }]
-const formatPrice = price => price.toLocaleString('ko-KR') + '원'
 
 export default function Home() {
   const { pathname } = useLocation()
@@ -319,9 +301,9 @@ export default function Home() {
       <div className="home-featured-details">
         <h2><span aria-hidden="true">{line.icon}</span> {line.name}</h2>
         <ul className="home-featured-products">{line.products.map((product, productIndex) => <li key={product.id}>
-          <div className="home-product-image">{product.image ? <img src={product.image} alt={product.name ?? `${line.label} 라인 상품 ${productIndex + 1}`} /> : <span className="home-product-pending-image">이미지 준비 중</span>}</div>
-          <div className="home-product-details"><h3>{product.name ?? '상품 정보 준비 중'}</h3>
-            <p className="home-product-prices">{product.originalPrice !== null && <del>{formatPrice(product.originalPrice)}</del>}{product.salePrice !== null ? <strong>{formatPrice(product.salePrice)}</strong> : <span className="home-product-pending-price">가격 정보 준비 중</span>}{product.discount !== null && <span>{product.discount}%</span>}</p>
+          <Link to={getProductDetailHref(product.id)} className="home-product-image">{product.image ? <img src={product.image} alt={product.name ?? `${line.label} 라인 상품 ${productIndex + 1}`} /> : <span className="home-product-pending-image">이미지 준비 중</span>}</Link>
+          <div className="home-product-details"><ProductBadge product={product} /><h3><Link to={getProductDetailHref(product.id)}>{product.name ?? '상품 정보 준비 중'}</Link></h3>
+            <ProductPrice product={product} className="home-product-prices" />
           </div>
         </li>)}</ul>
       </div>

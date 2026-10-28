@@ -1,7 +1,9 @@
+import { readOrder, saveOrder } from '../services/orderStore.js'
+import ProductPrice from '../components/ProductPrice.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { calculateShippingFee } from '../utils/orderPricing.js'
+import { Link, useNavigate } from 'react-router-dom'
+import { calculateShippingFee, calculateOrderTotals } from '../utils/orderPricing.js'
 import './Payment.css'
 import './Checkout.css'
 import cardIcon from '../assets/payment/card.svg'
@@ -37,10 +39,6 @@ function ErrorMessage({ id, visible, className = '' }) {
   return visible ? <p className={`checkout-error-message ${className}`} id={id} role="status">필수 입력 항목입니다.</p> : null
 }
 
-const initialProducts = [
-  { id: 'pad', name: '[반값특가] 히알루론산 카테킨 패드', price: 12000, quantity: 1, option: '(옵션: 1개)' },
-  { id: 'pdrn-set', name: '[SET] PDRN 주름 관리 세트', price: 38900, quantity: 1, option: '(옵션: PDRN 세럼 1개 + PDRN 크림 1개)' },
-]
 
 function Icon({ name }) {
   const paths = {
@@ -123,13 +121,14 @@ function Amount({ label, amount, large = false }) {
 
 export default function Checkout({ onPayment }) {
   const navigate = useNavigate()
-  const location = useLocation()
-  const [products, setProducts] = useState(() => location.state?.cartItems ?? initialProducts)
+  const [products, setProducts] = useState(readOrder)
+  useEffect(() => saveOrder(products), [products])
   const [quantityDrafts, setQuantityDrafts] = useState({})
   const totalProductQuantity = products.reduce((total, product) => total + product.quantity, 0)
   const totalProductPrice = products.reduce((total, product) => total + product.price * product.quantity, 0)
   const shippingFee = calculateShippingFee(totalProductPrice, products.length)
-  const totalPaymentPrice = totalProductPrice + shippingFee
+  const totals = calculateOrderTotals(products)
+  const totalPaymentPrice = totals.total
 
   function changeQuantity(id, change) {
     setQuantityDrafts(current => ({ ...current, [id]: undefined }))
@@ -238,6 +237,7 @@ export default function Checkout({ onPayment }) {
       requestAnimationFrame(() => mainRef.current?.querySelector('[aria-invalid="true"]')?.focus())
       return
     }
+    saveOrder(products)
     onPayment?.()
   }
 
@@ -254,6 +254,7 @@ export default function Checkout({ onPayment }) {
 
   const renderPaymentMethod = method => <button type="button" key={method.id} className={`payment-method checkout-payment-${method.id}${selectedPayment === method.id ? ' payment-method-active checkout-payment-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => selectPayment(method.id)}><img className="payment-method-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>
 
+  if (!products.length) return <main className="checkout-page"><p>{'\uc8fc\ubb38 \uc0c1\ud488\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.'}</p><Link to="/cart">{'\uc7a5\ubc14\uad6c\ub2c8\ub85c \uc774\ub3d9'}</Link></main>
   return <div className="checkout-page">
     <main className="checkout-main" ref={mainRef}>
       <div className="checkout-heading"><h1>주문서 작성</h1><p>주문 정보를 입력하고 결제 수단을 선택해주세요.</p></div>
@@ -261,9 +262,9 @@ export default function Checkout({ onPayment }) {
         <div className="checkout-left">
           <Section title={`주문 상품 (${totalProductQuantity}개)`} className="checkout-order-section">
             {products.map(product => <div className="checkout-product" key={product.id}>
-              <div className="checkout-product-placeholder" aria-label="상품 이미지 자리" />
+              <img className="checkout-product-placeholder" src={product.image} alt={product.name} />
               <div className="checkout-product-description"><p>{product.name}</p><small>{product.option}</small></div>
-              <span className="checkout-product-price">{formatPrice(product.price)}원</span>
+              <ProductPrice product={product} className="checkout-product-price" />
               <div className="checkout-quantity"><button type="button" aria-label={`${product.name} 수량 감소`} disabled={product.quantity === 1} onClick={() => changeQuantity(product.id, -1)}>-</button><input className="checkout-quantity-input" type="text" inputMode="numeric" pattern="[0-9]*" aria-label={`${product.name} 수량`} value={quantityDrafts[product.id] ?? product.quantity} onChange={event => inputQuantity(product.id, event.target.value)} onBlur={() => finishQuantity(product.id)} /><button type="button" aria-label={`${product.name} 수량 증가`} onClick={() => changeQuantity(product.id, 1)}>+</button></div>
               <span className="checkout-product-price">{formatPrice(product.price * product.quantity)}원</span>
               <button type="button" className="checkout-remove" aria-label={`${product.name} 삭제`} onClick={() => removeProduct(product.id)}>×</button>
@@ -314,9 +315,9 @@ export default function Checkout({ onPayment }) {
         </div>
 
         <aside className="checkout-sidebar" aria-label="주문 및 결제 요약">
-          <Section title="주문 금액 정보" className="checkout-order-amount"><div className="checkout-amount-body"><Amount label="상품금액" amount={totalProductPrice} /><div className="checkout-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="checkout-total-divider"><Amount label="총 상품금액" amount={totalProductPrice} large /></div><div className="checkout-free-shipping"><span>배송비</span><span>{shippingFee === 0 ? '무료' : `${formatPrice(shippingFee)}원`}</span></div></div></Section>
+          <Section title="주문 금액 정보" className="checkout-order-amount"><div className="checkout-amount-body"><Amount label="상품금액" amount={totals.originalTotal} /><Amount label="할인금액" amount={totals.discountTotal} /><div className="checkout-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="checkout-total-divider"><Amount label="총 상품금액" amount={totalProductPrice} large /></div><div className="checkout-free-shipping"><span>배송비</span><span>{shippingFee === 0 ? '무료' : `${formatPrice(shippingFee)}원`}</span></div></div></Section>
           <Section title="결제 금액 정보" className="checkout-payment-amount"><div className="checkout-amount-body"><Amount label="총 상품금액" amount={totalProductPrice} /><div className="checkout-amount"><span>배송비</span><span>{formatPrice(shippingFee)}원</span></div><div className="checkout-total-payment"><Amount label="총 결제금액" amount={totalPaymentPrice} large /></div></div></Section>
-          <Section title="주문 상품 확인하기" className="checkout-review">{products.map(product => <div className="checkout-review-product" key={product.id}><div className="checkout-product-placeholder" aria-label="상품 이미지 자리" /><div><p>{product.name}</p><p>{formatPrice(product.price)}원 <span className="checkout-review-quantity">{product.quantity}개</span></p></div></div>)}</Section>
+          <Section title="주문 상품 확인하기" className="checkout-review">{products.map(product => <div className="checkout-review-product" key={product.id}><img className="checkout-product-placeholder" src={product.image} alt={product.name} /><div><p>{product.name}</p><p>{formatPrice(product.price)}원 <span className="checkout-review-quantity">{product.quantity}개</span></p></div></div>)}</Section>
           <div className="checkout-actions">
             <button className="checkout-pay-button" type="button" onClick={validatePayment}>결제하기 <svg className="checkout-pay-chevron" width="27" height="27" viewBox="0 0 27 27" fill="none" aria-hidden="true"><path d="M9.89923 21.6001L16.6492 14.8501L9.89923 8.10011" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
             <button className="checkout-back-button" type="button" onClick={() => navigate('/cart')}>이전으로</button>

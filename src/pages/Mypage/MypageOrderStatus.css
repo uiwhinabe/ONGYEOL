@@ -7,7 +7,7 @@
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 .ongyeol-mypage :is(.mp-shopping-order-status, .mp-home-order-status) > :first-child {
   display: flex;
@@ -73,7 +73,7 @@
   gap: clamp(4px, 1cqi, 12px);
   margin-top: 16px;
   border-top: 1px solid rgb(0 0 0 / 50%);
-  font: 500 18px/25px 'Noto Sans KR', sans-serif;
+  font: 500 18px/25px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 .ongyeol-mypage :is(.mp-shopping-status-returns, .ongyeol-mypage-returns) p {
   min-width: 0;

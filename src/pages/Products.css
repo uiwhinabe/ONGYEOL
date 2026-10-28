@@ -7,7 +7,7 @@
   background: #fff;
   color: #111;
   color-scheme: light;
-  font-family: 'Ongyeol Footer Noto Sans KR', Arial, sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5;
   letter-spacing: normal;
@@ -20,7 +20,7 @@
 .ongyeol-products__title {
   margin: 0;
   color: #111;
-  font: 700 24px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif;
+  font: 700 24px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif;
   letter-spacing: normal;
 }
 .ongyeol-products__categories {
@@ -56,11 +56,6 @@
   list-style: none;
   text-align: left;
 }
-.ongyeol-products__pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 92px; }
-.ongyeol-products__pagination button { display: grid; place-items: center; width: 24px; height: 30px; padding: 0; border: 0; background: transparent; color: #555; }
-.ongyeol-products__pagination button[aria-current='page'] { color: #111; font-weight: 700; }
-.ongyeol-products__pagination button:disabled { opacity: .3; cursor: default; }
-.ongyeol-products__pagination svg { display: block; }
 .ongyeol-products__empty { padding: 80px 0; color: #666; }
 
 @media (min-width: 600px) and (max-width: 834px) {
@@ -97,8 +92,6 @@
     font-size: 18px;
   }
   .ongyeol-products__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 16px; }
-  .ongyeol-products__pagination { flex-wrap: wrap; gap: 4px; margin-top: 60px; }
-  .ongyeol-products__pagination button { width: 36px; height: 40px; }
 }
 @media (max-width: 360px) {
   .ongyeol-products { padding-inline: 14px; }
@@ -157,3 +150,5 @@
     max-width: 100%;
   }
 }
+.products-page-navigation { margin-top: 92px; }
+@media (max-width: 599px) { .products-page-navigation { margin-top: 60px; } }

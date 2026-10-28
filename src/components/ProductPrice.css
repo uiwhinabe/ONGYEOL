@@ -1,0 +1,8 @@
+.product-price { display: inline-flex; flex-wrap: wrap; gap: 5px; align-items: baseline; }
+.product-price del { color: #878787; font-size: .8em; }
+.product-price strong { color: #000; font-weight: 500; }
+.product-price .ongyeol-product-card__discount { color: #d32f2f; }
+@media (max-width: 1024px) { .product-price--cart { flex-direction: column-reverse; gap: 0; } }
+@media (max-width: 540px) { .product-price--cart del { display: none; } }
+
+.product-badge { display: inline-block; padding: 2px 6px; background: #f3f0ec; color: #333; font-size: 12px; }

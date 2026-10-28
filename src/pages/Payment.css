@@ -1,4 +1,4 @@
-.payment-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; font-family: "Ongyeol Footer Noto Sans KR", "Ongyeol Footer Noto Sans", "Noto Sans KR", "Noto Sans", sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
+.payment-page { display: flow-root; width: 100%; min-height: 100vh; background-color: #fff; color: #000; font-family: 'Noto Sans KR', 'Noto Sans', sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-align: left; color-scheme: light; }
 .payment-page *, .payment-page *::before, .payment-page *::after { box-sizing: border-box; }
 .payment-main { color: #222; max-width: 1450px; width: calc(100% - 160px); margin: 78px auto 118px; }
 .payment-page p { margin: 0; }

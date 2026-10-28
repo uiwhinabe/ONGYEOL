@@ -1,3 +1,4 @@
+import { refreshShopping } from '../services/wishlistStore.js'
 import { useEffect, useRef, useState } from 'react'
 import { AuthContext } from './authContext.js'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -19,19 +20,23 @@ export default function AuthProvider({ children }) {
     if (!isAuthPath(location.pathname)) saveReturnPath(location.pathname + location.search + location.hash)
     navigate('/login')
   }
-  const completeLogin = () => {
+  const completeLogin = (userId = 'ongyeol@gmail.com') => {
+    try { sessionStorage.setItem('ongyeol.userId', userId) } catch { /* unavailable */ }
     writeAuthenticated(true)
+    refreshShopping()
     setAuthenticated(true)
     navigate(consumeReturnPath(), { replace: true })
   }
   const completeSignup = () => {
     writeAuthenticated(true)
+    refreshShopping()
     setAuthenticated(true)
     consumeReturnPath()
     navigate('/', { replace: true })
   }
   const logout = () => {
     writeAuthenticated(false)
+    refreshShopping()
     setAuthenticated(false)
   }
   return <AuthContext.Provider value={{ isAuthenticated, enterLogin, completeLogin, completeSignup, logout }}>{children}</AuthContext.Provider>

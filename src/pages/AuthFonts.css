@@ -1,39 +1,9 @@
-/* Real Noto Sans files, matching the AI Chat font sources.
-   Noto Sans KR 400/500/700 is already loaded by the shared Footer.css. */
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../assets/header/noto-sans-regular.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../assets/footer/noto-sans-500.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../assets/footer/noto-sans-600.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url('../assets/footer/noto-sans-700.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
+/* Font files are declared once in src/fonts.css. */
 /* Scope native controls, validation messages and dialog text to auth screens. */
 :is(.ongyeol-login, .ongyeol-signup, .ongyeol-identity, .ongyeol-signup-complete),
 :is(.ongyeol-login, .ongyeol-signup, .ongyeol-identity, .ongyeol-signup-complete) *,
 :is(.ongyeol-login, .ongyeol-signup, .ongyeol-identity, .ongyeol-signup-complete) *::before,
 :is(.ongyeol-login, .ongyeol-signup, .ongyeol-identity, .ongyeol-signup-complete) *::after,
 :is(.ongyeol-login, .ongyeol-signup, .ongyeol-identity, .ongyeol-signup-complete) ::placeholder {
-  font-family: "Noto Sans KR", "Noto Sans", sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
 }

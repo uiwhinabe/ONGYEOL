@@ -1,10 +1,10 @@
-.ongyeol-mypage .contact-page { box-sizing: border-box; width: 100%; min-width: 0; background: #fff; color: #111; color-scheme: light; font: 400 16px/1.5 'Ongyeol Footer Noto Sans KR', 'Ongyeol Noto Sans', sans-serif; letter-spacing: normal; text-align: left; }
+.ongyeol-mypage .contact-page { box-sizing: border-box; width: 100%; min-width: 0; background: #fff; color: #111; color-scheme: light; font: 400 16px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; letter-spacing: normal; text-align: left; }
 .ongyeol-mypage .contact-page * { box-sizing: border-box; }
 .ongyeol-mypage .contact-page :where(button, input, textarea) { font: inherit; color: inherit; }
 .ongyeol-mypage .contact-page :is(button, input, textarea, a):focus-visible { outline: 2px solid #111; outline-offset: 3px; }
 .ongyeol-mypage .contact-page .contact-main { min-width: 0; }
 .ongyeol-mypage .contact-page .contact-section-heading { padding: 0 28px 24px; border-bottom: 1px solid #111; }
-.ongyeol-mypage .contact-page .contact-title, .ongyeol-mypage .contact-page .contact-faq-title { margin: 0 0 12px; color: #111; font: 700 20px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
+.ongyeol-mypage .contact-page .contact-title, .ongyeol-mypage .contact-page .contact-faq-title { margin: 0 0 12px; color: #111; font: 700 20px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; letter-spacing: normal; }
 .ongyeol-mypage .contact-page .contact-title { scroll-margin-top: 130px; }
 .ongyeol-mypage .contact-page .contact-introduction, .ongyeol-mypage .contact-page .contact-faq-introduction { margin: 0; }
 .ongyeol-mypage .contact-page .contact-form { margin: 32px 24px 0; }
@@ -40,12 +40,12 @@
 .ongyeol-mypage .contact-page .contact-submit-area { position: relative; display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 32px; text-align: center; }
 .ongyeol-mypage .contact-page .contact-submit-button { width: 100px; min-height: 34px; padding: 6px 16px; border: 1px solid #000000; border-radius: 4px; background: #FFFFFF; color: #000000; font-size: 14px; font-weight: 500; cursor: pointer; }
 .ongyeol-mypage .contact-page .contact-type-error { margin: 8px 0 0; font-size: 12px; }
-.ongyeol-mypage .contact-page .contact-confirm-popup { position: fixed; inset: 0; width: 650px; max-width: calc(100vw - 24px); height: 350px; max-height: calc(100dvh - 24px); margin: auto; padding: 0; overflow: auto; border: 1px solid #000; border-radius: 33px; background: #fff; color: #000; box-shadow: -15px -15px 20px rgba(0,0,0,.25), 15px 15px 20px rgba(0,0,0,.25); font: 500 14px/1.5 'Ongyeol Footer Noto Sans', 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; text-align: center; }
+.ongyeol-mypage .contact-page .contact-confirm-popup { position: fixed; inset: 0; width: 650px; max-width: calc(100vw - 24px); height: 350px; max-height: calc(100dvh - 24px); margin: auto; padding: 0; overflow: auto; border: 1px solid #000; border-radius: 33px; background: #fff; color: #000; box-shadow: -15px -15px 20px rgba(0,0,0,.25), 15px 15px 20px rgba(0,0,0,.25); font: 500 14px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; letter-spacing: normal; text-align: center; }
 .ongyeol-mypage .contact-page .contact-confirm-popup::backdrop { background: rgba(0,0,0,.5); }
 .ongyeol-mypage .contact-page .contact-confirm-close { position: absolute; top: 12px; right: 16px; display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; background: transparent; color: #000; cursor: pointer; }
 .ongyeol-mypage .contact-page .contact-confirm-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; min-height: 348px; padding: 32px 75px; }
 .ongyeol-mypage .contact-page .contact-confirm-heading { width: 100%; }
-.ongyeol-mypage .contact-page .contact-confirm-heading h2 { margin: 0; color: #000; font: 700 18px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; }
+.ongyeol-mypage .contact-page .contact-confirm-heading h2 { margin: 0; color: #000; font: 700 18px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; }
 .ongyeol-mypage .contact-page .contact-confirm-heading p { margin: 16px 0 0; color: #888; font-size: 18px; font-weight: 400; }
 .ongyeol-mypage .contact-page .contact-confirm-question { display: grid; place-items: center; width: 100%; min-height: 58px; margin: 0; padding: 10px 12px; border: 1px solid #000; border-radius: 5px; font-size: 24px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
 .ongyeol-mypage .contact-page .contact-confirm-actions { display: flex; width: 350px; max-width: 100%; gap: 28px; }
@@ -75,7 +75,7 @@
 .ongyeol-mypage .contact-page .contact-benefits { display: flex; justify-content: space-between; gap: 24px; margin: 80px 48px 0; }
 .ongyeol-mypage .contact-page .contact-benefit { display: flex; align-items: flex-start; gap: 16px; }
 .ongyeol-mypage .contact-page .contact-benefit-icon { flex-shrink: 0; }
-.ongyeol-mypage .contact-page .contact-benefit-title { margin: 0 0 10px; color: #111; font: 700 18px/1.5 'Ongyeol Footer Noto Sans KR', sans-serif; letter-spacing: normal; }
+.ongyeol-mypage .contact-page .contact-benefit-title { margin: 0 0 10px; color: #111; font: 700 18px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; letter-spacing: normal; }
 .ongyeol-mypage .contact-page .contact-benefit-description { margin: 0; color: #999; font-size: 13px; line-height: 1.4; }
 @media (max-width: 1432px) {
   .ongyeol-mypage .contact-page .contact-field { grid-template-columns: 100px minmax(0, 1fr); gap: 20px; }

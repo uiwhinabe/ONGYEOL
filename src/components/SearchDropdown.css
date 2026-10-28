@@ -12,7 +12,7 @@
   border: 0;
   background: #fff;
   color: #000;
-  font-family: 'Ongyeol Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
   text-align: left;
   letter-spacing: normal;
   visibility: hidden;
@@ -48,7 +48,7 @@
 
 .ongyeol-search-title {
   margin: 0;
-  font: 600 20px/24px 'Ongyeol Noto Sans', sans-serif;
+  font: 600 20px/24px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 
 .ongyeol-search-form {
@@ -73,7 +73,7 @@
   outline: none;
   background: transparent;
   color: #000;
-  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+  font: 400 18px/22px 'Noto Sans KR', 'Noto Sans', sans-serif;
   letter-spacing: normal;
   appearance: none;
 }
@@ -104,7 +104,7 @@
 .ongyeol-search-popular-title {
   margin: 0 0 25px;
   color: #515151;
-  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+  font: 400 18px/22px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 
 .ongyeol-search-keywords {
@@ -114,7 +114,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  font: 400 18px/22px 'Ongyeol Noto Sans', sans-serif;
+  font: 400 18px/22px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
 
 .ongyeol-search-keywords li {

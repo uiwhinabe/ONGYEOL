@@ -1,4 +1,4 @@
-.product-review-summary { width: 100%; max-width: 1000px; margin: 0 auto; color: #000; font: 14px/1.4 'Ongyeol Footer Noto Sans KR', sans-serif; text-align: left; }
+.product-review-summary { width: 100%; max-width: 1000px; margin: 0 auto; color: #000; font: 14px/1.4 'Noto Sans KR', 'Noto Sans', sans-serif; text-align: left; }
 .product-review-summary * { box-sizing: border-box; }
 .product-review-summary__heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .product-review-summary__heading h2 { display: flex; gap: 16px; margin: 0; }
@@ -11,7 +11,7 @@
 .product-review-summary__stats > div + div { margin-top: 7px; }
 .product-review-summary__stats dt { font-size: 13px; }
 .product-review-summary__stats dd { margin: 2px 0 0; font-size: 12px; font-weight: 700; }
-.product-review-summary h3 { margin: 0 0 20px; color: #000; font: 700 14px/1.4 'Ongyeol Footer Noto Sans KR', sans-serif; text-align: center; letter-spacing: normal; }
+.product-review-summary h3 { margin: 0 0 20px; color: #000; font: 700 14px/1.4 'Noto Sans KR', 'Noto Sans', sans-serif; text-align: center; letter-spacing: normal; }
 .product-review-summary__ratings { min-width: 0; padding: 0 28px; border-inline: 1px solid #d5d5d5; }
 .product-review-summary__rating { display: grid; grid-template-columns: 30px minmax(0, 1fr) 26px; align-items: center; gap: 12px; font-size: 12px; }
 .product-review-summary__rating + .product-review-summary__rating { margin-top: 10px; }
