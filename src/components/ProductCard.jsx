@@ -13,25 +13,29 @@ const catalogTextures = import.meta.glob('../assets/products/catalog-textures/*-
 })
 
 // A stable, unique product.id preserves each product's wish across page changes.
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, selection, actions, onWishChange, onProductLinkClick }) {
   const { isAuthenticated, enterLogin } = useAuth()
   const { wishlist } = useShopping()
   const wished = wishlist.some(p => p.id === product.id)
   const rating = Math.min(5, Math.max(0, Number(product.rating) || 0))
   const stars = Math.round(rating)
+  const reviewCount = product.reviewCount ?? 0
   const frame = productImageFrames[product.id]
   const detailHref = getProductDetailHref(product.id)
   const textureImage = ['닥열매', '장미', '백목이', '뽕나무', '비타민C'].includes(product.line) ? (catalogTextures[`../assets/products/catalog-textures/${product.id}-texture.png`] || product.textureImage) : null
 
   function toggleWish() {
+    if (onWishChange) return onWishChange(product)
     if (!isAuthenticated) return enterLogin()
     if (wished) removeWishlistProducts([product.id])
     else addWishlistProduct(product)
   }
 
   return (
+    <>
     <article className="ongyeol-product-card" data-product-id={product.id}>
-      <Link className="ongyeol-product-card__visual ongyeol-product-card__detail-link" to={detailHref} aria-label={`${product.name} 상세 보기`}>
+      {selection && <input className="ongyeol-product-card__selection" type="checkbox" aria-label={`${product.name} 선택`} checked={selection.checked} onChange={event => selection.onChange(event.target.checked)} />}
+      <Link className="ongyeol-product-card__visual ongyeol-product-card__detail-link" to={detailHref} onClick={onProductLinkClick} aria-label={`${product.name} 상세 보기`}>
         {product.image && frame ? (
           <div className="ongyeol-product-card__image-stage">
             <div className="ongyeol-product-card__image-crop" style={{
@@ -57,15 +61,15 @@ export default function ProductCard({ product }) {
         )}
       </Link>
       <h2 className="ongyeol-product-card__name">
-        <Link className="ongyeol-product-card__name-link ongyeol-product-card__detail-link" to={detailHref}>
+        <Link className="ongyeol-product-card__name-link ongyeol-product-card__detail-link" to={detailHref} onClick={onProductLinkClick}>
           <span>{product.name}</span>
         </Link>
       </h2>
       <ProductPrice product={product} className="ongyeol-product-card__price" />
       <div className="ongyeol-product-card__meta">
-        <span className="ongyeol-product-card__rating" aria-label={`평점 ${rating}점, 리뷰 ${product.reviewCount}개`}>
+        <span className="ongyeol-product-card__rating" aria-label={`평점 ${rating}점, 리뷰 ${reviewCount}개`}>
           <span className="ongyeol-product-card__stars" aria-hidden="true">{'★'.repeat(stars)}<span className="ongyeol-product-card__empty-stars">{'★'.repeat(5 - stars)}</span></span>
-          <span className="ongyeol-product-card__reviews" aria-hidden="true">({product.reviewCount})</span>
+          <span className="ongyeol-product-card__reviews" aria-hidden="true">({reviewCount})</span>
         </span>
         <button type="button" className="ongyeol-product-card__wish" aria-pressed={wished}
           aria-label={`${product.name} 찜 ${wished ? '해제' : '하기'}`} onClick={toggleWish}>
@@ -76,5 +80,7 @@ export default function ProductCard({ product }) {
         </button>
       </div>
     </article>
+    {actions && <div className="ongyeol-product-card__actions">{actions}</div>}
+    </>
   )
 }

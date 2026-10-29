@@ -2,8 +2,6 @@
 
 @media (max-width: 767px) {
   /* Figma 2277:42209; device UI is excluded. All rules are address-scoped. */
-  .ongyeol-mypage-screens:has(:is(.mp-address-empty, .mp-address-populated)) { padding-top: 10px; }
-  .ongyeol-mypage-screens:has(:is(.mp-address-empty, .mp-address-populated)) .mp-page-heading { min-height: 43px; height: auto; margin-bottom: 35px; padding: 5px 10px; font-size: 24px; line-height: 33px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-address-empty, .mp-address-populated) { width: 100%; gap: 35px; overflow: visible; }
   .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) > .mp-view-36 { margin-top: 15px; gap: 10px; }
   .ongyeol-mypage-screens :is(.mp-address-empty, .mp-address-populated) .mp-view-94 { display: none; }

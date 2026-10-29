@@ -3,8 +3,6 @@
 @media (max-width: 767px) {
   /* Figma 2275:29658: 402px canvas, 20px gutters, 35px controls.
      Reuse account content and validation; device/browser UI is excluded. */
-  .ongyeol-mypage-screens:has(.mp-account-tablet) { padding-top: 14px; }
-  .ongyeol-mypage-screens:has(.mp-account-tablet) .mp-page-heading { display: none; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-account-tablet { width: 100%; gap: 30px; overflow: visible; }
   .ongyeol-mypage-screens .mp-account-tablet :is(.mp-view-118, .mp-view-123) { width: 100%; }
   .ongyeol-mypage-screens .mp-account-tablet .mp-view-123 { gap: 20px; }

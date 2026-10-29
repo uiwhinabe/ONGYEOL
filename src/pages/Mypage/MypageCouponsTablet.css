@@ -9,8 +9,6 @@
 }
 
 @media (min-width: 768px) and (max-width: 1432px) {
-  .ongyeol-mypage-screens:has(.mp-coupons) { padding-top: 12px; }
-  .ongyeol-mypage-screens:has(.mp-coupons) .mp-page-heading { height: 54px; margin-bottom: 15px; padding: 5px 10px; font-size: 32px; line-height: 44px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-coupons { width: 100%; gap: 60px; overflow: visible; }
 
   .ongyeol-mypage-screens .mp-coupons .mp-view-18 { width: 100%; height: 70px; padding: 13px 19px; }

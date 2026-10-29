@@ -31,14 +31,25 @@
 .skin-guide-page .skin-guide-hero h1 { font-size: 26px; font-weight: 600; }
 .skin-guide-hero-copy > p { margin-top: 32px; font-size: 23px; font-weight: 500; }
 .skin-guide-hero-copy > p[lang='en'] { margin-top: 28px; font-size: 20px; font-weight: 400; }
-.skin-guide-how { min-height: 840px; padding: 64px 24px 20px; }
-.skin-guide-page .skin-guide-how h2 { font-size: 24px; font-weight: 700; }
-.skin-guide-how-intro { margin-top: 28px !important; font-size: 24px; font-weight: 700; }
-.skin-guide-page .skin-guide-how-list { display: flex; flex-direction: column; gap: 55px; align-items: center; margin-top: 48px; }
-.skin-guide-how-list li { display: flex; flex-direction: column; align-items: center; gap: 19px; }
+.skin-guide-how {
+  min-height: calc(100vh - var(--skin-guide-header-height, 110px));
+  min-height: calc(100dvh - var(--skin-guide-header-height, 110px));
+  /* Figma 3071:5733: 673px of content; retain readable padding on short screens. */
+  padding: clamp(24px, calc((100dvh - var(--skin-guide-header-height, 110px) - 673px) / 2), 64px) 24px;
+}
+.skin-guide-page .skin-guide-how h2 { font-size: 24px; font-weight: 700; line-height: 1.375; }
+.skin-guide-how-intro { margin-top: 28px !important; font-size: 24px; font-weight: 700; line-height: 1.375 !important; }
+.skin-guide-page .skin-guide-how-list { display: flex; flex-direction: column; gap: 40px; align-items: center; margin-top: 49px; }
+.skin-guide-how-list li { display: flex; flex-direction: column; align-items: center; gap: 0; }
 .skin-guide-how-list img { width: 60px; height: 60px; object-fit: cover; }
-.skin-guide-how-list h3 { font-size: 20px; font-weight: 700; }
-.skin-guide-how-list p { font-size: 20px; }
+.skin-guide-page .skin-guide-how-list h3 { margin-top: 15px; font-size: 20px; font-weight: 700; line-height: 1.35; }
+.skin-guide-page .skin-guide-how-list p { margin-top: 10px; font-size: 20px; line-height: 1.35; }
+@media (prefers-reduced-motion: no-preference) {
+  .skin-guide-how [data-solution-reveal='pending'] { opacity: 0; }
+  .skin-guide-how [data-solution-reveal='visible'] {
+    animation: skin-guide-concern-fade-in 1.1s ease-out var(--solution-reveal-delay, 0ms) both;
+  }
+}
 .skin-guide-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .skin-guide-page .skin-guide-steps { width: min(1003px, calc(100% - 48px)); display: flex; justify-content: space-between; align-items: center; margin-inline: auto; font-size: 24px; font-weight: 500; }
 .skin-guide-steps li { display: flex; flex: 1; align-items: center; gap: clamp(24px, 6.3vw, 121px); white-space: nowrap; }
@@ -69,10 +80,23 @@
 .skin-guide-why-content { width: min(1382px, 100%); margin-inline: auto; }
 .skin-guide-why-columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 745px); gap: clamp(40px, 14.5vw, 279px); align-items: center; margin-top: 72px; }
 .skin-guide-summary { display: flex; flex-direction: column; align-items: center; }
+.skin-guide-summary-reveal { display: flex; flex-direction: column; align-items: center; width: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  /* Match STEP 01's .7s heading fade, ease-out, and .12s icon stagger. */
+  .skin-guide-why[data-concern-reveal='pending'] :is(.skin-guide-summary-reveal, .skin-guide-causes) { opacity: 0; }
+  .skin-guide-why[data-concern-reveal='visible'] :is(.skin-guide-summary-reveal, .skin-guide-causes) {
+    animation: skin-guide-concern-fade-in .7s ease-out both;
+  }
+  .skin-guide-why[data-concern-reveal='visible'] .skin-guide-causes { animation-delay: .12s; }
+  @keyframes skin-guide-concern-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
 .skin-guide-page .skin-guide-summary h2 { font-size: 24px; font-weight: 600; white-space: nowrap; }
 .skin-guide-moisture-label { margin-top: 9px !important; font-size: 24px; font-weight: 400; white-space: nowrap; }
 .skin-guide-summary-type { display: flex; flex-direction: column; align-items: center; gap: 15px; font-size: 20px; }
-.skin-guide-summary > .skin-guide-summary-type { margin-top: 58px; }
+.skin-guide-summary-reveal > .skin-guide-summary-type { margin-top: 58px; }
 .skin-guide-summary-copy { margin-top: 41px !important; font-size: 20px; font-weight: 500; }
 .skin-guide-why-label { font-size: 36px; font-weight: 700; }
 .skin-guide-page .skin-guide-causes h2 { margin-top: 10px; font-size: 36px; font-weight: 600; }
@@ -99,6 +123,12 @@
 .skin-guide-ingredients li > p:first-of-type { margin-top: 8px; }
 .skin-guide-ingredients li > p:last-child { margin-top: 14px; white-space: nowrap; }
 .skin-guide-routine { margin-top: 33px; }
+@media (prefers-reduced-motion: no-preference) {
+  .skin-guide-solution [data-solution-reveal='pending'] { opacity: 0; }
+  .skin-guide-solution [data-solution-reveal='visible'] {
+    animation: skin-guide-concern-fade-in 1.1s ease-out var(--solution-reveal-delay, 0ms) both;
+  }
+}
 .skin-guide-routine-heading { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-inline: 50px; text-align: left; }
 .skin-guide-routine-heading h3, .skin-guide-routine-heading p { font-size: 16px; font-weight: 400; white-space: nowrap; }
 .skin-guide-routine-line { flex: 1; min-width: 0; overflow: hidden; }
@@ -129,7 +159,7 @@
 .skin-guide-ending > p { margin-top: 29px; font-size: 24px; font-weight: 500; }
 
 @media (min-width: 1025px) {
-  .skin-guide-how, .skin-guide-types, .skin-guide-why { min-height: max(840px, calc(100vh - var(--skin-guide-header-height, 110px))); }
+  .skin-guide-types, .skin-guide-why { min-height: max(840px, calc(100vh - var(--skin-guide-header-height, 110px))); }
   .skin-guide-routine { min-height: calc(100vh - var(--skin-guide-header-height, 110px)); }
   .skin-guide-hero, .skin-guide-how, .skin-guide-types, .skin-guide-why, .skin-guide-solution, .skin-guide-routine { scroll-margin-top: var(--skin-guide-header-height, 110px); }
 }
@@ -173,8 +203,6 @@
   .skin-guide-hero-copy { width: 440px; }
   .skin-guide-hero-copy > p:not([lang]) br { display: none; }
 
-  .skin-guide-how { min-height: 1084px; padding: 174px 24px 120px; }
-  .skin-guide-page .skin-guide-how-list { margin-top: 50px; }
 
   .skin-guide-page .skin-guide-steps { width: min(660px, calc(100% - 24px)); margin-inline: auto; font-size: clamp(18px, 2.88vw, 24px); gap: 0; }
   .skin-guide-steps li, .skin-guide-steps li:last-child { position: relative; flex: 1; justify-content: center; gap: 0; min-width: 0; }
@@ -266,13 +294,14 @@
     scroll-margin-top: var(--skin-guide-header-height, 110px);
   }
   .skin-guide-page .skin-guide-how .skin-guide-steps { display: none; }
+  .skin-guide-how-heading { display: flex; flex-direction: column; align-items: center; }
   .skin-guide-page .skin-guide-how h2 { font-size: 18px; font-weight: 600; }
   .skin-guide-how-intro { margin-top: 20px !important; font-size: 18px; font-weight: 600; }
   .skin-guide-page .skin-guide-how-list { margin-top: 32px; gap: 24px; }
-  .skin-guide-how-list li { width: 100%; gap: 12px; }
+  .skin-guide-how-list li { width: 100%; }
   .skin-guide-how-list img { width: 48px; height: 48px; }
-  .skin-guide-how-list h3 { font-size: 18px; font-weight: 600; }
-  .skin-guide-how-list p { font-size: 16px; }
+  .skin-guide-page .skin-guide-how-list h3 { margin-top: 12px; font-size: 18px; font-weight: 600; }
+  .skin-guide-page .skin-guide-how-list p { margin-top: 8px; font-size: 16px; }
 
   .skin-guide-page .skin-guide-steps { width: min(338px, calc(100% - 8px)); margin-inline: auto; gap: 0; font-size: 13px; }
   .skin-guide-steps li, .skin-guide-steps li:last-child { position: relative; flex: 1; justify-content: center; min-width: 0; gap: 0; color: #777; }
@@ -316,7 +345,7 @@
   .skin-guide-summary { position: relative; min-height: 704px; justify-content: center; padding: 110px 21px 64px; }
   .skin-guide-mobile-summary-steps[hidden] { display: block; position: absolute; top: 30px; left: 21px; right: 21px; }
   .skin-guide-causes { width: 100%; max-width: 402px; margin-inline: auto; padding: 64px 21px; }
-  .skin-guide-summary > .skin-guide-summary-type { margin-top: 40px; }
+  .skin-guide-summary-reveal > .skin-guide-summary-type { margin-top: 40px; }
   .skin-guide-summary-type { font-size: 14px; gap: 10px; }
   .skin-guide-summary-copy { margin-top: 30px !important; font-size: 15px; }
   .skin-guide-why-label { font-size: 24px; }

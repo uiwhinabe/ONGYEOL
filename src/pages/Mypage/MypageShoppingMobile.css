@@ -4,9 +4,6 @@
 @media (max-width: 767px) {
   /* Figma 2277:42340 / 2277:41887 / 2277:42060. Device UI is excluded.
      Scope every shared presentation rule to these three shopping screens. */
-  .ongyeol-mypage-screens:has(.mp-shopping) .mp-page-heading { height: auto; min-height: 43px; margin-bottom: 26px; padding: 5px 10px; font-size: 24px; line-height: 33px; }
-  .ongyeol-mypage-screens:has(.mp-shopping-returns) { padding-top: 13px; }
-  .ongyeol-mypage-screens:has(.mp-shopping-refunds) { padding-top: 10px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-shopping { width: 100%; overflow: visible; gap: 35px; }
   .ongyeol-mypage-screens .mp-shopping :is(.mp-view-59, .mp-view-70) { width: 100%; gap: 35px; }
   .ongyeol-mypage-screens .mp-shopping .mp-view-70 { gap: 5px; }

@@ -1,10 +1,9 @@
 import Pagination from '../components/Pagination.jsx'
-import ProductBadge from '../components/ProductBadge.jsx'
+import ProductCard from '../components/ProductCard.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { addCartProducts, addWishlistProduct, removeWishlistProducts, useShopping, paginateWishlist, wishlistCatalog } from '../services/wishlistStore.js'
 import './Wishlist.css'
-import { getProductDetailHref } from '../utils/productNavigation.js'
 
 const won = (value) => `${value.toLocaleString('ko-KR')}원`
 
@@ -148,7 +147,6 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
   const { popup, setPopup, closePopup, perform } = useWishlistPopup()
   const { page, pageCount, items } = paginateWishlist(wishlist, requestedPage)
   const [heartError, setHeartError] = useState('')
-  const [animatingHearts, setAnimatingHearts] = useState([])
   const selected = wishlist.filter((p) => selection.includes(p.id))
   const allChecked = wishlist.length > 0 && selected.length === wishlist.length
   if (previousWishlist !== wishlist) {
@@ -202,37 +200,16 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
     <div className="wishlist-message-space" aria-hidden="true" />
     {heartError && <p role="alert">{heartError}</p>}
     {!items.length ? <p className="wishlist-empty">{preview ? '표시할 상품이 없습니다.' : '찜한 상품이 없습니다.'}</p> : <>
-      <ul className="wishlist-grid">
-        {items.map((product) => <li className="wishlist-card" key={product.id}>
-          <div className="wishlist-image">
-            <Link to={preview ? '/wishlist' : getProductDetailHref(product.id)} onClick={handleProductLink}><ProductImage product={product} /></Link>
-            <input className="wishlist-product-checkbox" type="checkbox" aria-label={`${product.name} 선택`}
-              checked={selection.includes(product.id)} onChange={(event) => {
-                const checked = event.target.checked
-                setSelection((current) => checked ? [...current, product.id] : current.filter((id) => id !== product.id))
-              }} />
-          </div>
-          <Link className="wishlist-product-name" to={preview ? '/wishlist' : getProductDetailHref(product.id)} onClick={handleProductLink}>{product.name}</Link>
-          <ProductBadge product={product} /><div className="wishlist-price-row"><Price product={product} />
-            <button className={`wishlist-heart${animatingHearts.includes(product.id) ? ' wishlist-heart-animating' : ''}`} type="button" aria-label={`${product.name} 찜 해제`} aria-pressed="true"
-              onClick={(event) => {
-                if (animatingHearts.includes(product.id)) return
-                const touch = event.nativeEvent.pointerType === 'touch'
-                  || !window.matchMedia('(hover: hover) and (pointer: fine)').matches
-                if (touch && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                  setAnimatingHearts((current) => [...current, product.id])
-                } else unlike(product)
-              }}
-              onAnimationEnd={() => {
-                if (!animatingHearts.includes(product.id)) return
-                setAnimatingHearts((current) => current.filter((id) => id !== product.id))
-                unlike(product)
-              }}>♥</button>
-          </div>
-          <div className="wishlist-card-actions">
-            <button className="wishlist-cart-button wishlist-hover-cart" type="button" aria-label={`${product.name} 장바구니 담기`} onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.', 'cart')}><span className="wishlist-cart-text">장바구니 담기</span></button>
-            <button className="wishlist-buy-button" type="button" disabled title="구매 기능 준비 중"><span>바로구매</span></button>
-          </div>
+      <ul className="wishlist-grid catalog-product-grid">
+        {items.map(product => <li key={product.id}>
+          <ProductCard product={product} onProductLinkClick={handleProductLink} onWishChange={unlike}
+            selection={{ checked: selection.includes(product.id), onChange: checked => {
+              setSelection(current => checked ? [...current, product.id] : current.filter(id => id !== product.id))
+            } }}
+            actions={<div className="wishlist-card-actions">
+              <button className="wishlist-cart-button wishlist-hover-cart" type="button" aria-label={`${product.name} 장바구니 담기`} onClick={() => perform(() => onAddCart([product]), '장바구니에 담았습니다.', 'cart')}><span className="wishlist-cart-text">장바구니 담기</span></button>
+              <button className="wishlist-buy-button" type="button" disabled title="구매 기능 준비 중"><span>바로구매</span></button>
+            </div>} />
         </li>)}
       </ul>
     </>}

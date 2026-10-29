@@ -1,4 +1,32 @@
+/* Exact Event sale-grid dimensions, shared without stretching cards. */
+:root {
+  --catalog-card-width: calc((min(980px, 100vw - 48px) - 160px) / 3);
+  --catalog-column-gap: 80px;
+  --catalog-row-gap: 28px;
+}
+.catalog-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--catalog-card-width));
+  justify-content: center;
+  align-items: start;
+  gap: var(--catalog-row-gap) var(--catalog-column-gap);
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.catalog-product-grid > li { min-width: 0; }
+.catalog-product-grid .ongyeol-product-card { width: var(--catalog-card-width); }
+@media (min-width: 541px) and (max-width: 1024px) {
+  :root { --catalog-card-width: calc((100vw - 102px) / 2); --catalog-column-gap: 50px; --catalog-row-gap: 32px; }
+}
+@media (max-width: 540px) {
+  :root { --catalog-card-width: calc((100vw - 60px) / 2); --catalog-column-gap: 20px; --catalog-row-gap: 35px; }
+}
 .ongyeol-product-card {
+  position: relative;
   box-sizing: border-box;
   min-width: 0;
   color: #111;
@@ -119,7 +147,7 @@
 .ongyeol-product-card__discount { color: #ed0000; font-weight: 700; }
 .ongyeol-product-card__empty-stars { color: #bbb; }
 .ongyeol-product-card__name { margin: 8px 0 0; color: #111; font-family: inherit; font-size: 12px; font-weight: 400; line-height: 18px; letter-spacing: normal; overflow-wrap: anywhere; }
-.ongyeol-product-card__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; margin: 6px 0 0; line-height: 18px; }
+.ongyeol-product-card__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; margin: 6px 0 0; min-height: 19px; line-height: 18px; }
 .ongyeol-product-card__meta { display: flex; align-items: center; justify-content: space-between; min-height: 24px; margin-top: 4px; }
 .ongyeol-product-card__rating { display: flex; align-items: center; gap: 4px; }
 .ongyeol-product-card__stars { color: #ffc400; font: 20px/1 Arial, sans-serif; letter-spacing: 0; }
@@ -141,7 +169,7 @@
   .ongyeol-product-card { font-size: 11px; }
   .ongyeol-product-card__name { font-size: 11px; line-height: 17px; }
   .ongyeol-product-card__original-price { font-size: 9px; }
-  .ongyeol-product-card__price { gap: 3px; line-height: 17px; }
+  .ongyeol-product-card__price { gap: 3px; min-height: 18px; line-height: 17px; }
   .ongyeol-product-card__stars { font-size: 16px; }
   .ongyeol-product-card__reviews { font-size: 9px; }
   .ongyeol-product-card__meta { flex-wrap: wrap; gap: 4px; }
@@ -156,3 +184,6 @@
 @media (prefers-reduced-motion: reduce) {
   .ongyeol-product-card__name-link span { transition: none; }
 }
+
+.ongyeol-product-card__selection { position: absolute; top: 12px; right: 12px; z-index: 2; width: 19px; height: 19px; margin: 0; accent-color: #111; cursor: pointer; }
+.ongyeol-product-card__actions { margin-top: 12px; }

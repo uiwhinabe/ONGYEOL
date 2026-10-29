@@ -3,7 +3,6 @@
 @media (max-width: 767px) {
   /* Figma 2275:29531. The 60px device UI is excluded. */
 
-  .ongyeol-mypage-screens:has(.mp-coupons) .mp-page-heading { display: none; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > .mp-coupons { width: 100%; gap: 10px; overflow: visible; }
   .ongyeol-mypage-screens .mp-coupons .mp-view-18 { width: 100%; height: 34px; padding: 0; border: 0; }
   .ongyeol-mypage-screens .mp-coupons .mp-view-19 { height: 34px; justify-content: center; gap: 10px; }

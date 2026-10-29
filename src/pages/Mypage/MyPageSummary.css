@@ -1,6 +1,8 @@
 
 .ongyeol-mypage-screens :where(.mp-summary).mp-view-94 { background-color:#dedada;align-content:stretch;display:flex;gap:55px;height:177px;align-items:flex-start;overflow:clip;padding-inline:60px;padding-block:20px;position:relative;border-radius:5px;flex-shrink:0;width:100%; }
 .mp-summary .mp-coupon-tablet-greeting, .mp-summary-compact { display: none; }
+.ongyeol-mypage-screens .mp-summary .mp-view-8,
+.ongyeol-mypage .mp-summary-compact .mp-shopping-benefit-item h2 { white-space: nowrap; overflow-wrap: normal; }
 .ongyeol-mypage .mp-coupons .mp-summary-compact.mp-shopping-benefits { display: none; }
 /* One responsive benefits layout for shopping and address screens. */
 @media (min-width: 768px) and (max-width: 1432px) {
@@ -59,12 +61,17 @@
   .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-10 ~ .mp-view-10 { left: calc(200% / 3); }
   .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-12 { width: 80px; }
   .ongyeol-mypage-screens .mp-coupons .mp-summary :is(.mp-view-7, .mp-view-15, .mp-view-17) { width: 100%; min-width: 0; min-height: 54px; justify-content: space-between; }
-  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-8 { font-size: 16px; line-height: 22px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
+  .ongyeol-mypage-screens .mp-coupons .mp-summary .mp-view-8 { font-size: 16px; line-height: 22px; text-align: center; white-space: nowrap; overflow-wrap: normal; }
   .ongyeol-mypage-screens .mp-coupons .mp-summary :is(.mp-view-9, .mp-view-16) { font-size: 15px; font-weight: 300; line-height: 22px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
 }
 
 /* Desktop only; retain the original tablet and mobile spacing above. */
 @media (min-width: 1433px) {
+  /* The label is slightly wider than the exported 79px slot with our font. */
+  .ongyeol-mypage-screens .mp-summary .mp-view-17 {
+    width: max-content;
+    min-width: max-content;
+  }
   .ongyeol-mypage-screens .mp-summary :is(.mp-view-7, .mp-view-15, .mp-view-17) {
     display: flex;
     flex-direction: column;

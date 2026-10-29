@@ -56,7 +56,7 @@ export default function Event() {
       </button>)}</div>
       <div className="events-page-navigation"><Pagination currentPage={1} totalPages={1} label="이벤트 페이지" /></div>
     </> : <>
-      <div className="sale-product-grid">
+      <div className="sale-product-grid catalog-product-grid">
         {visibleProducts.map(product => <ProductCard key={product.id} product={product} />)}
       </div>
       <div className="sale-page-navigation"><Pagination currentPage={currentPage} totalPages={pageCount} onPageChange={setSalePage} maxVisiblePages={pageCount} label="세일상품 페이지" /></div>
