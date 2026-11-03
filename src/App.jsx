@@ -17,6 +17,7 @@ import AIChatWidget from './components/AIchat/AIChatWidget.jsx'
 
 import Home from './pages/Home.jsx'
 import Products from './pages/Products.jsx'
+import SearchResults from './pages/SearchResults.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
 import Review from './pages/Review/Review.jsx'
 import PhotoReviews from './pages/Review/PhotoReviews.jsx'
@@ -108,13 +109,14 @@ function Layout() {
       />
 
       <Routes>
-        <Route path="/contact" element={<div className="footer-page-body"><MyPage /></div>} />
+        <Route path="/contact" element={<RequireShoppingLogin><div className="footer-page-body"><MyPage /></div></RequireShoppingLogin>} />
         <Route path="/wishlist" element={<RequireShoppingLogin><Wishlist /></RequireShoppingLogin>} />
         <Route path="/products/:id" element={<LegacyProductDetail />} />
-        <Route path="/mypage/*" element={<div className="footer-page-body"><MyPage /></div>} />
+        <Route path="/mypage/*" element={<RequireShoppingLogin><div className="footer-page-body"><MyPage /></div></RequireShoppingLogin>} />
         {/* HOME */}
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="/review/:productId" element={<Review />} />
         <Route path="/review/:productId/photos" element={<PhotoReviews />} />
         <Route path="/skin-guide" element={<SkinGuide />} />

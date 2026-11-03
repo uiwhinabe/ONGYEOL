@@ -24,7 +24,7 @@
 .checkout-section { border: 1px solid #d2cece; border-radius: 4px; overflow: hidden; background: #fff; }
 .checkout-page .checkout-section-title { margin: 0; padding: 15px 25px; min-height: 53px; font-family: inherit; font-size: 17px; font-weight: 700; line-height: 1.35; color: #222; letter-spacing: 0; border-bottom: 1px solid #d2cece; }
 .checkout-product { min-height: 108px; padding: 8px 43px 8px 23px; border-bottom: 1px solid #d2cece; display: grid; grid-template-columns: 70px minmax(0, 1fr) 85px 74px 88px; gap: 17px; align-items: center; position: relative; }
-.checkout-product-placeholder { width: 70px; height: 92px; background: #d9d9d9; }
+.checkout-product-placeholder { width: 70px; height: 92px; background: #fff; object-fit: contain; }
 .checkout-product-description p { font-size: 13px; }
 .checkout-product-description small { color: #999; font-size: 10px; }
 .checkout-product-price { white-space: nowrap; text-align: center; }
@@ -43,6 +43,8 @@
 .checkout-page input:not([type="radio"]):not(.checkout-quantity-input), .checkout-page select, .checkout-page textarea { border: 1px solid #aaa; border-radius: 4px; height: 35px; background: #fff; color: #333; padding: 6px 9px; min-width: 0; }
 .checkout-page input::placeholder, .checkout-page textarea::placeholder { color: #d5d5d5; font-size: 12px; opacity: 1; }
 .checkout-page input:focus-visible, .checkout-page select:focus-visible, .checkout-page textarea:focus-visible, .checkout-page button:focus-visible { outline: 2px solid #777; outline-offset: 2px; }
+.checkout-page .checkout-field-content :is(input:not([type="radio"]), select, textarea):focus { outline: none; box-shadow: none; }
+.checkout-page[data-keyboard-focus="true"] .checkout-field-content :is(input:not([type="radio"]), select, textarea):focus-visible { outline: 2px solid #777; outline-offset: 2px; }
 .checkout-name-input { width: 90%; }
 .checkout-inline { display: flex; gap: 8px; align-items: center; }
 .checkout-postcode { width: 120px; }
@@ -337,8 +339,8 @@ body:has(.ongyeol-ai-chat-button) .checkout-floating-button { display: none; }
 }
 
 /* Interaction states do not change the existing control dimensions. */
-.checkout-page input.checkout-input-error, .checkout-page select.checkout-input-error,
-.checkout-page .checkout-phone-error input, .checkout-page .checkout-phone-error select { border-color: #ff4d4f; }
+.checkout-page input:not([type="radio"]):not(.checkout-quantity-input)[aria-invalid="true"],
+.checkout-page select[aria-invalid="true"], .checkout-page textarea[aria-invalid="true"] { border-color: #ff4d4f; }
 .checkout-page .checkout-error-message { margin: 2px 0 0; color: #ff4d4f; font-size: 9px; line-height: 1.2; }
 .checkout-page .checkout-address-error-message { margin: -6px 0 0 65px; }
 

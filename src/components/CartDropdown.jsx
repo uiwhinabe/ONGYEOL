@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import useShoppingMenuNavigation from './useShoppingMenuNavigation.js'
 import './CartDropdown.css'
 
 // Header can use this controller without duplicating hover and touch handling.
@@ -76,11 +77,7 @@ export function useCartDropdown(onOpen) {
 export default function CartDropdown({ open, onClose, anchorRef, headerRef, panelRef: externalPanelRef,
   onPointerEnter, onPointerLeave, onBlur }) {
   const localPanelRef = useRef(null)
-  const navigate = useNavigate()
-  const visit = (path) => {
-    onClose()
-    navigate(path)
-  }
+  const visit = useShoppingMenuNavigation(onClose)
   const panelRef = externalPanelRef || localPanelRef
 
   useLayoutEffect(() => {

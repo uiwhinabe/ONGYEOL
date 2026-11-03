@@ -10,12 +10,27 @@
 .photo-reviews-dialog::backdrop { background: #0009; }
 .photo-reviews-dialog form { display: flex; justify-content: flex-end; margin-bottom: 12px; }
 .photo-reviews-dialog button { min-width: 36px; min-height: 36px; border: 0; background: transparent; font-size: 28px; cursor: pointer; }
-.photo-review-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 28px; padding: 8px 12px 20px; }
-.photo-review-detail__media { min-width: 0; }
-.photo-review-detail__media > img { display: block; width: 100%; max-height: calc(90dvh - 160px); object-fit: contain; }
-.photo-review-detail__navigation { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 12px; font-size: 14px; }
-.photo-review-detail__navigation button:disabled { opacity: .3; cursor: default; }
-.photo-review-detail__content { display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow-wrap: anywhere; }
+.photo-reviews-dialog { overflow: hidden; }
+.photo-review-detail__viewport { position: relative; height: min(60dvh, 500px); overflow: hidden; }
+.photo-review-detail { box-sizing: border-box; position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 28px; padding: 8px 12px 20px; }
+.photo-review-detail__media { min-width: 0; height: 100%; min-height: 0; }
+.photo-review-detail__media > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.photo-review-detail__navigation { display: flex; align-items: center; justify-content: center; gap: 0; width: calc((100% - 52px) / 2); margin: 12px 12px 0 auto; font: 400 14px/1.5 'Noto Sans KR', 'Noto Sans', sans-serif; }
+.photo-review-detail__navigation button { display: grid; place-items: center; padding: 0; color: #515151; }
+.photo-review-detail__navigation button:disabled, .photo-review-detail__navigation button:disabled:hover { color: #a8a8a8; opacity: 1; cursor: default; }
+.photo-review-detail__navigation span { min-width: 20px; text-align: center; }
+.photo-review-detail__content { display: flex; flex-direction: column; gap: 16px; min-width: 0; max-height: 100%; overflow-y: auto; overflow-wrap: anywhere; }
+.photo-review-detail--leave-next { animation: photo-review-leave-next 400ms cubic-bezier(.22, .61, .36, 1) both; }
+.photo-review-detail--enter-next { animation: photo-review-enter-next 400ms cubic-bezier(.22, .61, .36, 1) both; }
+.photo-review-detail--leave-previous { animation: photo-review-leave-previous 400ms cubic-bezier(.22, .61, .36, 1) both; }
+.photo-review-detail--enter-previous { animation: photo-review-enter-previous 400ms cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes photo-review-leave-next { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@keyframes photo-review-enter-next { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes photo-review-leave-previous { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes photo-review-enter-previous { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .photo-review-detail[class*='--'] { animation-duration: 1ms; }
+}
 .photo-review-detail__author { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 14px; }
 .photo-review-detail__author strong { font-size: 17px; font-weight: 600; }
 .photo-review-detail__author time { color: #777; font-size: 13px; }
@@ -25,8 +40,11 @@
 .review-page .photo-review-detail__content h2 { padding-top: 8px; font-size: 18px; line-height: 1.5; }
 .review-page .photo-review-detail__content p { font-size: 15px; line-height: 1.8; white-space: pre-wrap; }
 @media (max-width: 540px) {
-  .photo-review-detail { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-inline: 4px; }
-  .photo-review-detail__media > img { max-height: 45dvh; }
+  .photo-review-detail__viewport { height: calc(90dvh - 140px); }
+  .photo-review-detail { display: flex; flex-direction: column; gap: 24px; padding-inline: 4px; overflow-y: auto; }
+  .photo-review-detail__media { flex: none; width: 100%; height: 35dvh; }
+  .photo-review-detail__content { flex: none; width: 100%; max-height: none; overflow: visible; }
+  .photo-review-detail__navigation { width: 100%; margin-inline: 0; }
 }
 @media (max-width: 1199px) {
   .photo-reviews-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }

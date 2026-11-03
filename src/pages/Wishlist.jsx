@@ -166,7 +166,6 @@ function WishlistContent({ wishlist, preview, onRemove, onAddCart }) {
   }
   function movePage(next) {
     setPage(Math.max(1, Math.min(next, pageCount)))
-    window.scrollTo({ top: 0, behavior: 'instant' })
   }
   function unlike(product) {
     try {

@@ -75,7 +75,7 @@ const catalog = [
     price: 34000, badge: 'BEST', rating: 5, reviewCount: 4, defaultWished: true,
     line: '닥열매', type: '에센스/앰플', concerns: ['수분/보습', '주름/탄력'] },
   { id: 'dakyeolmae-toner', name: '닥열매 워터 토너, 200ml', image: toner, textureImage: tonerTexture,
-    originalPrice: 28000, price: 22400, discountPercent: 20, badge: null, rating: 5, reviewCount: 3, defaultWished: false,
+    originalPrice: 28000, price: 22400, discountPercent: 20, badge: 'SALE', rating: 5, reviewCount: 3, defaultWished: false,
     line: '닥열매', type: '토너/패드', concerns: ['수분/보습', '모공/피지', '피부톤/기미잡티'] },
   { id: 'dakyeolmae-mask', name: '닥열매 콜라겐 마스크팩, 8+1매', image: mask, textureImage: maskTexture,
     price: 46000, badge: 'LIMITED', rating: 5, reviewCount: 5, defaultWished: true,

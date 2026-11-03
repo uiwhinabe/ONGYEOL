@@ -1,10 +1,12 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { flushSync } from 'react-dom'
 import { Link } from 'react-router-dom'
+import useShoppingMenuNavigation from './useShoppingMenuNavigation.js'
 import './MemberDropdown.css'
 
 export default function MemberDropdown({ open, onClose, onPointerEnter, onPointerLeave, anchorRef, headerRef, links = {}, isAuthenticated = false, onLogout, onLogin }) {
   const panelRef = useRef(null)
+  const visitShopping = useShoppingMenuNavigation(onClose)
 
   useLayoutEffect(() => {
     if (!open) return
@@ -51,18 +53,18 @@ export default function MemberDropdown({ open, onClose, onPointerEnter, onPointe
     }
   }, [open, onClose, anchorRef])
 
-  const handleItemClick = (event, name) => {
+  const handleItemClick = (event) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     flushSync(onClose)
-    if (name !== 'mypage' && !isAuthenticated && onLogin) {
+    if (!isAuthenticated && onLogin) {
       event.preventDefault()
       onLogin()
     }
   }
   const item = (name, label) => {
-    const href = name === 'mypage' || isAuthenticated ? links[name] : '/login'
+    const href = isAuthenticated ? links[name] : '/login'
     return href
-      ? <Link className="ongyeol-member-item" to={href} onClick={event => handleItemClick(event, name)}>{label}</Link>
+      ? <Link className="ongyeol-member-item" to={href} onClick={handleItemClick}>{label}</Link>
       : <button className="ongyeol-member-item" type="button" aria-disabled="true">{label}</button>
   }
   const logout = () => {
@@ -79,6 +81,8 @@ export default function MemberDropdown({ open, onClose, onPointerEnter, onPointe
           : <>{item('login', '로그인')}<span aria-hidden="true">/</span>{item('signup', '회원가입')}</>}
       </div>
       {item('mypage', '마이페이지')}
+      <button className="ongyeol-member-item ongyeol-member-item--shopping" type="button" onClick={() => visitShopping('/wishlist')}>찜</button>
+      <button className="ongyeol-member-item ongyeol-member-item--shopping" type="button" onClick={() => visitShopping('/cart')}>장바구니</button>
     </nav>
   )
 }

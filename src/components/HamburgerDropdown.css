@@ -40,6 +40,11 @@
   transition: transform 160ms ease;
 }
 .ongyeol-hd-layer.is-open .ongyeol-hd-panel { transform: translateY(0); }
+.ongyeol-hd-panel > * { flex-shrink: 0; }
+.ongyeol-hd-mypage { min-width: 0; }
+.ongyeol-hd-mypage-heading { display: flex; align-items: center; gap: 12px; }
+.ongyeol-hd-mypage-heading > .ongyeol-hd-link { flex: 1; min-width: 0; width: auto; }
+.ongyeol-hd-mypage .ongyeol-hd-item { display: block; text-decoration: none; overflow-wrap: anywhere; }
 .ongyeol-hd-heading, .ongyeol-hd-link {
   margin: 0;
   font: 500 25px/30px 'Noto Sans KR', 'Noto Sans', sans-serif;
@@ -91,7 +96,7 @@
 .ongyeol-hd-item { color: #878787; font: 400 18px/24px 'Noto Sans KR', 'Noto Sans', sans-serif; cursor: pointer; transition: color 120ms ease; }
 .ongyeol-hd-item:hover,
 .ongyeol-hd-item:focus-visible { color: #000000; }
-.ongyeol-hd-panel button:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+.ongyeol-hd-panel :is(button, a):focus-visible { outline: 2px solid #000; outline-offset: 4px; }
 @media (max-width: 402px) {
   .ongyeol-hd-layer { --hd-width: 100%; }
   .ongyeol-hd-panel { padding-right: 29px; }
@@ -100,7 +105,6 @@
   .ongyeol-hd-category { font-size: 18px; line-height: 22px; }
   .ongyeol-hd-plus { width: 20px; height: 20px; }
   .ongyeol-hd-plus::before, .ongyeol-hd-plus::after { width: 12px; }
-  .ongyeol-hd-mypage { order: 1; }
 }
 @media (min-width: 1480px) { .ongyeol-hd-layer { display: none; } }
 @media (prefers-reduced-motion: reduce) {

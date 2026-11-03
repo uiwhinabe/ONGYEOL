@@ -1,13 +1,9 @@
-/* Exact Event sale-grid dimensions, shared without stretching cards. */
-:root {
-  --catalog-card-width: calc((min(980px, 100vw - 48px) - 160px) / 3);
+/* Shared by the wishlist, sale products and product catalog only. */
+.catalog-product-grid {
   --catalog-column-gap: 80px;
   --catalog-row-gap: 28px;
-}
-.catalog-product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, var(--catalog-card-width));
-  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   gap: var(--catalog-row-gap) var(--catalog-column-gap);
   width: 100%;
@@ -17,14 +13,25 @@
   list-style: none;
   text-align: left;
 }
-.catalog-product-grid > li { min-width: 0; }
-.catalog-product-grid .ongyeol-product-card { width: var(--catalog-card-width); }
-@media (min-width: 541px) and (max-width: 1024px) {
-  :root { --catalog-card-width: calc((100vw - 102px) / 2); --catalog-column-gap: 50px; --catalog-row-gap: 32px; }
+.catalog-product-grid > * { min-width: 0; }
+.catalog-product-grid .ongyeol-product-card { width: 100%; max-width: 100%; }
+@media (max-width: 834px) {
+  .catalog-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    --catalog-column-gap: 50px;
+    --catalog-row-gap: 32px;
+  }
 }
-@media (max-width: 540px) {
-  :root { --catalog-card-width: calc((100vw - 60px) / 2); --catalog-column-gap: 20px; --catalog-row-gap: 35px; }
+@media (max-width: 599px) {
+  .catalog-product-grid { --catalog-column-gap: 20px; --catalog-row-gap: 35px; }
 }
+.catalog-product-grid .ongyeol-product-card__meta { flex-wrap: wrap; gap: 4px; }
+.catalog-product-grid .ongyeol-product-card__rating { min-width: 0; flex-wrap: wrap; }
+.catalog-product-grid .ongyeol-product-card__stars { white-space: nowrap; }
+.catalog-product-grid .ongyeol-product-card__reviews { overflow-wrap: anywhere; }
+.catalog-product-grid .ongyeol-product-card__wish { flex: none; margin-right: 0; }
+.catalog-product-grid .ongyeol-product-card__price > * { min-width: 0; overflow-wrap: anywhere; }
+.catalog-product-grid .ongyeol-product-card__actions { min-width: 0; overflow-wrap: anywhere; }
 .ongyeol-product-card {
   position: relative;
   box-sizing: border-box;

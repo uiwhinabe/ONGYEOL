@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { readOrder, clearOrder, recordCompletedOrder } from '../services/orderStore.js'
 import { completeCartOrder } from '../services/wishlistStore.js'
 import { calculateShippingFee, calculateOrderTotals } from '../utils/orderPricing.js'
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import './Payment.css'
 import cardIcon from '../assets/payment/card.svg'
 import bankIcon from '../assets/payment/bank.svg'
@@ -60,6 +60,17 @@ export default function Payment({ delivery = exampleDelivery, onComplete, onBack
   const [agreements, setAgreements] = useState([false, false, false])
   const [errors, setErrors] = useState({})
   const formRef = useRef(null)
+  const [keyboardFocus, setKeyboardFocus] = useState(false)
+  useEffect(() => {
+    const handleKeyDown = event => { if (event.key === 'Tab') setKeyboardFocus(true) }
+    const handlePointerDown = () => setKeyboardFocus(false)
+    document.addEventListener('keydown', handleKeyDown, true)
+    document.addEventListener('pointerdown', handlePointerDown, true)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true)
+      document.removeEventListener('pointerdown', handlePointerDown, true)
+    }
+  }, [])
   const [currentYear] = useState(() => new Date().getFullYear())
   const totalProductPrice = products.reduce((sum, product) => sum + product.price * product.quantity, 0)
   const shippingFee = calculateShippingFee(totalProductPrice, products.length)
@@ -135,7 +146,7 @@ export default function Payment({ delivery = exampleDelivery, onComplete, onBack
   }
 
   if (!products.length) return <main><Link to="/cart">{'\uc8fc\ubb38 \uc0c1\ud488\uc774 \uc5c6\uc2b5\ub2c8\ub2e4. \uc7a5\ubc14\uad6c\ub2c8\ub85c \uc774\ub3d9'}</Link></main>
-  return <main className="payment-page"><div className="payment-main">
+  return <main className="payment-page" data-keyboard-focus={keyboardFocus}><div className="payment-main">
     <div className="payment-heading"><h1>결제하기</h1><p>선택하신 결제 수단으로 안전하게 결제할 수 있습니다.</p></div>
     <form className="payment-layout" ref={formRef} onSubmit={submit} noValidate>
       <div className="payment-left">

@@ -1,0 +1,5 @@
+.search-results .ongyeol-products__title { overflow-wrap: anywhere; }
+.search-results__count { margin: 34px auto 70px; }
+@media (max-width: 599px) {
+  .search-results__count { margin: 26px auto 40px; }
+}

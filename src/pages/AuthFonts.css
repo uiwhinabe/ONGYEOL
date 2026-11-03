@@ -7,3 +7,14 @@
 :is(.ongyeol-login, .ongyeol-signup, .ongyeol-identity, .ongyeol-signup-complete) ::placeholder {
   font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
+/* Text fields keep their existing border and error styles during pointer input. */
+.ongyeol-login-form input:focus,
+.ongyeol-signup-form input:not([type="checkbox"]):focus {
+  outline: none;
+  box-shadow: none;
+}
+.ongyeol-login[data-keyboard-focus="true"] .ongyeol-login-form input:focus-visible,
+.ongyeol-signup[data-keyboard-focus="true"] .ongyeol-signup-form input:not([type="checkbox"]):focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}

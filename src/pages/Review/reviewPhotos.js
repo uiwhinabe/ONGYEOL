@@ -4,8 +4,8 @@ function normalizePhoto(value) {
 }
 
 // One thumbnail per review, regardless of how many photos that review contains.
-export function getPhotoReviews(reviews) {
-  return reviews.flatMap(review => {
+export function getPhotoReviews(reviews, thumbnailOrder = []) {
+  const photoReviews = reviews.flatMap(review => {
     const candidates = [review.photo, review.image,
       ...(Array.isArray(review.photos) ? review.photos : []),
       ...(Array.isArray(review.images) ? review.images : []),
@@ -16,6 +16,23 @@ export function getPhotoReviews(reviews) {
       seen.add(photo.src)
       return true
     })
-    return photos.length ? [{ ...photos[0], reviewId: review.id, photos }] : []
+    return photos.length ? [{ ...photos[0], reviewId: review.id, photos, review }] : []
   })
+  // Preserve the displayed gallery order, then append reviews not in its preview data.
+  const ordered = []
+  const seen = new Set()
+  for (const thumbnail of thumbnailOrder) {
+    const image = normalizePhoto(thumbnail)
+    const entry = photoReviews.find(item => thumbnail.reviewId
+      ? item.reviewId === thumbnail.reviewId : item.photos.some(photo => photo.src === image?.src))
+    if (!entry || seen.has(entry.reviewId)) continue
+    seen.add(entry.reviewId)
+    ordered.push({ ...entry, ...(entry.photos.find(photo => photo.src === image?.src) ?? entry.photos[0]) })
+  }
+  for (const entry of photoReviews) {
+    if (seen.has(entry.reviewId)) continue
+    seen.add(entry.reviewId)
+    ordered.push(entry)
+  }
+  return ordered
 }

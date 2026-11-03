@@ -2,6 +2,7 @@
 import { useAuth } from './authContext.js'
 import { useShopping, addWishlistProduct, removeWishlistProducts } from '../services/wishlistStore.js'
 import ProductPrice from './ProductPrice.jsx'
+import ProductBadge from './ProductBadge.jsx'
 import { Link } from 'react-router-dom'
 import './ProductCard.css'
 import { productImageFrames } from '../data/productImageFrames.js'
@@ -55,9 +56,7 @@ export default function ProductCard({ product, selection, actions, onWishChange,
           <img className="ongyeol-product-card__texture" src={textureImage} alt="" aria-hidden="true" />
         )}
         {product.badge && (
-          <span className={`ongyeol-product-card__badge ongyeol-product-card__badge--${product.badge.toLowerCase()}`}>
-            {product.badge === 'SALE' ? `${product.discountPercent}% SALE` : product.badge}
-          </span>
+          <ProductBadge product={product} className={`ongyeol-product-card__badge ongyeol-product-card__badge--${product.badge.toLowerCase()}`} />
         )}
       </Link>
       <h2 className="ongyeol-product-card__name">
