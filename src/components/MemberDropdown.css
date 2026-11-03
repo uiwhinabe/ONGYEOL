@@ -51,6 +51,12 @@
   cursor: pointer;
 }
 .ongyeol-member-item:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.ongyeol-member-item--shopping { display: none; }
+/* Match the breakpoint that hides the header's cart trigger. */
+@media (max-width: 1199px) {
+  .ongyeol-member-dropdown { height: auto; min-height: 80px; }
+  .ongyeol-member-item--shopping { display: block; }
+}
 .ongyeol-member-account-row,
 .ongyeol-member-dropdown > .ongyeol-member-item {
   transform: translateY(0);

@@ -14,48 +14,9 @@
 .event-empty { margin: 0; padding: 100px 0; color: #999; font-size: 14px; text-align: center; }
 .event-page button:focus-visible { outline: 2px solid #777; outline-offset: 4px; }
 
-.sale-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 80px; row-gap: 28px; }
-.sale-product-card { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; width: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.sale-product-image, .sale-product-placeholder { display: block; width: 100%; aspect-ratio: 1 / 1.25; border-radius: 4px; }
-.sale-product-image { object-fit: cover; }
-.sale-product-placeholder { background: #d9d9d9; }
-.sale-product-name { margin-top: 12px; font-size: 16px; font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
-.sale-product-prices { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
-.sale-product-original-price { color: #bbb; font-size: 14px; text-decoration: line-through; }
-.sale-product-sale-price { color: #111; font-size: 18px; font-weight: 600; }
-.sale-product-discount { color: #ff0000; font-size: 18px; font-weight: 600; }
-
 @media (min-width: 541px) and (max-width: 1024px) {
   .event-content:has(.sale-product-grid) {
     padding-bottom: 100px;
-  }
-
-  .sale-product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 50px;
-    row-gap: 32px;
-  }
-
-  .sale-product-name {
-    font-size: clamp(17px, 2.1vw, 19px);
-  }
-
-  .sale-product-prices {
-    flex-wrap: nowrap;
-    gap: clamp(4px, 0.7vw, 7px);
-    white-space: nowrap;
-  }
-
-  .sale-product-original-price {
-    font-size: clamp(13px, 1.8vw, 15px);
-  }
-
-  .sale-product-sale-price {
-    font-size: clamp(16px, 2.3vw, 19px);
-  }
-
-  .sale-product-discount {
-    font-size: clamp(16px, 2.2vw, 18px);
   }
 
   .event-content {
@@ -93,36 +54,6 @@
 @media (max-width: 540px) {
   .event-content:has(.sale-product-grid) {
     padding-bottom: 110px;
-  }
-
-  .sale-product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 20px;
-    row-gap: 35px;
-  }
-
-  .sale-product-name {
-    margin-top: 11px;
-    font-size: 15px;
-  }
-
-  .sale-product-prices {
-    flex-wrap: nowrap;
-    gap: clamp(2px, calc(2vw - 4px), 4px);
-    margin-top: 10px;
-    white-space: nowrap;
-  }
-
-  .sale-product-original-price {
-    font-size: clamp(9px, calc(5vw - 7px), 12px);
-  }
-
-  .sale-product-sale-price {
-    font-size: clamp(12px, calc(5vw - 4px), 16px);
-  }
-
-  .sale-product-discount {
-    font-size: clamp(11px, calc(5vw - 5px), 15px);
   }
 
   .event-content {

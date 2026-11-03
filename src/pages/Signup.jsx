@@ -1,5 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import useKeyboardFocus from '../components/useKeyboardFocus.js'
 import './Signup.css'
 import './AuthFonts.css'
 
@@ -31,6 +32,7 @@ export default function Signup() {
 }
 
 function SignupForm() {
+  const keyboardFocus = useKeyboardFocus()
   const [checked, setChecked] = useState(agreements.map(() => false))
   const [gender, setGender] = useState('')
   const [message, setMessage] = useState('')
@@ -76,7 +78,7 @@ function SignupForm() {
   })
 
   return (
-    <main className="ongyeol-signup" aria-label="회원가입">
+    <main className="ongyeol-signup" data-keyboard-focus={keyboardFocus} aria-label="회원가입">
       <form className="ongyeol-signup-form" noValidate autoComplete="off" onSubmit={submit}>
         <nav className="ongyeol-signup-tabs" aria-label="회원 페이지">
           <Link to="/login">로그인</Link>
@@ -84,27 +86,27 @@ function SignupForm() {
         </nav>
         <div className="ongyeol-signup-fields">
           <div className="ongyeol-signup-field">
-            <label htmlFor="signup-name">이름</label>
+            <label htmlFor="signup-name">이름<span className="ongyeol-signup-required" aria-hidden="true">*</span></label>
             <input id="signup-name" name="name" type="text" autoComplete="off" placeholder="신짱구 입력" required {...errorAttributes('name')} />
             {fieldError('name')}
           </div>
           <div className="ongyeol-signup-field">
-            <label htmlFor="signup-email">아이디(이메일)</label>
+            <label htmlFor="signup-email">아이디(이메일)<span className="ongyeol-signup-required" aria-hidden="true">*</span></label>
             <input id="signup-email" name="email" type="email" autoComplete="off" placeholder="test@gmail.com 입력" required {...errorAttributes('email')} />
             {fieldError('email')}
           </div>
           <div className="ongyeol-signup-field">
-            <label htmlFor="signup-password">비밀번호</label>
+            <label htmlFor="signup-password">비밀번호<span className="ongyeol-signup-required" aria-hidden="true">*</span></label>
             <SignupPasswordInput label="비밀번호" id="signup-password" name="password" autoComplete="new-password" placeholder="1234! 입력" required {...errorAttributes('password')} />
             {fieldError('password')}
           </div>
           <div className="ongyeol-signup-field">
-            <label htmlFor="signup-password-confirm">비밀번호 확인</label>
+            <label htmlFor="signup-password-confirm">비밀번호 확인<span className="ongyeol-signup-required" aria-hidden="true">*</span></label>
             <SignupPasswordInput label="비밀번호 확인" id="signup-password-confirm" name="passwordConfirm" autoComplete="new-password" placeholder="1234!를 한번 더 입력" required {...errorAttributes('passwordConfirm')} />
             {fieldError('passwordConfirm')}
           </div>
           <div className="ongyeol-signup-field">
-            <label htmlFor="signup-gender">성별</label>
+            <label htmlFor="signup-gender">성별<span className="ongyeol-signup-required" aria-hidden="true">*</span></label>
             <select id="signup-gender" name="gender" value={gender} required {...errorAttributes('gender')} className={gender ? '' : 'ongyeol-signup-placeholder'} onChange={(event) => setGender(event.target.value)}>
               <option value="" disabled>성별을 선택해주세요.</option>
               <option value="female">여성</option><option value="male">남성</option><option value="unspecified">선택 안 함</option>

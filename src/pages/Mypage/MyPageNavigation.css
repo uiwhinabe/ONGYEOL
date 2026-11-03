@@ -8,8 +8,7 @@
   text-align: inherit;
 }
 /* Buttons inherit the typography and geometry of the previous links. */
-.ongyeol-mypage-menu button,
-.ongyeol-mypage h1 > button {
+.ongyeol-mypage-menu button {
   appearance: none;
   border: 0;
   border-radius: 0;
@@ -21,8 +20,7 @@
   text-align: inherit;
   cursor: pointer;
 }
-.ongyeol-mypage-menu button:focus-visible,
-.ongyeol-mypage h1 > button:focus-visible {
+.ongyeol-mypage-menu button:focus-visible {
   outline: 2px solid #000;
   outline-offset: 3px;
 }

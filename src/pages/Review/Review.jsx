@@ -56,14 +56,14 @@ function Dropdown({ label, mobileLabel, kind, value, options, onChange }) {
   </details>
 }
 
-function ReviewSummary({ data, onPhoto }) {
+function ReviewSummary({ data, photoReviews, onPhoto }) {
   const totalRatings = Object.values(data.ratingDistribution).reduce((sum, count) => sum + count, 0)
   return <section className="review-summary" aria-label="리뷰 요약">
     <p className="review-mobile-only review-mobile-total">총 {data.totalReviews}개 리뷰</p>
     <div className="review-summary-inner">
       <div className="review-score"><strong>{data.totalReviews ? data.rating.toFixed(1) : '—'}</strong><Stars rating={Math.round(data.rating)} /></div>
       <dl className="review-statistics">
-        {[["리뷰등록", data.totalReviews], ["포토리뷰", data.photoReviewCount], ["상품조회수", data.viewCount]].map(([label, count]) => <div key={label}><dt>{label}</dt><dd>{count}건</dd></div>)}
+        {[["리뷰등록", data.totalReviews], ["포토리뷰", photoReviews.length], ["상품조회수", data.viewCount]].map(([label, count]) => <div key={label}><dt>{label}</dt><dd>{count}건</dd></div>)}
       </dl>
       <div className="review-summary-divider" />
       <div className="review-breakdown"><h2>세부평가</h2><div className="review-rating-rows">
@@ -76,14 +76,14 @@ function ReviewSummary({ data, onPhoto }) {
       </div></div>
       <div className="review-summary-divider" />
       <div className="review-mini-gallery"><h2>포토리뷰 모아보기</h2><div>
-        {(data.summaryPhotos ?? data.photoReviews).slice(0, 4).map(photo => <button key={photo.id} type="button" onClick={() => onPhoto(photo)}><img src={photo.src} alt={photo.alt} /></button>)}
+        {photoReviews.slice(0, 4).map(photo => <button key={photo.reviewId} data-photo-review-id={photo.reviewId} type="button" onClick={() => onPhoto(photo)}><img src={photo.src} alt={photo.alt} /></button>)}
       </div></div>
     </div>
   </section>
 }
 
-function ReviewItem({ review, helpful, onHelpful, onPhoto }) {
-  return <article className={`review-item${review.photo ? '' : ' review-item--text-only'}`}>
+function ReviewItem({ review, photoReview, helpful, onHelpful, onPhoto }) {
+  return <article className={`review-item${photoReview ? '' : ' review-item--text-only'}`}>
     <div className="review-item-content">
       <div className="review-item-text">
         <div className="review-item-meta">
@@ -93,9 +93,11 @@ function ReviewItem({ review, helpful, onHelpful, onPhoto }) {
         </div>
         <h3>{review.title}</h3><p>{review.preview ?? review.body}</p>
       </div>
-      <button className="review-helpful" type="button" aria-pressed={helpful} onClick={onHelpful}><span><img src={helpfulIcon} alt="" /><img className="review-mobile-only" src={mobileHelpfulIcon} alt="" /></span>도움돼요</button>
+      <button className="review-helpful" type="button" aria-label="도움돼요" aria-pressed={helpful} onClick={onHelpful}>
+        <span className="review-helpful-icon" aria-hidden="true" style={{ '--review-helpful-icon': `url("${helpfulIcon}")`, '--review-helpful-mobile-icon': `url("${mobileHelpfulIcon}")` }} />
+      </button>
     </div>
-    {review.photo && <button className="review-item-photo" type="button" onClick={() => onPhoto(review.photo)}><img src={review.photo.src} alt={review.photo.alt} /></button>}
+    {photoReview && <button className="review-item-photo" data-photo-review-id={photoReview.reviewId} type="button" onClick={() => onPhoto(photoReview)}><img src={photoReview.src} alt={photoReview.alt} /></button>}
   </article>
 }
 
@@ -113,40 +115,33 @@ export function Review({ data }) {
   const [helpfulIds, setHelpfulIds] = useState(new Set())
   const [localReviews, setLocalReviews] = useState([])
   const [photo, setPhoto] = useState(null)
-  const listRef = useRef(null)
   const dialogRef = useRef(null)
   const photoDialogRef = useRef(null)
-  const photoReviews = getPhotoReviews([...localReviews, ...data.reviews])
-  const selectedPhotoReview = photo && photoReviews.find(entry => entry.photos.some(image => image.src === photo.src))
-  const selectedReview = selectedPhotoReview && [...localReviews, ...data.reviews].find(review => review.id === selectedPhotoReview.reviewId)
-  const previewPhotos = data.photoReviews.flatMap(image => {
-    const entry = photoReviews.find(review => review.photos.some(photo => photo.src === image.src))
-    return entry ? [{ ...entry, ...image }] : []
-  })
+  const photoOpenSequence = useRef(0)
+  const photoReviews = useMemo(() => getPhotoReviews([...localReviews, ...data.reviews], data.photoReviews), [localReviews, data.reviews, data.photoReviews])
   const filteredReviews = useMemo(() => [...localReviews, ...data.reviews].filter(review =>
-    (tab !== 'photo' || review.photo) && (!filters.age || review.age === filters.age) &&
+    (tab !== 'photo' || photoReviews.some(photo => photo.reviewId === review.id)) && (!filters.age || review.age === filters.age) &&
     (!filters.skinType || review.skinType === filters.skinType) && (!filters.concern || review.concern === filters.concern)
-  ).sort((a, b) => (filters.sort === 'high' ? b.rating - a.rating : filters.sort === 'low' ? a.rating - b.rating : 0) || b.date.localeCompare(a.date)), [localReviews, data.reviews, tab, filters])
+  ).sort((a, b) => (filters.sort === 'high' ? b.rating - a.rating : filters.sort === 'low' ? a.rating - b.rating : 0) || b.date.localeCompare(a.date)), [localReviews, data.reviews, tab, filters, photoReviews])
   const pageCount = Math.ceil(filteredReviews.length / PAGE_SIZE)
   const currentPage = Math.min(page, Math.max(1, pageCount))
   const submitReview = ({ rating, body, photos }) => {
     setLocalReviews(current => [{ id: crypto.randomUUID(), productId: data.productId, nickname: '온결회원', title: body.split('\n')[0].slice(0, 40), body, rating, photos, photo: photos[0], date: new Date().toLocaleDateString('sv-SE'), skinType: '미입력', concernLabel: '미입력', age: '미입력' }, ...current])
     setTab('all'); setFilters({ age: '', skinType: '', concern: '', sort: 'latest' }); setPage(1)
   }
-  const openPhoto = nextPhoto => { setPhoto(nextPhoto); requestAnimationFrame(() => photoDialogRef.current?.showModal()) }
+  const openPhoto = nextPhoto => { setPhoto({ ...nextPhoto, openSequence: ++photoOpenSequence.current }); requestAnimationFrame(() => photoDialogRef.current?.showModal()) }
   const updateFilter = (key, value) => { setFilters(current => ({ ...current, [key]: value })); setPage(1) }
   const selectTab = next => { setTab(next); setPage(1) }
-  const turnPage = next => { setPage(next); listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
   const options = values => [{ label: '전체', value: '' }, ...values.map(value => ({ label: value, value }))]
 
   return <main className="review-page" aria-label={`${data.productName} 리뷰`}>
     <div className="review-container">
       <div className="review-section-heading"><h1><span className="review-heading-desktop-label">고객 리뷰</span><span className="review-mobile-only">리뷰</span><span>({data.totalReviews})</span></h1><span className="review-mobile-only review-mobile-rating" aria-label={`평점 ${data.rating}점`}><img src={mobileRatingStar} alt="" />{data.totalReviews ? data.rating.toFixed(1) : '—'}</span><button className="review-outline-button" type="button" onClick={() => { setPhoto(null); requestAnimationFrame(() => dialogRef.current.showModal()) }}>리뷰 작성</button></div>
-      <ReviewSummary data={data} onPhoto={openPhoto} />
+      <ReviewSummary data={data} photoReviews={photoReviews} onPhoto={openPhoto} />
       <div className="review-body">
         <section className="review-photo-section" aria-labelledby="review-photo-heading">
-          <div className="review-section-heading"><h2 id="review-photo-heading">포토 리뷰 <span>({data.photoReviewCount})</span></h2><Link className="review-view-all" to="photos" style={{ textDecoration: 'none', color: 'inherit' }}>전체보기<img src={rightIcon} alt="" /></Link></div>
-          <div className="review-photo-strip">{previewPhotos.slice(0, 6).map(item => <button key={item.id} type="button" onClick={() => openPhoto(item)}><img src={item.src} alt={item.alt} /></button>)}</div>
+          <div className="review-section-heading"><h2 id="review-photo-heading">포토 리뷰 <span>({photoReviews.length})</span></h2><Link className="review-view-all" to="photos" style={{ textDecoration: 'none', color: 'inherit' }}>전체보기<img src={rightIcon} alt="" /></Link></div>
+          <div className="review-photo-strip">{photoReviews.slice(0, 6).map(item => <button key={item.reviewId} data-photo-review-id={item.reviewId} type="button" onClick={() => openPhoto(item)}><img src={item.src} alt={item.alt} /></button>)}</div>
         </section>
         <div className="review-tabs" aria-label="리뷰 종류">{[['all', '전체리뷰'], ['photo', '포토리뷰']].map(([value, label]) => <button key={value} type="button" aria-pressed={tab === value} onClick={() => selectTab(value)}>{label}</button>)}</div>
         <div className="review-filters">
@@ -160,15 +155,15 @@ export function Review({ data }) {
             <button className="review-mobile-only review-mobile-photo-filter" type="button" aria-pressed={tab === 'photo'} onClick={() => selectTab(tab === 'photo' ? 'all' : 'photo')}>포토리뷰</button>
           </div>
         </div>
-        <section className="review-list" ref={listRef} aria-label="고객 리뷰 목록" aria-live="polite">
-          {filteredReviews.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE).map(review => <ReviewItem key={review.id} review={review} helpful={helpfulIds.has(review.id)} onHelpful={() => setHelpfulIds(current => { const next = new Set(current); if (next.has(review.id)) next.delete(review.id); else next.add(review.id); return next })} onPhoto={openPhoto} />)}
+        <section className="review-list" aria-label="고객 리뷰 목록" aria-live="polite">
+          {filteredReviews.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE).map(review => <ReviewItem key={review.id} review={review} photoReview={photoReviews.find(photo => photo.reviewId === review.id)} helpful={helpfulIds.has(review.id)} onHelpful={() => setHelpfulIds(current => { const next = new Set(current); if (next.has(review.id)) next.delete(review.id); else next.add(review.id); return next })} onPhoto={openPhoto} />)}
           {!filteredReviews.length && <p className="review-empty">{data.reviews.length || localReviews.length ? '선택한 조건에 맞는 리뷰가 없습니다.' : `${data.productName}의 리뷰가 아직 등록되지 않았습니다.`}</p>}
         </section>
       </div>
-      {pageCount > 0 && <div className="reviews-page-navigation"><Pagination currentPage={currentPage} totalPages={pageCount} onPageChange={turnPage} label="리뷰 페이지" /></div>}
+      {pageCount > 0 && <div className="reviews-page-navigation"><Pagination currentPage={currentPage} totalPages={pageCount} onPageChange={setPage} label="리뷰 페이지" /></div>}
     </div>
     <ReviewDialog dialogRef={dialogRef} productId={data.productId} onSubmit={submitReview} />
-    <PhotoReviewDialog key={`${selectedPhotoReview?.reviewId}:${photo?.src}`} dialogRef={photoDialogRef} selectedPhoto={selectedPhotoReview && { ...selectedPhotoReview, src: photo.src }} selectedReview={selectedReview} />
+    <PhotoReviewDialog key={`${data.productId}:${photo?.openSequence}`} dialogRef={photoDialogRef} selectedPhoto={photo} photoReviews={photoReviews} />
   </main>
 }
 

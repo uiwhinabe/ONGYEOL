@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { handleDesktopHeaderNav } from '../headerNavigation.js'
 import './Header.css'
 import ShopDropdown from './ShopDropdown.jsx'
@@ -37,6 +37,7 @@ function ResponsiveIcon({ desktop, tablet, mobile }) {
 
 export default function Header({ onSearch, accountLinks, chatOpen = false, isAuthenticated = false, onLogout, onLogin }) {
   const location = useLocation()
+  const navigate = useNavigate()
   useLayoutEffect(() => {
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
@@ -129,6 +130,19 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
     }
   }
   const closeHamburger = hamburger.close
+  const handleSearch = query => {
+    const keyword = query.trim()
+    if (!keyword) return
+    cancelSearchClose()
+    searchHovered.current = false
+    flushSync(() => {
+      setSearchOpen(false)
+      closeHamburger()
+    })
+    if (onSearch) onSearch(keyword)
+    else navigate(`/search?${new URLSearchParams({ q: keyword })}`)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }
   useEffect(() => {
     if (!chatOpen) return
     window.clearTimeout(closeTimer.current)
@@ -265,7 +279,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
                   <button ref={shopRef} id="shop-trigger" className="ongyeol-header-menu-label ongyeol-header-shop-trigger" type="button" aria-expanded={shopOpen} aria-controls="shop-dropdown" onFocus={openShop} onBlur={handleBlur} onClick={openShop}>
                     {label}
                   </button>
-                ) : id === 'skin-guide' ? <Link className="ongyeol-header-menu-label" to="/skin-guide" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/skin-guide')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : id === 'event' ? <Link className="ongyeol-header-menu-label" to="/event?tab=ongoing" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/event')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : id === 'brand' ? <Link className="ongyeol-header-menu-label" to="/brand" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/brand')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : <span className="ongyeol-header-menu-label">{label}</span>}
+                ) : id === 'skin-guide' ? <Link className="ongyeol-header-menu-label" to="/skin-guide" onClick={event => { if (!location.search) handleDesktopHeaderNav(event, location.pathname, '/skin-guide') }} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : id === 'event' ? <Link className="ongyeol-header-menu-label" to="/event?tab=ongoing" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/event')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : id === 'brand' ? <Link className="ongyeol-header-menu-label" to="/brand" onClick={event => handleDesktopHeaderNav(event, location.pathname, '/brand')} style={{ color: 'inherit', textDecoration: 'none' }}>{label}</Link> : <span className="ongyeol-header-menu-label">{label}</span>}
                 {id === 'shop' && <ShopDropdown ref={dropdownRef} open={shopOpen} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={handleBlur} onClose={closeShop} />}
               </li>
             ))}
@@ -297,7 +311,7 @@ export default function Header({ onSearch, accountLinks, chatOpen = false, isAut
         </div>
       </div>
       {searchOpen && <div ref={searchBridgeRef} className="ongyeol-search-hover-bridge" aria-hidden="true" onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />}
-      <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={onSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
+      <SearchDropdown ref={searchDropdownRef} open={searchOpen} autoFocusInput={searchAutoFocus} onSearch={handleSearch} onPointerEnter={enterSearch} onPointerLeave={leaveSearch} />
       <HamburgerDropdown ref={hamburgerPanelRef} open={hamburgerOpen} controller={hamburger} />
       <CartDropdown open={cartOpen} onClose={closeCart} anchorRef={cartTriggerRef} panelRef={cartPanelRef} headerRef={headerRef} {...cartPanelProps} />
       <MemberDropdown open={memberVisible} onClose={() => { cancelMemberClose(); setMemberOpen(false) }} onPointerEnter={enterMember} onPointerLeave={leaveMember} anchorRef={memberTriggerRef} headerRef={headerRef} links={{ mypage: '/mypage', ...accountLinks }} isAuthenticated={isAuthenticated} onLogout={onLogout} onLogin={onLogin} />

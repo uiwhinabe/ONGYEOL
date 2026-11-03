@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 export default function useHamburgerDropdown(onOpen) {
   const [open, setOpen] = useState(false)
@@ -21,6 +21,21 @@ export default function useHamburgerDropdown(onOpen) {
     cancelClose()
     timer.current = window.setTimeout(() => setOpen(false), 140)
   }
+  useLayoutEffect(() => {
+    if (!open) return
+    const saved = [document.documentElement, document.body].map(element => ({
+      element,
+      value: element.style.getPropertyValue('overflow'),
+      priority: element.style.getPropertyPriority('overflow'),
+    }))
+    saved.forEach(({ element }) => element.style.setProperty('overflow', 'hidden'))
+    return () => {
+      saved.forEach(({ element, value, priority }) => {
+        if (value) element.style.setProperty('overflow', value, priority)
+        else element.style.removeProperty('overflow')
+      })
+    }
+  }, [open])
   useEffect(() => {
     const desktop = window.matchMedia('(min-width: 1480px)')
     const change = () => { if (desktop.matches) close() }
@@ -58,7 +73,7 @@ export default function useHamburgerDropdown(onOpen) {
       if (!window.matchMedia('(max-width: 1479px)').matches) return
       cancelClose()
       if (!open) onOpen()
-      setOpen((value) => !value)
+      setOpen((value) => event.nativeEvent.pointerType === 'mouse' ? true : !value)
       if (event.detail === 0 && !open) window.requestAnimationFrame(() => panelRef.current?.querySelector('button')?.focus())
     },
     onKeyDown: (event) => {

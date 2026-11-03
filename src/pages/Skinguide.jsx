@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { products as catalogProducts } from '../data/products.js'
+import { getProductDetailHref } from '../utils/productNavigation.js'
 import { HEADER_SCROLL_TOP_EVENT } from '../headerNavigation.js'
+import { getSectionScrollTop } from '../utils/sectionScroll.js'
 import heroImage from '../assets/images/skin-guide/hero.png'
 import howType from '../assets/images/skin-guide/how-type.png'
 import howConcern from '../assets/images/skin-guide/how-concern.png'
@@ -14,6 +17,7 @@ import routineChevron from '../assets/images/skin-guide/routine-chevron.svg'
 import scrollDoubleChevron from '../assets/images/skin-guide/scroll-double-chevron.svg'
 import { skinConcerns, concernData } from './skinGuideConcernData.js'
 import WhyCauseIcon from './WhyCauseIcon.jsx'
+import useSolutionReveal from './useSolutionReveal.js'
 import './SkinGuide.css'
 
 const howSteps = [
@@ -44,19 +48,29 @@ function DetailLabel({ children }) {
   return <p className="skin-guide-detail-label">{children}<img src={labelLine} alt="" /></p>
 }
 
+function RoutineProductButton({ product }) {
+  const navigate = useNavigate()
+  const catalogProduct = catalogProducts.find(item => item.id === product.productId)
+  return <button type="button" disabled={!catalogProduct} aria-disabled={!catalogProduct || undefined}
+    aria-label={product.imageAlt ? `${product.imageAlt} 제품 보러가기` : '추천 제품 준비 중'}
+    onClick={() => { if (catalogProduct) navigate(getProductDetailHref(catalogProduct.id)) }}>
+    제품 보러가기 <img src={buttonChevron} alt="" />
+  </button>
+}
+
 function MobileRoutine({ products }) {
   const [productIndex, setProductIndex] = useState(0)
   const product = products[productIndex]
   const moveProduct = direction => setProductIndex(index => (index + direction + products.length) % products.length)
   return <div className="skin-guide-mobile-routine-product">
-    <article aria-label={`${product.step} 추천 제품`} aria-live="polite" aria-atomic="true">
+    <article key={product.id} data-solution-group={3 + productIndex} data-solution-reveal="pending" aria-label={`${product.step} 추천 제품`} aria-live="polite" aria-atomic="true">
       <div className={`skin-guide-routine-image skin-guide-routine-image--${product.id}`}><img src={product.image ?? undefined} alt={product.imageAlt ?? ''} loading="lazy" /></div>
       <div className="skin-guide-routine-copy">
         <span className="skin-guide-product-step">{product.step}</span>
         <h4>{product.name}</h4>
         <p className="skin-guide-product-english" lang="en">{product.englishName}</p>
         <p className="skin-guide-product-description">{product.descriptionLines?.map((line, index) => <span key={index}>{line}{index === 0 ? ' ' : ''}</span>) ?? product.description}</p>
-        <button type="button" aria-disabled={!product.image || undefined} aria-label={`${product.imageAlt} 제품 보러가기`}>제품 보러가기 <img src={buttonChevron} alt="" /></button>
+        <RoutineProductButton product={product} />
       </div>
     </article>
     <div className="skin-guide-mobile-routine-controls" aria-label="추천 제품 이동">
@@ -81,8 +95,10 @@ export default function SkinGuide() {
   const routineRef = useRef(null)
   const isAutoScrolling = useRef(false)
   const requestSectionScroll = useRef(null)
+  const cancelSectionScroll = useRef(null)
+  const revealConcern = useRef(null)
   const step2EndRef = useRef(null)
-  const [isStep2Unlocked, setIsStep2Unlocked] = useState(false)
+  const [isStep2Unlocked, setIsStep2Unlocked] = useState(() => Boolean(validConcern))
   const [isStep3Unlocked, setIsStep3Unlocked] = useState(false)
   const [solutionRequest, setSolutionRequest] = useState(0)
 
@@ -138,7 +154,13 @@ export default function SkinGuide() {
       animationFinished = true
       isAutoScrolling.current = false
     }
+    cancelSectionScroll.current = stopAnimation
     const moveTo = target => {
+      const finish = () => {
+        animationFinished = true
+        if (target === concernRef.current) revealConcern.current?.()
+      }
+      const targetY = () => typeof target === 'number' ? target : getSectionScrollTop(target, header)
       isAutoScrolling.current = true
       animationFinished = false
       lastWheelAt = performance.now()
@@ -151,26 +173,31 @@ export default function SkinGuide() {
       }
       const start = window.scrollY
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        window.scrollTo({ top: target, behavior: 'instant' })
-        animationFinished = true
+        window.scrollTo({ top: targetY(), behavior: 'instant' })
+        finish()
       } else {
         const startedAt = performance.now()
         const animate = now => {
           const progress = Math.min((now - startedAt) / 800, 1)
           const eased = progress < .5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2
-          window.scrollTo({ top: start + (target - start) * eased, behavior: 'instant' })
+          window.scrollTo({ top: start + (targetY() - start) * eased, behavior: 'instant' })
           if (progress < 1) animationFrame = window.requestAnimationFrame(animate)
-          else animationFinished = true
+          else finish()
         }
         animationFrame = window.requestAnimationFrame(animate)
       }
       unlockTimer = window.setTimeout(unlockWhenIdle, 850)
     }
-    requestSectionScroll.current = section => {
+    requestSectionScroll.current = (section, { instant = false } = {}) => {
       if (!section || section.closest('[data-step-locked="true"]')) return
       stopAnimation()
       updateHeaderHeight()
-      moveTo(Math.max(0, window.scrollY + section.getBoundingClientRect().top - headerHeight()))
+      if (instant) {
+        window.scrollTo({ top: getSectionScrollTop(section, header), behavior: 'instant' })
+        if (section === concernRef.current) revealConcern.current?.()
+        return
+      }
+      moveTo(section)
     }
     const handleWheel = event => {
       if (!desktop.matches || !/^\/skin-guide\/?$/.test(location.pathname) || event.ctrlKey || event.defaultPrevented) return
@@ -188,7 +215,7 @@ export default function SkinGuide() {
       const offset = headerHeight()
       const positions = sections.filter(ref => !ref.current.closest('[data-step-locked="true"]')).map(ref => {
         const bounds = ref.current.getBoundingClientRect()
-        return { top: bounds.top + window.scrollY, bottom: bounds.bottom + window.scrollY }
+        return { section: ref.current, top: bounds.top + window.scrollY, bottom: bounds.bottom + window.scrollY }
       })
       // The solution and its nested routine are consecutive logical sections.
       if (positions.length === 6) positions[4].bottom = positions[5].top
@@ -224,8 +251,7 @@ export default function SkinGuide() {
       if (nextIndex < 0 || nextIndex >= positions.length) return
       if (event.cancelable) event.preventDefault()
       const next = positions[nextIndex]
-      const target = next.top - offset
-      moveTo(Math.max(0, target))
+      moveTo(next.section)
     }
     const handleBreakpointChange = () => {
       if (!desktop.matches) stopAnimation()
@@ -247,6 +273,7 @@ export default function SkinGuide() {
       observer.disconnect()
       stopAnimation()
       requestSectionScroll.current = null
+      cancelSectionScroll.current = null
     }
   }, [location.pathname])
 
@@ -266,11 +293,44 @@ export default function SkinGuide() {
     setSelectedConcern(validConcern ?? 'moisture')
     setSelectedSkinType(validConcern)
     setSelectionRequest(0)
-    setIsStep2Unlocked(false)
+    setIsStep2Unlocked(Boolean(validConcern))
     setIsStep3Unlocked(false)
     setSolutionRequest(0)
   }
   const currentConcern = concernData[selectedConcern]
+  useSolutionReveal(solutionRef, `${location.key}:${selectedConcern}`, isAutoScrolling)
+  useSolutionReveal(howRef, 'how-it-works', isAutoScrolling, true)
+  useLayoutEffect(() => {
+    const section = concernRef.current
+    cancelSectionScroll.current?.()
+    section.dataset.concernReveal = 'pending'
+    // Commit the initial opacity and cancel the previous CSS animation before
+    // the next scroll can finish, including repeated choices of the same item.
+    void getComputedStyle(section.querySelector('.skin-guide-summary-reveal')).opacity
+    let started = false
+    revealConcern.current = () => {
+      if (started) return
+      started = true
+      section.dataset.concernReveal = 'visible'
+    }
+    return () => { revealConcern.current = null }
+  }, [selectedConcern, selectionRequest, location.key])
+  useLayoutEffect(() => {
+    let cancelled = false
+    let frame
+    // State and unlocked content are committed first. Wait for font layout and
+    // the shared route's top reset before positioning this URL's entry screen.
+    document.fonts.ready.then(() => {
+      if (cancelled) return
+      frame = window.requestAnimationFrame(() => {
+        requestSectionScroll.current?.(validConcern ? concernRef.current : heroRef.current, { instant: true })
+      })
+    })
+    return () => {
+      cancelled = true
+      window.cancelAnimationFrame(frame)
+    }
+  }, [location.key, validConcern])
   useLayoutEffect(() => {
     const routine = routineRef.current
     const descriptions = [...routine.querySelectorAll('.skin-guide-product-description')]
@@ -347,10 +407,12 @@ export default function SkinGuide() {
     </section>
 
     <section ref={howRef} className="skin-guide-how skin-guide-surface" aria-labelledby="skin-guide-how-title">
+      <div className="skin-guide-how-heading" data-solution-group="0" data-solution-reveal="pending">
       <h2 id="skin-guide-how-title">HOW IT WORKS</h2>
       <p className="skin-guide-how-intro">피부를 이해하는 것부터,<br />온결의 스킨케어는 시작됩니다.</p>
+      </div>
       <ol className="skin-guide-how-list">
-        {howSteps.map((step, index) => <li key={step.title}>
+        {howSteps.map((step, index) => <li key={step.title} data-solution-group={index + 1} data-solution-reveal="pending">
           <img src={step.icon} alt="" width="60" height="60" loading="lazy" />
           <h3><span className="skin-guide-visually-hidden">{String(index + 1).padStart(2, '0')} </span>{step.title}</h3>
           <p>{step.description}</p>
@@ -383,9 +445,11 @@ export default function SkinGuide() {
         <div className="skin-guide-why-columns">
           <div className="skin-guide-summary">
             <div className="skin-guide-mobile-summary-steps" hidden><GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={2} /></div>
+            <div className="skin-guide-summary-reveal">
             <div><h2>{currentConcern.concernTitle ?? `${currentConcern.concernName} 피부 분석 준비 중`}</h2><p className="skin-guide-moisture-label">{currentConcern.solutionEnglish ?? '결과 정보 준비 중'}</p></div>
             <div className="skin-guide-summary-type"><ConcernImage concern={currentConcern.concern} /><p>{currentConcern.concernName}</p></div>
             <p className="skin-guide-summary-copy"><GuideText>{currentConcern.intro}</GuideText></p>
+            </div>
           </div>
           <div className="skin-guide-causes">
             <p className="skin-guide-why-label">WHY</p>
@@ -408,8 +472,8 @@ export default function SkinGuide() {
     <section ref={solutionRef} data-step-locked={!isStep3Unlocked} hidden={!isStep3Unlocked} inert={!isStep3Unlocked} className="skin-guide-solution skin-guide-surface" aria-labelledby="skin-guide-solution-title">
       <div className="skin-guide-solution-content">
       <GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={3} />
-      <div className="skin-guide-solution-heading"><p>YOUR SKIN SOLUTION</p><h2 id="skin-guide-solution-title">당신의 피부를 위한 맞춤 솔루션</h2><p className="skin-guide-solution-intro" hidden><GuideText>{currentConcern.solutionIntro ?? `${currentConcern.concernName} 피부의 맞춤 케어를 준비하고 있습니다.\n확정된 루틴은 추후 안내해 드립니다.`}</GuideText></p></div>
-      <div className="skin-guide-solution-details">
+      <div className="skin-guide-solution-heading" data-solution-group="0" data-solution-reveal="pending"><p>YOUR SKIN SOLUTION</p><h2 id="skin-guide-solution-title">당신의 피부를 위한 맞춤 솔루션</h2><p className="skin-guide-solution-intro" hidden><GuideText>{currentConcern.solutionIntro ?? `${currentConcern.concernName} 피부의 맞춤 케어를 준비하고 있습니다.\n확정된 루틴은 추후 안내해 드립니다.`}</GuideText></p></div>
+      <div className="skin-guide-solution-details" data-solution-group="1" data-solution-reveal="pending">
         <div className="skin-guide-my-skin">
           <DetailLabel>MY SKIN</DetailLabel>
           <div className="skin-guide-my-skin-content">
@@ -433,18 +497,18 @@ export default function SkinGuide() {
       </div>
       <div ref={routineRef} className="skin-guide-routine" id="skin-guide-routine">
         <div className="skin-guide-mobile-routine-steps" hidden><GuideSteps isStep2Unlocked={isStep2Unlocked} isStep3Unlocked={isStep3Unlocked} activeStep={3} /></div>
-        <div className="skin-guide-routine-heading">
+        <div className="skin-guide-routine-heading" data-solution-group="2" data-solution-reveal="pending">
           <h3>ONGYEOL RECOMMENDED ROUTINE</h3>
           <span className="skin-guide-routine-line"><img src={routineLine} alt="" /></span>
           <p>{currentConcern.routineDescription}</p>
         </div>
-        <ol className="skin-guide-routine-list">{currentConcern.products.map((product, index) => <li key={product.id}>
+        <ol className="skin-guide-routine-list">{currentConcern.products.map((product, index) => <li key={product.id} data-solution-group={3 + index} data-solution-reveal="pending">
           <div className={`skin-guide-routine-image skin-guide-routine-image--${product.id}`}><img src={product.image ?? undefined} alt={product.imageAlt ?? ''} loading="lazy" style={!product.image ? { visibility: 'hidden' } : undefined} /></div>
           <div className="skin-guide-routine-copy">
             <span className="skin-guide-product-step">{product.step}</span>
             <h4>{product.name ?? '추천 제품 준비 중'}</h4><p className="skin-guide-product-english" lang="en">{product.englishName ?? 'PRODUCT INFORMATION\nCOMING SOON'}</p>
             <p className="skin-guide-product-description">{product.descriptionLines?.map((line, index) => <span key={index}>{line}{index === 0 ? ' ' : ''}</span>) ?? product.description ?? '확정된 추천 제품은 추후 안내해 드립니다.'}</p>
-            <button type="button" aria-disabled={!product.image || undefined} aria-label={product.imageAlt ? `${product.imageAlt} 제품 보러가기` : '추천 제품 준비 중'}>제품 보러가기 <img src={buttonChevron} alt="" /></button>
+            <RoutineProductButton product={product} />
           </div>
           {index < currentConcern.products.length - 1 && <img className="skin-guide-routine-chevron" src={routineChevron} alt="" />}
         </li>)}</ol>

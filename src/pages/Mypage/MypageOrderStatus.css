@@ -1,15 +1,15 @@
-/* Shared geometry for the two existing order-status presentations. */
+/* Order-status geometry shared by the shopping screens. */
 .ongyeol-mypage .mp-shopping-section-title + .mp-shopping-status-card {
   margin-block-start: 8px;
 }
-.ongyeol-mypage :is(.mp-shopping-order-status, .mp-home-order-status) {
+.ongyeol-mypage .mp-shopping-order-status {
   display: block;
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
-.ongyeol-mypage :is(.mp-shopping-order-status, .mp-home-order-status) > :first-child {
+.ongyeol-mypage .mp-shopping-order-status > :first-child {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -17,7 +17,7 @@
   height: auto;
   white-space: nowrap;
 }
-.ongyeol-mypage :is(.mp-shopping-status-card, .ongyeol-mypage-status) {
+.ongyeol-mypage .mp-shopping-status-card {
   container-type: inline-size;
   box-sizing: border-box;
   width: 100%;
@@ -26,24 +26,24 @@
   border-radius: 5px;
   background: #efeaea;
 }
-.ongyeol-mypage :is(.mp-shopping-stages, .ongyeol-mypage-stages) {
+.ongyeol-mypage .mp-shopping-stages {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: clamp(8px, 2cqi, 24px);
   width: 100%;
   min-width: 0;
 }
-.ongyeol-mypage :is(.mp-shopping-stage, .ongyeol-mypage-stage) {
+.ongyeol-mypage .mp-shopping-stage {
   --status-number-size: 60px;
   position: relative;
   min-width: 0;
   text-align: center;
 }
-.ongyeol-mypage :is(.mp-shopping-stage > div, .ongyeol-mypage-stage-value) {
+.ongyeol-mypage .mp-shopping-stage > div {
   width: 100%;
   min-width: 0;
 }
-.ongyeol-mypage :is(.mp-shopping-stage span, .ongyeol-mypage-stage-value > span) {
+.ongyeol-mypage .mp-shopping-stage span {
   display: grid;
   place-items: center;
   width: var(--status-number-size);
@@ -54,12 +54,12 @@
   font-size: 24px;
   line-height: 33px;
 }
-.ongyeol-mypage :is(.mp-shopping-stage p, .ongyeol-mypage-stage-value p) {
+.ongyeol-mypage .mp-shopping-stage p {
   margin-top: 21px;
   white-space: nowrap;
   text-align: center;
 }
-.ongyeol-mypage :is(.mp-shopping-stage, .ongyeol-mypage-stage) > img {
+.ongyeol-mypage .mp-shopping-stage > img {
   position: absolute;
   right: -17px;
   /* The shared SVG's visible chevron is centered 34px below its canvas top. */
@@ -67,7 +67,7 @@
   pointer-events: none;
 }
 .ongyeol-mypage .mp-shopping-stage > .mp-shopping-mobile-stage-arrow { display: none; }
-.ongyeol-mypage :is(.mp-shopping-status-returns, .ongyeol-mypage-returns) {
+.ongyeol-mypage .mp-shopping-status-returns {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(4px, 1cqi, 12px);
@@ -75,16 +75,16 @@
   border-top: 1px solid rgb(0 0 0 / 50%);
   font: 500 18px/25px 'Noto Sans KR', 'Noto Sans', sans-serif;
 }
-.ongyeol-mypage :is(.mp-shopping-status-returns, .ongyeol-mypage-returns) p {
+.ongyeol-mypage .mp-shopping-status-returns p {
   min-width: 0;
   padding: 10px 0;
   text-align: center;
   white-space: nowrap;
 }
 @media (max-width: 767px) {
-  .ongyeol-mypage :is(.mp-shopping-status-card, .ongyeol-mypage-status) { background: transparent; padding-inline: clamp(0px, calc((100vw - 375px) * .05), 12px); }
-  .ongyeol-mypage :is(.mp-shopping-stages, .ongyeol-mypage-stages) { gap: clamp(0px, calc((100vw - 375px) * .08), 8px); }
-  .ongyeol-mypage :is(.mp-shopping-stage, .ongyeol-mypage-stage) { --status-number-size: 40px; }
-  .ongyeol-mypage :is(.mp-shopping-stage span, .ongyeol-mypage-stage-value > span) { width: 32px; font-size: 20px; line-height: 27px; }
-  .ongyeol-mypage :is(.mp-shopping-stage p, .ongyeol-mypage-stage-value p) { font-size: 14px; line-height: 22px; }
+  .ongyeol-mypage .mp-shopping-status-card { background: transparent; padding-inline: clamp(0px, calc((100vw - 375px) * .05), 12px); }
+  .ongyeol-mypage .mp-shopping-stages { gap: clamp(0px, calc((100vw - 375px) * .08), 8px); }
+  .ongyeol-mypage .mp-shopping-stage { --status-number-size: 40px; }
+  .ongyeol-mypage .mp-shopping-stage span { width: 32px; font-size: 20px; line-height: 27px; }
+  .ongyeol-mypage .mp-shopping-stage p { font-size: 14px; line-height: 22px; }
 }

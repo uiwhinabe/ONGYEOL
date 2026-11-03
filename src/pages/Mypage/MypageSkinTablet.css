@@ -58,8 +58,6 @@
      Figma 2275:26800: content ends at 1525, Footer starts at 1702.
      Use the design's bottom spacing in normal flow so added content
      moves the Footer down without fixed page heights or spacer nodes. */
-  .ongyeol-mypage-screens.mp-page-skin { padding-top: 78px; }
-  .ongyeol-mypage-screens.mp-page-skin-settings { padding-top: 77px; }
   .ongyeol-mypage-screens .ongyeol-mypage-layout-columns > :is(.mp-skin-summary, .mp-skin-settings) { width: 100%; overflow: visible; gap: 60px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-219 { height: 132px; padding: 31px 35px; }
   .ongyeol-mypage-screens .mp-skin-summary .mp-view-220 { height: 70px; padding-left: 30px; align-items: flex-start; }

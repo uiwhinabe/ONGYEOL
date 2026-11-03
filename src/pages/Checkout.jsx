@@ -1,5 +1,4 @@
 import { readOrder, saveOrder } from '../services/orderStore.js'
-import ProductPrice from '../components/ProductPrice.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useNavigate } from 'react-router-dom'
@@ -76,8 +75,11 @@ function Address({ prefix, scope, form }) {
 function Phone({ label, landline = false, scope, form }) {
   const type = landline ? 'landline' : 'mobile'
   const invalid = !landline && form.errors[`${scope}.mobile`]
-  const errorProps = { 'aria-invalid': Boolean(invalid), 'aria-describedby': invalid ? `${scope}-mobile-error` : undefined }
-  return <><div className={`checkout-phone${invalid ? ' checkout-phone-error' : ''}`}><select {...form.input(scope, `${type}Prefix`)} {...errorProps} aria-label={`${label} 앞자리`}>{(landline ? areaCodes : mobileCodes).map(code => <option key={code}>{code}</option>)}</select><input {...form.input(scope, `${type}Middle`)} {...errorProps} aria-label={`${label} 중간 번호`} inputMode="numeric" maxLength={4} /><input {...form.input(scope, `${type}Last`)} {...errorProps} aria-label={`${label} 마지막 번호`} inputMode="numeric" maxLength={4} /></div><ErrorMessage id={`${scope}-mobile-error`} visible={invalid} /></>
+  const errorProps = key => ({
+    'aria-invalid': Boolean(invalid && !form.input(scope, key).value.trim()),
+    'aria-describedby': invalid ? `${scope}-mobile-error` : undefined,
+  })
+  return <><div className="checkout-phone"><select {...form.input(scope, `${type}Prefix`)} {...errorProps(`${type}Prefix`)} aria-label={`${label} 앞자리`}>{(landline ? areaCodes : mobileCodes).map(code => <option key={code}>{code}</option>)}</select><input {...form.input(scope, `${type}Middle`)} {...errorProps(`${type}Middle`)} aria-label={`${label} 중간 번호`} inputMode="numeric" maxLength={4} /><input {...form.input(scope, `${type}Last`)} {...errorProps(`${type}Last`)} aria-label={`${label} 마지막 번호`} inputMode="numeric" maxLength={4} /></div><ErrorMessage id={`${scope}-mobile-error`} visible={invalid} /></>
 }
 
 function Radio({ name, text, value, onChange }) {
@@ -162,6 +164,17 @@ export default function Checkout({ onPayment }) {
   const [selectedInstallment, setSelectedInstallment] = useState('일시불')
   const [deliveryChoice, setDeliveryChoice] = useState('주문자 정보와 동일')
   const mainRef = useRef(null)
+  const [keyboardFocus, setKeyboardFocus] = useState(false)
+  useEffect(() => {
+    const handleKeyDown = event => { if (event.key === 'Tab') setKeyboardFocus(true) }
+    const handlePointerDown = () => setKeyboardFocus(false)
+    document.addEventListener('keydown', handleKeyDown, true)
+    document.addEventListener('pointerdown', handlePointerDown, true)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true)
+      document.removeEventListener('pointerdown', handlePointerDown, true)
+    }
+  }, [])
 
   function selectPayment(method) {
     setSelectedPayment(method)
@@ -255,7 +268,7 @@ export default function Checkout({ onPayment }) {
   const renderPaymentMethod = method => <button type="button" key={method.id} className={`payment-method checkout-payment-${method.id}${selectedPayment === method.id ? ' payment-method-active checkout-payment-active' : ''}`} aria-pressed={selectedPayment === method.id} onClick={() => selectPayment(method.id)}><img className="payment-method-icon" src={method.icon} alt="" aria-hidden="true" />{method.label}</button>
 
   if (!products.length) return <main className="checkout-page"><p>{'\uc8fc\ubb38 \uc0c1\ud488\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.'}</p><Link to="/cart">{'\uc7a5\ubc14\uad6c\ub2c8\ub85c \uc774\ub3d9'}</Link></main>
-  return <div className="checkout-page">
+  return <div className="checkout-page" data-keyboard-focus={keyboardFocus}>
     <main className="checkout-main" ref={mainRef}>
       <div className="checkout-heading"><h1>주문서 작성</h1><p>주문 정보를 입력하고 결제 수단을 선택해주세요.</p></div>
       <div className="checkout-layout">
@@ -264,7 +277,7 @@ export default function Checkout({ onPayment }) {
             {products.map(product => <div className="checkout-product" key={product.id}>
               <img className="checkout-product-placeholder" src={product.image} alt={product.name} />
               <div className="checkout-product-description"><p>{product.name}</p><small>{product.option}</small></div>
-              <ProductPrice product={product} className="checkout-product-price" />
+              <span className="checkout-product-price">{formatPrice(product.price)}원</span>
               <div className="checkout-quantity"><button type="button" aria-label={`${product.name} 수량 감소`} disabled={product.quantity === 1} onClick={() => changeQuantity(product.id, -1)}>-</button><input className="checkout-quantity-input" type="text" inputMode="numeric" pattern="[0-9]*" aria-label={`${product.name} 수량`} value={quantityDrafts[product.id] ?? product.quantity} onChange={event => inputQuantity(product.id, event.target.value)} onBlur={() => finishQuantity(product.id)} /><button type="button" aria-label={`${product.name} 수량 증가`} onClick={() => changeQuantity(product.id, 1)}>+</button></div>
               <span className="checkout-product-price">{formatPrice(product.price * product.quantity)}원</span>
               <button type="button" className="checkout-remove" aria-label={`${product.name} 삭제`} onClick={() => removeProduct(product.id)}>×</button>

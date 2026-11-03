@@ -12,8 +12,7 @@ const events = [
   { id: 'kakao-coupon', title: '카카오톡 플러스 친구 쿠폰 이벤트', status: '상시 이벤트', image: kakaoEvent },
 ]
 
-// 실제 상품 데이터가 준비되면 이 배열을 교체합니다.
-const saleProducts = products.filter(p => p.discountPercent > 0)
+const saleProducts = products.filter(p => p.discountPercent > 0 && p.id !== 'odi-cleansing-balm')
 
 export default function Event() {
   const navigate = useNavigate()
@@ -56,7 +55,7 @@ export default function Event() {
       </button>)}</div>
       <div className="events-page-navigation"><Pagination currentPage={1} totalPages={1} label="이벤트 페이지" /></div>
     </> : <>
-      <div className="sale-product-grid">
+      <div className="sale-product-grid catalog-product-grid">
         {visibleProducts.map(product => <ProductCard key={product.id} product={product} />)}
       </div>
       <div className="sale-page-navigation"><Pagination currentPage={currentPage} totalPages={pageCount} onPageChange={setSalePage} maxVisiblePages={pageCount} label="세일상품 페이지" /></div>

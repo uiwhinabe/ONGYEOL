@@ -61,7 +61,7 @@ const pendingRecommendations = () => ({
   ingredientsStatus: 'pending',
   productsStatus: 'pending',
   ingredients: Array.from({ length: 3 }, (_, i) => ({ id: `pending-${i}`, name: null, effect: null, image: null })),
-  products: ['pad', 'cream', 'eyecream'].map((id, i) => ({ id, step: `STEP ${String(i + 1).padStart(2, '0')}`, name: null, englishName: null, description: null, image: null, imageAlt: null })),
+  products: ['pad', 'cream', 'eyecream'].map((id, i) => ({ id, productId: null, step: `STEP ${String(i + 1).padStart(2, '0')}`, name: null, englishName: null, description: null, image: null, imageAlt: null })),
 })
 const guide = (item, copy) => ({
   ...pendingRecommendations(),
@@ -91,8 +91,8 @@ const productDescriptionLines = {
   'vitamin-ampoule': ['비타민 C 성분을 집중적으로 전달해', '맑고 생기 있는 피부로 가꿔주는 앰플'],
   'vitamin-lotion': ['산뜻한 보습막으로 수분을 채워', '촉촉하고 윤기 있는 피부로 가꿔주는 로션'],
 }
-const product = (id, step, name, image, englishName = '', description = '') => ({
-  id, step, name, image, imageAlt: name, englishName, description,
+const product = (id, productId, step, name, image, englishName = '', description = '') => ({
+  id, productId, step, name, image, imageAlt: name, englishName, description,
   descriptionLines: productDescriptionLines[id],
 })
 
@@ -100,9 +100,9 @@ export const concernData = {
   sensitive: guide(skinConcerns[0], {
     productsStatus: 'ready',
     products: [
-      product('mulberry-toner', 'STEP 01', '오디 수분 토너', mulberryTonerImage, 'Mulberry Hydrating Toner', '맑고 가벼운 수분을 채워 피부결을 촉촉하고 매끄럽게 정돈하는 데일리 토너'),
-      product('tremella-lotion', 'STEP 02', '백목이 딥 모이스처 로션', tremellaLotionImage, 'Tremella Deep Moisture Lotion', '건조한 피부에 수분을 채우는 데일리 로션'),
-      product('cream', 'STEP 03', '백목이 수분 잠금 크림', creamImage, 'Tremella Moisture Holding Cream', '건조한 피부에 촉촉한 수분을 머금는 수분크림'),
+      product('mulberry-toner', 'odi-toner', 'STEP 01', '오디 수분 토너', mulberryTonerImage, 'Mulberry Hydrating Toner', '맑고 가벼운 수분을 채워 피부결을 촉촉하고 매끄럽게 정돈하는 데일리 토너'),
+      product('tremella-lotion', 'baekmogi-lotion', 'STEP 02', '백목이 딥 모이스처 로션', tremellaLotionImage, 'Tremella Deep Moisture Lotion', '건조한 피부에 수분을 채우는 데일리 로션'),
+      product('cream', 'baekmogi-cream', 'STEP 03', '백목이 수분 잠금 크림', creamImage, 'Tremella Moisture Holding Cream', '건조한 피부에 촉촉한 수분을 머금는 수분크림'),
     ],
     concernTitle: '외부 자극에 쉽게 반응하는 피부를 위한',
     solutionEnglish: 'ONGYEOL SOOTHING SOLUTION',
@@ -142,17 +142,17 @@ export const concernData = {
     ],
     productsStatus: 'ready',
     products: [
-      product('tremella-toner', 'STEP 01', '백목이 딥 모이스처 토너', tremellaTonerImage, 'Tremella Deep Moisture Toner', '건조한 피부에 수분을 채우는 데일리 토너'),
-      product('tremella-ampoule', 'STEP 02', '백목이 수분 농축 앰플', tremellaAmpouleImage, 'Tremella Intensive Hydrating Ampoule', '푸석해진 피부를 빠르게 잡아주는 데일리 앰플'),
-      product('tremella-mask', 'STEP 03', '백목이 수분 베일 마스크', tremellaMaskImage, 'Tremella Hydration Veil Mask', '건조해진 피부에 수분을 채우는 데일리 마스크팩'),
+      product('tremella-toner', 'baekmogi-toner', 'STEP 01', '백목이 딥 모이스처 토너', tremellaTonerImage, 'Tremella Deep Moisture Toner', '건조한 피부에 수분을 채우는 데일리 토너'),
+      product('tremella-ampoule', 'baekmogi-ampoule', 'STEP 02', '백목이 수분 농축 앰플', tremellaAmpouleImage, 'Tremella Intensive Hydrating Ampoule', '푸석해진 피부를 빠르게 잡아주는 데일리 앰플'),
+      product('tremella-mask', 'baekmogi-mask', 'STEP 03', '백목이 수분 베일 마스크', tremellaMaskImage, 'Tremella Hydration Veil Mask', '건조해진 피부에 수분을 채우는 데일리 마스크팩'),
     ],
   }),
   pore: guide(skinConcerns[2], {
     productsStatus: 'ready',
     products: [
-      product('vitamin-cleanser', 'STEP 01', '비타민 C 클렌징폼', vitaminCleanserImage, 'Vitamin C Brightening Cleansing Foam', '부드러운 거품으로 노폐물을 씻어내 맑고 산뜻한 피부로 가꿔주는 클렌징 폼'),
-      product('paper-mulberry-toner', 'STEP 02', '닥열매 워터 토너', paperMulberryTonerImage, 'Dakyeolmae Brightening Water Toner', '맑은 수분을 채워 피부결을 촉촉하고 투명하게 정돈하는 워터 토너'),
-      product('paper-mulberry-pad', 'STEP 03', '닥열매 사각 패드', paperMulberryPadImage, 'Paper Mulberry Brightening Toner Pad', '맑은 피부결, 촉촉한 수분과 부드러운 결 케어'),
+      product('vitamin-cleanser', 'vitamin-c-cleanser', 'STEP 01', '비타민 C 클렌징폼', vitaminCleanserImage, 'Vitamin C Brightening Cleansing Foam', '부드러운 거품으로 노폐물을 씻어내 맑고 산뜻한 피부로 가꿔주는 클렌징 폼'),
+      product('paper-mulberry-toner', 'dakyeolmae-toner', 'STEP 02', '닥열매 워터 토너', paperMulberryTonerImage, 'Dakyeolmae Brightening Water Toner', '맑은 수분을 채워 피부결을 촉촉하고 투명하게 정돈하는 워터 토너'),
+      product('paper-mulberry-pad', 'dakyeolmae-pad', 'STEP 03', '닥열매 사각 패드', paperMulberryPadImage, 'Paper Mulberry Brightening Toner Pad', '맑은 피부결, 촉촉한 수분과 부드러운 결 케어'),
     ],
     concernTitle: '번들거림과 모공이 고민인 피부를 위한',
     solutionEnglish: 'ONGYEOL PORE BALANCE SOLUTION',
@@ -173,9 +173,9 @@ export const concernData = {
   tone: guide(skinConcerns[3], {
     productsStatus: 'ready',
     products: [
-      product('vitamin-toner', 'STEP 01', '비타민 C 토너', vitaminTonerImage, 'Vitamin C Brightening Toner', '맑고 생기 있는 피부를 위한 비타민 C 브라이트닝 토너'),
-      product('vitamin-ampoule', 'STEP 02', '비타민 C 앰플', vitaminAmpouleImage, 'Vitamin C Brightening Ampoule', '비타민 C 성분을 집중적으로 전달해 맑고 생기 있는 피부로 가꿔주는 앰플'),
-      product('vitamin-lotion', 'STEP 03', '비타민 C 로션', vitaminLotionImage, 'Vitamin C Brightening Lotion', '산뜻한 보습막으로 수분을 채워 촉촉하고 윤기 있는 피부로 가꿔주는 로션'),
+      product('vitamin-toner', 'vitamin-c-toner', 'STEP 01', '비타민 C 토너', vitaminTonerImage, 'Vitamin C Brightening Toner', '맑고 생기 있는 피부를 위한 비타민 C 브라이트닝 토너'),
+      product('vitamin-ampoule', 'vitamin-c-ampoule', 'STEP 02', '비타민 C 앰플', vitaminAmpouleImage, 'Vitamin C Brightening Ampoule', '비타민 C 성분을 집중적으로 전달해 맑고 생기 있는 피부로 가꿔주는 앰플'),
+      product('vitamin-lotion', 'vitamin-c-lotion', 'STEP 03', '비타민 C 로션', vitaminLotionImage, 'Vitamin C Brightening Lotion', '산뜻한 보습막으로 수분을 채워 촉촉하고 윤기 있는 피부로 가꿔주는 로션'),
     ],
     concernTitle: '맑고 균일한 피부톤을 위한',
     solutionEnglish: 'ONGYEOL BRIGHTENING SOLUTION',
@@ -196,9 +196,9 @@ export const concernData = {
   elasticity: guide(skinConcerns[4], {
     productsStatus: 'ready',
     products: [
-      product('tremella-ampoule', 'STEP 01', '백목이 수분 농축 앰플', tremellaAmpouleImage, 'Tremella Intensive Hydrating Ampoule', '푸석해진 피부를 빠르게 잡아주는 데일리 앰플'),
-      product('rose-cream', 'STEP 02', 'PDRN 로즈 밸런싱 크림', roseCreamImage, 'PDRN Rose Balancing Cream', '건조하고 거칠어진 피부에 촉촉한 편안함을 전하는 크림'),
-      product('eyecream', 'STEP 03', 'PDRN 리페어 로즈 아이크림', eyecreamImage, 'PDRN Repair Rose Eye Cream', '건조하고 거칠어진 눈가에 촉촉한 편안함을 전하는 아이크림'),
+      product('tremella-ampoule', 'baekmogi-ampoule', 'STEP 01', '백목이 수분 농축 앰플', tremellaAmpouleImage, 'Tremella Intensive Hydrating Ampoule', '푸석해진 피부를 빠르게 잡아주는 데일리 앰플'),
+      product('rose-cream', 'rose-pdrn-balancing-cream', 'STEP 02', 'PDRN 로즈 밸런싱 크림', roseCreamImage, 'PDRN Rose Balancing Cream', '건조하고 거칠어진 피부에 촉촉한 편안함을 전하는 크림'),
+      product('eyecream', 'rose-pdrn-eyecream', 'STEP 03', 'PDRN 리페어 로즈 아이크림', eyecreamImage, 'PDRN Repair Rose Eye Cream', '건조하고 거칠어진 눈가에 촉촉한 편안함을 전하는 아이크림'),
     ],
     concernTitle: '탄탄하고 생기 있는 피부를 위한',
     solutionEnglish: 'ONGYEOL FIRMING SOLUTION',

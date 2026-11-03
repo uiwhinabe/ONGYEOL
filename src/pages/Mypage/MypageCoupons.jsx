@@ -1,27 +1,13 @@
 import MyPageSummary from './MyPageSummary.jsx'
 import useMyPageDraft from './useMyPageDraft.js'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
+import { mypageCoupons } from './mypageCouponsData.js'
 import imgCalendar from '../../assets/mypage/screens/40ae1.svg'
-import imgLine2 from '../../assets/mypage/screens/083a1.svg'
 import { ShoppingPeriod } from './MypageShoppingTablet.jsx'
 import './MypageCouponsTablet.css'
 import './MypageCouponsMobile.css'
 
 
-// Only issuedOn is used by period queries. expiresOn is separate and never filtered here.
-// Temporary fixtures preserve the three Figma rows; replace this array with API records later.
-const MOCK_COUPONS = [
-  { id: 'figma-coupon-1', issuedOn: '2026-09-03', expiresOn: '2026-10-03' },
-  { id: 'figma-coupon-2', issuedOn: '2026-09-06', expiresOn: '2026-10-06' },
-  { id: 'figma-coupon-3', issuedOn: '2026-09-10', expiresOn: '2026-10-10' },
-].map(coupon => ({
-  ...coupon,
-  name: '온결 신규 회원가입 쿠폰',
-  benefit: '전 상품',
-  condition: '30,000원 이상 구매 시',
-  applicableProducts: '전 상품',
-  validityLabel: '발급일로부터 30일',
-}))
 const INITIAL_RANGE = { start: '2026-09-03', end: '2026-09-10' }
 const controlStyle = { margin: 0, font: 'inherit', color: 'inherit', background: 'transparent', cursor: 'pointer' }
 
@@ -51,7 +37,7 @@ function calculateRange(period) {
 
 // Figma frame 2275:23490; content node 2275:23547.
 export default function MypageCoupons() {
-  const [coupons] = useState(() => MOCK_COUPONS)
+  const coupons = mypageCoupons
   const [selectedPeriod, setSelectedPeriod] = useMyPageDraft('MypageCoupons.selectedPeriod', null)
   const [range, setRange] = useMyPageDraft('MypageCoupons.range', INITIAL_RANGE)
   const [results, setResults] = useMyPageDraft('MypageCoupons.results', coupons)
@@ -174,12 +160,7 @@ export default function MypageCoupons() {
                 <div className="mp-view-39" data-node-id="2275:23597" data-name="쿠폰함">
                   <div className="mp-view-40" data-node-id="2275:23598">
                     <div className="mp-view-41" data-node-id="2275:23599" data-name="최근 주문 정보 수정">
-                      <div className="mp-view-42" data-node-id="2275:23600" data-name="유효기간">
-                        <div className="mp-view-43" data-node-id="2275:23601">
-                          <div className="mp-view-44">
-                            <img alt="" className="mp-view-14" src={imgLine2} />
-                          </div>
-                        </div>
+                      <div className="mp-view-42 mp-coupon-table-row" data-node-id="2275:23600" data-name="유효기간">
                         <div className="mp-view-45" data-node-id="2275:23602" data-name="쿠폰명">
                           <p className="mp-view-46" data-node-id="2275:23603" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
                             쿠폰명
@@ -210,17 +191,15 @@ export default function MypageCoupons() {
                   </div>
                   {results.length === 0 ? (
                     <p className="mp-view-52" role="status" style={{ position: 'absolute', top: 117, left: 0, width: '100%', textAlign: 'center' }}>조회 내역이 없습니다.</p>
-                  ) : results.map((coupon, index) => (
+                  ) : results.map(coupon => (
                     <div key={coupon.id} data-coupon-id={coupon.id}>
                       <MobileCouponCard coupon={coupon} />
-                      <div className={['mp-view-51', 'mp-view-53', 'mp-view-54'][index]} data-name="쿠폰 상세 T + f">
+                      <div className="mp-coupon-table-row mp-coupon-table-body" data-name="쿠폰 상세 T + f">
                         {[coupon.name, coupon.benefit, coupon.condition, coupon.applicableProducts, coupon.validityLabel].map((text, column) => (
                           <div className="mp-view-34" key={column}>
                             <p className="mp-view-52" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>{text}</p>
                           </div>
                         ))}
-                      </div>
-                      <div className={`mp-coupon-row-divider ${index === results.length - 1 ? 'mp-view-55' : index === 0 ? 'mp-view-56' : 'mp-view-57'}`} style={{ top: 109 + index * 61 }}>
                       </div>
                     </div>
                   ))}

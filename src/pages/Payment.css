@@ -76,7 +76,8 @@
 .payment-chevron-white { width: 27px; height: 27px; transform: none; }
 .payment-sidebar .payment-section-heading { padding: 20px 17px; }
 .payment-product { display: flex; align-items: center; gap: 17px; padding: 9px 17px; border-top: 1px solid #c9c4c4; min-height: 103px; font-size: 12px; }
-.payment-product-placeholder { width: 70px; height: 75px; background: #d9d9d9; flex-shrink: 0; }
+.payment-product-placeholder { width: 70px; height: 75px; flex-shrink: 0; }
+.payment-page .payment-product-placeholder { background: #fff; object-fit: contain; }
 .payment-product small { color: #aaa; font-size: 10px; }
 .payment-product-price { margin-top: 6px !important; }
 .payment-product-price span { color: #bbb; margin-left: 12px; }
@@ -96,6 +97,8 @@
 .payment-error { color: #f33; font-size: 10px; line-height: 1.4; margin: 3px 0 0 !important; }
 .payment-agreement-error { padding: 0 32px 12px; }
 .payment-page input:focus-visible, .payment-page select:focus-visible, .payment-page button:focus-visible { outline: 2px solid #777; outline-offset: 2px; }
+.payment-page .payment-field-content :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea):focus { outline: none; box-shadow: none; }
+.payment-page[data-keyboard-focus="true"] .payment-field-content :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea):focus-visible { outline: 2px solid #777; outline-offset: 2px; }
 
 @media (min-width: 1025px) and (max-width: 1200px) {
   .payment-card-form .payment-field {

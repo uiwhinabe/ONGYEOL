@@ -91,7 +91,7 @@ function ProductList({ products, classification, initialCategory, onCategoryChan
       </nav>
       <div aria-live="polite" aria-atomic="true">
         {visible.length ? (
-          <ul className="ongyeol-products__grid">
+          <ul className="ongyeol-products__grid catalog-product-grid">
             {visible.map((product) => (
               <li key={product.id} className="ongyeol-products__card">
                 <ProductCard product={product} />

@@ -1,4 +1,5 @@
 import { useAuth } from '../components/authContext.js'
+import { Link } from 'react-router-dom'
 import presentIcon from '../assets/signup-complete/present.svg'
 import './SignupComplete.css'
 import './AuthFonts.css'
@@ -8,7 +9,7 @@ export default function SignupComplete() {
   return (
     <main className="ongyeol-signup-complete" aria-labelledby="signup-complete-title">
       <section className="ongyeol-signup-complete-panel">
-        <h1 id="signup-complete-title" className="ongyeol-signup-complete-title">@@@님, 반갑습니다.</h1>
+        <h1 id="signup-complete-title" className="ongyeol-signup-complete-title">신짱구님, 반갑습니다.</h1>
         <div className="ongyeol-signup-complete-content">
           <p className="ongyeol-signup-complete-description">
             회원가입이 완료되었습니다.<br />
@@ -20,7 +21,7 @@ export default function SignupComplete() {
           </div>
           <div className="ongyeol-signup-complete-actions">
             <button className="ongyeol-signup-complete-button ongyeol-signup-complete-home" type="button" onClick={completeSignup}>홈으로 돌아가기</button>
-            <button className="ongyeol-signup-complete-button ongyeol-signup-complete-coupon-button" type="button" disabled title="쿠폰함은 준비 중입니다">쿠폰함 보러가기</button>
+            <Link className="ongyeol-signup-complete-button ongyeol-signup-complete-coupon-button" to="/mypage/coupons">쿠폰함 보러가기</Link>
           </div>
         </div>
       </section>

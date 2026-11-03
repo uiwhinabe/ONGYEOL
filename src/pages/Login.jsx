@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import { useRef } from 'react'
 import { authenticateLogin } from '../services/login.js'
 import { useAuth } from '../components/authContext.js'
+import useKeyboardFocus from '../components/useKeyboardFocus.js'
 import './Login.css'
 import './AuthFonts.css'
 function FieldError({ id, message }) {
   return <div id={id} className="ongyeol-login-error" aria-live="polite" aria-atomic="true">{message && <><svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><circle cx="5.5" cy="5.5" r="5" stroke="currentColor" /><path d="M5.5 2.5v3.5" stroke="currentColor" /><circle cx="5.5" cy="8" r=".6" fill="currentColor" /></svg><span>{message}</span></>}</div>
 }
 export default function Login() {
+  const keyboardFocus = useKeyboardFocus()
   const { completeLogin } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -65,7 +67,7 @@ export default function Login() {
     }
   }
   return (
-    <main className="ongyeol-login" aria-label="로그인">
+    <main className="ongyeol-login" data-keyboard-focus={keyboardFocus} aria-label="로그인">
       <div className="ongyeol-login-panel">
         <nav className="ongyeol-login-tabs" aria-label="회원 페이지">
           <Link to="/login" aria-current="page">로그인</Link><Link to="/signup/verify">회원가입</Link>

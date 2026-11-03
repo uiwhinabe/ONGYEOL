@@ -1,17 +1,13 @@
 import ProductBadge from '../components/ProductBadge.jsx'
+import { getSectionScrollTop } from '../utils/sectionScroll.js'
 import { products } from '../data/products.js'
 import ProductPrice from '../components/ProductPrice.jsx'
-import { getProductDetailHref } from '../utils/productNavigation.js'
+import { getProductDetailHref, navigateToProducts } from '../utils/productNavigation.js'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import heroImage from '../assets/images/home/image 228.png'
 import moistureHeroImage from '../assets/images/home/image 228-1.png'
 import vitaminHeroImage from '../assets/images/home/image 228-2.png'
-import sensitiveImage from '../assets/images/home/Ellipse 10.png'
-import moistureImage from '../assets/images/home/Ellipse 11.png'
-import poresImage from '../assets/images/home/Ellipse 12.png'
-import toneImage from '../assets/images/home/Ellipse 13.png'
-import elasticityImage from '../assets/images/home/Ellipse 14.png'
 import cleansingIcon from '../assets/images/home/category-cleansing.png'
 import tonerIcon from '../assets/images/home/category-toner.png'
 import essenceIcon from '../assets/images/home/category-essence.png'
@@ -23,31 +19,23 @@ import lemonLineImage from '../assets/images/home/비타민전체.png'
 import roseLineImage from '../assets/images/home/장미전체.png'
 import mulberryLineImage from '../assets/images/home/오디 전체.png'
 import paperMulberryLineImage from '../assets/images/home/닥열매 전체.png'
-import featuredArrowLeft from '../assets/images/home/featured-arrow-left.svg'
-import featuredArrowRight from '../assets/images/home/featured-arrow-right.svg'
+import { skinConcerns } from './skinGuideConcernData.js'
 import './Home.css'
 
 const heroSlides = [
-  { id: 'rose', image: heroImage, description: '촉촉하고 탄탄한 눈가를 위한 데일리 케어', title: '로즈 PDRN 아이크림', alt: '로즈 PDRN 아이크림을 들고 있는 모델', position: 'center center', textSide: 'right' },
-  { id: 'tremella', image: moistureHeroImage, description: '메마른 피부를 촉촉하게 채우는 집중 수분 케어', title: '백목이 수분 농축 앰플', alt: '백목이 수분 농축 앰플을 들고 있는 모델', position: 'center center', textSide: 'left' },
-  { id: 'vitamin', image: vitaminHeroImage, description: '맑고 생기 있는 피부를 위한 데일리 클렌징', title: '비타민 클렌징 폼', alt: '비타민 클렌징 폼을 들고 있는 모델', position: 'center center', textSide: 'left' },
-]
+  { id: 'rose', productId: 'rose-pdrn-eyecream', image: heroImage, description: '촉촉하고 탄탄한 눈가를 위한 데일리 케어', title: '로즈 PDRN 아이크림', alt: '로즈 PDRN 아이크림을 들고 있는 모델', position: 'center center', textSide: 'right' },
+  { id: 'tremella', productId: 'baekmogi-ampoule', image: moistureHeroImage, description: '메마른 피부를 촉촉하게 채우는 집중 수분 케어', title: '백목이 수분 농축 앰플', alt: '백목이 수분 농축 앰플을 들고 있는 모델', position: 'center center', textSide: 'left' },
+  { id: 'vitamin', productId: 'vitamin-c-cleanser', image: vitaminHeroImage, description: '맑고 생기 있는 피부를 위한 데일리 클렌징', title: '비타민 클렌징 폼', alt: '비타민 클렌징 폼을 들고 있는 모델', position: 'center center', textSide: 'left' },
+].map(slide => ({ ...slide, line: products.find(product => product.id === slide.productId).line }))
 // The first slide's clone lets the final slide move forward before resetting invisibly.
 const heroTrackSlides = [...heroSlides, { ...heroSlides[0], id: 'rose-loop' }]
 
-const skinConcerns = [
-  { id: 'sensitive', label: '민감 / 진정', image: sensitiveImage },
-  { id: 'moisture', label: '수분 / 보습', image: moistureImage },
-  { id: 'pore', label: '모공 / 피지', image: poresImage },
-  { id: 'tone', label: '피부톤 / 기미·잡티', image: toneImage },
-  { id: 'elasticity', label: '주름 / 탄력', image: elasticityImage },
-]
 const productCategories = [
-  { id: 'cleansing', label: '클렌징', image: cleansingIcon },
-  { id: 'toner-pad', label: '토너 / 패드', image: tonerIcon },
-  { id: 'essence-ampoule', label: '에센스 / 앰플', image: essenceIcon },
-  { id: 'lotion-cream', label: '로션 / 크림', image: creamIcon },
-  { id: 'mask', label: '마스크팩', image: maskIcon },
+  { id: 'toner-pad', label: '토너 / 패드', category: '토너/패드', image: tonerIcon },
+  { id: 'essence-ampoule', label: '에센스 / 앰플', category: '에센스/앰플', image: essenceIcon },
+  { id: 'lotion-cream', label: '로션 / 크림', category: '로션/크림', image: creamIcon },
+  { id: 'cleansing', label: '클렌징', category: '클렌징', image: cleansingIcon },
+  { id: 'mask', label: '마스크팩', category: '마스크팩', image: maskIcon },
 ]
 const byIds = ids => ids.map(id => products.find(p => p.id === id)).filter(Boolean)
 const lineSlides = [
@@ -59,8 +47,15 @@ const lineSlides = [
 ]
 const lineTrackSlides = [...lineSlides, { ...lineSlides[0], id: 'tremella-loop' }]
 
+function HomeLineArrow() {
+  return <svg width="154" height="154" viewBox="0 0 154 154" fill="none" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M59.7392 43.0558C59.1443 43.6495 58.6724 44.3546 58.3504 45.1308C58.0284 45.9071 57.8627 46.7392 57.8627 47.5796C57.8627 48.42 58.0284 49.2521 58.3504 50.0283C58.6724 50.8046 59.1443 51.5097 59.7392 52.1033L84.6358 77L59.7392 101.897C58.5394 103.096 57.8654 104.724 57.8654 106.42C57.8654 108.117 58.5394 109.744 59.7392 110.944C60.9389 112.144 62.5662 112.818 64.2629 112.818C65.9597 112.818 67.5869 112.144 68.7867 110.944L98.2392 81.4917C98.834 80.898 99.3059 80.1929 99.6279 79.4167C99.9499 78.6404 100.116 77.8083 100.116 76.9679C100.116 76.1275 99.9499 75.2954 99.6279 74.5192C99.3059 73.7429 98.834 73.0378 98.2392 72.4442L68.7867 42.9917C66.3483 40.5533 62.2417 40.5533 59.7392 43.0558Z" fill="white" />
+  </svg>
+}
+
 export default function Home() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const heroRef = useRef(null)
   const skinGuideRef = useRef(null)
   const isAutoScrolling = useRef(false)
@@ -112,7 +107,9 @@ export default function Home() {
     let lastWheelAt = 0
 
     const updateHeaderHeight = () => {
-      guide?.style.setProperty('--home-header-height', `${header?.getBoundingClientRect().height ?? 0}px`)
+      const height = `${header?.getBoundingClientRect().height ?? 0}px`
+      guide?.style.setProperty('--home-header-height', height)
+      heroRef.current?.style.setProperty('--home-header-height', height)
     }
     updateHeaderHeight()
     const headerObserver = new ResizeObserver(updateHeaderHeight)
@@ -142,7 +139,7 @@ export default function Home() {
         const distanceToTop = headerHeight - guideBounds.top
         if (delta < 0 && distanceToTop > 20 && guideBounds.bottom > headerHeight && -delta >= distanceToTop && event.cancelable) {
           event.preventDefault()
-          window.scrollTo({ top: window.scrollY - distanceToTop, behavior: 'instant' })
+          window.scrollTo({ top: getSectionScrollTop(guide, header), behavior: 'instant' })
         }
         return
       }
@@ -153,9 +150,9 @@ export default function Home() {
       lastWheelAt = performance.now()
       updateHeaderHeight()
       const startY = window.scrollY
-      const targetY = Math.max(0, startY + target.getBoundingClientRect().top - headerHeight)
+      const targetY = () => getSectionScrollTop(target, header)
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        window.scrollTo({ top: targetY, behavior: 'instant' })
+        window.scrollTo({ top: targetY(), behavior: 'instant' })
         animationFinished = true
       } else {
         // A cancellable animation prevents native smooth scrolling from
@@ -164,7 +161,7 @@ export default function Home() {
         const animate = now => {
           const progress = Math.min((now - startedAt) / 800, 1)
           const eased = progress < .5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2
-          window.scrollTo({ top: startY + (targetY - startY) * eased, behavior: 'instant' })
+          window.scrollTo({ top: startY + (targetY() - startY) * eased, behavior: 'instant' })
           if (progress < 1) animationFrame = window.requestAnimationFrame(animate)
           else animationFinished = true
         }
@@ -264,7 +261,7 @@ export default function Home() {
           <div className="home-hero-overlay"><div className="home-hero-copy">
             <p>{slide.description}</p>
             <h1>{slide.title}</h1>
-            <div className="home-hero-actions"><button type="button">Shop now</button><button type="button">Show more</button></div>
+            <div className="home-hero-actions"><button type="button" onClick={() => navigate(getProductDetailHref(slide.productId))}>Shop now</button><button type="button" onClick={() => navigateToProducts('line', slide.line, navigate)}>Shop more</button></div>
           </div></div>
         </div>)}
       </div>
@@ -281,7 +278,9 @@ export default function Home() {
     </section>
     <section className="home-categories" aria-label="제품 유형">
       <ul>{productCategories.map(category => <li key={category.id}>
-        <div className="home-category-image"><img src={category.image} alt="" loading="lazy" /></div><span>{category.label}</span>
+        <button className="home-category-link" type="button" onClick={() => navigateToProducts('type', category.category, navigate)}>
+          <div className="home-category-image"><img src={category.image} alt="" loading="lazy" /></div><span>{category.label}</span>
+        </button>
       </li>)}</ul>
     </section>
     <section className="home-opening" aria-label="온결 Grand Opening">
@@ -293,10 +292,10 @@ export default function Home() {
           {lineTrackSlides.map((line, index) => <div className="home-line-slide" key={line.id} role="group" aria-roledescription="슬라이드" aria-label={`${line.label} 라인`} aria-hidden={index !== lineState.index || index === lineSlides.length} inert={index !== lineState.index || index === lineSlides.length}>
       <div className="home-featured-visual">
         <img className="home-featured-image" src={line.image} alt={`${line.label} 라인 제품 연출 이미지`} />
-        <button className="home-featured-arrow home-featured-arrow-left" type="button" aria-label="이전 라인 보기" onClick={() => moveLine(-1)}><img src={featuredArrowLeft} alt="" /></button>
-        <button className="home-featured-arrow home-featured-arrow-right" type="button" aria-label="다음 라인 보기" onClick={() => moveLine(1)}><img src={featuredArrowRight} alt="" /></button>
-        <button className="home-line-arrow-button home-line-arrow-previous" type="button" aria-label="이전 라인 보기" onClick={() => moveLine(-1)}><img src={featuredArrowLeft} alt="" /></button>
-        <button className="home-line-arrow-button home-line-arrow-next" type="button" aria-label="다음 라인 보기" onClick={() => moveLine(1)}><img src={featuredArrowRight} alt="" /></button>
+        <button className="home-featured-arrow home-featured-arrow-left" type="button" aria-label="이전 라인 보기" onClick={() => moveLine(-1)}><HomeLineArrow /></button>
+        <button className="home-featured-arrow home-featured-arrow-right" type="button" aria-label="다음 라인 보기" onClick={() => moveLine(1)}><HomeLineArrow /></button>
+        <button className="home-line-arrow-button home-line-arrow-previous" type="button" aria-label="이전 라인 보기" onClick={() => moveLine(-1)}><HomeLineArrow /></button>
+        <button className="home-line-arrow-button home-line-arrow-next" type="button" aria-label="다음 라인 보기" onClick={() => moveLine(1)}><HomeLineArrow /></button>
       </div>
       <div className="home-featured-details">
         <h2><span aria-hidden="true">{line.icon}</span> {line.name}</h2>

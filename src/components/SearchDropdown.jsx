@@ -13,17 +13,21 @@ const popularKeywords = [
 export default function SearchDropdown({ ref, open, autoFocusInput, onSearch, onPointerEnter, onPointerLeave, onBlur }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef(null)
+  const composing = useRef(false)
 
   useEffect(() => {
     if (open && autoFocusInput) inputRef.current?.focus()
   }, [open, autoFocusInput])
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const keyword = query.trim()
+  const search = value => {
+    const keyword = value.trim()
     if (!keyword) return
-    // Connect the search route/service through Header's onSearch prop when available.
     onSearch?.(keyword)
+  }
+  const handleSubmit = event => {
+    event.preventDefault()
+    if (composing.current) return
+    search(query)
   }
 
   return (
@@ -51,8 +55,10 @@ export default function SearchDropdown({ ref, open, autoFocusInput, onSearch, on
             autoComplete="off"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
+            onCompositionStart={() => { composing.current = true }}
+            onCompositionEnd={() => { composing.current = false }}
             onKeyDown={(event) => {
-              if (event.key === 'Enter' && event.nativeEvent.isComposing) event.preventDefault()
+              if (event.key === 'Enter' && (composing.current || event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229)) event.preventDefault()
             }}
           />
           <button className="ongyeol-search-submit" type="submit" aria-label="검색 실행">
@@ -67,8 +73,7 @@ export default function SearchDropdown({ ref, open, autoFocusInput, onSearch, on
                 <span aria-hidden="true">{index + 1}.</span>
                 <button className="ongyeol-search-keyword" type="button" onClick={() => {
                   setQuery(keyword)
-                  inputRef.current?.focus()
-                  onSearch?.(keyword)
+                  search(keyword)
                 }}>{keyword}</button>
               </li>
             ))}
