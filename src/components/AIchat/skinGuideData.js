@@ -42,11 +42,10 @@ import vitaminLotion from '../../assets/images/chat/products/vitamin-lotion.png'
 
 // Shared ampoule information; concern-specific presentation can override it.
 const tremellaAmpoule = {
-  id: 'tremella-ampoule',
+  id: 'tremella-ampoule', productId: 'baekmogi-ampoule',
   name: '백목이 수분 농축 앰플, 50ml',
   englishName: 'TREMELLA INTENSIVE HYDRATING AMPOULE',
   description: ['푸석해진 피부를 빠르게 잡아주는 데일리 앰플'],
-  href: null,
   contentWidth: 299,
   imageSize: { width: 136.476, height: 182 },
   imageLayers: [
@@ -67,11 +66,10 @@ export const skinGuideData = {
   dry: {
     products: [
       {
-        id: 'tremella-deep-toner',
+        id: 'tremella-deep-toner', productId: 'baekmogi-toner',
         name: '백목이 딥 모이스처 토너',
         englishName: 'TREMELLA DEEP MOISTURE TONER',
         description: ['건조한 피부에 수분을 채우는 데일리 토너'],
-        href: null,
         contentWidth: 258,
         contentTop: 154,
         englishNoWrap: true,
@@ -87,12 +85,11 @@ export const skinGuideData = {
         englishNoWrap: true,
       },
       {
-        id: 'tremella-veil-mask',
+        id: 'tremella-veil-mask', productId: 'baekmogi-mask',
         name: '백목이 수분 베일 마스크팩',
         // Preserve the spelling supplied by this Figma screen.
         englishName: 'TREMELLA HYDRAITON VEIL MASK',
         description: ['건조해진 피부에 수분을 채우는 데일리 마스크팩'],
-        href: null,
         contentWidth: 296,
         englishNoWrap: true,
         imageSize: { width: 172, height: 164.72 },
@@ -124,12 +121,11 @@ export const skinGuideData = {
   oily: {
     products: [
       {
-        id: 'mulberry-toner',
+        id: 'mulberry-toner', productId: 'odi-toner',
         name: '오디 수분 토너',
         englishName: 'Mulberry Hydrating Toner',
         // The supplied Figma toner screen uses this ampoule description.
         description: ['푸석해진 피부를 빠르게 잡아주는 데일리 앰플'],
-        href: null,
         contentWidth: 282,
         imageSize: { width: 129.026, height: 148 },
         imageLayers: [
@@ -139,11 +135,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'tremella-lotion',
+        id: 'tremella-lotion', productId: 'baekmogi-lotion',
         name: '백목이 딥 모이스처 로션',
         englishName: 'TREMELLA DEEP MOISTURE LOTION',
         description: ['건조한 피부에 수분을 채우는 데일리 로션'],
-        href: null,
         contentWidth: 258,
         contentTop: 154,
         englishNoWrap: true,
@@ -154,11 +149,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'tremella-holding-cream',
+        id: 'tremella-holding-cream', productId: 'baekmogi-cream',
         name: '백목이 수분 잠금 크림',
         englishName: 'TREMELLA MOISTURE HOLDING CREAM',
         description: ['건조한 피부에 촉촉한 수분을 머금는 수분크림'],
-        href: null,
         contentWidth: 298,
         englishNoWrap: true,
         imageSize: { width: 142, height: 142 },
@@ -191,15 +185,13 @@ export const skinGuideData = {
   combination: {
     // Add products only when that concern's design and product list are confirmed.
     // imageLayers preserve the texture/product overlays supplied by Figma.
-    // Set href to an implemented React Router product route when available.
     products: [
       { ...tremellaAmpoule, presentation: 'wrinkle-ampoule' },
       {
-        id: 'pdrn-rose-cream',
+        id: 'pdrn-rose-cream', productId: 'rose-pdrn-balancing-cream',
         name: 'PDRN 로즈 밸런싱 크림',
         englishName: 'PDRN ROSE BALANCING CRAEM',
         description: ['건조하고 거칠어진 피부에', '촉촉한 편안함을 전하는 크림'],
-        href: null,
         contentWidth: 258,
         imageSize: { width: 161.459, height: 165.54 },
         imageLayers: [
@@ -208,11 +200,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'pdrn-rose-eyecream',
+        id: 'pdrn-rose-eyecream', productId: 'rose-pdrn-eyecream',
         name: 'PDRN 리페어 로즈 아이크림',
         englishName: 'PDRN REPAIR ROSE EYECREAM',
         description: ['건조하고 거칠어진 눈가에', '촉촉한 편안함을 전하는 아이크림'],
-        href: null,
         contentWidth: 296,
         imageSize: { width: 128, height: 168 },
         imageLayers: [
@@ -242,11 +233,10 @@ export const skinGuideData = {
   sensitive: {
     products: [
       {
-        id: 'vitamin-c-cleanser',
+        id: 'vitamin-c-cleanser', productId: 'vitamin-c-cleanser',
         name: '비타민 C 브라이트닝 클렌징폼',
         englishName: 'Vitamin C Brightening Cleansing Foam',
         description: ['부드러운 거품으로 노폐물을 씻어내 맑고', '산뜻한 피부로 가꿔주는 클렌징 폼'],
-        href: null,
         contentWidth: 258,
         contentTop: 154,
         englishNoWrap: true,
@@ -257,11 +247,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'dakyeolmae-water-toner',
+        id: 'dakyeolmae-water-toner', productId: 'dakyeolmae-toner',
         name: '닥열매 브라이트닝 워터 토너',
         englishName: 'Dakyeolmae Brightening Water Toner',
         description: ['맑은 수분을 채워 피부결을 촉촉하고 투명하게', '정돈하는 워터 토너'],
-        href: null,
         contentWidth: 296,
         englishNoWrap: true,
         imageSize: { width: 139.125, height: 157 },
@@ -272,11 +261,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'dakyeolmae-toner-pad',
+        id: 'dakyeolmae-toner-pad', productId: 'dakyeolmae-pad',
         name: '닥열매 브라이트닝 토너 패드',
         englishName: 'Paper Mulberry Brightening Toner Pad',
         description: ['맑은 피부결, 촉촉한 수분과 부드러운 결 케어'],
-        href: null,
         contentWidth: 296,
         englishNoWrap: true,
         imageSize: { width: 210, height: 162.904 },
@@ -309,11 +297,10 @@ export const skinGuideData = {
   normal: {
     products: [
       {
-        id: 'vitamin-c-toner',
+        id: 'vitamin-c-toner', productId: 'vitamin-c-toner',
         name: '비타민 C 브라이트닝 토너',
         englishName: 'Vitamin C Brightening Toner',
         description: ['맑고 생기 있는 피부를 위한 비타민 C', '브라이트닝 토너'],
-        href: null,
         contentWidth: 258,
         contentTop: 154,
         englishNoWrap: true,
@@ -324,11 +311,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'vitamin-c-ampoule',
+        id: 'vitamin-c-ampoule', productId: 'vitamin-c-ampoule',
         name: '비타민 C 브라이트닝 앰플',
         englishName: 'Vitamin C Brightening Ampoule',
         description: ['비타민 C 성분을 집중적으로 전달해', '맑고 생기 있는 피부로 가꿔주는 앰플'],
-        href: null,
         contentWidth: 265,
         englishNoWrap: true,
         imageSize: { width: 164, height: 164 },
@@ -338,11 +324,10 @@ export const skinGuideData = {
         ],
       },
       {
-        id: 'vitamin-c-lotion',
+        id: 'vitamin-c-lotion', productId: 'vitamin-c-lotion',
         name: '비타민 C 브라이트닝 로션',
         englishName: 'Vitamin C Brightening Lotion',
         description: ['산뜻한 보습막으로 수분을 채워', '촉촉하고 윤기 있는 피부로 가꿔주는 로션'],
-        href: null,
         contentWidth: 265,
         englishNoWrap: true,
         imageSize: { width: 150, height: 150, overflow: 'hidden' },

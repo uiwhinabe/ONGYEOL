@@ -7,7 +7,7 @@ import productChevron from '../../assets/images/chat/products/product-chevron.sv
 import browseChevron from '../../assets/images/chat/products/browse-chevron.svg'
 import './SK05Recommend.css'
 
-export default function SK05Recommend({ products, onBack, onBrowseConcerns }) {
+export default function SK05Recommend({ products, onBack, onBrowseConcerns, onViewProduct }) {
   // This screen mounts on entry; returning from ingredients starts at STEP 01.
   const [productStep, setProductStep] = useState(0)
   const motionRef = useRef(null)
@@ -103,7 +103,7 @@ export default function SK05Recommend({ products, onBack, onBrowseConcerns }) {
     </nav>
     </div>
     <div className="ongyeol-chat-products-actions">
-        <button className="ongyeol-chat-products-action ongyeol-chat-products-view" type="button">{actionContent}</button>
+        <button className="ongyeol-chat-products-action ongyeol-chat-products-view" type="button" onClick={() => onViewProduct(product.productId)}>{actionContent}</button>
         {productStep === products.length - 1 && <button className="ongyeol-chat-products-action ongyeol-chat-products-browse" type="button" onClick={onBrowseConcerns}>
           다른 고민 둘러보기<img src={browseChevron} alt="" />
         </button>}
