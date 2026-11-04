@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { flushSync } from 'react-dom'
+import { products } from '../../data/products.js'
+import { getProductDetailHref } from '../../utils/productNavigation.js'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AIChatButton from './AIChatButton.jsx'
 import AIChat from './AIChat.jsx'
 import './AIChatFonts.css'
 
 export default function AIChatWidget({ open, onOpenChange, onInquiry, onConversation, onSettings }) {
+  const navigate = useNavigate()
   const buttonRef = useRef(null)
   const { pathname } = useLocation()
   const previousPath = useRef(pathname)
@@ -31,8 +35,16 @@ export default function AIChatWidget({ open, onOpenChange, onInquiry, onConversa
     return () => document.removeEventListener('keydown', keydown)
   }, [open, close])
 
+  const viewProduct = (productId) => {
+    if (!products.some((product) => product.id === productId)) return
+    // Release the mobile body scroll lock before entering the detail page.
+    flushSync(() => onOpenChange(false))
+    navigate(getProductDetailHref(productId))
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }
+
   return <>
-    <AIChat open={open} onInquiry={onInquiry} onConversation={onConversation} onSettings={onSettings} />
+    <AIChat onViewProduct={viewProduct} open={open} onInquiry={onInquiry} onConversation={onConversation} onSettings={onSettings} />
     <AIChatButton buttonRef={buttonRef} open={open} onClick={() => open ? close() : onOpenChange(true)} />
   </>
 }

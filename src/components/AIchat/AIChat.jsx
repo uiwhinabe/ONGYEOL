@@ -13,7 +13,7 @@ import useChatTransition from './useChatTransition.js'
 import useMobileChatLayout from './useMobileChatLayout.js'
 import './AIChatMobile.css'
 
-export default function AIChat({ open, onInquiry, onConversation, onSettings }) {
+export default function AIChat({ open, onInquiry, onConversation, onSettings, onViewProduct }) {
   const [screen, setScreen] = useState('home')
   const [selectedSkinType, setSelectedSkinType] = useState('')
   const [visible, setVisible] = useState(false)
@@ -81,7 +81,7 @@ export default function AIChat({ open, onInquiry, onConversation, onSettings }) 
             {screen === 'skin-guide-step-one' && <SK02 onBack={() => changeScreen('skin-guide-intro')} selectedSkinType={selectedSkinType} onSelectSkinType={selectSkinType} />}
             {screen === 'skin-guide-type-detail' && <SK03TypeText data={skinGuideData[selectedSkinType]} onBack={() => changeScreen('skin-guide-step-one')} onContinue={recommendation ? openRecommendation : undefined} />}
             {screen === 'skin-guide-recommendation' && recommendation && <SK04TypeDetail data={recommendation} onContinue={products?.length ? openProducts : undefined} onBack={() => changeScreen('skin-guide-type-detail')} />}
-            {screen === 'skin-guide-products' && products?.length > 0 && <SK05Recommend key={selectedSkinType} products={products} onBack={() => changeScreen('skin-guide-recommendation')} onBrowseConcerns={() => changeScreen('skin-guide-step-one')} />}
+            {screen === 'skin-guide-products' && products?.length > 0 && <SK05Recommend key={selectedSkinType} products={products} onViewProduct={onViewProduct} onBack={() => changeScreen('skin-guide-recommendation')} onBrowseConcerns={() => changeScreen('skin-guide-step-one')} />}
           </>}
     </section>, document.body,
   )
